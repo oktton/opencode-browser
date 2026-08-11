@@ -118,6 +118,65 @@ If you're interested in contributing to OpenCode, please read our [contributing 
 
 If you are working on a project that's related to OpenCode and is using "opencode" as a part of its name; for example, "opencode-dashboard" or "opencode-mobile", please add a note to your README to clarify that it is not built by the OpenCode team and is not affiliated with us in any way.
 
+### Browser Tools (Experimental)
+
+OpenCode includes built-in browser automation tools powered by CDP (Chrome DevTools Protocol). The AI agent can open a real Chrome browser, navigate pages, read DOM structures, click elements, fill forms, and more — all without leaving the terminal.
+
+#### Setup
+
+1. **Install Chrome** — the system Chrome is used automatically (`C:\Program Files\Google\Chrome\Application\chrome.exe` on Windows, `/Applications/Google Chrome.app` on macOS, `google-chrome` on Linux). Set `CHROME_PATH` to override.
+
+2. **Install puppeteer-core** — already included as a dependency.
+
+3. **Enable the feature flag**:
+   ```bash
+   # Environment variable
+   OPENCODE_EXPERIMENTAL_BROWSER=true opencode
+
+   # PowerShell
+   $env:OPENCODE_EXPERIMENTAL_BROWSER = "true"; opencode
+   ```
+
+#### Available Tools
+
+| Tool | Description |
+|------|-------------|
+| `browser_goto` | Navigate to a URL. Opens a Chrome window if not already open. |
+| `browser_refresh` | Refresh the current page. |
+| `browser_restore_state` | Return to a previous page state by stateId. |
+| `browser_click` | Click an element marked with `[N]` in the DOM output. |
+| `browser_input` | Fill text into an input field marked with `<N>`. Supports `pressEnter` and `clear` options. |
+| `browser_execute_script` | Run JavaScript in the page context with built-in helpers (`__q`, `__find`, `__get`). |
+| `browser_screenshot` | Capture a full-page screenshot. |
+| `browser_view_elements` | Screenshot specific visual elements (`[view:ID]` markers — images, tables, SVGs). |
+| `browser_reveal_offscreen` | Scroll to make an off-screen element visible. |
+| `browser_scroll_explore` | Scroll one viewport to discover new content. |
+| `browser_scroll_to_page` | Jump to a specific page number in a scrollable container. |
+| `browser_new_tab` | Open a new browser tab, optionally navigating to a URL. |
+| `browser_switch_tab` | Switch to a different tab by ID. |
+| `browser_close_tab` | Close one or more tabs. |
+| `browser_wait` | Wait for a specified duration (useful after dynamic content loads). |
+
+#### How It Works
+
+- **DOM extraction**: Every tool that modifies the page returns a structured DOM snapshot in its output. The DOM is pruned, indexed, and serialized so the AI can understand page structure.
+- **Element indices**: Interactive elements are marked with `[N]` (clickable) or `<N>` (fillable input) in the DOM output. The AI uses these indices to target clicks and inputs.
+- **Incremental diff**: When less than 30% of elements change, only the diff is shown (`+|` added, `-|` removed), saving context tokens.
+- **DOM omission**: Old DOM snapshots are automatically replaced with lightweight placeholders, keeping only the latest full DOM and any incremental diff chain. The agent can restore previous states with `browser_restore_state`.
+- **Scroll containers**: Off-screen elements show `<!-- above/below viewport [container:N] -->` markers. The scroll map tracks explored vs unexplored pages per container.
+
+#### Example Usage
+
+Just ask the agent naturally:
+
+```
+> Go to https://news.ycombinator.com and find the top 3 stories about AI
+> Open https://example.com and click the "More information" link
+> Search for "opencode" on GitHub and tell me the star count
+```
+
+The agent will automatically use the appropriate browser tools to complete the task.
+
 ### FAQ
 
 #### How is this different from Claude Code?
