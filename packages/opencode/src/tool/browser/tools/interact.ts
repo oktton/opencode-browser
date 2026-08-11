@@ -168,7 +168,9 @@ Supports range, color, date inputs and ARIA sliders.`,
         await new Promise((resolve) => setTimeout(resolve, 100))
 
         if (params.clear) {
-          await tab.page.keyboard.press("Control+A")
+          await tab.page.keyboard.down("Control")
+          await tab.page.keyboard.press("a")
+          await tab.page.keyboard.up("Control")
           await new Promise((resolve) => setTimeout(resolve, 50))
         }
 

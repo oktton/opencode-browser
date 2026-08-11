@@ -26,7 +26,7 @@ import {
 } from './tree/visual-element';
 import { pruneTree } from './tree/pruner';
 import { createDiffTree, type DiffShow } from './tree/diff';
-import { assignAndHighlight, DOMSelectorMap } from './tree/highlight';
+import { assignAndHighlight, type DOMSelectorMap } from './tree/highlight';
 import type {
   DOMRect,
   EnhancedDOMTreeNode,

@@ -9,7 +9,7 @@ export const BrowserScreenshotTool = Tool.define("browser_screenshot", {
     const manager = BrowserManager.getInstance()
     const tab = manager.getActiveTab()
 
-    const buffer = await tab.page.screenshot({ type: "png" })
+    const buffer = await tab.page.screenshot()
     const base64 = buffer.toString("base64")
 
     return {

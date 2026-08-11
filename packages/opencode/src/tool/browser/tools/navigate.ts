@@ -56,7 +56,7 @@ The stateId is shown in every DOM snapshot header.`,
       return {
         title: "Restore state",
         output: `Invalid stateId format: "${params.stateId}". Expected "tabN-domN".`,
-        metadata: {},
+        metadata: {} as Record<string, string>,
       }
     }
     const [, tabId, domId] = match
@@ -66,7 +66,7 @@ The stateId is shown in every DOM snapshot header.`,
       return {
         title: "Restore state",
         output: `Tab "${tabId}" not found. It may have been closed.`,
-        metadata: {},
+        metadata: {} as Record<string, string>,
       }
     }
 
