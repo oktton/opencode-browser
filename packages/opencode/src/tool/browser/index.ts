@@ -1,3 +1,4 @@
+import { BrowserStartTool } from "./tools/start"
 import { BrowserGotoTool, BrowserRefreshTool, BrowserRestoreStateTool } from "./tools/navigate"
 import { BrowserNewTabTool, BrowserSwitchTabTool, BrowserCloseTabTool } from "./tools/tab"
 import { BrowserClickTool, BrowserInputTool } from "./tools/interact"
@@ -7,10 +8,13 @@ import {
   BrowserScrollToPageTool,
 } from "./tools/scroll"
 import { BrowserExecuteScriptTool } from "./tools/script"
-import { BrowserScreenshotTool, BrowserViewElementsTool } from "./tools/observe"
+import { BrowserViewElementsTool } from "./tools/observe"
 import { BrowserWaitTool } from "./tools/wait"
 
+export { BrowserStartTool }
+
 export const BrowserTools = [
+  BrowserStartTool,
   BrowserGotoTool,
   BrowserRefreshTool,
   BrowserRestoreStateTool,
@@ -23,7 +27,6 @@ export const BrowserTools = [
   BrowserScrollNextScreenTool,
   BrowserScrollToPageTool,
   BrowserExecuteScriptTool,
-  BrowserScreenshotTool,
   BrowserViewElementsTool,
   BrowserWaitTool,
 ]

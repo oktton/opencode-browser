@@ -12,7 +12,8 @@ TIP: You can revisit a URL from previous DOM snapshots to restore a prior page s
   }),
   async execute(params, ctx) {
     const manager = BrowserManager.getInstance()
-    let tab = manager.hasActiveTab() ? manager.getActiveTab() : await manager.newTab()
+    manager.ensureStarted()
+    const tab = manager.getActiveTab()
 
     await tab.page.goto(params.url, { waitUntil: "domcontentloaded" }).catch(() => {})
 

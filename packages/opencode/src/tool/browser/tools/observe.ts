@@ -2,32 +2,6 @@ import z from "zod"
 import { Tool } from "../../tool"
 import { BrowserManager } from "../manager"
 
-export const BrowserScreenshotTool = Tool.define("browser_screenshot", {
-  description: "Take a screenshot of the current page and return it as an image attachment.",
-  parameters: z.object({}),
-  async execute(_params, ctx) {
-    const manager = BrowserManager.getInstance()
-    const tab = manager.getActiveTab()
-
-    const buffer = await tab.page.screenshot()
-    const base64 = buffer.toString("base64")
-
-    return {
-      title: "Screenshot",
-      output: "Screenshot captured.",
-      metadata: {},
-      attachments: [
-        {
-          type: "file" as const,
-          mime: "image/png",
-          filename: "screenshot.png",
-          url: `data:image/png;base64,${base64}`,
-        },
-      ],
-    }
-  },
-})
-
 export const BrowserViewElementsTool = Tool.define("browser_view_elements", {
   description: `Take a screenshot of visual elements (img/svg/table/etc.) and return the images for inspection.
 

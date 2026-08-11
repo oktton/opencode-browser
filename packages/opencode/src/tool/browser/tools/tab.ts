@@ -10,6 +10,7 @@ export const BrowserNewTabTool = Tool.define("browser_new_tab", {
   }),
   async execute(params, ctx) {
     const manager = BrowserManager.getInstance()
+    manager.ensureStarted()
     const tab = await manager.newTab(params.url)
     if (params.url) {
       await new Promise((resolve) => setTimeout(resolve, 2000))
@@ -30,6 +31,7 @@ export const BrowserSwitchTabTool = Tool.define("browser_switch_tab", {
   }),
   async execute(params, ctx) {
     const manager = BrowserManager.getInstance()
+    manager.ensureStarted()
     const tab = await manager.switchTab(params.tabId)
     const dom = await getPageDom(manager, tab)
     return {
@@ -47,6 +49,7 @@ export const BrowserCloseTabTool = Tool.define("browser_close_tab", {
   }),
   async execute(params, ctx) {
     const manager = BrowserManager.getInstance()
+    manager.ensureStarted()
     const targets = params.tabIds?.length ? params.tabIds : [manager.getActiveTab().id]
     for (const id of targets) {
       await manager.closeTab(id)
