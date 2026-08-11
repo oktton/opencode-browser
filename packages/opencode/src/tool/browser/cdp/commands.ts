@@ -42,9 +42,7 @@ export class CDPCommands {
 
     // Limit documents to prevent iframe explosion
     if (snapshot.documents.length > maxIframes) {
-      console.warn(
-        `[CDP] Limiting ${snapshot.documents.length} frames to ${maxIframes}`,
-      );
+      // limit frames silently
       snapshot.documents = snapshot.documents.slice(0, maxIframes);
     }
 
@@ -63,10 +61,7 @@ export class CDPCommands {
       try {
         result.oopifTrees = await oopifManager.captureAllOOPIFTrees();
       } catch (error) {
-        console.warn(
-          '[CDP] Failed to capture OOPIF trees:',
-          error instanceof Error ? error.message : String(error),
-        );
+        // silently ignore OOPIF capture failures
       }
     }
 
@@ -147,13 +142,7 @@ export class CDPCommands {
             { frameId },
             options?.timeout ?? 10000,
           )
-          .catch(error => {
-            console.warn(
-              `[CDP] Failed to get AX tree for frame ${frameId}:`,
-              error.message,
-            );
-            return { nodes: [] };
-          }),
+          .catch(() => ({ nodes: [] })),
       );
 
       const axTrees = await Promise.all(axTreePromises);
@@ -163,10 +152,7 @@ export class CDPCommands {
 
       return { nodes: mergedNodes };
     } catch (error) {
-      console.warn(
-        '[CDP] Failed to get accessibility tree:',
-        error instanceof Error ? error.message : String(error),
-      );
+      // silently ignore AX tree failures
       return { nodes: [] };
     }
   }

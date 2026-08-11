@@ -127,7 +127,7 @@ export function saveDebugJson(filename: string, data: unknown): void {
 
     fs.writeFileSync(filepath, json, 'utf-8');
   } catch (error) {
-    console.error(`[DOM Debug] Failed to save ${filename}:`, error);
+    // silently ignore debug save failures
   }
 }
 
@@ -427,6 +427,6 @@ export function saveDebugHtml(
     const filepath = path.join(DEBUG_FOLDER, filename);
     fs.writeFileSync(filepath, renderDebugHtml(root), 'utf-8');
   } catch (error) {
-    console.error(`[DOM Debug] Failed to save ${filename}:`, error);
+    // silently ignore debug save failures
   }
 }

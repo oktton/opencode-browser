@@ -249,10 +249,7 @@ export class DOMTreeBuilder {
         enhancedNode.contentDocument = oopifRoot;
         enhancedNode.contentDocument.parentNode = enhancedNode;
       } catch (error) {
-        console.warn(
-          `[TreeBuilder] Failed to build OOPIF tree for ${oopifData.frameUrl}:`,
-          error instanceof Error ? error.message : String(error),
-        );
+        // silently ignore OOPIF tree build failures
       }
     }
 

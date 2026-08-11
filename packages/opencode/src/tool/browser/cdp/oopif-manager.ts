@@ -72,20 +72,14 @@ export class OOPIFManager {
             this.sessions.set(session.sessionId, session);
           }
         } catch (error) {
-          console.warn(
-            `[OOPIF] Failed to attach to ${targetInfo.url}:`,
-            error instanceof Error ? error.message : String(error),
-          );
+          // silently ignore attach failures
         }
       }
 
 
       return [...this.sessions.values()];
     } catch (error) {
-      console.warn(
-        '[OOPIF] Failed to discover OOPIFs:',
-        error instanceof Error ? error.message : String(error),
-      );
+      // silently ignore discovery failures
       return [];
     }
   }
@@ -110,9 +104,7 @@ export class OOPIFManager {
       }>('Page.getFrameTree', {}, 5000, sessionId);
       frameId = frameTree.frameTree.frame.id;
     } catch {
-      console.warn(
-        `[OOPIF] Cannot get frame tree for session, skipping: ${targetInfo.url}`,
-      );
+      // silently skip
       return null;
     }
 
@@ -124,7 +116,7 @@ export class OOPIFManager {
       }>('DOM.getFrameOwner', { frameId });
       ownerBackendNodeId = owner.backendNodeId;
     } catch {
-      console.warn(`[OOPIF] Cannot find owner for frame ${frameId}, skipping`);
+      // silently skip
       return null;
     }
 
@@ -187,10 +179,7 @@ export class OOPIFManager {
     const results = await Promise.all(
       [...this.sessions.values()].map(session =>
         this.captureOOPIFTree(session).catch(error => {
-          console.warn(
-            `[OOPIF] Failed to capture tree for ${session.frameUrl}:`,
-            error instanceof Error ? error.message : String(error),
-          );
+          // silently ignore capture failures
           return null;
         }),
       ),

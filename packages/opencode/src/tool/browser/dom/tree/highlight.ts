@@ -186,10 +186,7 @@ async function highlightElements(
         }
       }
     } catch (error) {
-      console.error(
-        `[Highlight] Failed to inject into frame ${frameId}:`,
-        error,
-      );
+      // silently ignore frame injection failures
     }
   }
 
@@ -203,10 +200,7 @@ async function highlightElements(
           awaitPromise: false,
         });
       } catch (error) {
-        console.warn(
-          `[Highlight] Failed to inject into OOPIF session ${rawSessionId}:`,
-          error instanceof Error ? error.message : String(error),
-        );
+        // silently ignore OOPIF injection failures
       }
     }
   }

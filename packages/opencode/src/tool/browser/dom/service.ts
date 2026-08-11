@@ -681,18 +681,13 @@ export class DomService {
         backendNodeId: node.backendNodeId,
       })) as { object: { objectId?: string } };
     } catch (e) {
-      console.warn(
-        `[scrollToElement] DOM.resolveNode failed for backendNodeId ${node.backendNodeId}:`,
-        e,
-      );
+      // silently ignore resolve failures
       return;
     }
 
     const objectId = resolveResult.object?.objectId;
     if (!objectId) {
-      console.warn(
-        `[scrollToElement] No objectId for backendNodeId ${node.backendNodeId}`,
-      );
+      // no objectId available
       return;
     }
 

@@ -128,7 +128,7 @@ export class BrowserManager {
   }
 
   getActiveTab(): TabState {
-    if (!this.browser) throw new Error("Browser not started. Call browser_start first to enter browser mode.")
+    this.ensureStarted()
     if (!this.activeTabId) throw new Error("No active tab. Call browser_start first to enter browser mode.")
     const tab = this.tabs.get(this.activeTabId)
     if (!tab) throw new Error("Active tab not found")
@@ -153,11 +153,21 @@ export class BrowserManager {
   }
 
   isStarted(): boolean {
-    return this.browser !== null
+    return this.browser !== null && this.browser.connected
   }
 
   ensureStarted(): void {
     if (!this.browser) throw new Error("Browser not started. Call browser_start first to enter browser mode.")
+    if (!this.browser.connected) {
+      this.reset()
+      throw new Error("Browser was closed. Call browser_start again to re-enter browser mode.")
+    }
+  }
+
+  private reset(): void {
+    this.tabs.clear()
+    this.activeTabId = null
+    this.browser = null
   }
 
   async cleanup(): Promise<void> {
