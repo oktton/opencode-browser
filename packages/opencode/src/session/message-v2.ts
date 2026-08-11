@@ -435,6 +435,120 @@ export namespace MessageV2 {
   })
   export type WithParts = z.infer<typeof WithParts>
 
+  const DOM_BLOCK_RE = /<!-- DOM_START (.+?) -->\n([\s\S]*?)\n<!-- DOM_END -->/g
+
+  function omitOldDomBlocks(messages: UIMessage[]): void {
+    interface DomBlockRef {
+      msg: UIMessage
+      partIndex: number
+      blockStart: number
+      blockEnd: number
+      domId: string
+      tabId: string
+      mode: string
+      content: string
+    }
+
+    const allBlocks: DomBlockRef[] = []
+
+    for (const msg of messages) {
+      for (let pi = 0; pi < msg.parts.length; pi++) {
+        const part = msg.parts[pi]
+        if (!("output" in part) || part.state !== "output-available") continue
+        const text = typeof part.output === "string" ? part.output : typeof part.output === "object" && part.output && "text" in part.output ? (part.output as any).text : null
+        if (typeof text !== "string") continue
+
+        DOM_BLOCK_RE.lastIndex = 0
+        let match: RegExpExecArray | null
+        while ((match = DOM_BLOCK_RE.exec(text)) !== null) {
+          const header = match[1].trim()
+          const headerParts = header.split(/\s+/)
+          const domId = headerParts[0] ?? ""
+          let tabId = ""
+          let mode = ""
+          for (const p of headerParts.slice(1)) {
+            if (p.startsWith("tab:")) tabId = p.slice(4)
+            else if (p.startsWith("mode:")) mode = p.slice(5)
+          }
+          if (mode === "omitted") continue
+          allBlocks.push({
+            msg,
+            partIndex: pi,
+            blockStart: match.index,
+            blockEnd: match.index + match[0].length,
+            domId,
+            tabId,
+            mode,
+            content: match[2],
+          })
+        }
+      }
+    }
+
+    if (allBlocks.length <= 1) return
+
+    // Per tab, walk backwards from newest: keep all consecutive "diff" blocks
+    // plus the first "full" block they reference, omit everything older.
+    const keepSet = new Set<number>()
+    const blocksByTab = new Map<string, number[]>()
+    for (let i = 0; i < allBlocks.length; i++) {
+      const tabId = allBlocks[i].tabId
+      if (!blocksByTab.has(tabId)) blocksByTab.set(tabId, [])
+      blocksByTab.get(tabId)!.push(i)
+    }
+
+    for (const [, indices] of blocksByTab) {
+      let foundFull = false
+      for (let j = indices.length - 1; j >= 0; j--) {
+        const idx = indices[j]
+        const block = allBlocks[idx]
+        if (!foundFull) {
+          keepSet.add(idx)
+          if (block.mode !== "diff") foundFull = true
+        }
+      }
+    }
+
+    const grouped = new Map<string, DomBlockRef[]>()
+    for (let i = 0; i < allBlocks.length; i++) {
+      if (keepSet.has(i)) continue
+      const b = allBlocks[i]
+      const key = `${b.msg.id}:${b.partIndex}`
+      if (!grouped.has(key)) grouped.set(key, [])
+      grouped.get(key)!.push(b)
+    }
+
+    for (const [, blocks] of grouped) {
+      const sorted = blocks.sort((a, b) => b.blockStart - a.blockStart)
+      const part = sorted[0].msg.parts[sorted[0].partIndex] as any
+      let text = typeof part.output === "string" ? part.output : (part.output as any).text as string
+
+      for (const block of sorted) {
+        const stateId = `${block.tabId}-${block.domId.split(".")[0]}`
+        // Extract scroll position from stateId line: (stateId: xxx | scrollPosition: ...)
+        const scrollMatch = block.content.match(/\(stateId:[^|]*\|\s*scrollPosition:\s*([^)]+)\)/)
+        const scrollPosition = scrollMatch ? scrollMatch[1].trim() : ""
+        // Extract active tab title from **Tabs**: section: [active] [tab:...] Title (url)
+        const titleMatch = block.content.match(/\[active\]\s*\[tab:[^\]]*\]\s*(.+?)\s*\(/)
+        const pageTitle = titleMatch ? titleMatch[1].trim() : ""
+
+        const stateLabel = scrollPosition
+          ? `(stateId: ${stateId} | scrollPosition: ${scrollPosition})`
+          : `(stateId: ${stateId})`
+        const titleLine = pageTitle ? `\n**${pageTitle}**` : ""
+        const scrollHint = scrollPosition ? ` Was at scrollPosition: ${scrollPosition}.` : ""
+        const placeholder = `<!-- DOM_START ${block.domId} tab:${block.tabId} mode:omitted -->\n${stateLabel}\n## Previous Page DOM Snapshot${titleLine}\n[DOM content omitted. Use \`browser_restore_state\` with (stateId: "${stateId}") to restore this page.${scrollHint}]\n<!-- DOM_END -->`
+        text = text.slice(0, block.blockStart) + placeholder + text.slice(block.blockEnd)
+      }
+
+      if (typeof part.output === "string") {
+        part.output = text
+      } else {
+        ;(part.output as any).text = text
+      }
+    }
+  }
+
   export function toModelMessages(input: WithParts[], model: Provider.Model): ModelMessage[] {
     const result: UIMessage[] = []
     const toolNames = new Set<string>()
@@ -596,6 +710,8 @@ export namespace MessageV2 {
         }
       }
     }
+
+    omitOldDomBlocks(result)
 
     const tools = Object.fromEntries(Array.from(toolNames).map((toolName) => [toolName, { toModelOutput }]))
 

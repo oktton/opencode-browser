@@ -107,6 +107,7 @@
     "open": "10.1.2",
     "opentui-spinner": "0.0.6",
     "partial-json": "0.1.7",
+    "puppeteer-core": "25.5.0",
     "remeda": "catalog:",
     "solid-js": "catalog:",
     "strip-ansi": "7.1.2",
