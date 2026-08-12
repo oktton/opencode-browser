@@ -39,6 +39,21 @@ export class BrowserManager {
         ],
         defaultViewport: { width: 1280, height: 900 },
       })
+
+      // Register tabs opened by the page itself (target="_blank", window.open, etc.)
+      this.browser.on("targetcreated", async (target) => {
+        if (target.type() !== "page") return
+        const page = await target.page()
+        if (!page) return
+        for (const tab of this.tabs.values()) {
+          if (tab.page === page) return
+        }
+        const id = `tab${this.tabCounter++}`
+        const cdpSession = await page.createCDPSession()
+        const cdpClient = new CDPClient(cdpSession)
+        const domService = new DomService(page, cdpClient)
+        this.tabs.set(id, { id, page, cdpSession, cdpClient, domService })
+      })
     }
     return this.browser
   }
@@ -124,6 +139,33 @@ export class BrowserManager {
       } else {
         this.activeTabId = null
       }
+    }
+  }
+
+  async syncActiveTab(): Promise<void> {
+    // Clean up closed pages
+    for (const [tabId, tab] of this.tabs) {
+      if (tab.page.isClosed()) {
+        await tab.domService.destroySettle().catch(() => {})
+        await tab.cdpClient.cleanup().catch(() => {})
+        this.tabs.delete(tabId)
+        if (this.activeTabId === tabId) this.activeTabId = null
+      }
+    }
+    // Pick a fallback if active was closed
+    if (!this.activeTabId && this.tabs.size > 0) {
+      this.activeTabId = [...this.tabs.keys()].pop()!
+    }
+    if (this.tabs.size <= 1) return
+    // Find the visible (topmost) tab
+    for (const [tabId, tab] of this.tabs) {
+      try {
+        const visible = await tab.page.evaluate(() => document.visibilityState === "visible")
+        if (visible) {
+          this.activeTabId = tabId
+          return
+        }
+      } catch {}
     }
   }
 

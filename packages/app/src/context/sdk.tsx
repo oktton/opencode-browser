@@ -1,48 +1,17 @@
-import { createOpencodeClient, type Event } from "@opencode-ai/sdk/v2/client"
 import { createSimpleContext } from "@opencode-ai/ui/context"
-import { createGlobalEmitter } from "@solid-primitives/event-bus"
-import { createEffect, createMemo, onCleanup } from "solid-js"
-import { useGlobalSDK } from "./global-sdk"
-import { usePlatform } from "./platform"
+import { type Accessor, createMemo } from "solid-js"
+import { type ServerSDK, useServerSDK } from "./server-sdk"
+
+export type DirectorySDK = ReturnType<ServerSDK["ensureDirSdkContext"]>
 
 export const { use: useSDK, provider: SDKProvider } = createSimpleContext({
   name: "SDK",
-  init: (props: { directory: string }) => {
-    const platform = usePlatform()
-    const globalSDK = useGlobalSDK()
-
-    const directory = createMemo(() => props.directory)
-    const client = createMemo(() =>
-      createOpencodeClient({
-        baseUrl: globalSDK.url,
-        fetch: platform.fetch,
-        directory: directory(),
-        throwOnError: true,
-      }),
-    )
-
-    const emitter = createGlobalEmitter<{
-      [key in Event["type"]]: Extract<Event, { type: key }>
-    }>()
-
-    createEffect(() => {
-      const unsub = globalSDK.event.on(directory(), (event) => {
-        emitter.emit(event.type, event)
-      })
-      onCleanup(unsub)
+  // Resolves the directory-scoped SDK reactively from the (possibly changing) server.
+  init: (props: { directory: string | Accessor<string> }) => {
+    const serverSDK = useServerSDK()
+    return createMemo(() => {
+      const directory = typeof props.directory === "function" ? props.directory() : props.directory
+      return serverSDK().ensureDirSdkContext(directory)
     })
-
-    return {
-      get directory() {
-        return directory()
-      },
-      get client() {
-        return client()
-      },
-      event: emitter,
-      get url() {
-        return globalSDK.url
-      },
-    }
   },
 })

@@ -1,5 +1,5 @@
-import z from "zod"
-import { Tool } from "../../tool"
+import { Effect, Schema } from "effect"
+import * as Tool from "../../tool"
 import { BrowserManager } from "../manager"
 import { getPageDom } from "../dom-utils"
 
@@ -99,35 +99,39 @@ Each DOM snapshot has:
 ### Utility
 - **browser_wait**(seconds) — Wait for a specified time`
 
-export const BrowserStartTool = Tool.define("browser_start", {
-  description: `Enter browser mode. Call this BEFORE using any other browser_* tools.
+export const BrowserStartTool = Tool.define(
+  "browser_start",
+  Effect.succeed({
+    description: `Enter browser mode. Call this BEFORE using any other browser_* tools.
 Opens a real browser, navigates to the URL, and returns the browser usage guide with DOM snapshot.
 Use when websearch or webfetch alone are not enough — e.g. interacting with web apps, filling forms, navigating multi-step flows, or extracting content from dynamic/JS-rendered pages that require real-time browser interaction.`,
-  parameters: z.object({
-    url: z.string().describe("The URL to navigate to"),
+    parameters: Schema.Struct({
+      url: Schema.String.annotate({ description: "The URL to navigate to" }),
+    }),
+    execute: (params: { url: string }, ctx: Tool.Context) =>
+      Effect.gen(function* () {
+        const manager = BrowserManager.getInstance()
+        const tab = manager.hasActiveTab() ? manager.getActiveTab() : yield* Effect.promise(() => manager.newTab())
+
+        yield* Effect.promise(() => tab.page.goto(params.url, { waitUntil: "domcontentloaded" }).catch(() => {}))
+
+        const hasGuide = ctx.messages.some((msg) =>
+          msg.parts.some(
+            (part) =>
+              part.type === "tool" &&
+              part.tool === "browser_start" &&
+              part.state.status === "completed" &&
+              !part.state.metadata?.truncated,
+          ),
+        )
+
+        const dom = yield* Effect.promise(() => getPageDom(manager))
+        const guide = hasGuide ? "" : `${BROWSER_SYSTEM_PROMPT}\n\n---\n\n`
+        return {
+          title: `Browser started → ${params.url}`,
+          output: `${guide}Navigated to ${params.url}${dom.output}`,
+          metadata: { url: params.url, domId: dom.domId },
+        }
+      }),
   }),
-  async execute(params, ctx) {
-    const manager = BrowserManager.getInstance()
-    const tab = manager.hasActiveTab() ? manager.getActiveTab() : await manager.newTab()
-
-    await tab.page.goto(params.url, { waitUntil: "domcontentloaded" }).catch(() => {})
-
-    const hasGuide = ctx.messages.some((msg) =>
-      msg.parts.some(
-        (part) =>
-          part.type === "tool" &&
-          part.tool === "browser_start" &&
-          part.state.status === "completed" &&
-          !part.state.metadata?.truncated,
-      ),
-    )
-
-    const dom = await getPageDom(manager, tab)
-    const guide = hasGuide ? "" : `${BROWSER_SYSTEM_PROMPT}\n\n---\n\n`
-    return {
-      title: `Browser started → ${params.url}`,
-      output: `${guide}Navigated to ${params.url}${dom.output}`,
-      metadata: { url: params.url, domId: dom.domId },
-    }
-  },
-})
+)

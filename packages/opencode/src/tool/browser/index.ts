@@ -13,7 +13,7 @@ import { BrowserWaitTool } from "./tools/wait"
 
 export { BrowserStartTool }
 
-export const BrowserTools = [
+export const BrowserToolEffects = [
   BrowserStartTool,
   BrowserGotoTool,
   BrowserRefreshTool,

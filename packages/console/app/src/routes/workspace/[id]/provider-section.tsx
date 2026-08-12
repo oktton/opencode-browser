@@ -4,6 +4,8 @@ import { Provider } from "@opencode-ai/console-core/provider.js"
 import { withActor } from "~/context/auth.withActor"
 import { createStore } from "solid-js/store"
 import styles from "./provider-section.module.css"
+import { useI18n } from "~/context/i18n"
+import { formError, localizeError } from "~/lib/form-error"
 
 const PROVIDERS = [
   { name: "OpenAI", key: "openai", prefix: "sk-" },
@@ -19,10 +21,10 @@ function maskCredentials(credentials: string) {
 
 const removeProvider = action(async (form: FormData) => {
   "use server"
-  const provider = form.get("provider")?.toString()
-  if (!provider) return { error: "Provider is required" }
-  const workspaceID = form.get("workspaceID")?.toString()
-  if (!workspaceID) return { error: "Workspace ID is required" }
+  const provider = form.get("provider") as string | null
+  if (!provider) return { error: formError.providerRequired }
+  const workspaceID = form.get("workspaceID") as string | null
+  if (!workspaceID) return { error: formError.workspaceRequired }
   return json(await withActor(() => Provider.remove({ provider }), workspaceID), {
     revalidate: listProviders.key,
   })
@@ -30,12 +32,12 @@ const removeProvider = action(async (form: FormData) => {
 
 const saveProvider = action(async (form: FormData) => {
   "use server"
-  const provider = form.get("provider")?.toString()
-  const credentials = form.get("credentials")?.toString()
-  if (!provider) return { error: "Provider is required" }
-  if (!credentials) return { error: "API key is required" }
-  const workspaceID = form.get("workspaceID")?.toString()
-  if (!workspaceID) return { error: "Workspace ID is required" }
+  const provider = form.get("provider") as string | null
+  const credentials = form.get("credentials") as string | null
+  if (!provider) return { error: formError.providerRequired }
+  if (!credentials) return { error: formError.apiKeyRequired }
+  const workspaceID = form.get("workspaceID") as string | null
+  if (!workspaceID) return { error: formError.workspaceRequired }
   return json(
     await withActor(
       () =>
@@ -55,11 +57,15 @@ const listProviders = query(async (workspaceID: string) => {
 
 function ProviderRow(props: { provider: Provider }) {
   const params = useParams()
+  const i18n = useI18n()
   const providers = createAsync(() => listProviders(params.id!))
-  const saveSubmission = useSubmission(saveProvider, ([fd]) => fd.get("provider")?.toString() === props.provider.key)
+  const saveSubmission = useSubmission(
+    saveProvider,
+    ([fd]) => (fd.get("provider") as string | null) === props.provider.key,
+  )
   const removeSubmission = useSubmission(
     removeProvider,
-    ([fd]) => fd.get("provider")?.toString() === props.provider.key,
+    ([fd]) => (fd.get("provider") as string | null) === props.provider.key,
   )
   const [store, setStore] = createStore({ editing: false })
 
@@ -100,13 +106,16 @@ function ProviderRow(props: { provider: Provider }) {
                 ref={(r) => (input = r)}
                 name="credentials"
                 type="text"
-                placeholder={`Enter ${props.provider.name} API key (${props.provider.prefix}...)`}
+                placeholder={i18n.t("workspace.providers.placeholder", {
+                  provider: props.provider.name,
+                  prefix: props.provider.prefix,
+                })}
                 autocomplete="off"
                 data-form-type="other"
                 data-lpignore="true"
               />
               <Show when={saveSubmission.result && saveSubmission.result.error}>
-                {(err) => <div data-slot="form-error">{err()}</div>}
+                {(err) => <div data-slot="form-error">{localizeError(i18n.t, err())}</div>}
               </Show>
             </div>
             <input type="hidden" name="provider" value={props.provider.key} />
@@ -122,19 +131,19 @@ function ProviderRow(props: { provider: Provider }) {
               when={!!providerData()}
               fallback={
                 <button data-color="ghost" onClick={() => show()}>
-                  Configure
+                  {i18n.t("workspace.providers.configure")}
                 </button>
               }
             >
               <div data-slot="configured-actions">
                 <button data-color="ghost" onClick={() => show()}>
-                  Edit
+                  {i18n.t("workspace.providers.edit")}
                 </button>
                 <form action={removeProvider} method="post" data-slot="delete-form">
                   <input type="hidden" name="provider" value={props.provider.key} />
                   <input type="hidden" name="workspaceID" value={params.id} />
                   <button data-color="ghost" type="submit" disabled={removeSubmission.pending}>
-                    Delete
+                    {i18n.t("workspace.providers.delete")}
                   </button>
                 </form>
               </div>
@@ -148,11 +157,11 @@ function ProviderRow(props: { provider: Provider }) {
               disabled={saveSubmission.pending}
               form={`provider-form-${props.provider.key}`}
             >
-              {saveSubmission.pending ? "Saving..." : "Save"}
+              {saveSubmission.pending ? i18n.t("workspace.providers.saving") : i18n.t("workspace.providers.save")}
             </button>
             <Show when={!saveSubmission.pending}>
               <button type="reset" data-color="ghost" onClick={() => hide()}>
-                Cancel
+                {i18n.t("common.cancel")}
               </button>
             </Show>
           </div>
@@ -163,18 +172,20 @@ function ProviderRow(props: { provider: Provider }) {
 }
 
 export function ProviderSection() {
+  const i18n = useI18n()
+
   return (
     <section class={styles.root}>
       <div data-slot="section-title">
-        <h2>Bring Your Own Key</h2>
-        <p>Configure your own API keys from AI providers.</p>
+        <h2>{i18n.t("workspace.providers.title")}</h2>
+        <p>{i18n.t("workspace.providers.subtitle")}</p>
       </div>
       <div data-slot="providers-table">
         <table data-slot="providers-table-element">
           <thead>
             <tr>
-              <th>Provider</th>
-              <th>API Key</th>
+              <th>{i18n.t("workspace.providers.table.provider")}</th>
+              <th>{i18n.t("workspace.providers.table.apiKey")}</th>
               <th></th>
             </tr>
           </thead>

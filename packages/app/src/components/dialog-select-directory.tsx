@@ -2,170 +2,125 @@ import { useDialog } from "@opencode-ai/ui/context/dialog"
 import { Dialog } from "@opencode-ai/ui/dialog"
 import { FileIcon } from "@opencode-ai/ui/file-icon"
 import { List } from "@opencode-ai/ui/list"
-import { getDirectory, getFilename } from "@opencode-ai/util/path"
-import fuzzysort from "fuzzysort"
-import { createMemo } from "solid-js"
-import { useGlobalSDK } from "@/context/global-sdk"
-import { useGlobalSync } from "@/context/global-sync"
+import type { ListRef } from "@opencode-ai/ui/list"
+import { getDirectory, getFilename } from "@opencode-ai/core/util/path"
+import { createMemo, createResource, createSignal } from "solid-js"
 import { useLanguage } from "@/context/language"
+import { ServerConnection } from "@/context/server"
+import { useGlobal } from "@/context/global"
+import { cleanPickerInput, createDirectorySearch, displayPickerPath } from "./directory-picker-domain"
+import type { Path } from "@opencode-ai/sdk/v2/client"
 
 interface DialogSelectDirectoryProps {
   title?: string
   multiple?: boolean
   onSelect: (result: string | string[] | null) => void
+  server: ServerConnection.Any
+}
+
+const RECENT_PROJECT_LIMIT = 5
+
+type Row = {
+  absolute: string
+  search: string
+  group: "recent" | "folders"
+}
+
+function toRow(absolute: string, home: string, group: Row["group"]): Row {
+  const full = displayPickerPath(absolute, "", "")
+  const tilde = displayPickerPath(full, "~", home)
+  const withSlash = (value: string) => {
+    if (!value) return ""
+    if (value.endsWith("/")) return value
+    return value + "/"
+  }
+
+  const search = Array.from(
+    new Set([full, withSlash(full), tilde, withSlash(tilde), getFilename(full)].filter(Boolean)),
+  ).join("\n")
+  return { absolute: full, search, group }
+}
+
+function uniqueRows(rows: Row[]) {
+  const seen = new Set<string>()
+  return rows.filter((row) => {
+    if (seen.has(row.absolute)) return false
+    seen.add(row.absolute)
+    return true
+  })
 }
 
 export function DialogSelectDirectory(props: DialogSelectDirectoryProps) {
-  const sync = useGlobalSync()
-  const sdk = useGlobalSDK()
+  const global = useGlobal()
+  const { sync, sdk, ...serverCtx } = global.ensureServerCtx(props.server)
   const dialog = useDialog()
   const language = useLanguage()
 
-  const home = createMemo(() => sync.data.path.home)
+  const [filter, setFilter] = createSignal("")
+  let list: ListRef | undefined
 
-  const start = createMemo(() => sync.data.path.home || sync.data.path.directory)
+  const missingHome = createMemo(() => !sync.data.path.home)
+  const [fallbackPath] = createResource(
+    () => (missingHome() ? true : undefined),
+    async (): Promise<Path | undefined> => {
+      if ((await sdk.protocol) !== "v1") return
+      return sdk.client.path
+        .get()
+        .then((result) => result.data)
+        .catch(() => undefined)
+    },
+    { initialValue: undefined },
+  )
 
-  const cache = new Map<string, Promise<Array<{ name: string; absolute: string }>>>()
+  const home = createMemo(() => sync.data.path.home || fallbackPath()?.home || "")
+  const start = createMemo(
+    () => sync.data.path.home || sync.data.path.directory || fallbackPath()?.home || fallbackPath()?.directory,
+  )
 
-  function normalize(input: string) {
-    const v = input.replaceAll("\\", "/")
-    if (v.startsWith("//") && !v.startsWith("///")) return "//" + v.slice(2).replace(/\/+/g, "/")
-    return v.replace(/\/+/g, "/")
-  }
+  const directories = createDirectorySearch({
+    sdk,
+    home,
+    base: start,
+  })
 
-  function normalizeDriveRoot(input: string) {
-    const v = normalize(input)
-    if (/^[A-Za-z]:$/.test(v)) return v + "/"
-    return v
-  }
+  const recentProjects = createMemo(() => {
+    const projects = serverCtx.projects.list()
+    const byProject = new Map<string, number>()
 
-  function trimTrailing(input: string) {
-    const v = normalizeDriveRoot(input)
-    if (v === "/") return v
-    if (v === "//") return v
-    if (/^[A-Za-z]:\/$/.test(v)) return v
-    return v.replace(/\/+$/, "")
-  }
-
-  function join(base: string | undefined, rel: string) {
-    const b = trimTrailing(base ?? "")
-    const r = trimTrailing(rel).replace(/^\/+/, "")
-    if (!b) return r
-    if (!r) return b
-    if (b.endsWith("/")) return b + r
-    return b + "/" + r
-  }
-
-  function rootOf(input: string) {
-    const v = normalizeDriveRoot(input)
-    if (v.startsWith("//")) return "//"
-    if (v.startsWith("/")) return "/"
-    if (/^[A-Za-z]:\//.test(v)) return v.slice(0, 3)
-    return ""
-  }
-
-  function display(path: string) {
-    const full = trimTrailing(path)
-    const h = home()
-    if (!h) return full
-
-    const hn = trimTrailing(h)
-    const lc = full.toLowerCase()
-    const hc = hn.toLowerCase()
-    if (lc === hc) return "~"
-    if (lc.startsWith(hc + "/")) return "~" + full.slice(hn.length)
-    return full
-  }
-
-  function scoped(filter: string) {
-    const base = start()
-    if (!base) return
-
-    const raw = normalizeDriveRoot(filter.trim())
-    if (!raw) return { directory: trimTrailing(base), path: "" }
-
-    const h = home()
-    if (raw === "~") return { directory: trimTrailing(h ?? base), path: "" }
-    if (raw.startsWith("~/")) return { directory: trimTrailing(h ?? base), path: raw.slice(2) }
-
-    const root = rootOf(raw)
-    if (root) return { directory: trimTrailing(root), path: raw.slice(root.length) }
-    return { directory: trimTrailing(base), path: raw }
-  }
-
-  async function dirs(dir: string) {
-    const key = trimTrailing(dir)
-    const existing = cache.get(key)
-    if (existing) return existing
-
-    const request = sdk.client.file
-      .list({ directory: key, path: "" })
-      .then((x) => x.data ?? [])
-      .catch(() => [])
-      .then((nodes) =>
-        nodes
-          .filter((n) => n.type === "directory")
-          .map((n) => ({
-            name: n.name,
-            absolute: trimTrailing(normalizeDriveRoot(n.absolute)),
-          })),
-      )
-
-    cache.set(key, request)
-    return request
-  }
-
-  async function match(dir: string, query: string, limit: number) {
-    const items = await dirs(dir)
-    if (!query) return items.slice(0, limit).map((x) => x.absolute)
-    return fuzzysort.go(query, items, { key: "name", limit }).map((x) => x.obj.absolute)
-  }
-
-  const directories = async (filter: string) => {
-    const input = scoped(filter)
-    if (!input) return [] as string[]
-
-    const raw = normalizeDriveRoot(filter.trim())
-    const isPath = raw.startsWith("~") || !!rootOf(raw) || raw.includes("/")
-
-    const query = normalizeDriveRoot(input.path)
-
-    if (!isPath) {
-      const results = await sdk.client.find
-        .files({ directory: input.directory, query, type: "directory", limit: 50 })
-        .then((x) => x.data ?? [])
-        .catch(() => [])
-
-      return results.map((rel) => join(input.directory, rel)).slice(0, 50)
-    }
-
-    const segments = query.replace(/^\/+/, "").split("/")
-    const head = segments.slice(0, segments.length - 1).filter((x) => x && x !== ".")
-    const tail = segments[segments.length - 1] ?? ""
-
-    const cap = 12
-    const branch = 4
-    let paths = [input.directory]
-    for (const part of head) {
-      if (part === "..") {
-        paths = paths.map((p) => {
-          const v = trimTrailing(p)
-          if (v === "/") return v
-          if (/^[A-Za-z]:\/$/.test(v)) return v
-          const i = v.lastIndexOf("/")
-          if (i <= 0) return "/"
-          return v.slice(0, i)
-        })
-        continue
+    for (const project of projects) {
+      let at = 0
+      const dirs = [project.worktree, ...(project.sandboxes ?? [])]
+      for (const directory of dirs) {
+        const sessions = sync.child(directory, { bootstrap: false })[0].session
+        for (const session of sessions) {
+          if (session.time.archived) continue
+          const updated = session.time.updated ?? session.time.created
+          if (updated > at) at = updated
+        }
       }
-
-      const next = (await Promise.all(paths.map((p) => match(p, part, branch)))).flat()
-      paths = Array.from(new Set(next)).slice(0, cap)
-      if (paths.length === 0) return [] as string[]
+      byProject.set(project.worktree, at)
     }
 
-    const out = (await Promise.all(paths.map((p) => match(p, tail, 50)))).flat()
-    return Array.from(new Set(out)).slice(0, 50)
+    return projects
+      .map((project, index) => ({ project, at: byProject.get(project.worktree) ?? 0, index }))
+      .sort((a, b) => b.at - a.at || a.index - b.index)
+      .map(({ project }) => {
+        const row = toRow(project.worktree, home(), "recent")
+        const name = project.name || getFilename(project.worktree)
+        return {
+          ...row,
+          search: `${row.search}\n${name}`,
+        }
+      })
+  })
+
+  const items = async (value: string) => {
+    const results = await directories(value)
+    const directoryRows = results.map((absolute) => toRow(absolute, home(), "folders"))
+    // Cap the idle list only. Once a query narrows the results, every project stays searchable.
+    const recent = recentProjects()
+    const visible = value ? recent : recent.slice(0, RECENT_PROJECT_LIMIT)
+    return uniqueRows([...visible, ...directoryRows])
   }
 
   function resolve(absolute: string) {
@@ -176,27 +131,64 @@ export function DialogSelectDirectory(props: DialogSelectDirectoryProps) {
   return (
     <Dialog title={props.title ?? language.t("command.project.open")}>
       <List
+        class="px-3"
         search={{ placeholder: language.t("dialog.directory.search.placeholder"), autofocus: true }}
         emptyMessage={language.t("dialog.directory.empty")}
         loadingMessage={language.t("common.loading")}
-        items={directories}
-        key={(x) => x}
+        items={items}
+        key={(x) => x.absolute}
+        filterKeys={["search"]}
+        groupBy={(item) => item.group}
+        sortGroupsBy={(a, b) => {
+          if (a.category === b.category) return 0
+          return a.category === "recent" ? -1 : 1
+        }}
+        groupHeader={(group) =>
+          group.category === "recent" ? language.t("home.recentProjects") : language.t("command.project.open")
+        }
+        ref={(r) => (list = r)}
+        onFilter={(value) => setFilter(cleanPickerInput(value))}
+        onKeyEvent={(e, item) => {
+          if (e.key !== "Tab") return
+          if (e.shiftKey) return
+          if (!item) return
+
+          e.preventDefault()
+          e.stopPropagation()
+
+          const value = displayPickerPath(item.absolute, filter(), home())
+          list?.setFilter(value.endsWith("/") ? value : value + "/")
+        }}
         onSelect={(path) => {
           if (!path) return
-          resolve(path)
+          resolve(path.absolute)
         }}
       >
-        {(absolute) => {
-          const path = display(absolute)
+        {(item) => {
+          const path = displayPickerPath(item.absolute, filter(), home())
+          if (path === "~") {
+            return (
+              <div data-directory-path={item.absolute} class="w-full flex items-center justify-between rounded-md">
+                <div class="flex items-center gap-x-3 grow min-w-0">
+                  <FileIcon node={{ path: item.absolute, type: "directory" }} class="shrink-0 size-4" />
+                  <div class="flex items-center text-14-regular min-w-0">
+                    <span class="text-text-strong whitespace-nowrap">~</span>
+                    <span class="text-text-weak whitespace-nowrap">/</span>
+                  </div>
+                </div>
+              </div>
+            )
+          }
           return (
-            <div class="w-full flex items-center justify-between rounded-md">
+            <div data-directory-path={item.absolute} class="w-full flex items-center justify-between rounded-md">
               <div class="flex items-center gap-x-3 grow min-w-0">
-                <FileIcon node={{ path: absolute, type: "directory" }} class="shrink-0 size-4" />
+                <FileIcon node={{ path: item.absolute, type: "directory" }} class="shrink-0 size-4" />
                 <div class="flex items-center text-14-regular min-w-0">
                   <span class="text-text-weak whitespace-nowrap overflow-hidden overflow-ellipsis truncate min-w-0">
                     {getDirectory(path)}
                   </span>
                   <span class="text-text-strong whitespace-nowrap">{getFilename(path)}</span>
+                  <span class="text-text-weak whitespace-nowrap">/</span>
                 </div>
               </div>
             </div>

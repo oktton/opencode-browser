@@ -1,5 +1,5 @@
-import z from "zod"
-import { Tool } from "../../tool"
+import { Effect, Schema } from "effect"
+import * as Tool from "../../tool"
 import { BrowserManager } from "../manager"
 import { getPageDom } from "../dom-utils"
 import type { EnhancedDOMTreeNode } from "../dom/types/dom-node"
@@ -58,138 +58,152 @@ async function getElementDataByIndex(tab: import("../manager").TabState, element
   })
 }
 
-export const BrowserClickTool = Tool.define("browser_click", {
-  description: `Click on a specific element on the page.
+export const BrowserClickTool = Tool.define(
+  "browser_click",
+  Effect.succeed({
+    description: `Click on a specific element on the page.
 Only use on elements marked with [N] or <N> in the DOM.
 Do NOT interact with off-screen elements — scroll first with browser_reveal_offscreen.`,
-  parameters: z.object({
-    elementIndex: z.coerce.number().describe("The numeric ID of the element to click (e.g., 5 for [5]<button>)"),
-  }),
-  async execute(params, ctx) {
-    const manager = BrowserManager.getInstance()
-    const tab = manager.getActiveTab()
-    const elementData = await getElementDataByIndex(tab, params.elementIndex)
-    if (!elementData) {
-      return {
-        title: `Click [${params.elementIndex}]`,
-        output: `Element [${params.elementIndex}] not found or not clickable in the current DOM.`,
-        metadata: {},
-      }
-    }
-
-    return tab.domService.withClient(async () => {
-      if (elementData.isSelectOption) {
-        await tab.domService.selectOption(elementData.node)
-        tab.domService.recordInteraction(elementData.node.backendNodeId, "select", elementData.renderedLine)
-        await new Promise((resolve) => setTimeout(resolve, 200))
-        const dom = await getPageDom(manager, tab)
-        return {
-          title: `Select ${elementData.renderedLine?.trim() ?? `[${params.elementIndex}]`}`,
-          output: `Selected ${elementData.renderedLine?.trim() ?? `option [${params.elementIndex}]`}${dom.output}`,
-          metadata: {},
-        }
-      }
-
-      const { rect } = elementData
-      const cssX = rect.x + rect.width / 2
-      const cssY = rect.y + rect.height / 2
-
-      const isHit = await tab.domService.hitTestAtPoint(elementData.node)
-      if (!isHit) {
-        return {
-          title: `Click [${params.elementIndex}]`,
-          output: `Element [${params.elementIndex}] is occluded by another element. Try closing overlays or scrolling.`,
-          metadata: {},
-        }
-      }
-
-      await tab.domService.click(cssX, cssY)
-      tab.domService.recordInteraction(elementData.node.backendNodeId, "click", elementData.renderedLine)
-      await new Promise((resolve) => setTimeout(resolve, 500))
-
-      const dom = await getPageDom(manager, tab)
-      return {
-        title: `Click ${elementData.renderedLine?.trim() ?? `[${params.elementIndex}]`}`,
-        output: `Clicked ${elementData.renderedLine?.trim() ?? `element [${params.elementIndex}]`}${dom.output}`,
-        metadata: {},
-      }
-    })
-  },
-})
-
-export const BrowserInputTool = Tool.define("browser_input", {
-  description: `Fill text into an input field.
-Only use on elements marked with <N> in the DOM (not [N]).
-TIP: For search boxes, use pressEnter: true to submit directly.
-Supports range, color, date inputs and ARIA sliders.`,
-  parameters: z.object({
-    elementIndex: z.coerce.number().describe("The numeric ID of the input element (e.g., 3 for <3><input>)"),
-    text: z.string().describe("The text content to input"),
-    clear: z.boolean().optional().default(true).describe("Whether to clear existing text before input (default: true)"),
-    pressEnter: z.boolean().optional().default(false).describe("Whether to press Enter after input (default: false)"),
-  }),
-  async execute(params, ctx) {
-    const manager = BrowserManager.getInstance()
-    const tab = manager.getActiveTab()
-    const elementData = await getElementDataByIndex(tab, params.elementIndex)
-    if (!elementData) {
-      return {
-        title: `Input [${params.elementIndex}]`,
-        output: `Element [${params.elementIndex}] not found in the current DOM.`,
-        metadata: {},
-      }
-    }
-    if (!elementData.isFill) {
-      return {
-        title: `Input [${params.elementIndex}]`,
-        output: `Element [${params.elementIndex}] is not an input element. Use browser_click instead.`,
-        metadata: {},
-      }
-    }
-
-    return tab.domService.withClient(async () => {
-      if (isValueSettableElement(elementData.node)) {
-        await tab.domService.setInputValue(elementData.node, params.text)
-      } else {
-        const { rect } = elementData
-        const cssX = rect.x + rect.width / 2
-        const cssY = rect.y + rect.height / 2
-
-        const isHit = await tab.domService.hitTestAtPoint(elementData.node)
-        if (!isHit) {
+    parameters: Schema.Struct({
+      elementIndex: Schema.Number.annotate({ description: "The numeric ID of the element to click (e.g., 5 for [5]<button>)" }),
+    }),
+    execute: (params: { elementIndex: number }, ctx: Tool.Context) =>
+      Effect.gen(function* () {
+        const manager = BrowserManager.getInstance()
+        const tab = manager.getActiveTab()
+        const elementData = yield* Effect.promise(() => getElementDataByIndex(tab, params.elementIndex))
+        if (!elementData) {
           return {
-            title: `Input [${params.elementIndex}]`,
-            output: `Element [${params.elementIndex}] is occluded. Try closing overlays or scrolling.`,
+            title: `Click [${params.elementIndex}]`,
+            output: `Element [${params.elementIndex}] not found or not clickable in the current DOM.`,
             metadata: {},
           }
         }
 
-        await tab.domService.click(cssX, cssY)
-        await new Promise((resolve) => setTimeout(resolve, 100))
+        return yield* Effect.promise(() =>
+          tab.domService.withClient(async () => {
+            if (elementData.isSelectOption) {
+              await tab.domService.selectOption(elementData.node)
+              tab.domService.recordInteraction(elementData.node.backendNodeId, "select", elementData.renderedLine)
+              await new Promise((resolve) => setTimeout(resolve, 200))
+              const dom = await getPageDom(manager)
+              return {
+                title: `Select ${elementData.renderedLine?.trim() ?? `[${params.elementIndex}]`}`,
+                output: `Selected ${elementData.renderedLine?.trim() ?? `option [${params.elementIndex}]`}${dom.output}`,
+                metadata: {},
+              }
+            }
 
-        if (params.clear) {
-          await tab.page.keyboard.down("Control")
-          await tab.page.keyboard.press("a")
-          await tab.page.keyboard.up("Control")
-          await new Promise((resolve) => setTimeout(resolve, 50))
+            const { rect } = elementData
+            const cssX = rect.x + rect.width / 2
+            const cssY = rect.y + rect.height / 2
+
+            const isHit = await tab.domService.hitTestAtPoint(elementData.node)
+            if (!isHit) {
+              return {
+                title: `Click [${params.elementIndex}]`,
+                output: `Element [${params.elementIndex}] is occluded by another element. Try closing overlays or scrolling.`,
+                metadata: {},
+              }
+            }
+
+            await tab.domService.click(cssX, cssY)
+            tab.domService.recordInteraction(elementData.node.backendNodeId, "click", elementData.renderedLine)
+            await new Promise((resolve) => setTimeout(resolve, 500))
+
+            const dom = await getPageDom(manager)
+            return {
+              title: `Click ${elementData.renderedLine?.trim() ?? `[${params.elementIndex}]`}`,
+              output: `Clicked ${elementData.renderedLine?.trim() ?? `element [${params.elementIndex}]`}${dom.output}`,
+              metadata: {},
+            }
+          }),
+        )
+      }),
+  }),
+)
+
+export const BrowserInputTool = Tool.define(
+  "browser_input",
+  Effect.succeed({
+    description: `Fill text into an input field.
+Only use on elements marked with <N> in the DOM (not [N]).
+TIP: For search boxes, use pressEnter: true to submit directly.
+Supports range, color, date inputs and ARIA sliders.`,
+    parameters: Schema.Struct({
+      elementIndex: Schema.Number.annotate({ description: "The numeric ID of the input element (e.g., 3 for <3><input>)" }),
+      text: Schema.String.annotate({ description: "The text content to input" }),
+      clear: Schema.optional(Schema.Boolean).annotate({ description: "Whether to clear existing text before input (default: true)" }),
+      pressEnter: Schema.optional(Schema.Boolean).annotate({ description: "Whether to press Enter after input (default: false)" }),
+    }),
+    execute: (params: { elementIndex: number; text: string; clear?: boolean; pressEnter?: boolean }, ctx: Tool.Context) =>
+      Effect.gen(function* () {
+        const clear = params.clear ?? true
+        const pressEnter = params.pressEnter ?? false
+        const manager = BrowserManager.getInstance()
+        const tab = manager.getActiveTab()
+        const elementData = yield* Effect.promise(() => getElementDataByIndex(tab, params.elementIndex))
+        if (!elementData) {
+          return {
+            title: `Input [${params.elementIndex}]`,
+            output: `Element [${params.elementIndex}] not found in the current DOM.`,
+            metadata: {},
+          }
+        }
+        if (!elementData.isFill) {
+          return {
+            title: `Input [${params.elementIndex}]`,
+            output: `Element [${params.elementIndex}] is not an input element. Use browser_click instead.`,
+            metadata: {},
+          }
         }
 
-        await tab.page.keyboard.type(params.text)
-      }
+        return yield* Effect.promise(() =>
+          tab.domService.withClient(async () => {
+            if (isValueSettableElement(elementData.node)) {
+              await tab.domService.setInputValue(elementData.node, params.text)
+            } else {
+              const { rect } = elementData
+              const cssX = rect.x + rect.width / 2
+              const cssY = rect.y + rect.height / 2
 
-      tab.domService.recordInteraction(elementData.node.backendNodeId, "input", elementData.renderedLine)
+              const isHit = await tab.domService.hitTestAtPoint(elementData.node)
+              if (!isHit) {
+                return {
+                  title: `Input [${params.elementIndex}]`,
+                  output: `Element [${params.elementIndex}] is occluded. Try closing overlays or scrolling.`,
+                  metadata: {},
+                }
+              }
 
-      if (params.pressEnter) {
-        await tab.domService.pressEnter()
-      }
+              await tab.domService.click(cssX, cssY)
+              await new Promise((resolve) => setTimeout(resolve, 100))
 
-      await new Promise((resolve) => setTimeout(resolve, 300))
-      const dom = await getPageDom(manager, tab)
-      return {
-        title: `Input "${params.text}" into [${params.elementIndex}]`,
-        output: `Input "${params.text}" into ${elementData.renderedLine?.trim() ?? `element <${params.elementIndex}>`}${params.pressEnter ? " and pressed Enter" : ""}${dom.output}`,
-        metadata: {},
-      }
-    })
-  },
-})
+              if (clear) {
+                await tab.page.keyboard.down("Control")
+                await tab.page.keyboard.press("a")
+                await tab.page.keyboard.up("Control")
+                await new Promise((resolve) => setTimeout(resolve, 50))
+              }
+
+              await tab.page.keyboard.type(params.text)
+            }
+
+            tab.domService.recordInteraction(elementData.node.backendNodeId, "input", elementData.renderedLine)
+
+            if (pressEnter) {
+              await tab.domService.pressEnter()
+            }
+
+            await new Promise((resolve) => setTimeout(resolve, 300))
+            const dom = await getPageDom(manager)
+            return {
+              title: `Input "${params.text}" into [${params.elementIndex}]`,
+              output: `Input "${params.text}" into ${elementData.renderedLine?.trim() ?? `element <${params.elementIndex}>`}${pressEnter ? " and pressed Enter" : ""}${dom.output}`,
+              metadata: {},
+            }
+          }),
+        )
+      }),
+  }),
+)

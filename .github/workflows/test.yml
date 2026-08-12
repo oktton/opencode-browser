@@ -6,129 +6,142 @@ on:
       - dev
   pull_request:
   workflow_dispatch:
+
+concurrency:
+  # Keep every run on dev so cancelled checks do not pollute the default branch
+  # commit history. PRs and other branches still share a group and cancel stale runs.
+  group: ${{ case(github.ref == 'refs/heads/dev', format('{0}-{1}', github.workflow, github.run_id), format('{0}-{1}', github.workflow, github.event.pull_request.number || github.ref)) }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  checks: write
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
-  test:
-    name: test (${{ matrix.settings.name }})
+  unit:
+    name: unit (${{ matrix.settings.name }})
     strategy:
       fail-fast: false
       matrix:
         settings:
           - name: linux
             host: blacksmith-4vcpu-ubuntu-2404
-            playwright: bunx playwright install --with-deps
-            workdir: .
-            command: |
-              git config --global user.email "bot@opencode.ai"
-              git config --global user.name "opencode"
-              bun turbo test
           - name: windows
-            host: windows-latest
-            playwright: bunx playwright install
-            workdir: packages/app
-            command: bun test:e2e:local
+            host: blacksmith-4vcpu-windows-2025
     runs-on: ${{ matrix.settings.host }}
     defaults:
       run:
         shell: bash
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: "24"
 
       - name: Setup Bun
         uses: ./.github/actions/setup-bun
 
-      - name: Install Playwright browsers
+      - name: Configure git identity
+        run: |
+          git config --global user.email "bot@opencode.ai"
+          git config --global user.name "opencode"
+
+      - name: Cache Turbo
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+        with:
+          path: node_modules/.cache/turbo
+          key: turbo-${{ runner.os }}-${{ hashFiles('turbo.json', '**/package.json') }}-${{ github.sha }}
+          restore-keys: |
+            turbo-${{ runner.os }}-${{ hashFiles('turbo.json', '**/package.json') }}-
+            turbo-${{ runner.os }}-
+
+      - name: Run unit tests
+        timeout-minutes: 20
+        run: GITHUB_ACTIONS=false bun turbo test
+        env:
+          OPENCODE_EXPERIMENTAL_DISABLE_FILEWATCHER: ${{ runner.os == 'Windows' && 'true' || 'false' }}
+
+      - name: Check generated client
+        if: runner.os == 'Linux'
+        working-directory: packages/client
+        run: bun run check:generated
+
+      - name: Run HttpApi exerciser gates
+        if: runner.os == 'Linux'
+        working-directory: packages/opencode
+        run: bun run test:httpapi
+
+  e2e:
+    name: e2e (${{ matrix.settings.name }})
+    strategy:
+      fail-fast: false
+      matrix:
+        settings:
+          - name: linux
+            host: blacksmith-4vcpu-ubuntu-2404
+          - name: windows
+            host: blacksmith-4vcpu-windows-2025
+    runs-on: ${{ matrix.settings.host }}
+    env:
+      PLAYWRIGHT_BROWSERS_PATH: ${{ github.workspace }}/.playwright-browsers
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          # Playwright 1.59 hangs while extracting Chromium with Node 24.16.
+          node-version: "24.15"
+
+      - name: Setup Bun
+        uses: ./.github/actions/setup-bun
+
+      - name: Read Playwright version
+        id: playwright-version
+        run: |
+          version=$(node -e 'console.log(require("./package.json").workspaces.catalog["@playwright/test"])')
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      - name: Cache Playwright browsers
+        id: playwright-cache
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+        with:
+          path: ${{ github.workspace }}/.playwright-browsers
+          key: ${{ runner.os }}-${{ runner.arch }}-playwright-${{ steps.playwright-version.outputs.version }}-chromium
+
+      - name: Install Playwright system dependencies
+        if: runner.os == 'Linux'
         working-directory: packages/app
-        run: ${{ matrix.settings.playwright }}
+        run: bunx playwright install-deps chromium
 
-      - name: Set OS-specific paths
-        run: |
-          if [ "${{ runner.os }}" = "Windows" ]; then
-            printf '%s\n' "OPENCODE_E2E_ROOT=${{ runner.temp }}\\opencode-e2e" >> "$GITHUB_ENV"
-            printf '%s\n' "OPENCODE_TEST_HOME=${{ runner.temp }}\\opencode-e2e\\home" >> "$GITHUB_ENV"
-            printf '%s\n' "XDG_DATA_HOME=${{ runner.temp }}\\opencode-e2e\\share" >> "$GITHUB_ENV"
-            printf '%s\n' "XDG_CACHE_HOME=${{ runner.temp }}\\opencode-e2e\\cache" >> "$GITHUB_ENV"
-            printf '%s\n' "XDG_CONFIG_HOME=${{ runner.temp }}\\opencode-e2e\\config" >> "$GITHUB_ENV"
-            printf '%s\n' "XDG_STATE_HOME=${{ runner.temp }}\\opencode-e2e\\state" >> "$GITHUB_ENV"
-          else
-            printf '%s\n' "OPENCODE_E2E_ROOT=${{ runner.temp }}/opencode-e2e" >> "$GITHUB_ENV"
-            printf '%s\n' "OPENCODE_TEST_HOME=${{ runner.temp }}/opencode-e2e/home" >> "$GITHUB_ENV"
-            printf '%s\n' "XDG_DATA_HOME=${{ runner.temp }}/opencode-e2e/share" >> "$GITHUB_ENV"
-            printf '%s\n' "XDG_CACHE_HOME=${{ runner.temp }}/opencode-e2e/cache" >> "$GITHUB_ENV"
-            printf '%s\n' "XDG_CONFIG_HOME=${{ runner.temp }}/opencode-e2e/config" >> "$GITHUB_ENV"
-            printf '%s\n' "XDG_STATE_HOME=${{ runner.temp }}/opencode-e2e/state" >> "$GITHUB_ENV"
-          fi
+      - name: Install Playwright browsers
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        working-directory: packages/app
+        run: bunx playwright install chromium
 
-      - name: Seed opencode data
-        if: matrix.settings.name != 'windows'
-        working-directory: packages/opencode
-        run: bun script/seed-e2e.ts
-        env:
-          OPENCODE_DISABLE_SHARE: "true"
-          OPENCODE_DISABLE_LSP_DOWNLOAD: "true"
-          OPENCODE_DISABLE_DEFAULT_PLUGINS: "true"
-          OPENCODE_EXPERIMENTAL_DISABLE_FILEWATCHER: "true"
-          OPENCODE_TEST_HOME: ${{ env.OPENCODE_TEST_HOME }}
-          XDG_DATA_HOME: ${{ env.XDG_DATA_HOME }}
-          XDG_CACHE_HOME: ${{ env.XDG_CACHE_HOME }}
-          XDG_CONFIG_HOME: ${{ env.XDG_CONFIG_HOME }}
-          XDG_STATE_HOME: ${{ env.XDG_STATE_HOME }}
-          OPENCODE_E2E_PROJECT_DIR: ${{ github.workspace }}
-          OPENCODE_E2E_SESSION_TITLE: "E2E Session"
-          OPENCODE_E2E_MESSAGE: "Seeded for UI e2e"
-          OPENCODE_E2E_MODEL: "opencode/gpt-5-nano"
-
-      - name: Run opencode server
-        if: matrix.settings.name != 'windows'
-        working-directory: packages/opencode
-        run: bun dev -- --print-logs --log-level WARN serve --port 4096 --hostname 127.0.0.1 &
-        env:
-          OPENCODE_DISABLE_SHARE: "true"
-          OPENCODE_DISABLE_LSP_DOWNLOAD: "true"
-          OPENCODE_DISABLE_DEFAULT_PLUGINS: "true"
-          OPENCODE_EXPERIMENTAL_DISABLE_FILEWATCHER: "true"
-          OPENCODE_TEST_HOME: ${{ env.OPENCODE_TEST_HOME }}
-          XDG_DATA_HOME: ${{ env.XDG_DATA_HOME }}
-          XDG_CACHE_HOME: ${{ env.XDG_CACHE_HOME }}
-          XDG_CONFIG_HOME: ${{ env.XDG_CONFIG_HOME }}
-          XDG_STATE_HOME: ${{ env.XDG_STATE_HOME }}
-          OPENCODE_CLIENT: "app"
-
-      - name: Wait for opencode server
-        if: matrix.settings.name != 'windows'
-        run: |
-          for i in {1..120}; do
-            curl -fsS "http://127.0.0.1:4096/global/health" > /dev/null && exit 0
-            sleep 1
-          done
-          exit 1
-
-      - name: run
-        working-directory: ${{ matrix.settings.workdir }}
-        run: ${{ matrix.settings.command }}
+      - name: Run app e2e tests
+        run: bun --cwd packages/app test:e2e:local
         env:
           CI: true
-          OPENCODE_DISABLE_SHARE: "true"
-          OPENCODE_DISABLE_LSP_DOWNLOAD: "true"
-          OPENCODE_DISABLE_DEFAULT_PLUGINS: "true"
-          OPENCODE_EXPERIMENTAL_DISABLE_FILEWATCHER: "true"
-          OPENCODE_TEST_HOME: ${{ env.OPENCODE_TEST_HOME }}
-          XDG_DATA_HOME: ${{ env.XDG_DATA_HOME }}
-          XDG_CACHE_HOME: ${{ env.XDG_CACHE_HOME }}
-          XDG_CONFIG_HOME: ${{ env.XDG_CONFIG_HOME }}
-          XDG_STATE_HOME: ${{ env.XDG_STATE_HOME }}
-          PLAYWRIGHT_SERVER_HOST: "127.0.0.1"
-          PLAYWRIGHT_SERVER_PORT: "4096"
-          VITE_OPENCODE_SERVER_HOST: "127.0.0.1"
-          VITE_OPENCODE_SERVER_PORT: "4096"
-          OPENCODE_CLIENT: "app"
         timeout-minutes: 30
 
       - name: Upload Playwright artifacts
-        if: failure()
-        uses: actions/upload-artifact@v4
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: playwright-${{ matrix.settings.name }}-${{ github.run_attempt }}
           if-no-files-found: ignore

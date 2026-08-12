@@ -13,8 +13,8 @@ export interface DomResult {
   domId: string
   /** The tabId */
   tabId: string
-  /** Whether this was a diff or full DOM */
-  mode: "full" | "diff" | "nochange"
+  /** full = complete DOM (new base), incremental = small diff (preserves base), added = large diff (new base), nochange = nothing changed */
+  mode: "full" | "incremental" | "added" | "nochange"
 }
 
 interface ExplorationData {
@@ -85,20 +85,22 @@ function formatTabList(
  */
 export async function getPageDom(
   manager: BrowserManager,
-  tab: TabState,
+  tab?: TabState,
 ): Promise<DomResult> {
-  const { domService } = tab
-  const tabId = tab.id
+  await manager.syncActiveTab()
+  const activeTab = tab ?? manager.getActiveTab()
+  const { domService } = activeTab
+  const tabId = activeTab.id
 
   return domService.withClient(async () => {
     const domId = domService.generateDomId()
     const stateId = `${tabId}-${domId.split(".")[0]}`
-    const previousDomId = tab.lastDomId
+    const previousDomId = activeTab.lastDomId
 
     // Extract and render DOM tree (settle wait happens inside buildTree)
     const domTree = await domService.extractCurrentDomTree({ expand: 0.8 })
     const renderResult = await domService.renderDomTree(domTree)
-    const url = tab.page.url()
+    const url = activeTab.page.url()
     const viewportStats = await domService.computeViewportStats(renderResult.scrollContainerMap)
     const explorationBars = domService.getExplorationBars(domId)
     const tabList = manager.listTabs()
@@ -118,7 +120,7 @@ export async function getPageDom(
     )
 
     // Try diff when we have a previous snapshot on the same tab
-    let diffMode: "full" | "diff" | "nochange" = "full"
+    let diffMode: "full" | "incremental" | "added" | "nochange" = "full"
     let domHtml = renderResult.html
 
     if (previousDomId) {
@@ -126,7 +128,7 @@ export async function getPageDom(
 
       if (diffStats !== null) {
         if (diffStats.added === 0 && diffStats.removed === 0) {
-          tab.lastDomId = domId
+          activeTab.lastDomId = domId
           return {
             output: `\n\n${DOM_START} ${domId} tab:${tabId} mode:nochange -->\nNo DOM changes detected after the previous action.\n${DOM_END}`,
             domId,
@@ -135,28 +137,28 @@ export async function getPageDom(
           }
         }
 
-        const incremental =
+        const isIncremental =
           Math.max(diffStats.addedRatio, diffStats.removedRatio) < INCREMENTAL_DIFF_RATIO_THRESHOLD
 
-        if (incremental) {
+        if (isIncremental) {
           const diffTree = domService.getDiffTree(previousDomId, domId, "both")
           if (diffTree) {
             const diffResult = await domService.renderDomTree(diffTree, { incrementalDiff: true })
             domHtml = diffResult.html
-            diffMode = "diff"
+            diffMode = "incremental"
           }
         } else {
           const diffTree = domService.getDiffTree(previousDomId, domId, "added")
           if (diffTree) {
             const diffResult = await domService.renderDomTree(diffTree)
             domHtml = diffResult.html
-            diffMode = "diff"
+            diffMode = "added"
           }
         }
       }
     }
 
-    tab.lastDomId = domId
+    activeTab.lastDomId = domId
 
     // Build output with delimiter markers
     const overlayNotice = renderResult.hasOverlay
@@ -165,11 +167,13 @@ export async function getPageDom(
     const bars = formatExplorationBars(explorationBars)
     const tabs = formatTabList(tabList)
     const diffTip =
-      diffMode === "diff"
-        ? "\n**Tip**: Elements prefixed with `+|` are newly added and `-|` are removed since the previous action."
-        : ""
+      diffMode === "incremental"
+        ? "\n**Tip**: Elements prefixed with `+|` are newly added and `-|` are removed since the previous action. Removed elements are no longer interactive."
+        : diffMode === "added"
+          ? "\n**Tip**: Elements prefixed with `+|` are newly appeared since the previous action."
+          : ""
 
-    const header = diffMode === "diff" ? "## Incremental DOM updates" : "## Current Page DOM Structure"
+    const header = diffMode === "incremental" || diffMode === "added" ? "## Incremental DOM updates" : "## Current Page DOM Structure"
 
     const content = `(stateId: ${stateId})\n${header}\n${tabs}\n\n${domHtml}${bars}${overlayNotice}${diffTip}`
 
@@ -177,7 +181,7 @@ export async function getPageDom(
       output: `\n\n${DOM_START} ${domId} tab:${tabId} mode:${diffMode} -->\n${content}\n${DOM_END}`,
       domId,
       tabId,
-      mode: diffMode as "full" | "diff",
+      mode: diffMode,
     }
   })
 }
@@ -213,4 +217,82 @@ export function parseDomBlockMeta(header: string): {
     else if (p.startsWith("mode:")) mode = p.slice(5)
   }
   return { domId, tabId, mode }
+}
+
+/**
+ * Omit stale DOM blocks from browser tool outputs before sending to LLM.
+ *
+ * Strategy (matches abrowser):
+ * - Scan all tool outputs from newest to oldest
+ * - The newest DOM block is always kept (it's the current state)
+ * - For older blocks, keep the "base chain": a full/added DOM and all
+ *   incremental diffs that follow it, until the next full/added DOM appears
+ * - Everything outside the base chain gets replaced with an omitted placeholder
+ * - view_elements image attachments older than the newest are stripped
+ *
+ * Base chain example:
+ *   [full dom3] → [incremental dom4] → [incremental dom5] → [full dom6]
+ *   dom6 = current (kept), dom3-5 = all omitted (dom6 is a new base)
+ *
+ *   [full dom3] → [incremental dom4] → [incremental dom5]
+ *   dom5 = current (kept), dom4 = kept (incremental), dom3 = kept (base for dom4-5)
+ */
+export function omitStaleDomBlocks(
+  toolOutputs: { toolName: string; output: string; index: number }[],
+): Map<number, string> {
+  const replacements = new Map<number, string>()
+
+  // Collect all DOM blocks with their position info
+  const allBlocks: {
+    index: number
+    mode: string
+    domId: string
+    tabId: string
+  }[] = []
+
+  for (const entry of toolOutputs) {
+    const re = new RegExp(DOM_BLOCK_RE.source, "g")
+    let match
+    while ((match = re.exec(entry.output)) !== null) {
+      const meta = parseDomBlockMeta(match[1])
+      allBlocks.push({ index: entry.index, ...meta })
+    }
+  }
+
+  if (allBlocks.length <= 1) return replacements
+
+  // The last block is always the current state — never omit
+  // Walk backwards from second-to-last to find what to keep
+  const keepSet = new Set<string>() // domIds to keep
+  keepSet.add(allBlocks[allBlocks.length - 1].domId)
+
+  const lastBlock = allBlocks[allBlocks.length - 1]
+
+  // If the current (newest) block is incremental, walk backwards to find its base chain
+  if (lastBlock.mode === "incremental") {
+    for (let i = allBlocks.length - 2; i >= 0; i--) {
+      const block = allBlocks[i]
+      if (block.mode === "omitted" || block.mode === "nochange") continue
+      keepSet.add(block.domId)
+      // Stop at full or added — that's the base
+      if (block.mode === "full" || block.mode === "added") break
+    }
+  }
+
+  // Replace non-kept DOM blocks with omitted placeholders
+  for (const entry of toolOutputs) {
+    const re = new RegExp(DOM_BLOCK_RE.source, "g")
+    let modified = false
+    const newOutput = entry.output.replace(re, (fullMatch, header) => {
+      const meta = parseDomBlockMeta(header)
+      if (keepSet.has(meta.domId)) return fullMatch
+      modified = true
+      return buildOmittedDomPlaceholder(meta.domId, meta.tabId)
+    })
+    if (modified) {
+      replacements.set(entry.index, newOutput)
+    }
+  }
+
+  return replacements
 }

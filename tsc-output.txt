@@ -1,0 +1,27 @@
+﻿bunx.exe : 
+At C:\Users\86188\AppData\Roaming\fnm\node-versions\v22.15.0\installation\bunx.ps1:14 char:3
++   & "$basedir/node_modules/bun/bin/bunx.exe"   $args
++   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+<--- Last few GCs --->
+
+[21136:0000020C504B1000]   133580 ms: Mark-Compact 2043.1 (2087.5) -> 2039.7 (2087.3) MB, pooled: 0 MB, 5682.39 / 0.00 ms  (average mu 
+= 0.066, current mu = 0.040) allocation failure; scavenge might not succeed
+[21136:0000020C504B1000]   137981 ms: Mark-Compact (reduce) 2043.9 (2087.3) -> 2042.7 (2083.0) MB, pooled: 0 MB, 1304.94 / 0.00 ms  (+ 
+331.0 ms in 0 steps since start of marking, biggest step 0.0 ms, walltime since start of marking 1786 ms) (average mu = 
+
+<--- JS stacktrace --->
+
+FATAL ERROR: Ineffective mark-compacts near heap limit Allocation failed - JavaScript heap out of memory
+----- Native stack trace -----
+
+ 1: 00007FF74EC8A2ED node::SetCppgcReference+17725
+ 2: 00007FF74EBF1EA8 v8::base::CPU::num_virtual_address_bits+92328
+ 3: 00007FF74F772EE1 v8::Isolate::ReportExternalAllocationLimitReached+65
+ 4: 00007FF74F75FB66 v8::Function::Experimental_IsNopFunction+2870
+ 5: 00007FF74F5ACDC0 v8::internal::StrongRootAllocatorBase::StrongRootAllocatorBase+31456
+ 6: 00007FF74F5A6ABA v8::internal::StrongRootAllocatorBase::StrongRootAllocatorBase+6106
+ 7: 00007FF74F5A2155 v8::CpuProfileNode::GetScriptResourceNameStr+188453
+ 8: 00007FF74EF254CD BIO_ssl_shutdown+189

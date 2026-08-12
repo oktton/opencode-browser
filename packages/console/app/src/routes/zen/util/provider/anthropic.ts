@@ -20,20 +20,21 @@ export const anthropicHelper: ProviderHelper = ({ reqModel, providerModel }) => 
   const isBedrockModelArn = providerModel.startsWith("arn:aws:bedrock:")
   const isBedrockModelID = providerModel.startsWith("global.anthropic.")
   const isBedrock = isBedrockModelArn || isBedrockModelID
-  const isSonnet = reqModel.includes("sonnet")
+  const isDatabricks = providerModel.startsWith("databricks-claude-")
+  const supports1m = reqModel.includes("sonnet") || reqModel.includes("opus-4-6")
   return {
     format: "anthropic",
     modifyUrl: (providerApi: string, isStream?: boolean) =>
       isBedrock
         ? `${providerApi}/model/${isBedrockModelArn ? encodeURIComponent(providerModel) : providerModel}/${isStream ? "invoke-with-response-stream" : "invoke"}`
         : providerApi + "/messages",
-    modifyHeaders: (headers: Headers, body: Record<string, any>, apiKey: string) => {
-      if (isBedrock) {
+    modifyHeaders: (headers: Headers, apiKey: string, _stickyId: string) => {
+      if (isBedrock || isDatabricks) {
         headers.set("Authorization", `Bearer ${apiKey}`)
       } else {
         headers.set("x-api-key", apiKey)
         headers.set("anthropic-version", headers.get("anthropic-version") ?? "2023-06-01")
-        if (body.model.startsWith("claude-sonnet-")) {
+        if (supports1m) {
           headers.set("anthropic-beta", "context-1m-2025-08-07")
         }
       }
@@ -43,13 +44,16 @@ export const anthropicHelper: ProviderHelper = ({ reqModel, providerModel }) => 
       ...(isBedrock
         ? {
             anthropic_version: "bedrock-2023-05-31",
-            anthropic_beta: isSonnet ? "context-1m-2025-08-07" : undefined,
+            anthropic_beta: supports1m ? ["context-1m-2025-08-07"] : undefined,
             model: undefined,
             stream: undefined,
           }
-        : {
-            service_tier: "standard_only",
-          }),
+        : isDatabricks
+          ? {
+              anthropic_version: "bedrock-2023-05-31",
+              anthropic_beta: supports1m ? ["context-1m-2025-08-07"] : undefined,
+            }
+          : {}),
     }),
     createBinaryStreamDecoder: () => {
       if (!isBedrock) return undefined
@@ -135,19 +139,20 @@ export const anthropicHelper: ProviderHelper = ({ reqModel, providerModel }) => 
         return encoder.encode(messages.join(""))
       }
     },
-    streamSeparator: "\n\n",
     createUsageParser: () => {
       let usage: Usage
 
       return {
         parse: (chunk: string) => {
           const data = chunk.split("\n")[1]
-          if (!data.startsWith("data: ")) return
+          // Claude models start with "data: {"
+          // Alibaba models start with "data:{"
+          if (!data.startsWith("data:")) return
 
           let json
           try {
-            json = JSON.parse(data.slice(6))
-          } catch (e) {
+            json = JSON.parse(data.replace(/^data:\s*/, ""))
+          } catch {
             return
           }
 
@@ -169,12 +174,14 @@ export const anthropicHelper: ProviderHelper = ({ reqModel, providerModel }) => 
         retrieve: () => usage,
       }
     },
+    extractUsage: (response: any) => response.usage,
     normalizeUsage: (usage: Usage) => ({
       inputTokens: usage.input_tokens ?? 0,
       outputTokens: usage.output_tokens ?? 0,
       reasoningTokens: undefined,
       cacheReadTokens: usage.cache_read_input_tokens ?? undefined,
-      cacheWrite5mTokens: usage.cache_creation?.ephemeral_5m_input_tokens ?? undefined,
+      cacheWrite5mTokens:
+        usage.cache_creation?.ephemeral_5m_input_tokens ?? usage.cache_creation_input_tokens ?? undefined,
       cacheWrite1hTokens: usage.cache_creation?.ephemeral_1h_input_tokens ?? undefined,
     }),
   }
