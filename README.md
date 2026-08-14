@@ -127,18 +127,6 @@ See [reproduction_report.md](assets/examples/reproduction_report.md)
 
 </details>
 
-### Cost
-
-All examples run on **MiniMax M3** ($0.30/M input, $1.20/M output):
-
-| Task | Steps | Final Context | Cost |
-|------|-------|--------------|------|
-| Information Extraction (HuggingFace) | 6 | 20,363 tokens | $0.022 |
-| Complex Form Filling (9 fields) | 15 | 21,527 tokens | $0.030 |
-| Deep Research (Paper Reproducibility) | 14 | 26,597 tokens | $0.040 |
-
-Multi-step agent tasks at **~$0.03 each** — enabled by incremental DOM diffing that keeps context compact.
-
 ---
 
 ## Benchmark
@@ -304,17 +292,17 @@ CDP Snapshot → Tree Build → Render Info (5 stages) → Prune → Highlight �
 
 | Tool | Description |
 |------|-------------|
+| `browser_start` | Launch browser and connect via CDP |
 | `browser_goto` | Navigate to a URL |
 | `browser_click` | Click elements by index `[N]` |
 | `browser_input` | Fill text into input fields `<N>` |
 | `browser_execute_script` | Run JavaScript |
-| `browser_scroll_explore` | Scroll to discover content |
+| `browser_scroll_next_screen` | Scroll to discover content |
+| `browser_scroll_to_page` | Scroll to a specific page position |
 | `browser_reveal_offscreen` | Scroll to specific off-screen elements |
-| `browser_screenshot` | Capture page screenshot |
-| `browser_extract` | Extract structured info from the page |
 | `browser_view_elements` | Inspect images, tables, SVGs |
-| `browser_new_tab` / `browser_close_tab` | Tab management |
-| `browser_back` / `browser_forward` / `browser_refresh` | Navigation |
+| `browser_new_tab` / `browser_switch_tab` / `browser_close_tab` | Tab management |
+| `browser_refresh` / `browser_restore_state` | Reload or restore browser state |
 | `browser_wait` | Wait for page changes |
 
 ### Project Structure (Browser Agent Module)
