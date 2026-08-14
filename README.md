@@ -141,6 +141,57 @@ Multi-step agent tasks at **~$0.03 each** — enabled by incremental DOM diffing
 
 ---
 
+## Benchmark
+
+Evaluated on **WebVoyager** (109 tasks across 3 sites) with MiniMax M3:
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | **73.4%** |
+| Completion Rate | 83.5% |
+| Success Rate (completed only) | 87.9% |
+| Avg Steps | 9.2 |
+| Avg Cost per Task | $0.025 |
+| KV Cache Hit Rate | 78.9% |
+| Avg Duration | 150s |
+
+### Per-Site Breakdown
+
+| Site | Tasks | Success Rate | Avg Steps | Avg Cost |
+|------|-------|-------------|-----------|----------|
+| allrecipes.com | 35 | **80.0%** | 8.3 | $0.021 |
+| apple.com | 35 | **74.3%** | 11.7 | $0.025 |
+| amazon.com | 39 | **66.7%** | 7.8 | $0.028 |
+
+<details>
+<summary>📄 Full benchmark data</summary>
+
+- [analysis.json](assets/benchmark/results/merged/analysis.json) — Summary statistics
+- [webvoyager_judgments.json](assets/benchmark/results/merged/webvoyager_judgments.json) — Per-task LLM-as-a-Judge results
+- [results.ndjson](assets/benchmark/results/merged/results.ndjson) — Raw execution traces
+
+</details>
+
+### Reproduce
+
+```bash
+# 1. Start OpenCode desktop app
+bun run dev:desktop
+
+# 2. Run benchmark (all tasks)
+bun run assets/benchmark/run.ts
+
+# Filter by site or limit task count
+bun run assets/benchmark/run.ts --site allrecipes --count 10
+
+# 3. Judge results with LLM-as-a-Judge
+bun run assets/benchmark/judge.ts --run <run-id>
+```
+
+See `--help` for full options (model override, concurrency, timeout, etc.).
+
+---
+
 ## Incremental DOM Diff
 
 Most browser agents re-send the **entire page DOM** to the LLM after every action. This is wasteful — the LLM re-reads thousands of unchanged elements just to find what changed.

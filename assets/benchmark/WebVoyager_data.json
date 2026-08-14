@@ -1,0 +1,2747 @@
+[
+  {
+    "task_id": "Allrecipes--0",
+    "confirmed_task": "Provide a recipe for vegetarian lasagna with more than 100 reviews and a rating of at least 4.5 stars suitable for 6 people.",
+    "website": "https://www.allrecipes.com/"
+  },
+  {
+    "task_id": "Allrecipes--1",
+    "confirmed_task": "Find a recipe for a vegetarian lasagna that has at least a four-star rating and uses zucchini.",
+    "website": "https://www.allrecipes.com/"
+  },
+  {
+    "task_id": "Allrecipes--2",
+    "confirmed_task": "Find a recipe for a vegetarian lasagna under 600 calories per serving that has a prep time of less than 1 hour.",
+    "website": "https://www.allrecipes.com/"
+  },
+  {
+    "task_id": "Allrecipes--3",
+    "confirmed_task": "Locate a recipe for vegan chocolate chip cookies with over 60 reviews and a rating of at least 4.5 stars on Allrecipes.",
+    "website": "https://www.allrecipes.com/"
+  },
+  {
+    "task_id": "Allrecipes--4",
+    "confirmed_task": "Find a recipe for Baked Salmon that takes less than 30 minutes to prepare and has at least a 4 star rating based on user reviews.",
+    "website": "https://www.allrecipes.com/"
+  },
+  {
+    "task_id": "Allrecipes--5",
+    "confirmed_task": "Search for a popular Pasta Sauce with more than 1000 reviews and a rating above 4 stars. Create a shopping list of ingredients for this recipe.",
+    "website": "https://www.allrecipes.com/"
+  },
+  {
+    "task_id": "Allrecipes--6",
+    "confirmed_task": "Search for a vegetarian lasagna recipe that has at least a four-star rating and over 500 reviews.",
+    "website": "https://www.allrecipes.com/"
+  },
+  {
+    "task_id": "Allrecipes--7",
+    "confirmed_task": "Find a popular recipe for a chocolate chip cookie and list the ingredients and preparation steps.",
+    "website": "https://www.allrecipes.com/"
+  },
+  {
+    "task_id": "Allrecipes--8",
+    "confirmed_task": "Search for a recipe for Beef Wellington on Allrecipes that has at least 200 reviews and an average rating of 4.5 stars or higher. List the main ingredients required for the dish.",
+    "website": "https://www.allrecipes.com/"
+  },
+  {
+    "task_id": "Allrecipes--9",
+    "confirmed_task": "Find a high-rated recipe for vegetarian lasagna, list the key ingredients required, and include the total preparation and cook time stated on the recipe.",
+    "website": "https://www.allrecipes.com/"
+  },
+  {
+    "task_id": "Allrecipes--10",
+    "confirmed_task": "Find The Most Popular Recipes of the 1960s, noting the recipe name, preparation time and total time of the second recipe in this collection.",
+    "website": "https://www.allrecipes.com/"
+  },
+  {
+    "task_id": "Allrecipes--11",
+    "confirmed_task": "Discover a suitable chocolate cupcake recipe on Allrecipes that has a preparation time of under 1 hour and at least 100 user reviews.",
+    "website": "https://www.allrecipes.com/"
+  },
+  {
+    "task_id": "Allrecipes--12",
+    "confirmed_task": "Search for a popular cookie recipe on Allrecipes with more than 1000 reviews and a rating of 4.5 stars or better. Provide the list of ingredients needed.",
+    "website": "https://www.allrecipes.com/"
+  },
+  {
+    "task_id": "Allrecipes--13",
+    "confirmed_task": "Find a recipe with over 100 reviews for Fried Fish on Allrecipes, list the Full Nutrition Label and tell me the amount of Iron per Serving.",
+    "website": "https://www.allrecipes.com/"
+  },
+  {
+    "task_id": "Allrecipes--14",
+    "confirmed_task": "Search for a recipe that includes \"chicken breast\" and \"quinoa\" with preparation time under 30 minutes on Allrecipes.",
+    "website": "https://www.allrecipes.com/"
+  },
+  {
+    "task_id": "Allrecipes--15",
+    "confirmed_task": "Choose a dessert recipe on Allrecipes with a prep time of less than 30 minutes, has chocolate as an ingredient, and has a user rating of 4 stars or higher. Provide the name of the recipe, ingredients list, and step-by-step instructions.",
+    "website": "https://www.allrecipes.com/"
+  },
+  {
+    "task_id": "Allrecipes--16",
+    "confirmed_task": "Find a five-star rated chocolate chip cookie recipe that takes less than 1 hour to make on Allrecipes. Note how many reviews the recipe has and the main ingredients required.",
+    "website": "https://www.allrecipes.com/"
+  },
+  {
+    "task_id": "Allrecipes--17",
+    "confirmed_task": "Find the Easy Vegetarian Spinach Lasagna recipe on Allrecipes and tell me what the latest review says.",
+    "website": "https://www.allrecipes.com/"
+  },
+  {
+    "task_id": "Allrecipes--18",
+    "confirmed_task": "Find a recipe for a vegetarian lasagna that has over 300 reviews and an average rating of 4.5 or higher on Allrecipes.",
+    "website": "https://www.allrecipes.com/"
+  },
+  {
+    "task_id": "Allrecipes--19",
+    "confirmed_task": "Find a vegan lasagna recipe on Allrecipes that requires 10 ingredients or less and has feedback of more than 200 reviews. Provide a brief overview of the ingredient list and the total prep and cook time.",
+    "website": "https://www.allrecipes.com/"
+  },
+  {
+    "task_id": "Allrecipes--20",
+    "confirmed_task": "Find a recipe for a cauliflower pizza crust that has a preparation time of under 30 minutes and a rating of at least 4 stars on Allrecipes. Include the number of calories per serving.",
+    "website": "https://www.allrecipes.com/"
+  },
+  {
+    "task_id": "Allrecipes--21",
+    "confirmed_task": "Locate a high-rated recipe for gluten-free brownies on Allrecipes with at least 50 reviews. List the main ingredients and the total time required for preparation and cooking.",
+    "website": "https://www.allrecipes.com/"
+  },
+  {
+    "task_id": "Allrecipes--22",
+    "confirmed_task": "Find a recipe for a healthy avocado salad on Allrecipes that has a preparation time of less than 20 minutes and more than 30 user reviews. Include the nutritional information per serving.",
+    "website": "https://www.allrecipes.com/"
+  },
+  {
+    "task_id": "Allrecipes--23",
+    "confirmed_task": "Search Allrecipes for a baked lemon chicken recipe that has a prep time under 45 minutes, with at least a 4.5-star rating based on user reviews, and over 200 reviews. List the primary ingredients required.",
+    "website": "https://www.allrecipes.com/"
+  },
+  {
+    "task_id": "Allrecipes--24",
+    "confirmed_task": "Locate a recipe for an eggplant Parmesan on Allrecipes with a rating of at least 4.5 stars and over 50 reviews. Include the preparation time and the number of servings provided by the recipe.",
+    "website": "https://www.allrecipes.com/"
+  },
+  {
+    "task_id": "Allrecipes--25",
+    "confirmed_task": "Find a popular quinoa salad recipe on Allrecipes with more than 500 reviews and a rating above 4 stars. Create a shopping list of ingredients for this recipe and include the total cooking and preparation time.",
+    "website": "https://www.allrecipes.com/"
+  },
+  {
+    "task_id": "Allrecipes--26",
+    "confirmed_task": "Search for a high-protein vegetarian chili recipe on Allrecipes that has at least 50 reviews and a rating of 4 stars or higher. Provide the ingredient list, cooking time, and a brief description of the cooking steps.",
+    "website": "https://www.allrecipes.com/"
+  },
+  {
+    "task_id": "Allrecipes--27",
+    "confirmed_task": "Locate a chicken curry recipe on Allrecipes that has been reviewed more than 30 times and has a rating of at least 4 stars. Provide a summary of the recipe including ingredients, preparation time, and cooking instructions.",
+    "website": "https://www.allrecipes.com/"
+  },
+  {
+    "task_id": "Allrecipes--28",
+    "confirmed_task": "On Allrecipes, find a vegan brownie recipe that has at least 40 reviews and a rating of 4.5 or higher. Include the list of ingredients, total prep and cook time, and a brief overview of the preparation steps.",
+    "website": "https://www.allrecipes.com/"
+  },
+  {
+    "task_id": "Allrecipes--29",
+    "confirmed_task": "Search for a Mediterranean-style grilled fish recipe on Allrecipes that includes ingredients like olives, has at least a 4-star rating, and more than 25 reviews. Detail the ingredients, cooking method, and total time required for preparation and cooking.",
+    "website": "https://www.allrecipes.com/"
+  },
+  {
+    "task_id": "Allrecipes--30",
+    "confirmed_task": "Find a recipe for a vegan smoothie bowl on Allrecipes that includes bananas and leaves, has more than 20 reviews, and a rating of at least 4 stars. Provide a list of ingredients, preparation time, and a summary of the recipe steps.",
+    "website": "https://www.allrecipes.com/"
+  },
+  {
+    "task_id": "Allrecipes--31",
+    "confirmed_task": "Search for a seafood paella recipe on Allrecipes with a minimum of 4.5 stars rating and at least 50 reviews. The recipe should include shrimp and mussels. Provide the ingredients, total time, and an overview of the preparation steps.",
+    "website": "https://www.allrecipes.com/"
+  },
+  {
+    "task_id": "Allrecipes--32",
+    "confirmed_task": "Find a high-rated beef stew recipe on Allrecipes that requires a slow cooker and has at least 30 reviews. Detail the cooking time and the first five ingredients listed in the recipe.",
+    "website": "https://www.allrecipes.com/"
+  },
+  {
+    "task_id": "Allrecipes--33",
+    "confirmed_task": "Find a recipe for a low-carb breakfast on Allrecipes with at least 25 reviews. Show the Nutrition Facts and the total carbohydrate content per serving.",
+    "website": "https://www.allrecipes.com/"
+  },
+  {
+    "task_id": "Allrecipes--34",
+    "confirmed_task": "Locate a baked salmon recipe on Allrecipes that has at least 50 reviews and a rating of 4.5 stars or higher. Note the primary seasoning or herb used and the estimated cooking time.",
+    "website": "https://www.allrecipes.com/"
+  },
+  {
+    "task_id": "Allrecipes--35",
+    "confirmed_task": "Search for an Italian-style meatball recipe on Allrecipes that has more than 100 reviews. Detail the type of meat used and the overall cooking time required.",
+    "website": "https://www.allrecipes.com/"
+  },
+  {
+    "task_id": "Allrecipes--36",
+    "confirmed_task": "Locate a recipe for an American apple pie on Allrecipes with a rating of at least 4 stars and more than 50 reviews. Note the maximum temperature mentioned in the Directions.",
+    "website": "https://www.allrecipes.com/"
+  },
+  {
+    "task_id": "Allrecipes--37",
+    "confirmed_task": "Search for a Greek salad recipe on Allrecipes that has a prep time of under 25 minutes and more than 15 reviews. Include the primary cheese used and the type of dressing recommended.",
+    "website": "https://www.allrecipes.com/"
+  },
+  {
+    "task_id": "Allrecipes--38",
+    "confirmed_task": "Find a French ratatouille recipe on Allrecipes with a 4-star rating or higher and at least 15 reviews. Note the variety of vegetables included and the overall cooking time.",
+    "website": "https://www.allrecipes.com/"
+  },
+  {
+    "task_id": "Allrecipes--39",
+    "confirmed_task": "Locate a recipe for sushi rolls on Allrecipes with a minimum of 20 reviews. Show the Nutrition Facts and the main ingredients. Tell me how to store these rolls.",
+    "website": "https://www.allrecipes.com/"
+  },
+  {
+    "task_id": "Allrecipes--40",
+    "confirmed_task": "Browse the about us section of Allrecipes for a brief introduction to The Allrecipes Allstars.",
+    "website": "https://www.allrecipes.com/"
+  },
+  {
+    "task_id": "Allrecipes--41",
+    "confirmed_task": "List 3 recommended dinner recipes in the Allrecipes Dinners section.",
+    "website": "https://www.allrecipes.com/"
+  },
+  {
+    "task_id": "Allrecipes--42",
+    "confirmed_task": "Find a recipe for banana bread with more than 200 reviews and a rating of at least 4.0 stars on Allrecipes.",
+    "website": "https://www.allrecipes.com/"
+  },
+  {
+    "task_id": "Allrecipes--43",
+    "confirmed_task": "Find a recipe for a vegan pumpkin pie on Allrecipes with a minimum four-star rating and a total cook time exceeding 1 hour.",
+    "website": "https://www.allrecipes.com/"
+  },
+  {
+    "task_id": "Allrecipes--44",
+    "confirmed_task": "List at least 6 holiday recipes sections mentioned in the Occasions section of Allrecipes.",
+    "website": "https://www.allrecipes.com/"
+  },
+  {
+    "task_id": "Amazon--0",
+    "confirmed_task": "Search an Xbox Wireless controller with green color and rated above 4 stars.",
+    "website": "https://www.amazon.com/"
+  },
+  {
+    "task_id": "Amazon--1",
+    "confirmed_task": "Search for women's golf polos in m size, priced between 50 to 75 dollars, and save the lowest priced among results.",
+    "website": "https://www.amazon.com/"
+  },
+  {
+    "task_id": "Amazon--2",
+    "confirmed_task": "Find a gaming desktop with Windows 11 Home, and the disk size should be 1TB.",
+    "website": "https://www.amazon.com/"
+  },
+  {
+    "task_id": "Amazon--3",
+    "confirmed_task": "Find climbing gears and sort the results by price high to low. Answer the first 3 results after sorting.",
+    "website": "https://www.amazon.com/"
+  },
+  {
+    "task_id": "Amazon--4",
+    "confirmed_task": "Find the used Nintendo Switch Lite on Amazon then filter by 'Used - Good', tell me the cheapest one that is 'Used - Good'.",
+    "website": "https://www.amazon.com/"
+  },
+  {
+    "task_id": "Amazon--5",
+    "confirmed_task": "Find a Blue iPhone 12 Pro 128gb and add to cart.",
+    "website": "https://www.amazon.com/"
+  },
+  {
+    "task_id": "Amazon--6",
+    "confirmed_task": "Browse black strollers within $100 to $200 on Amazon. Then find one Among these black strollers with over 20,000 reviews and a rating greater than 4 star.",
+    "website": "https://www.amazon.com/"
+  },
+  {
+    "task_id": "Amazon--7",
+    "confirmed_task": "Browse the women's hiking boots on Amazon and filter the results to show only those that are waterproof and have a rating of at least 4 stars and size 6.",
+    "website": "https://www.amazon.com/"
+  },
+  {
+    "task_id": "Amazon--8",
+    "confirmed_task": "Find the cheapest Samsung-made Android tablet with screen between 10-10.9 inches on Amazon. Only answer the cheapest one.",
+    "website": "https://www.amazon.com/"
+  },
+  {
+    "task_id": "Amazon--9",
+    "confirmed_task": "Find a dog bed on Amazon that is washable and has a length of at least 30 inches.",
+    "website": "https://www.amazon.com/"
+  },
+  {
+    "task_id": "Amazon--10",
+    "confirmed_task": "Find the cost of a 2-year protection for PS4 on Amazon.",
+    "website": "https://www.amazon.com/"
+  },
+  {
+    "task_id": "Amazon--11",
+    "confirmed_task": "Find a stainless steel kitchen sink with double bowls on Amazon. Sort the results and find the cheapest one with FREE delivery.",
+    "website": "https://www.amazon.com/"
+  },
+  {
+    "task_id": "Amazon--12",
+    "confirmed_task": "Check reviews for a Ride On Car with 100+ reviews & 4+ stars rating on Amazon. Give me the top review about this Ride On Car.",
+    "website": "https://www.amazon.com/"
+  },
+  {
+    "task_id": "Amazon--13",
+    "confirmed_task": "Browse best selling black hoodies in mens size Big and Tall that is between $25 and $50 on Amazon.",
+    "website": "https://www.amazon.com/"
+  },
+  {
+    "task_id": "Amazon--14",
+    "confirmed_task": "Find the new surge protector on Amazon with 6 to 8 outlets under 25 dollars with customer reviews above 4+ stars.",
+    "website": "https://www.amazon.com/"
+  },
+  {
+    "task_id": "Amazon--15",
+    "confirmed_task": "Find a pair of mens running shoes in black, size 7, 4+ stars and under $50 and add them to my cart on Amazon.",
+    "website": "https://www.amazon.com/"
+  },
+  {
+    "task_id": "Amazon--16",
+    "confirmed_task": "Find the Return Policy for Mens Rhinestone Skull Graphic Shirt on Amazon. Color: Black, Size: XX-Large. If Free return is avaliable, tell me how to return this item.",
+    "website": "https://www.amazon.com/"
+  },
+  {
+    "task_id": "Amazon--17",
+    "confirmed_task": "Show me the list of baby products that are on sale and under 10 dollars on Amazon. Provide at least 2 on sale products",
+    "website": "https://www.amazon.com/"
+  },
+  {
+    "task_id": "Amazon--18",
+    "confirmed_task": "Open Amazon's home page and tell me what the deal is that is going on at the moment, list the names of at least 2 items that are on offer and tell me what percent off they are.",
+    "website": "https://www.amazon.com/"
+  },
+  {
+    "task_id": "Amazon--19",
+    "confirmed_task": "Look for an English language book on roman empire history in the Amazon Kindle store. Sort by newests arrivals and look for a title that will be released within a month.",
+    "website": "https://www.amazon.com/"
+  },
+  {
+    "task_id": "Amazon--20",
+    "confirmed_task": "Search for a wireless ergonomic keyboard with backlighting and a rating of at least 4 stars. The price should be between $40 to $60. Save the product with the 500+ customer reviews.",
+    "website": "https://www.amazon.com/"
+  },
+  {
+    "task_id": "Amazon--21",
+    "confirmed_task": "Find a stainless steel, 12-cup programmable coffee maker on Amazon. The price range should be between $100 to $200. Report the one with the 4+ customer rating.",
+    "website": "https://www.amazon.com/"
+  },
+  {
+    "task_id": "Amazon--22",
+    "confirmed_task": "Search for a set of non-stick, oven-safe cookware on Amazon. The set should include at least 10 pieces and be priced under $150.",
+    "website": "https://www.amazon.com/"
+  },
+  {
+    "task_id": "Amazon--23",
+    "confirmed_task": "Look for a men's waterproof digital sports watch with a heart rate monitor on Amazon. It should be priced between $50 to $100.",
+    "website": "https://www.amazon.com/"
+  },
+  {
+    "task_id": "Amazon--24",
+    "confirmed_task": "Browse for a compact air fryer on Amazon with a capacity of 2 to 3 quarts. It should have a digital display, auto shutoff and be priced under $100.",
+    "website": "https://www.amazon.com/"
+  },
+  {
+    "task_id": "Amazon--25",
+    "confirmed_task": "Search for a queen-sized, hypoallergenic mattress topper on Amazon. It should have a memory foam material and be priced between $50 to $100.",
+    "website": "https://www.amazon.com/"
+  },
+  {
+    "task_id": "Amazon--26",
+    "confirmed_task": "Find a portable Bluetooth speaker on Amazon with a water-resistant design, under $50. It should have a minimum battery life of 10 hours.",
+    "website": "https://www.amazon.com/"
+  },
+  {
+    "task_id": "Amazon--27",
+    "confirmed_task": "Look for a USB-C hub on Amazon compatible with MacBook Pro, featuring at least 4 ports, including HDMI and SD card reader. The price should be under $50. Select the one after sorting by Best Sellers.",
+    "website": "https://www.amazon.com/"
+  },
+  {
+    "task_id": "Amazon--28",
+    "confirmed_task": "Search for a yoga mat on Amazon that is at least 6mm thick, non-slip, and eco-friendly. The price should be under $50.",
+    "website": "https://www.amazon.com/"
+  },
+  {
+    "task_id": "Amazon--29",
+    "confirmed_task": "Find a set of solar-powered garden lights on Amazon with a minimum pack of 10 lights. They should be LED and priced under $50.",
+    "website": "https://www.amazon.com/"
+  },
+  {
+    "task_id": "Amazon--31",
+    "confirmed_task": "Find a compact digital camera on Amazon with a zoom capability of at least 10x, rated 4 stars or higher, and priced between $100 to $300.",
+    "website": "https://www.amazon.com/"
+  },
+  {
+    "task_id": "Amazon--32",
+    "confirmed_task": "Search for an electric kettle on Amazon with a capacity of at least 1.5 liters, made of stainless steel, and with a customer rating of 4 stars or above.",
+    "website": "https://www.amazon.com/"
+  },
+  {
+    "task_id": "Amazon--33",
+    "confirmed_task": "Search for a portable air conditioner on Amazon suitable for a room size of 300 sq ft, with energy efficiency rating, and compare the prices of the top three search results.",
+    "website": "https://www.amazon.com/"
+  },
+  {
+    "task_id": "Amazon--34",
+    "confirmed_task": "Find a beginner's acrylic paint set on Amazon, with at least 24 colors, suitable for canvas painting, and priced under $40.",
+    "website": "https://www.amazon.com/"
+  },
+  {
+    "task_id": "Amazon--35",
+    "confirmed_task": "Find a men's leather wallet on Amazon with RFID blocking, at least 6 card slots, and priced below $50. Check if it's available for FREE delivery.",
+    "website": "https://www.amazon.com/"
+  },
+  {
+    "task_id": "Amazon--36",
+    "confirmed_task": "Search for a children's science experiment kit on Amazon suitable for ages 8-13, with at least a 4-star rating and priced under $30.",
+    "website": "https://www.amazon.com/"
+  },
+  {
+    "task_id": "Amazon--37",
+    "confirmed_task": "Locate a queen-sized bedspread on Amazon with a floral pattern, and check if it's available in blue color.",
+    "website": "https://www.amazon.com/"
+  },
+  {
+    "task_id": "Amazon--38",
+    "confirmed_task": "Find a bird feeder on Amazon suitable for small birds, with an anti-squirrel mechanism, and check if it's available with free shipping.",
+    "website": "https://www.amazon.com/"
+  },
+  {
+    "task_id": "Amazon--40",
+    "confirmed_task": "Locate a women's yoga mat in purple, with a thickness of at least 5mm, rated 4+ stars, and priced under $30 on Amazon. Check how many colors are available in total, and what is the return and delivery policy.",
+    "website": "https://www.amazon.com/"
+  },
+  {
+    "task_id": "Apple--0",
+    "confirmed_task": "Compare the prices of the latest models of MacBook Air available on Apple's website.",
+    "website": "https://www.apple.com/"
+  },
+  {
+    "task_id": "Apple--1",
+    "confirmed_task": "Research the new features of the iOS 17 on Apple support and check its compatibility with the iPhone 12.",
+    "website": "https://www.apple.com/"
+  },
+  {
+    "task_id": "Apple--2",
+    "confirmed_task": "Compare the prices and chips for the iPhone 14 Pro and iPhone 15 Pro models directly from Apple's website.",
+    "website": "https://www.apple.com/"
+  },
+  {
+    "task_id": "Apple--3",
+    "confirmed_task": "Find the latest model of the iPhone and compare the price and screen size between the pro and pro max.",
+    "website": "https://www.apple.com/"
+  },
+  {
+    "task_id": "Apple--4",
+    "confirmed_task": "How much does it cost to buy a Macbook pro, 16-inch, Apple M3 Max chip with 16-core CPU, 40-core GPU, 64GB unified memory, 1TB SSD.",
+    "website": "https://www.apple.com/"
+  },
+  {
+    "task_id": "Apple--5",
+    "confirmed_task": "Check the release date and price for the latest version of the iPhone.",
+    "website": "https://www.apple.com/"
+  },
+  {
+    "task_id": "Apple--6",
+    "confirmed_task": "Find AirPods on Apple and how many types are currently available.",
+    "website": "https://www.apple.com/"
+  },
+  {
+    "task_id": "Apple--7",
+    "confirmed_task": "When and where the Apple Vision Pro will be released.",
+    "website": "https://www.apple.com/"
+  },
+  {
+    "task_id": "Apple--8",
+    "confirmed_task": "Identify and list the specifications of the latest iPad model released by Apple, including its storage options, processor type, and display features.",
+    "website": "https://www.apple.com/"
+  },
+  {
+    "task_id": "Apple--10",
+    "confirmed_task": "Find information on the latest (as of today's date) MacBook model, including its key features such as processor type, memory size, and storage capacity.",
+    "website": "https://www.apple.com/"
+  },
+  {
+    "task_id": "Apple--11",
+    "confirmed_task": "Get information about the latest iPad model released by Apple, including its release date, base storage capacity, and starting price available on Apple's official website.",
+    "website": "https://www.apple.com/"
+  },
+  {
+    "task_id": "Apple--12",
+    "confirmed_task": "What Apple Repair ways are mentioned on apple website, answer 2 of them.",
+    "website": "https://www.apple.com/"
+  },
+  {
+    "task_id": "Apple--13",
+    "confirmed_task": "How many colors does the latest MacBook Air come in?",
+    "website": "https://www.apple.com/"
+  },
+  {
+    "task_id": "Apple--14",
+    "confirmed_task": "Identify the upgrade options available for the cheapest base model of the MacBook Pro 14-inch with M3 chip, and calculate the total price difference from the base model to the maximum upgrade (no Pre-Installed Software) offered by Apple.",
+    "website": "https://www.apple.com/"
+  },
+  {
+    "task_id": "Apple--15",
+    "confirmed_task": "On Apple's website, how many different types of keyboards are available when customizing your 14-inch MacBook Pro?",
+    "website": "https://www.apple.com/"
+  },
+  {
+    "task_id": "Apple--16",
+    "confirmed_task": "Find on Apple website how many types of AirPods (3rd generation) are available and what is the price difference.",
+    "website": "https://www.apple.com/"
+  },
+  {
+    "task_id": "Apple--17",
+    "confirmed_task": "Search Apple for the accessory Smart Folio for iPad and check the closest pickup availability next to zip code 90038.",
+    "website": "https://www.apple.com/"
+  },
+  {
+    "task_id": "Apple--18",
+    "confirmed_task": "Check if there are trade-in offers for the latest model of iPhone.",
+    "website": "https://www.apple.com/"
+  },
+  {
+    "task_id": "Apple--19",
+    "confirmed_task": "On Apple's website, what is the slogan for the Mac and what is the slogan for the Macbook pro.",
+    "website": "https://www.apple.com/"
+  },
+  {
+    "task_id": "Apple--20",
+    "confirmed_task": "Check the price for an Apple iPhone 14 Plus with 256GB storage in Purple color.",
+    "website": "https://www.apple.com/"
+  },
+  {
+    "task_id": "Apple--21",
+    "confirmed_task": "Identify the available storage options for the latest iPad Pro on the Apple website.",
+    "website": "https://www.apple.com/"
+  },
+  {
+    "task_id": "Apple--22",
+    "confirmed_task": "Find out the trade-in value for an iPhone 13 Pro Max in good condition on the Apple website.",
+    "website": "https://www.apple.com/"
+  },
+  {
+    "task_id": "Apple--23",
+    "confirmed_task": "Determine the price difference between the latest series of Apple Watch and Apple Watch SE on the Apple website.",
+    "website": "https://www.apple.com/"
+  },
+  {
+    "task_id": "Apple--24",
+    "confirmed_task": "Find out the starting price for the most recent model of the iMac on the Apple website.",
+    "website": "https://www.apple.com/"
+  },
+  {
+    "task_id": "Apple--25",
+    "confirmed_task": "On the Apple website, look up the processor for the latest model of the Apple TV.",
+    "website": "https://www.apple.com/"
+  },
+  {
+    "task_id": "Apple--26",
+    "confirmed_task": "Find the maximum video recording resolution supported by the latest iPad mini on the Apple website.",
+    "website": "https://www.apple.com/"
+  },
+  {
+    "task_id": "Apple--27",
+    "confirmed_task": "On Apple's website, check if the HomePod mini in store is available in multiple colors and list them.",
+    "website": "https://www.apple.com/"
+  },
+  {
+    "task_id": "Apple--28",
+    "confirmed_task": "On the Apple website, find out if the Mac Mini can be configured with a GPU larger than 16-core.",
+    "website": "https://www.apple.com/"
+  },
+  {
+    "task_id": "Apple--29",
+    "confirmed_task": "On Apple's website, check the estimated battery life of the latest MacBook Air during web browsing in Tech Specs.",
+    "website": "https://www.apple.com/"
+  },
+  {
+    "task_id": "Apple--30",
+    "confirmed_task": "Check the storage options and prices for the latest iPad Pro models on Apple's website.",
+    "website": "https://www.apple.com/"
+  },
+  {
+    "task_id": "Apple--31",
+    "confirmed_task": "On Apple's website, what is the slogan for the latest Apple Watch Series.",
+    "website": "https://www.apple.com/"
+  },
+  {
+    "task_id": "Apple--32",
+    "confirmed_task": "Investigate the trade-in value for an iPhone 11 Pro Max on Apple's website.",
+    "website": "https://www.apple.com/"
+  },
+  {
+    "task_id": "Apple--33",
+    "confirmed_task": "Look for the color options available for the newest iMac.",
+    "website": "https://www.apple.com/"
+  },
+  {
+    "task_id": "Apple--34",
+    "confirmed_task": "Identify the size and weight for the Apple TV 4K and list the Siri Remote features introduced.",
+    "website": "https://www.apple.com/"
+  },
+  {
+    "task_id": "Apple--35",
+    "confirmed_task": "How many types of Apple Pencil are currently available on the Apple's website? Which one supports Wireless pairing and charging.",
+    "website": "https://www.apple.com/"
+  },
+  {
+    "task_id": "Apple--36",
+    "confirmed_task": "Browse Apple Music on the entertainment section of the Apple's website, and see which singers' names are included in the pictures on this page.",
+    "website": "https://www.apple.com/"
+  },
+  {
+    "task_id": "Apple--37",
+    "confirmed_task": "Compare the color options of iPhone 13 Pro, iPhone 14 Pro and iPhone 15 Pro.",
+    "website": "https://www.apple.com/"
+  },
+  {
+    "task_id": "Apple--38",
+    "confirmed_task": "Explore accessories for Apple Vision Pro, list at least three accessories.",
+    "website": "https://www.apple.com/"
+  },
+  {
+    "task_id": "Apple--39",
+    "confirmed_task": "Find solutions on Apple's website if you forgot your Apple ID password.",
+    "website": "https://www.apple.com/"
+  },
+  {
+    "task_id": "Apple--40",
+    "confirmed_task": "Find information on Apple website, and tell me the device weight of Apple Vision Pro and list 5 Built-in Apps it supports.",
+    "website": "https://www.apple.com/"
+  },
+  {
+    "task_id": "Apple--41",
+    "confirmed_task": "How much does it cost to buy an ipad mini with 64GB storage and Wi-Fi + Cellular connectivity? (no engraving, no apple pencil, no smart folio, no apple trade-in).",
+    "website": "https://www.apple.com/"
+  },
+  {
+    "task_id": "Apple--42",
+    "confirmed_task": "Find updates for Apple Watch Series 7,8,9 on Apple's website.",
+    "website": "https://www.apple.com/"
+  },
+  {
+    "task_id": "ArXiv--0",
+    "confirmed_task": "Search for the latest preprints about 'quantum computing'.",
+    "website": "https://arxiv.org/"
+  },
+  {
+    "task_id": "ArXiv--1",
+    "confirmed_task": "Search for the latest research papers on quantum computing submitted to ArXiv within the last two days.",
+    "website": "https://arxiv.org/"
+  },
+  {
+    "task_id": "ArXiv--2",
+    "confirmed_task": "Look up the most recent papers related to 'cs.CL', select one and show its abstract.",
+    "website": "https://arxiv.org/"
+  },
+  {
+    "task_id": "ArXiv--3",
+    "confirmed_task": "Locate the most recent research paper about 'Algebraic Topology' under Mathematics published on ArXiv. Provide the title of the paper, the name of the authors, and the abstract.",
+    "website": "https://arxiv.org/"
+  },
+  {
+    "task_id": "ArXiv--4",
+    "confirmed_task": "Find the most recent research papers in Astrophysics of Galaxies. How many papers have been announced in the last day?",
+    "website": "https://arxiv.org/"
+  },
+  {
+    "task_id": "ArXiv--5",
+    "confirmed_task": "Search papers about \"quantum computing\" which has been submitted to the Quantum Physics category on ArXiv. How many results in total. What if search in all archives?",
+    "website": "https://arxiv.org/"
+  },
+  {
+    "task_id": "ArXiv--6",
+    "confirmed_task": "How many figures and tables are in the paper \"On the Sentence Embeddings from Pre-trained Language Models\"?",
+    "website": "https://arxiv.org/"
+  },
+  {
+    "task_id": "ArXiv--7",
+    "confirmed_task": "Find the most recent paper submitted on machine learning in the Computer Science category posted on ArXiv.",
+    "website": "https://arxiv.org/"
+  },
+  {
+    "task_id": "ArXiv--8",
+    "confirmed_task": "What is the latest news on ArXiv?",
+    "website": "https://arxiv.org/"
+  },
+  {
+    "task_id": "ArXiv--9",
+    "confirmed_task": "Find the latest research paper about neural networks published on ArXiv which has been submitted within the last week.",
+    "website": "https://arxiv.org/"
+  },
+  {
+    "task_id": "ArXiv--10",
+    "confirmed_task": "Visit ArXiv Help on how to withdraw an article if the submission is not yet announced.",
+    "website": "https://arxiv.org/"
+  },
+  {
+    "task_id": "ArXiv--11",
+    "confirmed_task": "For Non-English submissions, do I need to provide a multi-language abstract, if need, answer the separator between the multiple abstracts.",
+    "website": "https://arxiv.org/"
+  },
+  {
+    "task_id": "ArXiv--12",
+    "confirmed_task": "Find store in arXiv Help, tell me how many styles of arXiv Logo Shirt are available?",
+    "website": "https://arxiv.org/"
+  },
+  {
+    "task_id": "ArXiv--13",
+    "confirmed_task": "How many articles on ArXiv with 'SimCSE' in the title?",
+    "website": "https://arxiv.org/"
+  },
+  {
+    "task_id": "ArXiv--16",
+    "confirmed_task": "Locate the latest research about gravitational waves that were uploaded to ArXiv this week and provide a brief summary of one article's main findings.",
+    "website": "https://arxiv.org/"
+  },
+  {
+    "task_id": "ArXiv--17",
+    "confirmed_task": "Find the paper 'GPT-4 Technical Report', when was v3 submitted?",
+    "website": "https://arxiv.org/"
+  },
+  {
+    "task_id": "ArXiv--18",
+    "confirmed_task": "Download the paper 'Dense Passage Retrieval for Open-Domain Question Answering'. How many formulas are in the article and which one is the loss function?",
+    "website": "https://arxiv.org/"
+  },
+  {
+    "task_id": "ArXiv--19",
+    "confirmed_task": "Which university maintains and manages ArXiv. Accessing the university's website from ArXiv, how many underegraduate students are currently at the university.",
+    "website": "https://arxiv.org/"
+  },
+  {
+    "task_id": "ArXiv--20",
+    "confirmed_task": "Find the latest paper on 'machine learning in the Statistics section of ArXiv and provide its abstract.",
+    "website": "https://arxiv.org/"
+  },
+  {
+    "task_id": "ArXiv--21",
+    "confirmed_task": "Search for papers on 'neural networks for image processing' in the Computer Science category on ArXiv and report how many were submitted in the last week.",
+    "website": "https://arxiv.org/"
+  },
+  {
+    "task_id": "ArXiv--22",
+    "confirmed_task": "Locate the ArXiv Help section and find instructions on how to subscribe to daily listing emails for new submissions in a specific category.",
+    "website": "https://arxiv.org/"
+  },
+  {
+    "task_id": "ArXiv--23",
+    "confirmed_task": "Determine how many articles with the keyword 'autonomous vehicles' were published in the 'Electrical Engineering and Systems Science' section of ArXiv yesterday.",
+    "website": "https://arxiv.org/"
+  },
+  {
+    "task_id": "ArXiv--24",
+    "confirmed_task": "Identify the most recent paper related to 'graph neural networks' on ArXiv and determine the affiliation of the first author.",
+    "website": "https://arxiv.org/"
+  },
+  {
+    "task_id": "ArXiv--25",
+    "confirmed_task": "Browse the ArXiv store and let me know how many different types of merchandise are available.",
+    "website": "https://arxiv.org/"
+  },
+  {
+    "task_id": "ArXiv--26",
+    "confirmed_task": "Search for papers related to 'climate change modeling' on ArXiv and find out how many have been published in the Earth and Planetary Astrophysics (astro-ph.EP) category in the last week.",
+    "website": "https://arxiv.org/"
+  },
+  {
+    "task_id": "ArXiv--27",
+    "confirmed_task": "On ArXiv, what categories does Economics include, and what are their abbreviations?",
+    "website": "https://arxiv.org/"
+  },
+  {
+    "task_id": "ArXiv--28",
+    "confirmed_task": "Search 'Poly encoder' by title on ArXiv and check whether the articles in the search results provide HTML access.",
+    "website": "https://arxiv.org/"
+  },
+  {
+    "task_id": "ArXiv--30",
+    "confirmed_task": "Look up the submission guidelines on ArXiv for submitting a paper and tell me the formats for figures.",
+    "website": "https://arxiv.org/"
+  },
+  {
+    "task_id": "ArXiv--32",
+    "confirmed_task": "Locate the latest paper on ArXiv within the 'Nonlinear Sciences - Chaotic Dynamics' category, summarize the abstract and note the submission date.",
+    "website": "https://arxiv.org/"
+  },
+  {
+    "task_id": "ArXiv--33",
+    "confirmed_task": "Query ArXiv for the latest research article in the category of Systems and Control under Computer Science. Summarize the main objective or hypothesis presented in the paper and provide the names of the authors.",
+    "website": "https://arxiv.org/"
+  },
+  {
+    "task_id": "ArXiv--34",
+    "confirmed_task": "Search for the most recent paper related to non-commutative geometry submitted by an author with the first name John. Provide the title and the abstract.",
+    "website": "https://arxiv.org/"
+  },
+  {
+    "task_id": "ArXiv--35",
+    "confirmed_task": "Retrieve the latest research paper in Quantum Physics from ArXiv and provide the title, author(s), and date of submission.",
+    "website": "https://arxiv.org/"
+  },
+  {
+    "task_id": "ArXiv--37",
+    "confirmed_task": "Find the names of people in ArXiv's Leadership Team.",
+    "website": "https://arxiv.org/"
+  },
+  {
+    "task_id": "ArXiv--38",
+    "confirmed_task": "Find the ArXiv Blog on the ArXiv website and summarize the content of its latest article.",
+    "website": "https://arxiv.org/"
+  },
+  {
+    "task_id": "ArXiv--39",
+    "confirmed_task": "Search the title 'GPT-4 Technical Report' and access this paper through HTML format. Read the paper on this page and tell me what is 'one of the main goals of developing such models' mentioned in the Introduction.",
+    "website": "https://arxiv.org/"
+  },
+  {
+    "task_id": "ArXiv--40",
+    "confirmed_task": "How many articles are there on each of the three most recent announce days in the Solar and Stellar Astrophysics section of ArXiv. Choose one at random and answer its title and when the first version was uploaded?",
+    "website": "https://arxiv.org/"
+  },
+  {
+    "task_id": "ArXiv--41",
+    "confirmed_task": "Find the button to share arxiv non-profit store and follow the QR code to share the shop. Then add arXiv Forever short sleeve (XL) to your cart.",
+    "website": "https://arxiv.org/"
+  },
+  {
+    "task_id": "ArXiv--42",
+    "confirmed_task": "Find an article published between 1 January 2000 and 1 January 2005 that requires Support Vector Machines in the title and its Journey ref is ACL Workshop.",
+    "website": "https://arxiv.org/"
+  },
+  {
+    "task_id": "BBC News--0",
+    "confirmed_task": "Find a report on the BBC News website about recent developments in renewable energy technologies in the UK.",
+    "website": "https://www.bbc.com/news/"
+  },
+  {
+    "task_id": "BBC News--1",
+    "confirmed_task": "Read the latest health-related news article published on BBC News and summarize the key points discussed.",
+    "website": "https://www.bbc.com/news/"
+  },
+  {
+    "task_id": "BBC News--2",
+    "confirmed_task": "Read the latest article regarding the environmental impacts of deforestation published within the last two days.",
+    "website": "https://www.bbc.com/news/"
+  },
+  {
+    "task_id": "BBC News--3",
+    "confirmed_task": "Check the leaderboard for Golf's DP World Tour in the SPORT section, what was the name of the most recent tournament, and how many teams have a Total of -10 strokes.",
+    "website": "https://www.bbc.com/news/"
+  },
+  {
+    "task_id": "BBC News--4",
+    "confirmed_task": "Find the latest article regarding the economic implications of climate change in Europe as reported by BBC News and summarize the central points.",
+    "website": "https://www.bbc.com/news/"
+  },
+  {
+    "task_id": "BBC News--5",
+    "confirmed_task": "Find the article \"What is climate change? A really simple guide\" and use it to answer what human activities are causing climate change.",
+    "website": "https://www.bbc.com/news/"
+  },
+  {
+    "task_id": "BBC News--6",
+    "confirmed_task": "Find the top story from BBC News in the technology section for today.",
+    "website": "https://www.bbc.com/news/"
+  },
+  {
+    "task_id": "BBC News--7",
+    "confirmed_task": "Find a AI-related story under Technology of Business. What is in the first picture in the story?",
+    "website": "https://www.bbc.com/news/"
+  },
+  {
+    "task_id": "BBC News--8",
+    "confirmed_task": "Get a brief overview of the economic implications of the UK's latest trade deal posted on BBC News and the date when the article was published.",
+    "website": "https://www.bbc.com/news/"
+  },
+  {
+    "task_id": "BBC News--9",
+    "confirmed_task": "Find out which musician made the headlines in Music News.",
+    "website": "https://www.bbc.com/news/"
+  },
+  {
+    "task_id": "BBC News--10",
+    "confirmed_task": "Identify the main headlines covering the UK's plan to tackle climate change on BBC News.",
+    "website": "https://www.bbc.com/news/"
+  },
+  {
+    "task_id": "BBC News--11",
+    "confirmed_task": "Find out how many teams are in the Scottish Premiership of the Football Tournament and when did the Hibernian team's most recent match start?",
+    "website": "https://www.bbc.com/news/"
+  },
+  {
+    "task_id": "BBC News--12",
+    "confirmed_task": "Find a picture in the travel section that contains food, tell me what the food is called and what region it comes from.",
+    "website": "https://www.bbc.com/news/"
+  },
+  {
+    "task_id": "BBC News--13",
+    "confirmed_task": "Search for recent news related to Trump and summarize the main points.",
+    "website": "https://www.bbc.com/news/"
+  },
+  {
+    "task_id": "BBC News--14",
+    "confirmed_task": "Find a news article on BBC News about the impact of the recent tech industry layoffs on the global economy. Summarize the key points and the name of the author, and provide the date of publication.",
+    "website": "https://www.bbc.com/news/"
+  },
+  {
+    "task_id": "BBC News--15",
+    "confirmed_task": "What does the current headline in Natural Wonders tell about.",
+    "website": "https://www.bbc.com/news/"
+  },
+  {
+    "task_id": "BBC News--16",
+    "confirmed_task": "Identify the most recent development or update in Brexit negotiations as reported on BBC News and report the key points and any stated impacts on European economies.",
+    "website": "https://www.bbc.com/news/"
+  },
+  {
+    "task_id": "BBC News--17",
+    "confirmed_task": "How many War related sections are currently in BBC News.",
+    "website": "https://www.bbc.com/news/"
+  },
+  {
+    "task_id": "BBC News--19",
+    "confirmed_task": "Visit the Athletics calendar for the date of the next earliest game.",
+    "website": "https://www.bbc.com/news/"
+  },
+  {
+    "task_id": "BBC News--20",
+    "confirmed_task": "Find the latest article in the Green Living section on BBC News and provide a summary of its main points.",
+    "website": "https://www.bbc.com/news/"
+  },
+  {
+    "task_id": "BBC News--21",
+    "confirmed_task": "Identify the top headline in the World News section on BBC News and describe the region it is related to.",
+    "website": "https://www.bbc.com/news/"
+  },
+  {
+    "task_id": "BBC News--22",
+    "confirmed_task": "Determine the current top business story on BBC News and give a brief overview of its economic implications.",
+    "website": "https://www.bbc.com/news/"
+  },
+  {
+    "task_id": "BBC News--23",
+    "confirmed_task": "Identify the latest health-related news on BBC News and summarize the main findings or recommendations.",
+    "website": "https://www.bbc.com/news/"
+  },
+  {
+    "task_id": "BBC News--24",
+    "confirmed_task": "Search the latest article about space exploration on BBC News and summarize its key points.",
+    "website": "https://www.bbc.com/news/"
+  },
+  {
+    "task_id": "BBC News--25",
+    "confirmed_task": "Find the most recent sports analysis article on BBC News related to the English Premier League and summarize its key insights.",
+    "website": "https://www.bbc.com/news/"
+  },
+  {
+    "task_id": "BBC News--26",
+    "confirmed_task": "Locate the latest report on BBC News about the impact of recent natural disasters in Asia and summarize the key points and areas affected.",
+    "website": "https://www.bbc.com/news/"
+  },
+  {
+    "task_id": "BBC News--27",
+    "confirmed_task": "Find the most recent article on BBC News about archaeological discoveries and summarize the main findings and their significance.",
+    "website": "https://www.bbc.com/news/"
+  },
+  {
+    "task_id": "BBC News--28",
+    "confirmed_task": "Find the Market Data section on BBC News and tell me which company the data comes from.",
+    "website": "https://www.bbc.com/news/"
+  },
+  {
+    "task_id": "BBC News--29",
+    "confirmed_task": "Visit BBC News Audio and find out which podcast episode is currently featured as the \"New Releases\".",
+    "website": "https://www.bbc.com/news/"
+  },
+  {
+    "task_id": "BBC News--30",
+    "confirmed_task": "In the Culture section, identify the latest film release reviewed and provide a brief summary of the review.",
+    "website": "https://www.bbc.com/news/"
+  },
+  {
+    "task_id": "BBC News--31",
+    "confirmed_task": "Check the Sports section for the result of the most recent Manchester United football match.",
+    "website": "https://www.bbc.com/news/"
+  },
+  {
+    "task_id": "BBC News--32",
+    "confirmed_task": "Find the artificial intelligence section, what is the top headline at this time, and which companies are involved?",
+    "website": "https://www.bbc.com/news/"
+  },
+  {
+    "task_id": "BBC News--33",
+    "confirmed_task": "In the World News section, find the latest war situations of Middle East and provide a brief summary.",
+    "website": "https://www.bbc.com/news/"
+  },
+  {
+    "task_id": "BBC News--34",
+    "confirmed_task": "Find The SpeciaList section in Travel and browse the page to see which cities are mentioned.",
+    "website": "https://www.bbc.com/news/"
+  },
+  {
+    "task_id": "BBC News--35",
+    "confirmed_task": "In the Asia section, browse and identify the most recent report about technological advancements and summarize its content.",
+    "website": "https://www.bbc.com/news/"
+  },
+  {
+    "task_id": "BBC News--36",
+    "confirmed_task": "Look up recent articles in the Africa news section in World, summarize what topics most of these news are about",
+    "website": "https://www.bbc.com/news/"
+  },
+  {
+    "task_id": "BBC News--37",
+    "confirmed_task": "Identify the latest book review featured in the Culture section and provide the title and author of the book.",
+    "website": "https://www.bbc.com/news/"
+  },
+  {
+    "task_id": "BBC News--38",
+    "confirmed_task": "Find news related to the storm in Weather section and indicate where and when the severe weather occurred.",
+    "website": "https://www.bbc.com/news/"
+  },
+  {
+    "task_id": "BBC News--39",
+    "confirmed_task": "Check the Horse Racing results in Sport section, browse all the games that took place yesterday and see which one had the highest number of runners.",
+    "website": "https://www.bbc.com/news/"
+  },
+  {
+    "task_id": "BBC News--40",
+    "confirmed_task": "Read and summarise a recent story on BBC News about people being injured or killed in wars.",
+    "website": "https://www.bbc.com/news/"
+  },
+  {
+    "task_id": "BBC News--41",
+    "confirmed_task": "Find Golf in BBC News, check the Leaderboard at this point in Women's Majors and count which country has the most players in the top 20? Which player has the best score amongst the Australian players and in what place.",
+    "website": "https://www.bbc.com/news/"
+  },
+  {
+    "task_id": "Booking--0",
+    "confirmed_task": "Find a Mexico hotel with deals for December 25-26.",
+    "website": "https://www.booking.com/"
+  },
+  {
+    "task_id": "Booking--1",
+    "confirmed_task": "Find the cheapest available hotel room for a three night stay from 1st Jan in Jakarta. The room is for 2 adults, just answer the cheapest hotel room and the price.",
+    "website": "https://www.booking.com/"
+  },
+  {
+    "task_id": "Booking--2",
+    "confirmed_task": "Find a hotel in Ohio From December 20th to December 23th for 3 adults and 2 rooms.",
+    "website": "https://www.booking.com/"
+  },
+  {
+    "task_id": "Booking--3",
+    "confirmed_task": "Find a hotel with 4 star and above rating in Los Angeles for 3 days from Dec 18th.",
+    "website": "https://www.booking.com/"
+  },
+  {
+    "task_id": "Booking--4",
+    "confirmed_task": "Search for the cheapest Hotel near Kashi Vishwanath Temple that offer breakfast from Dec 25th - Dec 26th.",
+    "website": "https://www.booking.com/"
+  },
+  {
+    "task_id": "Booking--6",
+    "confirmed_task": "Book one room which provides breakfast, and airport shuttle from Jan 22 to 25 in Los Angeles.",
+    "website": "https://www.booking.com/"
+  },
+  {
+    "task_id": "Booking--7",
+    "confirmed_task": "Find a hotel room on January 3-6 that is closest to National University of Singapore and costs less than $500",
+    "website": "https://www.booking.com/"
+  },
+  {
+    "task_id": "Booking--9",
+    "confirmed_task": "Find hotels for 2 adults in London with a price less than 250 dollars for four days starting from December 25. You must browse the page and offer at least 3 options.",
+    "website": "https://www.booking.com/"
+  },
+  {
+    "task_id": "Booking--33",
+    "confirmed_task": "Find the Customer Service on the Booking website, browse the questions about cancellation, and tell me 'how do I know whether my booking has been cancelled'.",
+    "website": "https://www.booking.com/"
+  },
+  {
+    "task_id": "Booking--35",
+    "confirmed_task": "Browse the booking website to get inspiration for your next trip, and summarize at least three places mentioned in one of the travel articles.",
+    "website": "https://www.booking.com/"
+  },
+  {
+    "task_id": "Booking--41",
+    "confirmed_task": "Browse Booking's homepage to find out which company it belongs to.",
+    "website": "https://www.booking.com/"
+  },
+  {
+    "task_id": "Booking--43",
+    "confirmed_task": "Search for properties in Los Angeles, browse the results page to see what filters are available, list some of them.",
+    "website": "https://www.booking.com/"
+  },
+  {
+    "task_id": "Cambridge Dictionary--0",
+    "confirmed_task": "Look up the pronunciation and definition of the word \"sustainability\" on the Cambridge Dictionary.",
+    "website": "https://dictionary.cambridge.org/"
+  },
+  {
+    "task_id": "Cambridge Dictionary--1",
+    "confirmed_task": "Find the pronunciation, definition, and a sample sentence for the word 'serendipity'.",
+    "website": "https://dictionary.cambridge.org/"
+  },
+  {
+    "task_id": "Cambridge Dictionary--2",
+    "confirmed_task": "Look up the pronunciation, definition, and example sentence for the word \"ubiquitous\" in UK and US English.",
+    "website": "https://dictionary.cambridge.org/"
+  },
+  {
+    "task_id": "Cambridge Dictionary--3",
+    "confirmed_task": "Look up the definition, pronunciation, and examples of the word \"zeitgeist.\"",
+    "website": "https://dictionary.cambridge.org/"
+  },
+  {
+    "task_id": "Cambridge Dictionary--4",
+    "confirmed_task": "Look for the British English pronunciation of the word \"innovate\" and write down the International Phonetic Alphabet (IPA) notation, then find one example sentence provided in the Cambridge Dictionary that uses this word.",
+    "website": "https://dictionary.cambridge.org/"
+  },
+  {
+    "task_id": "Cambridge Dictionary--5",
+    "confirmed_task": "Learn the UK and US pronunciation of the word \"procrastination\", and find one example sentence that reflects its use in context.",
+    "website": "https://dictionary.cambridge.org/"
+  },
+  {
+    "task_id": "Cambridge Dictionary--6",
+    "confirmed_task": "Search for the word \"sustainability\" on the Cambridge Dictionary, what is the translation of sustainability into Chinese and French in the dictionary.",
+    "website": "https://dictionary.cambridge.org/"
+  },
+  {
+    "task_id": "Cambridge Dictionary--7",
+    "confirmed_task": "Look up the meaning, pronunciation, and an example sentence of the word \"gestalt\" using the Cambridge Dictionary.",
+    "website": "https://dictionary.cambridge.org/"
+  },
+  {
+    "task_id": "Cambridge Dictionary--8",
+    "confirmed_task": "Find three different meanings of \"dog\" in Cambridge Dictionary.",
+    "website": "https://dictionary.cambridge.org/"
+  },
+  {
+    "task_id": "Cambridge Dictionary--9",
+    "confirmed_task": "Look up the British pronunciation of the word \"euphoria\" and find an example sentence using that word on the Cambridge Dictionary.",
+    "website": "https://dictionary.cambridge.org/"
+  },
+  {
+    "task_id": "Cambridge Dictionary--10",
+    "confirmed_task": "Look up the definition and pronunciation of the word \"impeccable\" and also find an example sentence using that word.",
+    "website": "https://dictionary.cambridge.org/"
+  },
+  {
+    "task_id": "Cambridge Dictionary--11",
+    "confirmed_task": "Look up the pronunciation and definition of the word \"ameliorate,\" and provide an example sentence using the word.",
+    "website": "https://dictionary.cambridge.org/"
+  },
+  {
+    "task_id": "Cambridge Dictionary--12",
+    "confirmed_task": "Find the pronunciation, definition, and a sample sentence for the word \"resilience\" in the Cambridge Dictionary.",
+    "website": "https://dictionary.cambridge.org/"
+  },
+  {
+    "task_id": "Cambridge Dictionary--13",
+    "confirmed_task": "Find one word, one phase and one idiom related to euphoria in Cambridge Dictionary.",
+    "website": "https://dictionary.cambridge.org/"
+  },
+  {
+    "task_id": "Cambridge Dictionary--14",
+    "confirmed_task": "Use the Cambridge Dictionary to find the pronunciation, definition, and one example sentence for the word \"concatenate\".",
+    "website": "https://dictionary.cambridge.org/"
+  },
+  {
+    "task_id": "Cambridge Dictionary--15",
+    "confirmed_task": "Find the pronunciation and a sample sentence for the word \"pandemic.\"",
+    "website": "https://dictionary.cambridge.org/"
+  },
+  {
+    "task_id": "Cambridge Dictionary--16",
+    "confirmed_task": "Look up the definition of \"cryptocurrency\" on Cambridge Dictionary, provide the pronunciation, and use it in two example sentences that illustrate different contexts.",
+    "website": "https://dictionary.cambridge.org/"
+  },
+  {
+    "task_id": "Cambridge Dictionary--17",
+    "confirmed_task": "How many meanings of \"unblemished\" are given in Cambridge Dictionary? Please browse the page and give the number directly.",
+    "website": "https://dictionary.cambridge.org/"
+  },
+  {
+    "task_id": "Cambridge Dictionary--18",
+    "confirmed_task": "Search for \"to behave well\" in Cambridge Dictionary's Thesaurus and see which synonyms the dictionary gives.",
+    "website": "https://dictionary.cambridge.org/"
+  },
+  {
+    "task_id": "Cambridge Dictionary--19",
+    "confirmed_task": "Try a Cambridge Dictionary translation and tell me which company provided the translation.",
+    "website": "https://dictionary.cambridge.org/"
+  },
+  {
+    "task_id": "Cambridge Dictionary--20",
+    "confirmed_task": "Look up the definition, pronunciation (both UK and US), and find one example sentence for the word \"altruism\" in the Cambridge Dictionary.",
+    "website": "https://dictionary.cambridge.org/"
+  },
+  {
+    "task_id": "Cambridge Dictionary--21",
+    "confirmed_task": "Search for the word \"ephemeral\" on Cambridge Dictionary and find its translation into Spanish.",
+    "website": "https://dictionary.cambridge.org/"
+  },
+  {
+    "task_id": "Cambridge Dictionary--22",
+    "confirmed_task": "Use the Cambridge Dictionary to find the definition, UK pronunciation, and an example sentence for the word \"quintessential.\"",
+    "website": "https://dictionary.cambridge.org/"
+  },
+  {
+    "task_id": "Cambridge Dictionary--23",
+    "confirmed_task": "Find the US English pronunciation of the word \"meticulous\" using the Cambridge Dictionary and note the International Phonetic Alphabet (IPA) notation, then find one example sentence provided in the dictionary using this word.",
+    "website": "https://dictionary.cambridge.org/"
+  },
+  {
+    "task_id": "Cambridge Dictionary--24",
+    "confirmed_task": "Look up the definition and both UK and US pronunciation of the word \"reverie,\" and provide an example sentence using the word from Cambridge Dictionary.",
+    "website": "https://dictionary.cambridge.org/"
+  },
+  {
+    "task_id": "Cambridge Dictionary--25",
+    "confirmed_task": "Find two different meanings of the word \"harmony\" in the Cambridge Dictionary.",
+    "website": "https://dictionary.cambridge.org/"
+  },
+  {
+    "task_id": "Cambridge Dictionary--26",
+    "confirmed_task": "Search for the word \"nostalgia\" in the Cambridge Dictionary and report the translation of this word into Chinese.",
+    "website": "https://dictionary.cambridge.org/"
+  },
+  {
+    "task_id": "Cambridge Dictionary--27",
+    "confirmed_task": "Look up the meaning, pronunciation, and an example sentence of the word \"solitude\" using the Cambridge Dictionary.",
+    "website": "https://dictionary.cambridge.org/"
+  },
+  {
+    "task_id": "Cambridge Dictionary--28",
+    "confirmed_task": "Search for \"feel giddy\" in Cambridge Dictionary's Thesaurus and list the synonyms the dictionary provides.",
+    "website": "https://dictionary.cambridge.org/"
+  },
+  {
+    "task_id": "Cambridge Dictionary--29",
+    "confirmed_task": "Go to the Plus section of Cambridge Dictionary, find Image quizzes and do an easy quiz about Animals and tell me your final score.",
+    "website": "https://dictionary.cambridge.org/"
+  },
+  {
+    "task_id": "Cambridge Dictionary--30",
+    "confirmed_task": "Find the grammar for present perfect simple uses in English, including examples of affirmative, negative, and interrogative sentences, on the Cambridge Dictionary website.",
+    "website": "https://dictionary.cambridge.org/"
+  },
+  {
+    "task_id": "Cambridge Dictionary--31",
+    "confirmed_task": "Look up the use of modal verbs in grammar section for expressing possibility (e.g., 'might', 'could', 'may') and find examples of their usage in sentences on the Cambridge Dictionary.",
+    "website": "https://dictionary.cambridge.org/"
+  },
+  {
+    "task_id": "Cambridge Dictionary--32",
+    "confirmed_task": "Search for the differences between \"fewer\" and \"less\" in grammar section, and provide examples illustrating their correct usage from the Cambridge Dictionary.",
+    "website": "https://dictionary.cambridge.org/"
+  },
+  {
+    "task_id": "Cambridge Dictionary--33",
+    "confirmed_task": "Find explanations and examples of the passive voice in Grammar on the Cambridge Dictionary website.",
+    "website": "https://dictionary.cambridge.org/"
+  },
+  {
+    "task_id": "Cambridge Dictionary--34",
+    "confirmed_task": "Use the Cambridge Dictionary to understand the rules for forming and using comparative and superlative adjectives in English Grammar, including example sentences.",
+    "website": "https://dictionary.cambridge.org/"
+  },
+  {
+    "task_id": "Cambridge Dictionary--35",
+    "confirmed_task": "Find the most common prepositions that consist of groups of words on the Cambridge Dictionary.",
+    "website": "https://dictionary.cambridge.org/"
+  },
+  {
+    "task_id": "Cambridge Dictionary--36",
+    "confirmed_task": "Search for guidelines on using indirect speech in English, with examples of how to change direct speech to indirect speech, on the Cambridge Dictionary.",
+    "website": "https://dictionary.cambridge.org/"
+  },
+  {
+    "task_id": "Cambridge Dictionary--37",
+    "confirmed_task": "Use Cambridge Dictionary to understand the use of articles ('a', 'an', 'the') in English Grammar, including examples of usage with both countable and uncountable nouns.",
+    "website": "https://dictionary.cambridge.org/"
+  },
+  {
+    "task_id": "Cambridge Dictionary--38",
+    "confirmed_task": "Go to the Plus section of Cambridge Dictionary, finish a recommended Grammar quiz without login and tell me your final score.",
+    "website": "https://dictionary.cambridge.org/"
+  },
+  {
+    "task_id": "Cambridge Dictionary--39",
+    "confirmed_task": "Try the Word Scramble game in the Plus section, Can you beat the clock by unscrambling the letters to spell the word? (Just try the first example.)",
+    "website": "https://dictionary.cambridge.org/"
+  },
+  {
+    "task_id": "Cambridge Dictionary--40",
+    "confirmed_task": "Look up the definition, pronunciation in UK English, and at least one example using the word 'mitigate'.",
+    "website": "https://dictionary.cambridge.org/"
+  },
+  {
+    "task_id": "Cambridge Dictionary--41",
+    "confirmed_task": "Find and browse Cambridge Dictionary Shop section, listing 3 items.",
+    "website": "https://dictionary.cambridge.org/"
+  },
+  {
+    "task_id": "Cambridge Dictionary--42",
+    "confirmed_task": "Convert the Cambridge Dictionary homepage from English (UK) to Deutsch.",
+    "website": "https://dictionary.cambridge.org/"
+  },
+  {
+    "task_id": "Coursera--0",
+    "confirmed_task": "Find a beginner-level online course about '3d printing' which lasts 1-3 months, and is provided by a renowned university.",
+    "website": "https://www.coursera.org/"
+  },
+  {
+    "task_id": "Coursera--1",
+    "confirmed_task": "Search for a beginner-level online course about Python programming, suitable for someone who has no programming experience on Coursera.",
+    "website": "https://www.coursera.org/"
+  },
+  {
+    "task_id": "Coursera--2",
+    "confirmed_task": "Find a Beginner's Spanish Specialization on Coursera and show all the courses in this Specialization.",
+    "website": "https://www.coursera.org/"
+  },
+  {
+    "task_id": "Coursera--3",
+    "confirmed_task": "Identify a new course or Specialization on Coursera related to Python Data Science, sort the courses by newest, what the first course is and which institution offers it.",
+    "website": "https://www.coursera.org/"
+  },
+  {
+    "task_id": "Coursera--4",
+    "confirmed_task": "Identify a course or Specialization on Coursera that helps business process management with with a rating 4.7.",
+    "website": "https://www.coursera.org/"
+  },
+  {
+    "task_id": "Coursera--5",
+    "confirmed_task": "Identify a Specialization on Coursera that teaches C++ programming for beginners, provide the name and what the learning outcomes are.",
+    "website": "https://www.coursera.org/"
+  },
+  {
+    "task_id": "Coursera--6",
+    "confirmed_task": "Identify a course on Coursera related to 'Artificial Intelligence for Healthcare' and note the course duration along with the number of quizzes in Assessments.",
+    "website": "https://www.coursera.org/"
+  },
+  {
+    "task_id": "Coursera--7",
+    "confirmed_task": "Find a course on Coursera that teaches Reinforcement Learning for Intermediate with a rating of at least 4.5. Provide the name of the course, the institution offering it, and the number of reviews it has received.",
+    "website": "https://www.coursera.org/"
+  },
+  {
+    "task_id": "Coursera--8",
+    "confirmed_task": "Find a free course related to 'R for Data Science' available on Coursera. Scroll to find a course with the Free tag. What language the course is taught in?",
+    "website": "https://www.coursera.org/"
+  },
+  {
+    "task_id": "Coursera--9",
+    "confirmed_task": "Identify a Coursera course on artificial intelligence ethics that has a duration of less than 20 hours to complete and has been rated 4+ stars by participants.",
+    "website": "https://www.coursera.org/"
+  },
+  {
+    "task_id": "Coursera--10",
+    "confirmed_task": "Locate an introductory course related to artificial intelligence on Coursera, ensuring it's suitable for beginners and contains at least one module discussing Ethical Considerations.",
+    "website": "https://www.coursera.org/"
+  },
+  {
+    "task_id": "Coursera--11",
+    "confirmed_task": "Search for a Specialization on Coursera about project management that is produced by a university, show a testimonial for this Specialization.",
+    "website": "https://www.coursera.org/"
+  },
+  {
+    "task_id": "Coursera--12",
+    "confirmed_task": "Look for a Coursera course (not Specialization) that teaches Java programming basics.",
+    "website": "https://www.coursera.org/"
+  },
+  {
+    "task_id": "Coursera--13",
+    "confirmed_task": "Look for a Specialization on Coursera that teaches Python programming, and identify the skills you will learn by taking this Specialization.",
+    "website": "https://www.coursera.org/"
+  },
+  {
+    "task_id": "Coursera--14",
+    "confirmed_task": "Find a course on Coursera related to Introductory Project Management that includes modules on Agile methodology.",
+    "website": "https://www.coursera.org/"
+  },
+  {
+    "task_id": "Coursera--15",
+    "confirmed_task": "Find a course on Coursera named 'Introduction to Mathematical Thinking' offered by Stanford, what is the percentage (rounded) of 5 star ratings in reviews and which level has the least percentage?.",
+    "website": "https://www.coursera.org/"
+  },
+  {
+    "task_id": "Coursera--16",
+    "confirmed_task": "Identify a course on Coursera named 'Introduction to Finance: The Basics', who is the course instructor and what other courses does he/she teach.",
+    "website": "https://www.coursera.org/"
+  },
+  {
+    "task_id": "Coursera--17",
+    "confirmed_task": "How many results are there for a search on Coursera for Machine Learning, then filtered by Credit Eligible and 1-4 Years duration?",
+    "website": "https://www.coursera.org/"
+  },
+  {
+    "task_id": "Coursera--18",
+    "confirmed_task": "Identify a Coursera course that teaches JavaScript, which is beginner-friendly and includes a certificate upon completion.",
+    "website": "https://www.coursera.org/"
+  },
+  {
+    "task_id": "Coursera--19",
+    "confirmed_task": "Identify a course on Coursera that provides an introduction to Psychology, list the instructor's name, the institution offering it, and how many hours it will approximately take to complete.",
+    "website": "https://www.coursera.org/"
+  },
+  {
+    "task_id": "Coursera--20",
+    "confirmed_task": "Find an Intermediate-level online course on Coursera about 'Blockchain Technology' which lasts between 1 to 4 weeks, and is provided by a well-known institution. Also, note the course's main goals and the instructor's name.",
+    "website": "https://www.coursera.org/"
+  },
+  {
+    "task_id": "Coursera--21",
+    "confirmed_task": "Search for an online course on Coursera about 'Digital Marketing', suitable for beginner-level learners. Specify the course duration, the main learning outcomes, and the institution offering the course.",
+    "website": "https://www.coursera.org/"
+  },
+  {
+    "task_id": "Coursera--22",
+    "confirmed_task": "Identify a Specialization on Coursera that focuses on 'Human Resource', list the courses included in this Specialization, and the institution offering it.",
+    "website": "https://www.coursera.org/"
+  },
+  {
+    "task_id": "Coursera--23",
+    "confirmed_task": "Find a course on Coursera about 'Artificial Intelligence Ethics', which has a duration of less than 5 weeks and has been rated 4.5 stars or higher. Provide the course name and the instructor's name.",
+    "website": "https://www.coursera.org/"
+  },
+  {
+    "task_id": "Coursera--24",
+    "confirmed_task": "Locate an online course on Coursera related to 'Sustainability' that belongs to Physical Science and Engineering subject. The course should include a module on Measuring Sustainability. Note the course duration and the offering institution.",
+    "website": "https://www.coursera.org/"
+  },
+  {
+    "task_id": "Coursera--25",
+    "confirmed_task": "Find a course on Coursera about 'Relativity' for beginners. List the course's main topics and the estimated time (in hours) required to complete it.",
+    "website": "https://www.coursera.org/"
+  },
+  {
+    "task_id": "Coursera--26",
+    "confirmed_task": "Identify a Specialization on Coursera that offers an overview of 'Renewable Energy'. The Specialization should be beginner-level and include a course on Renewable Energy Futures. Note the instructor's name and the number of weeks required to complete the course if I spend 5 hours a week.",
+    "website": "https://www.coursera.org/"
+  },
+  {
+    "task_id": "Coursera--27",
+    "confirmed_task": "Search for a Specialization on Coursera about 'Data Visualization' that includes a project. Provide the name of the Specialization, the institution offering it, and the skills that will be developed by completing it.",
+    "website": "https://www.coursera.org/"
+  },
+  {
+    "task_id": "Coursera--28",
+    "confirmed_task": "Locate a Coursera Guided project related to 'Astrophysics' suitable for advanced learners. Mention the course duration, the institution offering it, and the main subjects covered in the course.",
+    "website": "https://www.coursera.org/"
+  },
+  {
+    "task_id": "Coursera--29",
+    "confirmed_task": "Browse the Coursera website and find the price required for one year of Coursera Plus. How much is the discount? Then list 3 companies that work with Coursera.",
+    "website": "https://www.coursera.org/"
+  },
+  {
+    "task_id": "Coursera--30",
+    "confirmed_task": "Locate the course 'Modern Art & Ideas' on Coursera offered by The Museum of Modern Art. Find out the percentage (rounded) of 3-star ratings in the reviews and note which star level has the lowest percentage.",
+    "website": "https://www.coursera.org/"
+  },
+  {
+    "task_id": "Coursera--31",
+    "confirmed_task": "Search for the course 'Exploring Quantum Physics' on Coursera, offered by the University of Maryland, College Park. Identify the percentage (rounded) of 5-star ratings in the reviews.",
+    "website": "https://www.coursera.org/"
+  },
+  {
+    "task_id": "Coursera--32",
+    "confirmed_task": "Search for 'Data Analysis' courses on Coursera. Apply filters to find courses that are 'Beginner Level' and have a duration ranging from 1 to 3 months. Determine the total count of courses that match these specifications.",
+    "website": "https://www.coursera.org/"
+  },
+  {
+    "task_id": "Coursera--33",
+    "confirmed_task": "Find a beginner level Coursera course related to \"Internet of Things (IoT)\" with a high rating. Provide the course name, instructor's name, and a brief summary of the skills that will be taught.",
+    "website": "https://www.coursera.org/"
+  },
+  {
+    "task_id": "Coursera--34",
+    "confirmed_task": "Find the course on Coursera named 'Essentials of Global Health'. Determine the instructor of this course and summarize his bio, note if there are any additional courses he offers on Coursera.",
+    "website": "https://www.coursera.org/"
+  },
+  {
+    "task_id": "Coursera--35",
+    "confirmed_task": "Find a Coursera course on Sustainable Agriculture practices, and detail the course's objectives and the background of the lead instructor.",
+    "website": "https://www.coursera.org/"
+  },
+  {
+    "task_id": "Coursera--36",
+    "confirmed_task": "Browse Coursera, which universities offer Master of Advanced Study in Engineering degrees? Tell me what is the latest application deadline for this degree?",
+    "website": "https://www.coursera.org/"
+  },
+  {
+    "task_id": "Coursera--37",
+    "confirmed_task": "Browse the Coursera homepage and list at least three free courses.",
+    "website": "https://www.coursera.org/"
+  },
+  {
+    "task_id": "Coursera--38",
+    "confirmed_task": "Browse Coursera, which universities and companies from Australia are partners of Coursera? List all of them.",
+    "website": "https://www.coursera.org/"
+  },
+  {
+    "task_id": "Coursera--39",
+    "confirmed_task": "Find the Space Safety course offered by TUM on Coursera. How many videos are there in module 2? What is the name of each video?",
+    "website": "https://www.coursera.org/"
+  },
+  {
+    "task_id": "Coursera--40",
+    "confirmed_task": "Browse Coursera for Business and Coursera for Teams and summarise some of their advantages.",
+    "website": "https://www.coursera.org/"
+  },
+  {
+    "task_id": "Coursera--41",
+    "confirmed_task": "Browse online degrees section on Coursera and list 3 Bachelor's degree programmes.",
+    "website": "https://www.coursera.org/"
+  },
+  {
+    "task_id": "ESPN--0",
+    "confirmed_task": "Look up the current standings for the NBA Eastern Conference on ESPN.",
+    "website": "https://www.espn.com/"
+  },
+  {
+    "task_id": "ESPN--1",
+    "confirmed_task": "Check the latest articles on ESPN for updates on any trades that occurred in the NBA within the past 2 days.",
+    "website": "https://www.espn.com/"
+  },
+  {
+    "task_id": "ESPN--2",
+    "confirmed_task": "Show the scores and main highlight of the Milwaukee Bucks game that took place within the last 2 days on ESPN.",
+    "website": "https://www.espn.com/"
+  },
+  {
+    "task_id": "ESPN--3",
+    "confirmed_task": "Retrieve the final score from the most recent NBA game broadcast on ESPN, including the playing teams' names and the date of the match.",
+    "website": "https://www.espn.com/"
+  },
+  {
+    "task_id": "ESPN--4",
+    "confirmed_task": "Check ESPN for the final scores of NBA games that were played yesterday.",
+    "website": "https://www.espn.com/"
+  },
+  {
+    "task_id": "ESPN--5",
+    "confirmed_task": "Identify the top scorer in the NBA from the latest completed game and note down the points scored, the team they play for, and their position on the team.",
+    "website": "https://www.espn.com/"
+  },
+  {
+    "task_id": "ESPN--6",
+    "confirmed_task": "Find the result of the latest basketball game between the Los Angeles Lakers and the Boston Celtics, including the final score and top scorer from the match.",
+    "website": "https://www.espn.com/"
+  },
+  {
+    "task_id": "ESPN--7",
+    "confirmed_task": "Retrieve the final score and a brief summary of the latest NBA game played by the Los Angeles Lakers as reported on ESPN.",
+    "website": "https://www.espn.com/"
+  },
+  {
+    "task_id": "ESPN--8",
+    "confirmed_task": "Find information on ESPN about the top three scoring leaders in the NBA as of the last day of the regular season, and note which teams they play for.",
+    "website": "https://www.espn.com/"
+  },
+  {
+    "task_id": "ESPN--9",
+    "confirmed_task": "Search on ESPN for how many teams have Los Angeles in their name and how many of them are NBA.",
+    "website": "https://www.espn.com/"
+  },
+  {
+    "task_id": "ESPN--10",
+    "confirmed_task": "Check ESPN for the score and a brief recap of the latest college football championship game.",
+    "website": "https://www.espn.com/"
+  },
+  {
+    "task_id": "ESPN--11",
+    "confirmed_task": "How many NBA teams are there and list all the teams with 'New' in their name.",
+    "website": "https://www.espn.com/"
+  },
+  {
+    "task_id": "ESPN--12",
+    "confirmed_task": "The first three Top Headlines in the current ESPN home page correspond to which sports leagues?",
+    "website": "https://www.espn.com/"
+  },
+  {
+    "task_id": "ESPN--13",
+    "confirmed_task": "Identify today's top headline in the Basketball section of ESPN, and summarize the main points of that article.",
+    "website": "https://www.espn.com/"
+  },
+  {
+    "task_id": "ESPN--14",
+    "confirmed_task": "Find the latest news about NBA trades or player movements on ESPN and report the most recent trade deal OR player acquisition.",
+    "website": "https://www.espn.com/"
+  },
+  {
+    "task_id": "ESPN--18",
+    "confirmed_task": "How many sports leagues can you choose from on the ESPN home page?",
+    "website": "https://www.espn.com/"
+  },
+  {
+    "task_id": "ESPN--20",
+    "confirmed_task": "Look up the current leaders in rebounds and assists in the NBA Western Conference on ESPN.",
+    "website": "https://www.espn.com/"
+  },
+  {
+    "task_id": "ESPN--21",
+    "confirmed_task": "Show the scores and main highlight of the Denver Nuggets game that occurred within the last 3 days on ESPN.",
+    "website": "https://www.espn.com/"
+  },
+  {
+    "task_id": "ESPN--22",
+    "confirmed_task": "Find the latest Team transactions in the NBA within the past week.",
+    "website": "https://www.espn.com/"
+  },
+  {
+    "task_id": "ESPN--23",
+    "confirmed_task": "Find the result of the latest basketball game between the Miami Heat and the New York Knicks, including the final score and top rebounder from the match.",
+    "website": "https://www.espn.com/"
+  },
+  {
+    "task_id": "ESPN--24",
+    "confirmed_task": "Find the final score from the most recent NFL game broadcast on ESPN, including the teams' names and the date of the match.",
+    "website": "https://www.espn.com/"
+  },
+  {
+    "task_id": "ESPN--25",
+    "confirmed_task": "Identify the player with the most assists in the latest NBA game and show me the assists, the team they play for, and their position.",
+    "website": "https://www.espn.com/"
+  },
+  {
+    "task_id": "ESPN--26",
+    "confirmed_task": "Find information on ESPN NBA schedule. Tell me yesterday's matchups in which the loser high was higher than the winner high.",
+    "website": "https://www.espn.com/"
+  },
+  {
+    "task_id": "ESPN--27",
+    "confirmed_task": "Search on ESPN for how many teams have 'Golden' in their name and how many of them are in the NHL.",
+    "website": "https://www.espn.com/"
+  },
+  {
+    "task_id": "ESPN--28",
+    "confirmed_task": "How many MLB teams are there and list all the teams with 'City' in their name.",
+    "website": "https://www.espn.com/"
+  },
+  {
+    "task_id": "ESPN--29",
+    "confirmed_task": "Identify today's top headline in the Soccer section of ESPN, and summarize the main points of that article.",
+    "website": "https://www.espn.com/"
+  },
+  {
+    "task_id": "ESPN--32",
+    "confirmed_task": "Review yesterday's NHL game results on ESPN, focusing on teams' performance.",
+    "website": "https://www.espn.com/"
+  },
+  {
+    "task_id": "ESPN--34",
+    "confirmed_task": "Visit ESPN to view the Philadelphia 76ers' latest injuries.",
+    "website": "https://www.espn.com/"
+  },
+  {
+    "task_id": "ESPN--35",
+    "confirmed_task": "Browse ESPN to find out when the next game of the Los Angeles Lakers will start. Then navigate to the ticket purchasing website from ESPN, what is the cheapest ticket available.",
+    "website": "https://www.espn.com/"
+  },
+  {
+    "task_id": "ESPN--36",
+    "confirmed_task": "Search for Lionel Messi's last 5 games, which teams has he played for, and what are the results?",
+    "website": "https://www.espn.com/"
+  },
+  {
+    "task_id": "ESPN--37",
+    "confirmed_task": "Check out LeBron James' Stats to see how many games he has played in his career so far.",
+    "website": "https://www.espn.com/"
+  },
+  {
+    "task_id": "ESPN--39",
+    "confirmed_task": "Check the New York Jets Depth Chart in the NFL section of ESPN and identify the players listed as injured in the 2ND position.",
+    "website": "https://www.espn.com/"
+  },
+  {
+    "task_id": "ESPN--40",
+    "confirmed_task": "Browse the ESPN+ page from ESPN for a brief summary of what ESPN+ Tools is used for.",
+    "website": "https://www.espn.com/"
+  },
+  {
+    "task_id": "ESPN--41",
+    "confirmed_task": "Find out which four teams the NFC North contains in the NFL on ESPN.",
+    "website": "https://www.espn.com/"
+  },
+  {
+    "task_id": "ESPN--42",
+    "confirmed_task": "Check out NCAAM standings on ESPN, what are the teams with equal wins and losses in the America East Conference currently?",
+    "website": "https://www.espn.com/"
+  },
+  {
+    "task_id": "ESPN--43",
+    "confirmed_task": "Check out NCAAW recruiting on ESPN, what colleges are the top three players from?",
+    "website": "https://www.espn.com/"
+  },
+  {
+    "task_id": "GitHub--0",
+    "confirmed_task": "Search for an open-source project related to 'climate change data visualization' on GitHub and report the project with the most stars.",
+    "website": "https://github.com/"
+  },
+  {
+    "task_id": "GitHub--1",
+    "confirmed_task": "Search for an open-source repository for machine learning in Python, specifically focused on decision trees, updated within the last 2 days.",
+    "website": "https://github.com/"
+  },
+  {
+    "task_id": "GitHub--2",
+    "confirmed_task": "Look for the trending Python repositories on GitHub with most stars.",
+    "website": "https://github.com/"
+  },
+  {
+    "task_id": "GitHub--3",
+    "confirmed_task": "Find out how much more package storage the Enterprise version has over Team in GitHub Pricing.",
+    "website": "https://github.com/"
+  },
+  {
+    "task_id": "GitHub--4",
+    "confirmed_task": "Find a popular JavaScript repository created in the last 30 days on GitHub with a Readme file.",
+    "website": "https://github.com/"
+  },
+  {
+    "task_id": "GitHub--5",
+    "confirmed_task": "Find a Python repository on GitHub that has been updated in the past 2 days and has at least 500 stars.",
+    "website": "https://github.com/"
+  },
+  {
+    "task_id": "GitHub--6",
+    "confirmed_task": "Search for an open-source project related to 'cryptocurrency wallet' updated in the past 30 days and provide the top three contributors.",
+    "website": "https://github.com/"
+  },
+  {
+    "task_id": "GitHub--7",
+    "confirmed_task": "Find the official GitHub repository for ALBERT and show me what files the repo changed in the most recent commit.",
+    "website": "https://github.com/"
+  },
+  {
+    "task_id": "GitHub--8",
+    "confirmed_task": "Look up the latest stable release version of Vuex and find out when it was published.",
+    "website": "https://github.com/"
+  },
+  {
+    "task_id": "GitHub--9",
+    "confirmed_task": "Locate a repository on GitHub that was created in the last week and has 50 or more stars. Provide brief details about the project's purpose and its programming language.",
+    "website": "https://github.com/"
+  },
+  {
+    "task_id": "GitHub--10",
+    "confirmed_task": "If I start using Copilot Individual, how much US dollars will it cost per year and what features does it have?",
+    "website": "https://github.com/"
+  },
+  {
+    "task_id": "GitHub--12",
+    "confirmed_task": "Retrieve the latest release from the 'electron/electron' repository on GitHub and note down the release version number and date.",
+    "website": "https://github.com/"
+  },
+  {
+    "task_id": "GitHub--13",
+    "confirmed_task": "Identify the latest top-trending open-source project in the category of 'Machine Learning' on GitHub, and check the number of stars it has received.",
+    "website": "https://github.com/"
+  },
+  {
+    "task_id": "GitHub--14",
+    "confirmed_task": "Locate the repository for the open-source project \"vscode\" and identify the top three contributors.",
+    "website": "https://github.com/"
+  },
+  {
+    "task_id": "GitHub--15",
+    "confirmed_task": "Locate a repository on GitHub related to 'quantum computing' that has been updated within the last week and has at least 50 stars. Provide a brief description of the project.",
+    "website": "https://github.com/"
+  },
+  {
+    "task_id": "GitHub--16",
+    "confirmed_task": "Find the GitHub Skill section and how many courses are under the 'First day on GitHub' heading.",
+    "website": "https://github.com/"
+  },
+  {
+    "task_id": "GitHub--17",
+    "confirmed_task": "Locate a C++ project on GitHub that has been recently updated in the last week and has at least 500 stars, then describe its main purpose.",
+    "website": "https://github.com/"
+  },
+  {
+    "task_id": "GitHub--18",
+    "confirmed_task": "Identify and report the most popular (in terms of stars) open-source image processing tool on GitHub.",
+    "website": "https://github.com/"
+  },
+  {
+    "task_id": "GitHub--19",
+    "confirmed_task": "Look up the most recently updated Python repository on GitHub that is tagged with 'web scraping' and has over 100 stars.",
+    "website": "https://github.com/"
+  },
+  {
+    "task_id": "GitHub--20",
+    "confirmed_task": "Open GitHub Copilot's FAQs to find the official answer to when Copilot chat can be used on mobile.",
+    "website": "https://github.com/"
+  },
+  {
+    "task_id": "GitHub--21",
+    "confirmed_task": "Find the Security topic in GitHub Resources and answer the role of GitHub Advanced Security.",
+    "website": "https://github.com/"
+  },
+  {
+    "task_id": "GitHub--22",
+    "confirmed_task": "Find an open-source repository on GitHub focused on natural language processing in Ruby, updated within the last week.",
+    "website": "https://github.com/"
+  },
+  {
+    "task_id": "GitHub--23",
+    "confirmed_task": "Find the wiki page of ohmyzsh on GitHub and tell me how to change the theme of zsh to agnoster.",
+    "website": "https://github.com/"
+  },
+  {
+    "task_id": "GitHub--24",
+    "confirmed_task": "Locate the GitHub repository for the open-source project \"angular\" and identify the last three issues closed.",
+    "website": "https://github.com/"
+  },
+  {
+    "task_id": "GitHub--25",
+    "confirmed_task": "Search for a 'virtual reality' related repository on GitHub updated in the last 10 days with at least 200 stars and summarize its main objective.",
+    "website": "https://github.com/"
+  },
+  {
+    "task_id": "GitHub--26",
+    "confirmed_task": "Find the Resolve merge conflicts course in GitHub Skills and what actions learners will perform in this course.",
+    "website": "https://github.com/"
+  },
+  {
+    "task_id": "GitHub--27",
+    "confirmed_task": "Find a Ruby repository on GitHub that has been updated in the past 3 days and has at least 1000 stars.",
+    "website": "https://github.com/"
+  },
+  {
+    "task_id": "GitHub--29",
+    "confirmed_task": "Compare the maximum number of private repositories allowed in the Free and Pro plans in GitHub Pricing.",
+    "website": "https://github.com/"
+  },
+  {
+    "task_id": "GitHub--30",
+    "confirmed_task": "Search for an open-source project related to 'blockchain technology' on GitHub updated in the past 15 days and list the top five contributors.",
+    "website": "https://github.com/"
+  },
+  {
+    "task_id": "GitHub--31",
+    "confirmed_task": "Find the official GitHub repository for TensorFlow and list the files changed in the last commit. Tell me the name of changed files, total additions and total deletion.",
+    "website": "https://github.com/"
+  },
+  {
+    "task_id": "GitHub--32",
+    "confirmed_task": "Discover the latest C# repository on GitHub related to 'game development' and having over 150 stars, and describe its main features.",
+    "website": "https://github.com/"
+  },
+  {
+    "task_id": "GitHub--33",
+    "confirmed_task": "Find Customer Stories on the GitHub page and list the 2 stories that appear on the web page.",
+    "website": "https://github.com/"
+  },
+  {
+    "task_id": "GitHub--34",
+    "confirmed_task": "Search for an open-source project on GitHub related to 'Protein prediction' and identify the project with the highest number of forks.",
+    "website": "https://github.com/"
+  },
+  {
+    "task_id": "GitHub--35",
+    "confirmed_task": "Check the latest release version of React and the date it was published on GitHub.",
+    "website": "https://github.com/"
+  },
+  {
+    "task_id": "GitHub--37",
+    "confirmed_task": "List the 3 features mentioned in GitHub's Copilot product page.",
+    "website": "https://github.com/"
+  },
+  {
+    "task_id": "GitHub--38",
+    "confirmed_task": "Identify and report the most popular (by stars) open-source repo related to cybersecurity on GitHub.",
+    "website": "https://github.com/"
+  },
+  {
+    "task_id": "GitHub--39",
+    "confirmed_task": "Browse the GitHub Trending and find out which developer is currently ranked first this month and the corresponding repository.",
+    "website": "https://github.com/"
+  },
+  {
+    "task_id": "GitHub--40",
+    "confirmed_task": "Select Sign up on the GitHub homepage to see if email 'test123@gmail.com' already exists.",
+    "website": "https://github.com/"
+  },
+  {
+    "task_id": "Google Flights--0",
+    "confirmed_task": "Book a journey with return option on same day from Edinburg to Manchester on December 28th and show me the lowest price option available.",
+    "website": "https://www.google.com/travel/flights/"
+  },
+  {
+    "task_id": "Google Flights--2",
+    "confirmed_task": "Find the lowest fare from all eligible one-way flights for 1 adult from JFK to Heathrow on Jan. 22.",
+    "website": "https://www.google.com/travel/flights/"
+  },
+  {
+    "task_id": "Google Flights--3",
+    "confirmed_task": "Search for the one-way flight available from Calgary to New York on Jan. 1st with the lowest carbon dioxide emissions.",
+    "website": "https://www.google.com/travel/flights/"
+  },
+  {
+    "task_id": "Google Flights--4",
+    "confirmed_task": "Search for one-way flights from New York to London on Dec. 26th and filter the results to show only non-stop flights.",
+    "website": "https://www.google.com/travel/flights/"
+  },
+  {
+    "task_id": "Google Flights--5",
+    "confirmed_task": "Find flights from Chicago to London on 20 December and return on 23 December.",
+    "website": "https://www.google.com/travel/flights/"
+  },
+  {
+    "task_id": "Google Flights--6",
+    "confirmed_task": "Search for a flight on December 19 and return on December 26 from Tel Aviv to Venice and Select First Class.",
+    "website": "https://www.google.com/travel/flights/"
+  },
+  {
+    "task_id": "Google Flights--7",
+    "confirmed_task": "Find a round trip from Phoenix to Miami (Dec. 25th - Dec. 28th), show the First Class plane tickets for me that do not exceed $1320..",
+    "website": "https://www.google.com/travel/flights/"
+  },
+  {
+    "task_id": "Google Flights--8",
+    "confirmed_task": "Search a one-way filght from Dublin To Athens Greece for 1 Adult that leaves on December 30 and analyse the price graph for the next 2 months.",
+    "website": "https://www.google.com/travel/flights/"
+  },
+  {
+    "task_id": "Google Flights--9",
+    "confirmed_task": "Find a one way economy flight from Pune to New York in Jan. 15th and show me how long it will take for flight transfer.",
+    "website": "https://www.google.com/travel/flights/"
+  },
+  {
+    "task_id": "Google Flights--40",
+    "confirmed_task": "Browse destinations on the Google Flights homepage from Seattle, look at destinations on a map, and recommend some famous places to travel that are within a reasonable distance and price.",
+    "website": "https://www.google.com/travel/flights/"
+  },
+  {
+    "task_id": "Google Map--0",
+    "confirmed_task": "Find 5 beauty salons with ratings greater than 4.8 in Seattle, WA.",
+    "website": "https://www.google.com/maps/"
+  },
+  {
+    "task_id": "Google Map--1",
+    "confirmed_task": "Tell me one bus stop that is nearest to the intersection of main street and Amherst street in Altavista.",
+    "website": "https://www.google.com/maps/"
+  },
+  {
+    "task_id": "Google Map--2",
+    "confirmed_task": "Find Apple Stores close to zip code 90028",
+    "website": "https://www.google.com/maps/"
+  },
+  {
+    "task_id": "Google Map--3",
+    "confirmed_task": "The least amount of walking from Central Park Zoo to the Broadway Theater in New York.",
+    "website": "https://www.google.com/maps/"
+  },
+  {
+    "task_id": "Google Map--4",
+    "confirmed_task": "Plan a trip from Boston Logan Airport to North Station.",
+    "website": "https://www.google.com/maps/"
+  },
+  {
+    "task_id": "Google Map--5",
+    "confirmed_task": "Search for a parking garage near Thalia Hall in Chicago that isn't open 24 hours.",
+    "website": "https://www.google.com/maps/"
+  },
+  {
+    "task_id": "Google Map--6",
+    "confirmed_task": "Find all Uniqlo locations in Chicago, IL.",
+    "website": "https://www.google.com/maps/"
+  },
+  {
+    "task_id": "Google Map--7",
+    "confirmed_task": "Find bus stops in Alanson, MI",
+    "website": "https://www.google.com/maps/"
+  },
+  {
+    "task_id": "Google Map--8",
+    "confirmed_task": "Find a place to climb within 2 miles of zip code 90028.",
+    "website": "https://www.google.com/maps/"
+  },
+  {
+    "task_id": "Google Map--9",
+    "confirmed_task": "Find the art gallery that is nearest to Los Angeles Hindu Temple.",
+    "website": "https://www.google.com/maps/"
+  },
+  {
+    "task_id": "Google Map--10",
+    "confirmed_task": "Search for a park in the state of California called Castle Mountains National Monument and find out it's Basic Information.",
+    "website": "https://www.google.com/maps/"
+  },
+  {
+    "task_id": "Google Map--11",
+    "confirmed_task": "Locate a large store in Washington that has kids' and maternity products, also check if it has a parking lot.",
+    "website": "https://www.google.com/maps/"
+  },
+  {
+    "task_id": "Google Map--12",
+    "confirmed_task": "Find 5 places that serve burgers near 44012 zip code and sort these 5 places by highest rating.",
+    "website": "https://www.google.com/maps/"
+  },
+  {
+    "task_id": "Google Map--13",
+    "confirmed_task": "Find a parking lot in Gloucester and book a ride from there to North Plymouth, view the map to understand the route better.",
+    "website": "https://www.google.com/maps/"
+  },
+  {
+    "task_id": "Google Map--14",
+    "confirmed_task": "Find motorcycle parking near Radio City Music Hall.",
+    "website": "https://www.google.com/maps/"
+  },
+  {
+    "task_id": "Google Map--15",
+    "confirmed_task": "Find daytime only parking nearest to Madison Square Garden. Summarize what people are saying about it. ",
+    "website": "https://www.google.com/maps/"
+  },
+  {
+    "task_id": "Google Map--16",
+    "confirmed_task": "Find EV charging supported parking closest to Smithsonian museum.",
+    "website": "https://www.google.com/maps/"
+  },
+  {
+    "task_id": "Google Map--17",
+    "confirmed_task": "Search for locksmiths open now but not open 24 hours in Texas City.",
+    "website": "https://www.google.com/maps/"
+  },
+  {
+    "task_id": "Google Map--18",
+    "confirmed_task": "Find a route between Chicago to Los Angeles, then print the route details.",
+    "website": "https://www.google.com/maps/"
+  },
+  {
+    "task_id": "Google Map--19",
+    "confirmed_task": "I will arrive Pittsburgh Airport soon. Provide the name of the Hilton hotel closest to the airport. Then, tell me the the walking time to the nearest supermarket from the hotel.",
+    "website": "https://www.google.com/maps/"
+  },
+  {
+    "task_id": "Google Map--20",
+    "confirmed_task": "Find Tesla Destination Charger closest to the National Air and Space Museum.",
+    "website": "https://www.google.com/maps/"
+  },
+  {
+    "task_id": "Google Map--21",
+    "confirmed_task": "Identify the nearest bus stop to the corner of Elm Street and Oak Street in Massachusetts.",
+    "website": "https://www.google.com/maps/"
+  },
+  {
+    "task_id": "Google Map--22",
+    "confirmed_task": "Find a Best Buy store near zip code 33139.",
+    "website": "https://www.google.com/maps/"
+  },
+  {
+    "task_id": "Google Map--23",
+    "confirmed_task": "Determine the shortest walking route from The Metropolitan Museum of Art to Times Square in New York.",
+    "website": "https://www.google.com/maps/"
+  },
+  {
+    "task_id": "Google Map--24",
+    "confirmed_task": "Plan a journey from San Francisco International Airport to Union Square via driving.",
+    "website": "https://www.google.com/maps/"
+  },
+  {
+    "task_id": "Google Map--25",
+    "confirmed_task": "Search for a parking facility near the Fox Theater in Detroit that closes at night.",
+    "website": "https://www.google.com/maps/"
+  },
+  {
+    "task_id": "Google Map--26",
+    "confirmed_task": "Search for Los Angeles on Google Map, try to print the map as PDF and summarize the information on the map.",
+    "website": "https://www.google.com/maps/"
+  },
+  {
+    "task_id": "Google Map--27",
+    "confirmed_task": "Locate the Target stores in Atlanta, GA. How many results are shown on the map.",
+    "website": "https://www.google.com/maps/"
+  },
+  {
+    "task_id": "Google Map--28",
+    "confirmed_task": "Find the search settings for Google Map, what options are shown on that page?",
+    "website": "https://www.google.com/maps/"
+  },
+  {
+    "task_id": "Google Map--29",
+    "confirmed_task": "Identify bus stops in Ypsilanti, MI, list three of them.",
+    "website": "https://www.google.com/maps/"
+  },
+  {
+    "task_id": "Google Map--30",
+    "confirmed_task": "Locate a parking lot near the Brooklyn Bridge that open 24 hours. Review the user comments about it.",
+    "website": "https://www.google.com/maps/"
+  },
+  {
+    "task_id": "Google Map--31",
+    "confirmed_task": "First search New York's Central Park Zoo on Google Map, and then find the way to share the map. What is the generated sharing link?",
+    "website": "https://www.google.com/maps/"
+  },
+  {
+    "task_id": "Google Map--32",
+    "confirmed_task": "Search for plumbers available now but not open 24 hours in Orlando, FL.",
+    "website": "https://www.google.com/maps/"
+  },
+  {
+    "task_id": "Google Map--33",
+    "confirmed_task": "Check out Denver International Airport's information and tell me: 1) which level has the least proportion in reviews; 2) what are its Accessibility and Amenities.",
+    "website": "https://www.google.com/maps/"
+  },
+  {
+    "task_id": "Google Map--34",
+    "confirmed_task": "Find a hiking trail within 2 miles of zip code 80202.",
+    "website": "https://www.google.com/maps/"
+  },
+  {
+    "task_id": "Google Map--35",
+    "confirmed_task": "Search for a natural reserve in Texas called Big Bend National Park and gather its Basic Information.",
+    "website": "https://www.google.com/maps/"
+  },
+  {
+    "task_id": "Google Map--36",
+    "confirmed_task": "Identify 5 restaurants serving pizza near the 30309 zip code and rank them by their ratings.",
+    "website": "https://www.google.com/maps/"
+  },
+  {
+    "task_id": "Google Map--37",
+    "confirmed_task": "Locate a parking area in Salem and find a route from there to Marblehead, including map directions for better understanding.",
+    "website": "https://www.google.com/maps/"
+  },
+  {
+    "task_id": "Google Map--38",
+    "confirmed_task": "Search for bicycle parking near the Empire State Building.",
+    "website": "https://www.google.com/maps/"
+  },
+  {
+    "task_id": "Google Map--39",
+    "confirmed_task": "Find a route from Miami to New Orleans, and provide the detailed route information.",
+    "website": "https://www.google.com/maps/"
+  },
+  {
+    "task_id": "Google Map--40",
+    "confirmed_task": "Find a restaurant in Boston that eats Boston lobster and asks for a rating of 4.6 or higher, and check out what a one-star review says.",
+    "website": "https://www.google.com/maps/"
+  },
+  {
+    "task_id": "Google Search--0",
+    "confirmed_task": "Find the initial release date for Guardians of the Galaxy Vol. 3 the movie.",
+    "website": "https://www.google.com/"
+  },
+  {
+    "task_id": "Google Search--1",
+    "confirmed_task": "Find Kevin Durant's bio",
+    "website": "https://www.google.com/"
+  },
+  {
+    "task_id": "Google Search--2",
+    "confirmed_task": "Search for the latest news title about the NBA team the Los Angeles Lakers.",
+    "website": "https://www.google.com/"
+  },
+  {
+    "task_id": "Google Search--3",
+    "confirmed_task": "Show me a list of comedy movies, sorted by user ratings. Show me the Top 5 movies.",
+    "website": "https://www.google.com/"
+  },
+  {
+    "task_id": "Google Search--4",
+    "confirmed_task": "Show most played games in Steam. And tell me the number of players in In game at this time",
+    "website": "https://www.google.com/"
+  },
+  {
+    "task_id": "Google Search--5",
+    "confirmed_task": "find the score of the latest nba game played by the phoenix suns.",
+    "website": "https://www.google.com/"
+  },
+  {
+    "task_id": "Google Search--6",
+    "confirmed_task": "Browse the monthly trending searches in Columbus.",
+    "website": "https://www.google.com/"
+  },
+  {
+    "task_id": "Google Search--7",
+    "confirmed_task": "Find the software requirements for iPhones that support AirDrop's ability to continue transmitting over the web when out of range.",
+    "website": "https://www.google.com/"
+  },
+  {
+    "task_id": "Google Search--9",
+    "confirmed_task": "Show the rating of Prometheus movie on IMDb and Rotten Tomatoes.",
+    "website": "https://www.google.com/"
+  },
+  {
+    "task_id": "Google Search--10",
+    "confirmed_task": "Find the no. 1 weekly charts ranked artist based on Billboard and tell me 10 most played song by this artist until now.",
+    "website": "https://www.google.com/"
+  },
+  {
+    "task_id": "Google Search--11",
+    "confirmed_task": "According to FlightAware, tell me the busiest airport last week and its total arrivals and departures last week.",
+    "website": "https://www.google.com/"
+  },
+  {
+    "task_id": "Google Search--12",
+    "confirmed_task": "Find the year that Tom Brady had the most touchdowns in a single seasson.",
+    "website": "https://www.google.com/"
+  },
+  {
+    "task_id": "Google Search--13",
+    "confirmed_task": "What are Jerry Trainor's upcoming projects?",
+    "website": "https://www.google.com/"
+  },
+  {
+    "task_id": "Google Search--15",
+    "confirmed_task": "Please try to log in to twitter with email: webagenttest@testmail.com and password: test123456. Let me know if the login was successful.",
+    "website": "https://www.google.com/"
+  },
+  {
+    "task_id": "Google Search--16",
+    "confirmed_task": "How many members are there in the OpenAI community on Reddit, and what is the hottest news right now?",
+    "website": "https://www.google.com/"
+  },
+  {
+    "task_id": "Google Search--17",
+    "confirmed_task": "Tell me the names of Trump's kids",
+    "website": "https://www.google.com/"
+  },
+  {
+    "task_id": "Google Search--18",
+    "confirmed_task": "When and where the most recent World Cup was held, and which team was the winner?",
+    "website": "https://www.google.com/"
+  },
+  {
+    "task_id": "Google Search--19",
+    "confirmed_task": "What are the first 7 bits of the SHA of the Bert's latest commit on GitHub, and what exactly was changed in that commit.",
+    "website": "https://www.google.com/"
+  },
+  {
+    "task_id": "Google Search--20",
+    "confirmed_task": "Find the release date for the latest \"Fast & Furious\" movie.",
+    "website": "https://www.google.com/"
+  },
+  {
+    "task_id": "Google Search--21",
+    "confirmed_task": "Show a list of the top 5 highest-grossing animated movies, sorted by box office earnings.",
+    "website": "https://www.google.com/"
+  },
+  {
+    "task_id": "Google Search--22",
+    "confirmed_task": "Browse and list the top three trending topics this month in New York City.",
+    "website": "https://www.google.com/"
+  },
+  {
+    "task_id": "Google Search--23",
+    "confirmed_task": "Retrieve a short biography of LeBron James.",
+    "website": "https://www.google.com/"
+  },
+  {
+    "task_id": "Google Search--24",
+    "confirmed_task": "What is the name of the star system closest to the Solar System, and what are the discovered planets in it?",
+    "website": "https://www.google.com/"
+  },
+  {
+    "task_id": "Google Search--25",
+    "confirmed_task": "Get the latest news headline about the English Premier League football club Manchester United.",
+    "website": "https://www.google.com/"
+  },
+  {
+    "task_id": "Google Search--26",
+    "confirmed_task": "Identify the hardware requirements for using the latest version of Adobe Photoshop on a Mac.",
+    "website": "https://www.google.com/"
+  },
+  {
+    "task_id": "Google Search--27",
+    "confirmed_task": "Check the current air quality index in Paris.",
+    "website": "https://www.google.com/"
+  },
+  {
+    "task_id": "Google Search--28",
+    "confirmed_task": "Check the IMDb and Metacritic scores of the movie \"Inception.\"",
+    "website": "https://www.google.com/"
+  },
+  {
+    "task_id": "Google Search--29",
+    "confirmed_task": "Find out the current world record for the men's 100m sprint.",
+    "website": "https://www.google.com/"
+  },
+  {
+    "task_id": "Google Search--30",
+    "confirmed_task": "Find the current number one artist on the Spotify Global Top 50 chart and list his/her top 10 songs as of now.",
+    "website": "https://www.google.com/"
+  },
+  {
+    "task_id": "Google Search--31",
+    "confirmed_task": "Discover which year Cristiano Ronaldo scored the most goals in a single season.",
+    "website": "https://www.google.com/"
+  },
+  {
+    "task_id": "Google Search--32",
+    "confirmed_task": "Find out where and when the most recent UEFA Champions League final was held, and which team won.",
+    "website": "https://www.google.com/"
+  },
+  {
+    "task_id": "Google Search--33",
+    "confirmed_task": "Find and copy the SHA of the latest commit in the TensorFlow repository on GitHub, then find a textbox to paste and tell me what the SHA is.",
+    "website": "https://www.google.com/"
+  },
+  {
+    "task_id": "Google Search--34",
+    "confirmed_task": "Determine the distance from Earth to Mars as of today's date.",
+    "website": "https://www.google.com/"
+  },
+  {
+    "task_id": "Google Search--35",
+    "confirmed_task": "Look up the latest research paper related to black holes published in the journal \"Nature Astronomy\".",
+    "website": "https://www.google.com/"
+  },
+  {
+    "task_id": "Google Search--36",
+    "confirmed_task": "Search for the most recent Nobel Prize winner in Physics and their contribution to the field.",
+    "website": "https://www.google.com/"
+  },
+  {
+    "task_id": "Google Search--37",
+    "confirmed_task": "Find the current top 3 super-earth planets and give a brief introduction to them.",
+    "website": "https://www.google.com/"
+  },
+  {
+    "task_id": "Google Search--38",
+    "confirmed_task": "Search for the next visible solar eclipse in North America and its expected date, and what about the one after that.",
+    "website": "https://www.google.com/"
+  },
+  {
+    "task_id": "Google Search--40",
+    "confirmed_task": "Look up the elevation of Mount Kilimanjaro on Google Search.",
+    "website": "https://www.google.com/"
+  },
+  {
+    "task_id": "Google Search--41",
+    "confirmed_task": "Look up the current statistics of air pollution level in Los Angeles using Google Search.",
+    "website": "https://www.google.com/"
+  },
+  {
+    "task_id": "Google Search--42",
+    "confirmed_task": " Use Google Search to find an article that explains the major differences between American English and British English.",
+    "website": "https://www.google.com/"
+  },
+  {
+    "task_id": "Huggingface--1",
+    "confirmed_task": "Use the Huggingface Inference API to generate a short story about a dragon and a wizard.",
+    "website": "https://huggingface.co/"
+  },
+  {
+    "task_id": "Huggingface--2",
+    "confirmed_task": "Discover three new and popular open-source NLP models for language translation released in the past month on Huggingface.",
+    "website": "https://huggingface.co/"
+  },
+  {
+    "task_id": "Huggingface--3",
+    "confirmed_task": "Look up a model with a license of cc-by-sa-4.0 with the most likes on Hugging face.",
+    "website": "https://huggingface.co/"
+  },
+  {
+    "task_id": "Huggingface--4",
+    "confirmed_task": "Locate an open-source conversational AI model on Hugging Face, trained in English and list its main features and applications.",
+    "website": "https://huggingface.co/"
+  },
+  {
+    "task_id": "Huggingface--5",
+    "confirmed_task": "Find a model released on Hugging Face for recipe generation. Retrieve the information of the model, including its name, model size and tensor type.",
+    "website": "https://huggingface.co/"
+  },
+  {
+    "task_id": "Huggingface--6",
+    "confirmed_task": "Find the model sentence-transformers/all-MiniLM-L6-v2 and use the Inference API on the webpage to get the similarity of the following two sentences: 'Tomorrow is Sunday', 'Eat a burger on Sunday'.",
+    "website": "https://huggingface.co/"
+  },
+  {
+    "task_id": "Huggingface--7",
+    "confirmed_task": "Which is the most downloaded audio related dataset on Hugging face currently.",
+    "website": "https://huggingface.co/"
+  },
+  {
+    "task_id": "Huggingface--8",
+    "confirmed_task": "Retrieve an example of a pre-trained language model in natural language processing and identify the tasks it is specifically designed for, like translation or text summarization.",
+    "website": "https://huggingface.co/"
+  },
+  {
+    "task_id": "Huggingface--9",
+    "confirmed_task": "Find the most download machine translation model on Huggingface which focuses on English and Japanese (en-ja) and report the evaluation metrics stated for it.",
+    "website": "https://huggingface.co/"
+  },
+  {
+    "task_id": "Huggingface--10",
+    "confirmed_task": "Open space: argilla/notux-chat-ui and interact with it by asking it 'which team trained you'. What is its answer.",
+    "website": "https://huggingface.co/"
+  },
+  {
+    "task_id": "Huggingface--11",
+    "confirmed_task": "Identify the latest updated image to video model available on Huggingface and summarize its main features.",
+    "website": "https://huggingface.co/"
+  },
+  {
+    "task_id": "Huggingface--12",
+    "confirmed_task": "Find the most recently updated machine learning model on Huggingface which focuses on Error Correction.",
+    "website": "https://huggingface.co/"
+  },
+  {
+    "task_id": "Huggingface--13",
+    "confirmed_task": "Search for LLaMA in the huggingface doc, what type is the spaces_between_special_tokens parameter in LlamaTokenizer and what is its default value.",
+    "website": "https://huggingface.co/"
+  },
+  {
+    "task_id": "Huggingface--14",
+    "confirmed_task": "How much is the Pro account of Hugging face for a month and what are the features?",
+    "website": "https://huggingface.co/"
+  },
+  {
+    "task_id": "Huggingface--15",
+    "confirmed_task": "Identify the most downloaded models on Hugging face that use the PaddlePaddle library.",
+    "website": "https://huggingface.co/"
+  },
+  {
+    "task_id": "Huggingface--16",
+    "confirmed_task": "Find information on the latest (as of today's date) pre-trained language model on Huggingface suitable for text classification and briefly describe its intended use case and architecture.",
+    "website": "https://huggingface.co/"
+  },
+  {
+    "task_id": "Huggingface--17",
+    "confirmed_task": "Find the most recently updated open-source project related to natural language processing on the Huggingface platform. Provide the project's name, creator, and a brief description of its functionality.",
+    "website": "https://huggingface.co/"
+  },
+  {
+    "task_id": "Huggingface--18",
+    "confirmed_task": "Look up TRL's forward modelling in the hugging face documentation on how to add a margin to a loss.",
+    "website": "https://huggingface.co/"
+  },
+  {
+    "task_id": "Huggingface--19",
+    "confirmed_task": "Explore and summarize the features of the most recent open-source NLP model released by Hugging Face for English text summarization.",
+    "website": "https://huggingface.co/"
+  },
+  {
+    "task_id": "Huggingface--21",
+    "confirmed_task": "Look up the tour about how to use the 'pipeline' feature in the Hugging Face Transformers library for sentiment analysis, and identify the default model it uses.",
+    "website": "https://huggingface.co/"
+  },
+  {
+    "task_id": "Huggingface--22",
+    "confirmed_task": "Identify the steps to convert a PyTorch model to TensorFlow using the Hugging Face Transformers library as described in their documentation.",
+    "website": "https://huggingface.co/"
+  },
+  {
+    "task_id": "Huggingface--23",
+    "confirmed_task": "Identify three innovative and widely recognized open-source NLP models for automatic speech recognition released in the past month on Huggingface.",
+    "website": "https://huggingface.co/"
+  },
+  {
+    "task_id": "Huggingface--24",
+    "confirmed_task": "Search for a model on Hugging Face with an Apache-2.0 license that has received the highest number of likes.",
+    "website": "https://huggingface.co/"
+  },
+  {
+    "task_id": "Huggingface--25",
+    "confirmed_task": "In the Hugging Face documentation, find the tutorial on loading adapters with PEFT, tell me how to load in 8bit or 4bit.",
+    "website": "https://huggingface.co/"
+  },
+  {
+    "task_id": "Huggingface--26",
+    "confirmed_task": "Identify a model on Hugging Face designed for generating travel chats. Obtain information about the model, including its name, size and training framwork.",
+    "website": "https://huggingface.co/"
+  },
+  {
+    "task_id": "Huggingface--27",
+    "confirmed_task": "Determine the most downloaded dataset related to Text Retrieval in NLP on Hugging Face.",
+    "website": "https://huggingface.co/"
+  },
+  {
+    "task_id": "Huggingface--28",
+    "confirmed_task": "Retrieve an example of a pre-trained model on Hugging Face that is optimized for question answering tasks and detail the languages it supports.",
+    "website": "https://huggingface.co/"
+  },
+  {
+    "task_id": "Huggingface--29",
+    "confirmed_task": "Summarize the description of the recent open-source NLP model released on Hugging Face for medical summarization.",
+    "website": "https://huggingface.co/"
+  },
+  {
+    "task_id": "Huggingface--30",
+    "confirmed_task": "Identify the most downloaded English-Chinese (en-zh) machine translation model on Huggingface and report its latest performance metrics and usage guidelines.",
+    "website": "https://huggingface.co/"
+  },
+  {
+    "task_id": "Huggingface--31",
+    "confirmed_task": "Identify the latest machine learning model on Huggingface that specializes in detecting fake news, including the date of its last update.",
+    "website": "https://huggingface.co/"
+  },
+  {
+    "task_id": "Huggingface--32",
+    "confirmed_task": "On the Hugging Face website, search for the model 'GPT-J-6B' and find the 'temperature' parameter in its settings. What is the default value of this parameter?",
+    "website": "https://huggingface.co/"
+  },
+  {
+    "task_id": "Huggingface--33",
+    "confirmed_task": "List three hugging face docs. How many GitHub stars have they earned so far?",
+    "website": "https://huggingface.co/"
+  },
+  {
+    "task_id": "Huggingface--34",
+    "confirmed_task": "List the benefits of hugging face classroom mentioned on Hugging face website.",
+    "website": "https://huggingface.co/"
+  },
+  {
+    "task_id": "Huggingface--35",
+    "confirmed_task": "Find the latest Diffusion-related blog on Hugging Face, and read its intro or overview section to roughly summarize the content of the blog.",
+    "website": "https://huggingface.co/"
+  },
+  {
+    "task_id": "Huggingface--36",
+    "confirmed_task": "Summarize all the payment plans and their advantages in huggingface pricing.",
+    "website": "https://huggingface.co/"
+  },
+  {
+    "task_id": "Huggingface--37",
+    "confirmed_task": "Browse the daily paper on Hugging Face. What is the title of the first article, how many upvotes has it received, and is there any related model or data release?",
+    "website": "https://huggingface.co/"
+  },
+  {
+    "task_id": "Huggingface--38",
+    "confirmed_task": "Investigate the 'transformers' library in the Hugging Face documentation, focusing on how to add new tokens to a tokenizer.",
+    "website": "https://huggingface.co/"
+  },
+  {
+    "task_id": "Huggingface--39",
+    "confirmed_task": "Investigate in the Hugging Face documentation how to utilize the 'Trainer' API for training a model on a custom dataset, and note the configurable parameters of the Trainer class.",
+    "website": "https://huggingface.co/"
+  },
+  {
+    "task_id": "Huggingface--40",
+    "confirmed_task": "Check out Text Embeddings Inference in Hugging face's Doc to summarise the strengths of the toolkit.",
+    "website": "https://huggingface.co/"
+  },
+  {
+    "task_id": "Huggingface--41",
+    "confirmed_task": "What is the current Text-to-3D model with the highest number of downloads and tell me are there Spaces that use the model.",
+    "website": "https://huggingface.co/"
+  },
+  {
+    "task_id": "Huggingface--42",
+    "confirmed_task": "Check the Dataset Viewer for ai2lumos/lumos_complex_qa_plan_onetime on Hugging face. what is the content corresponding to user in the first message?",
+    "website": "https://huggingface.co/"
+  },
+  {
+    "task_id": "Wolfram Alpha--0",
+    "confirmed_task": "derivative of x^2 when x=5.6",
+    "website": "https://www.wolframalpha.com/"
+  },
+  {
+    "task_id": "Wolfram Alpha--1",
+    "confirmed_task": "Give a constraint on the set of inequalities for the inner region of the pentagram.",
+    "website": "https://www.wolframalpha.com/"
+  },
+  {
+    "task_id": "Wolfram Alpha--2",
+    "confirmed_task": "Calculate 3^71 and retain 5 significant figures in scientific notation.",
+    "website": "https://www.wolframalpha.com/"
+  },
+  {
+    "task_id": "Wolfram Alpha--3",
+    "confirmed_task": "Let g(x) be the integral of x^2 cos(2x). Write the expression of g(x).",
+    "website": "https://www.wolframalpha.com/"
+  },
+  {
+    "task_id": "Wolfram Alpha--4",
+    "confirmed_task": "Pack 24 circles in a circle radius r. Compare Densest known packing and Square packing. Then tell me the radius of the inner circles.",
+    "website": "https://www.wolframalpha.com/"
+  },
+  {
+    "task_id": "Wolfram Alpha--5",
+    "confirmed_task": "Show the solution of y\"(z) + sin(y(z)) = 0 from wolframalpha.",
+    "website": "https://www.wolframalpha.com/"
+  },
+  {
+    "task_id": "Wolfram Alpha--6",
+    "confirmed_task": "Simplify x^5-20x^4+163x^3-676x^2+1424x-1209 so that it has fewer items.",
+    "website": "https://www.wolframalpha.com/"
+  },
+  {
+    "task_id": "Wolfram Alpha--7",
+    "confirmed_task": "Give the final angle and final length after 6s of a Spring pendulum with spring equilibrium length=0.12m, initial length=0.24m, initial angle=80deg, mass=1kg, spring constant=120 N/m .",
+    "website": "https://www.wolframalpha.com/"
+  },
+  {
+    "task_id": "Wolfram Alpha--8",
+    "confirmed_task": "Give 12 lbs of 4-cyanoindole, converted to molar and indicate the percentage of C, H, N.",
+    "website": "https://www.wolframalpha.com/"
+  },
+  {
+    "task_id": "Wolfram Alpha--9",
+    "confirmed_task": "Annual energy production of Diablo Canyon 2 in 2010.",
+    "website": "https://www.wolframalpha.com/"
+  },
+  {
+    "task_id": "Wolfram Alpha--11",
+    "confirmed_task": "Show the electrical resistivity of UNS A92024 and UNS G10800 at 20 degrees Celsius.",
+    "website": "https://www.wolframalpha.com/"
+  },
+  {
+    "task_id": "Wolfram Alpha--12",
+    "confirmed_task": "Which character in unicode 8900 to 8920 looks like a snowflake",
+    "website": "https://www.wolframalpha.com/"
+  },
+  {
+    "task_id": "Wolfram Alpha--13",
+    "confirmed_task": "What is 10,000 US dollars worth now in 1980 and in 1970?",
+    "website": "https://www.wolframalpha.com/"
+  },
+  {
+    "task_id": "Wolfram Alpha--14",
+    "confirmed_task": "Compare the total Calories: whopper vs baconator vs big mac. Assume that each serving of food is 300g.",
+    "website": "https://www.wolframalpha.com/"
+  },
+  {
+    "task_id": "Wolfram Alpha--15",
+    "confirmed_task": "Show the blood relationship fraction between you and your father's mother's sister's son.",
+    "website": "https://www.wolframalpha.com/"
+  },
+  {
+    "task_id": "Wolfram Alpha--16",
+    "confirmed_task": "Weight lose for a male with current weight 90 kg, 40 year old, 175 cm. If he intakes 1500 calories every day, how long will it take to lose 17 kg.",
+    "website": "https://www.wolframalpha.com/"
+  },
+  {
+    "task_id": "Wolfram Alpha--18",
+    "confirmed_task": "Plot Albert Einstein curve with Parametric equations.",
+    "website": "https://www.wolframalpha.com/"
+  },
+  {
+    "task_id": "Wolfram Alpha--19",
+    "confirmed_task": "Standing in the sun from 11:00 am with SPF 5 in Australia. Approximate time to sunburn for each skin type.",
+    "website": "https://www.wolframalpha.com/"
+  },
+  {
+    "task_id": "Wolfram Alpha--20",
+    "confirmed_task": "Compute the integral of 3e^(2x) from x=0 to x=5.",
+    "website": "https://www.wolframalpha.com/"
+  },
+  {
+    "task_id": "Wolfram Alpha--21",
+    "confirmed_task": "Calculate (1+0.1*i)^8 + (1−0.2*i)^8  where i is a complex number.",
+    "website": "https://www.wolframalpha.com/"
+  },
+  {
+    "task_id": "Wolfram Alpha--22",
+    "confirmed_task": "Determine the area of a regular hexagon with a side length of 7 cm.",
+    "website": "https://www.wolframalpha.com/"
+  },
+  {
+    "task_id": "Wolfram Alpha--24",
+    "confirmed_task": "Solve the differential equation y''(t) - 2y'(t) + 10y(t) = 0 and display its general solution.",
+    "website": "https://www.wolframalpha.com/"
+  },
+  {
+    "task_id": "Wolfram Alpha--25",
+    "confirmed_task": "Calculate the final position and velocity of a projectile launched at 45 degrees with an initial speed of 30 m/s after 3 seconds.",
+    "website": "https://www.wolframalpha.com/"
+  },
+  {
+    "task_id": "Wolfram Alpha--26",
+    "confirmed_task": "Convert 15 kilograms of sulfuric acid to moles and display the percentage composition of H, S, and O by weight.",
+    "website": "https://www.wolframalpha.com/"
+  },
+  {
+    "task_id": "Wolfram Alpha--27",
+    "confirmed_task": "Display the thermal conductivity of Copper (Cu) and Aluminum (Al) at 25 degrees Celsius.",
+    "website": "https://www.wolframalpha.com/"
+  },
+  {
+    "task_id": "Wolfram Alpha--28",
+    "confirmed_task": "Identify the character in Unicode range 9632 to 9650 that represents a hollow parallelogram.",
+    "website": "https://www.wolframalpha.com/"
+  },
+  {
+    "task_id": "Wolfram Alpha--29",
+    "confirmed_task": "Create a plot of cat curve using wolfram alpha.",
+    "website": "https://www.wolframalpha.com/"
+  },
+  {
+    "task_id": "Wolfram Alpha--30",
+    "confirmed_task": "Calculate the estimated time to sunburn for different skin types when exposed to the sun at 1:00 pm with SPF 1 in Brazil.",
+    "website": "https://www.wolframalpha.com/"
+  },
+  {
+    "task_id": "Wolfram Alpha--31",
+    "confirmed_task": "Using Wolfram Alpha, determine the current temperature and wind speed in Chicago, IL.",
+    "website": "https://www.wolframalpha.com/"
+  },
+  {
+    "task_id": "Wolfram Alpha--32",
+    "confirmed_task": "Print all prime numbers between 1000 and 1200 using Wolfram alpha.",
+    "website": "https://www.wolframalpha.com/"
+  },
+  {
+    "task_id": "Wolfram Alpha--34",
+    "confirmed_task": "Calculate the mass of Jupiter compared to Earth using Wolfram Alpha. Also, find the length of one day on Jupiter.",
+    "website": "https://www.wolframalpha.com/"
+  },
+  {
+    "task_id": "Wolfram Alpha--35",
+    "confirmed_task": "Calculate the determinant of a 6x6 Hilbert matrix.",
+    "website": "https://www.wolframalpha.com/"
+  },
+  {
+    "task_id": "Wolfram Alpha--36",
+    "confirmed_task": "Determine the convergence or divergence of the series Σ (n=1 to ∞) of 1/(n^3 + 1).",
+    "website": "https://www.wolframalpha.com/"
+  },
+  {
+    "task_id": "Wolfram Alpha--38",
+    "confirmed_task": "Compute the length of a curve defined by y = 2x^3 - 3x^2 + 4x - 5 from x = 0 to x = 3.",
+    "website": "https://www.wolframalpha.com/"
+  },
+  {
+    "task_id": "Wolfram Alpha--39",
+    "confirmed_task": "Use Wolfram alpha to write the expression of the ellipse x^2 + 3 y^2 = 4 rotated 33 degrees counterclockwise.",
+    "website": "https://www.wolframalpha.com/"
+  },
+  {
+    "task_id": "Wolfram Alpha--40",
+    "confirmed_task": "Approximate amount of fat burned by a 28yo, 172cm tall, 70kg woman running for 30min at a pace of 6min/mile.",
+    "website": "https://www.wolframalpha.com/"
+  },
+  {
+    "task_id": "Wolfram Alpha--41",
+    "confirmed_task": "What is the approximate Heart Rate Reserve of a 50 year old man who has a heart rate of 60bpm at rest.",
+    "website": "https://www.wolframalpha.com/"
+  },
+  {
+    "task_id": "Wolfram Alpha--42",
+    "confirmed_task": "What is the raw memory of a 100.2\" * 123.5\" true colour picture at 72 ppi?",
+    "website": "https://www.wolframalpha.com/"
+  },
+  {
+    "task_id": "Wolfram Alpha--43",
+    "confirmed_task": "A polyominoes of order 6 means you have 6 identical squares to combine different shapes (2-sided). How many combinations are there? Looking at all the shapes in the result, how many of them have only 2 rows in total?",
+    "website": "https://www.wolframalpha.com/"
+  },
+  {
+    "task_id": "Wolfram Alpha--44",
+    "confirmed_task": "Solve the ODE, g' + cos(g) = 0, if there is a constant in the result, determine the value of the constant by the condition that g(0) = 1.",
+    "website": "https://www.wolframalpha.com/"
+  },
+  {
+    "task_id": "Wolfram Alpha--45",
+    "confirmed_task": "A 175cm tall, 85kg, 40yo man climbs 2500 steps at about 18cm per step and 40 steps per minute. summarise the Metabolic properties.",
+    "website": "https://www.wolframalpha.com/"
+  }
+]
