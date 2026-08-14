@@ -4,11 +4,22 @@ An AI-powered browser agent built on top of [OpenCode](https://github.com/anomal
 
 > **Based on [OpenCode](https://github.com/anomalyco/opencode)** — the open source AI coding agent. This fork adds browser automation capabilities with intelligent DOM extraction, incremental diffing, and MCP 2.0 tool integration.
 
+## Quick Start
+
+```bash
+git clone https://github.com/oktton/opencode-browser.git
+cd opencode-browser
+bun install
+bun run dev:desktop
+```
+
+Requires [Bun](https://bun.sh) and an LLM API key (set via the in-app settings). Then type a browser task in natural language — the agent handles the rest.
+
 ## Examples
 
 ### Example 1: Information Extraction
 
-> **Prompt**: "使用浏览器找到 Hugging Face 热门大语言模型页面，记录排名前三的模型，包括模型名称、发布机构、参数规模、下载量或热度、是否支持中文。将结果保存到 huggingface_top3_models.md 文件中。"
+> **Prompt**: "找到 HuggingFace 热门大语言模型 Top 3，记录名称、机构、参数、下载量、是否支持中文。"
 
 https://github.com/user-attachments/assets/3d2ef328-b42a-45f4-820a-3e29b5ac923b
 
@@ -21,6 +32,13 @@ The agent navigates to HuggingFace, extracts model information, and produces a s
 | 3 | LFM2.5-2.6B | Liquid AI | 3B | 116,640 |
 
 <details>
+<summary>📄 Full prompt</summary>
+
+使用浏览器找到 Hugging Face 热门大语言模型页面，记录排名前三的模型，包括模型名称、发布机构、参数规模、下载量或热度、是否支持中文。将结果保存到 huggingface_top3_models.md 文件中。
+
+</details>
+
+<details>
 <summary>📄 Full report</summary>
 
 See [huggingface_top3_models.md](assets/examples/huggingface_top3_models.md)
@@ -31,7 +49,7 @@ See [huggingface_top3_models.md](assets/examples/huggingface_top3_models.md)
 
 ### Example 2: Complex Form Filling
 
-> **Prompt**: "使用浏览器访问 London Business School 官方 Contact Us 页面，找到在线咨询表单，填写所有字段（Masters programmes, kai.chen@example.com, Mr, Kai Chen...），检查页面校验结果，但不要最终提交表单。将填写内容和校验结果保存到 lbs_form_report.md。"
+> **Prompt**: "访问 London Business School Contact Us 页面，填写 9 个表单字段，检查校验结果，不提交。"
 
 https://github.com/user-attachments/assets/c35831c2-4433-41fd-a71c-d6b271fb6746
 
@@ -50,6 +68,29 @@ https://github.com/user-attachments/assets/c35831c2-4433-41fd-a71c-d6b271fb6746
 | Confirm Password | KaiMaster2026 | ✅ |
 
 <details>
+<summary>📄 Full prompt</summary>
+
+使用浏览器访问 London Business School 官方 Contact Us 页面：https://www.london.edu/about/contact
+
+找到在线咨询表单，并填写以下信息：
+
+- What's your question about?：Masters programmes
+- Topic：Unspecified
+- Email：kai.chen@example.com
+- Title：Mr
+- First Name：Kai
+- Last Name：Chen
+- Comment or enquiry details：I would like to know more about the application requirements for your master's programmes.
+- Password：KaiMaster2026
+- Confirm password：KaiMaster2026
+
+完成所有字段填写，检查页面是否出现必填项、密码格式或字符长度等校验提示，但不要最终提交表单。
+
+最后将填写内容、页面校验结果以及是否可以正常进入提交前状态，保存到 lbs_form_report.md 文件中。
+
+</details>
+
+<details>
 <summary>📄 Full report with DOM constraint analysis</summary>
 
 See [lbs_form_report.md](assets/examples/lbs_form_report.md)
@@ -60,13 +101,24 @@ See [lbs_form_report.md](assets/examples/lbs_form_report.md)
 
 ### Example 3: Deep Research
 
-> **Prompt**: "使用浏览器调查论文《Generative Agents: Interactive Simulacra of Human Behavior》的代码复现情况。找到GitHub仓库，检查代码完整性、依赖环境、运行说明、Issues中常见复现问题。判断复现难度并说明原因，整理到 reproduction_report.md。"
+> **Prompt**: "调查论文 *Generative Agents* 的代码复现情况，判断复现难度并说明原因。"
 
 https://github.com/user-attachments/assets/ab84a6b5-94c9-4fb0-a2f5-6997d6200762
 
 The agent performs multi-step research: navigates to the GitHub repo, checks issues, analyzes dependencies, evaluates code completeness, and generates a comprehensive reproducibility report.
 
 **Result**: 🟡 Medium difficulty — code is complete but core OpenAI models (`text-davinci-002/003`) have been deprecated, dependencies are outdated, and the project is unmaintained (3 years, 115 open issues).
+
+<details>
+<summary>📄 Full prompt</summary>
+
+使用浏览器调查论文《Generative Agents: Interactive Simulacra of Human Behavior》的代码复现情况。
+
+找到论文对应的 GitHub 仓库，检查是否提供完整代码、依赖环境、运行说明、数据或示例，以及是否需要额外 API。再查看仓库最近更新时间和 Issues 中常见的复现问题。
+
+最后判断该项目的复现难度属于容易 / 中等 / 困难，并说明主要原因。将调查结果整理并记录到一个 reproduction_report.md 文件中。
+
+</details>
 
 <details>
 <summary>📄 Full reproducibility report</summary>
@@ -137,6 +189,20 @@ See [dom-diff.txt](assets/dom-comparison/dom-diff.txt)
 
 </details>
 
+<details>
+<summary>Full DOM — before clicking settings (113 lines)</summary>
+
+See [dom-html.txt](assets/dom-comparison/dom-html.txt)
+
+</details>
+
+<details>
+<summary>Full DOM — after clicking settings (186 lines)</summary>
+
+See [dom-html-after.txt](assets/dom-comparison/dom-html-after.txt)
+
+</details>
+
 ### Why This Matters
 
 **1. KV Cache reuse** — Unchanged DOM stays as a stable prefix across rounds. LLM APIs skip re-computing attention for cached prefixes. Re-sending the full DOM each round **invalidates the entire cache**, wasting latency and cost.
@@ -200,7 +266,7 @@ CDP Snapshot → Tree Build → Render Info (5 stages) → Prune → Highlight �
 | `browser_back` / `browser_forward` / `browser_refresh` | Navigation |
 | `browser_wait` | Wait for page changes |
 
-### What I Built (vs. Original OpenCode)
+### Project Structure (Browser Agent Module)
 
 ```
 packages/opencode/src/tool/browser/

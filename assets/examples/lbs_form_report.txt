@@ -1,0 +1,19 @@
+使用浏览器访问 London Business School 官方 Contact Us 页面：
+
+https://www.london.edu/about/contact
+
+找到在线咨询表单，并填写以下信息：
+
+What's your question about?：Masters programmes
+Topic：Unspecified
+Email：kai.chen@example.com
+Title：Mr
+First Name：Kai
+Last Name：Chen
+Comment or enquiry details：I would like to know more about the application requirements for your master's programmes.
+Password：KaiMaster2026
+Confirm password：KaiMaster2026
+
+完成所有字段填写，检查页面是否出现必填项、密码格式或字符长度等校验提示，但不要最终提交表单。
+
+最后将填写内容、页面校验结果以及是否可以正常进入提交前状态，保存到 lbs_form_report.md 文件中。

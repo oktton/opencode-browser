@@ -1,0 +1,9 @@
+题目：论文代码复现调查
+
+使用浏览器调查论文 《Generative Agents: Interactive Simulacra of Human Behavior》 的代码复现情况。
+
+找到论文对应的 GitHub 仓库，检查是否提供完整代码、依赖环境、运行说明、数据或示例，以及是否需要额外 API。再查看仓库最近更新时间和 Issues 中常见的复现问题。
+
+最后判断该项目的复现难度属于容易 / 中等 / 困难，并说明主要原因。
+
+将调查结果整理并记录到一个 reproduction_report.md 文件中。
