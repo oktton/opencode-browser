@@ -1,7 +1,7 @@
 import { Effect, Schema } from "effect"
 import * as Tool from "../../tool"
 import { BrowserManager } from "../manager"
-import { getPageDom } from "../dom-utils"
+import { getPageDom, skippedDomOutput } from "../dom-utils"
 
 export const BrowserGotoTool = Tool.define(
   "browser_goto",
@@ -13,19 +13,19 @@ TIP: You can revisit a URL from previous DOM snapshots to restore a prior page s
       url: Schema.String.annotate({ description: "The URL to navigate to" }),
     }),
     execute: (params: { url: string }, ctx: Tool.Context) =>
-      Effect.gen(function* () {
+      Effect.promise(() => {
         const manager = BrowserManager.getInstance()
         manager.ensureStarted()
-        const tab = manager.getActiveTab()
-
-        yield* Effect.promise(() => tab.page.goto(params.url, { waitUntil: "domcontentloaded" }).catch(() => {}))
-
-        const dom = yield* Effect.promise(() => getPageDom(manager))
-        return {
-          title: `Navigate to ${params.url}`,
-          output: `Navigated to ${params.url}${dom.output}`,
-          metadata: { url: params.url, domId: dom.domId },
-        }
+        return manager.enqueue(async (isLast) => {
+          const tab = manager.getActiveTab()
+          await tab.page.goto(params.url, { waitUntil: "domcontentloaded" }).catch(() => {})
+          const dom = isLast() ? await getPageDom(manager) : skippedDomOutput()
+          return {
+            title: `Navigate to ${params.url}`,
+            output: `Navigated to ${params.url}${dom.output}`,
+            metadata: { url: params.url, domId: dom.domId },
+          }
+        })
       }),
   }),
 )
@@ -36,18 +36,18 @@ export const BrowserRefreshTool = Tool.define(
     description: "Refresh the current page",
     parameters: Schema.Struct({}),
     execute: (_params: {}, ctx: Tool.Context) =>
-      Effect.gen(function* () {
+      Effect.promise(() => {
         const manager = BrowserManager.getInstance()
-        const tab = manager.getActiveTab()
-
-        yield* Effect.promise(() => tab.page.reload({ waitUntil: "domcontentloaded" }).catch(() => {}))
-
-        const dom = yield* Effect.promise(() => getPageDom(manager))
-        return {
-          title: "Refresh page",
-          output: `Page refreshed${dom.output}`,
-          metadata: { domId: dom.domId },
-        }
+        return manager.enqueue(async (isLast) => {
+          const tab = manager.getActiveTab()
+          await tab.page.reload({ waitUntil: "domcontentloaded" }).catch(() => {})
+          const dom = isLast() ? await getPageDom(manager) : skippedDomOutput()
+          return {
+            title: "Refresh page",
+            output: `Page refreshed${dom.output}`,
+            metadata: { domId: dom.domId },
+          }
+        })
       }),
   }),
 )
@@ -62,38 +62,39 @@ The stateId is shown in every DOM snapshot header.`,
       stateId: Schema.String.annotate({ description: 'State ID from DOM snapshot header (e.g. "tab0-dom3")' }),
     }),
     execute: (params: { stateId: string }, ctx: Tool.Context) =>
-      Effect.gen(function* () {
+      Effect.promise(() => {
+        const manager = BrowserManager.getInstance()
         const match = params.stateId.match(/^(tab\d+)-(dom\d+)$/)
         if (!match) {
-          return {
+          return Promise.resolve({
             title: "Restore state",
             output: `Invalid stateId format: "${params.stateId}". Expected "tabN-domN".`,
             metadata: {} as Record<string, string>,
-          }
+          })
         }
         const [, tabId, domId] = match
-        const manager = BrowserManager.getInstance()
         const tab = manager.getTab(tabId)
         if (!tab) {
-          return {
+          return Promise.resolve({
             title: "Restore state",
             output: `Tab "${tabId}" not found. It may have been closed.`,
             metadata: {} as Record<string, string>,
+          })
+        }
+
+        return manager.enqueue(async (isLast) => {
+          await manager.switchTab(tabId)
+          const snapshotUrl = tab.domService.getCachedUrl(domId)
+          if (snapshotUrl) {
+            await tab.page.goto(snapshotUrl, { waitUntil: "domcontentloaded" }).catch(() => {})
           }
-        }
-
-        yield* Effect.promise(() => manager.switchTab(tabId))
-        const snapshotUrl = tab.domService.getCachedUrl(domId)
-        if (snapshotUrl) {
-          yield* Effect.promise(() => tab.page.goto(snapshotUrl, { waitUntil: "domcontentloaded" }).catch(() => {}))
-        }
-
-        const dom = yield* Effect.promise(() => getPageDom(manager))
-        return {
-          title: `Restore ${params.stateId}`,
-          output: `Restored to ${params.stateId}${dom.output}`,
-          metadata: { domId: dom.domId },
-        }
+          const dom = isLast() ? await getPageDom(manager) : skippedDomOutput()
+          return {
+            title: `Restore ${params.stateId}`,
+            output: `Restored to ${params.stateId}${dom.output}`,
+            metadata: { domId: dom.domId },
+          }
+        })
       }),
   }),
 )

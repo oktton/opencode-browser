@@ -13,30 +13,30 @@ The IDs correspond to the [view:ID] markers in the DOM HTML output.`,
       viewIds: Schema.Array(Schema.String).annotate({ description: 'Array of view IDs (e.g., ["ife", "eehb"]) from [view:ID] markers.' }),
     }),
     execute: (params: { viewIds: readonly string[] }, ctx: Tool.Context) =>
-      Effect.gen(function* () {
+      Effect.promise(() => {
         const manager = BrowserManager.getInstance()
         const tab = manager.getActiveTab()
         const { domService } = tab
 
         if (params.viewIds.length === 0) {
-          return {
+          return Promise.resolve({
             title: "View elements",
             output: "No viewIds provided.",
             metadata: {},
-          }
+          })
         }
 
         const visualElementMap = domService.getLatestVisualElementMap()
         if (!visualElementMap || visualElementMap.size === 0) {
-          return {
+          return Promise.resolve({
             title: "View elements",
             output: "No visual elements available. Please wait for the page to load.",
             metadata: {},
-          }
+          })
         }
 
-        return yield* Effect.promise(() =>
-          domService.withClient(async () => {
+        return manager.enqueue(async () => {
+          return domService.withClient(async () => {
             const padding = 10
             const textParts: string[] = []
             const attachments: Array<{
@@ -80,8 +80,8 @@ The IDs correspond to the [view:ID] markers in the DOM HTML output.`,
               metadata: {},
               attachments,
             }
-          }),
-        )
+          })
+        })
       }),
   }),
 )

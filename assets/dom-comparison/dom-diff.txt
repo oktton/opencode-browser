@@ -1,0 +1,76 @@
+<header></header>
+	<div></div>
+		+|<span></span>
+			+|<div></div>
+				+|[2143]<div role='link' aria-label='必应徽标，在新选项卡中打开' title='必应上的“实时热点”'></div>
+			+|<ul></ul>
+				+|[2147]<a role='link'> personal signin 使用个人帐户登录 </a>
+					+|[2148][view:cbei]<img role='presentation' aria-label='personal signin'></img>
+					+|[2149]<span> 使用个人帐户登录 </span>
+			+|<div></div>
+				+|[2151]<a role='menuitem' aria-label='收藏'></a>
+					+|[2155]<div> 收藏 </div>
+				+|<div></div>
+					+|[2158]<div role='menuitem' id='hbsettings' aria-expanded='false'> 设置 </div>
+						+|[view:cbgb]<span></span>
+						+|[view:cbge]<span></span>
+				+|[2189]<a role='menuitem' aria-label='安全搜索'></a>
+					+|<div></div>
+						+|[2192][view:cbjc]<span></span>
+					+|[2193]<div> 安全搜索 </div>
+					+|[2194]<div> 严格 </div>
+				+|[2195]<a role='menuitem' aria-label='搜索历史记录'></a>
+					+|<div></div>
+						+|[2198][view:cbji]<span></span>
+					+|[2199]<div> 搜索历史记录 </div>
+				+|[2201]<a role='menuitem' aria-label='隐私'></a>
+					+|<div></div>
+						+|[2204][view:ccae]<span></span>
+					+|[2205]<div> 隐私 </div>
+				+|[2207]<a role='menuitem' id='hb_feedback'> 反馈 </a>
+					+|<div></div>
+						+|[2210][view:ccba]<span></span>
+					+|[2211]<div> 反馈 </div>
+				+|<div></div>
+					+|[2213]<div role='menuitem' id='hbradio' aria-expanded='true'> 外观 </div>
+						+|[view:ccbg]<span></span>
+						+|[view:ccca]<span></span>
+					+|<div></div>
+						+|[2222]<a role='menuitemradio' aria-label='外观, 浅色' aria-checked='true'></a>
+							+|[2224]<label for='rdiolight'></label>
+								+|[2226][view:cccg]<svg></svg>
+								+|[2229]<span> 浅色 </span>
+								+|[2230][view:ccda]<img role='presentation'></img>
+						+|[2231]<a role='menuitemradio' aria-label='外观, 深色' aria-checked='false'></a>
+							+|[2233]<label for='rdiodark'></label>
+								+|[2235][view:ccdf]<svg></svg>
+								+|[2238]<span> 深色 </span>
+								+|[2239][view:ccdj]<img role='presentation'></img>
+						+|[2240]<a role='menuitemradio' aria-label='外观, 系统默认值' aria-checked='false'></a>
+							+|[2242]<label for='rdiodef'></label>
+								+|[2244][view:ccee]<svg></svg>
+								+|[2247]<span> 系统默认值 </span>
+								+|[2248][view:ccei]<img role='presentation'></img>
+				+|[2250]<div role='menuitem' id='hbthemes' aria-expanded='true'> 主题 </div>
+					+|[view:ccfd]<span></span>
+					+|[view:ccfh]<span></span>
+=== OFF-SCREEN below [container:0] (scroll to reveal these elements) ===
+				+|<div role='menuitem'> Default </div>
+					 ...
+				+|<div></div>
+					+|<li role='menuitem'> 隐私 </li>
+						 ...
+					+|<li role='menuitem'> 条款 </li>
+						 ...
+					+|<li role='menuitem'> 广告 </li>
+						 ...
+					+|<li role='menuitem'> 帮助 </li>
+						 ...
+					+|<li role='menuitem'> © 2026 Microsoft </li>
+						 ...
+=== END OFF-SCREEN ===
+<div></div>
+	<div></div>
+		-|<div></div>
+			-|[717]<div id='acftob11'> 禁止在居民楼开油烟餐饮 </div>
+				-|[1154]<a aria-label='禁止在居民楼开油烟餐饮' title='禁止在居民楼开油烟餐饮'></a>

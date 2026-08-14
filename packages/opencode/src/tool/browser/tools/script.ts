@@ -1,13 +1,16 @@
 import { Effect, Schema } from "effect"
 import * as Tool from "../../tool"
+import * as Truncate from "../../truncate"
 import { BrowserManager } from "../manager"
-import { getPageDom } from "../dom-utils"
+import { getPageDom, skippedDomOutput } from "../dom-utils"
 import { wrapScript } from "../page-tools"
 
 export const BrowserExecuteScriptTool = Tool.define(
   "browser_execute_script",
-  Effect.succeed({
-    description: `Execute JavaScript in the page context. You have full DOM/Web API access.
+  Effect.gen(function* () {
+    const truncate = yield* Truncate.Service
+    return {
+      description: `Execute JavaScript in the page context. You have full DOM/Web API access.
 
 ## Rules
 - Always use \`__find\` / \`__q\` / \`__get\` instead of querySelector, getElementById, etc.
@@ -46,30 +49,36 @@ Find all clickable elements near the given element (ancestors + children).
 Returned HTMLElements auto-serialize to \`{ref, index, tagName, textContent, attrs, ...}\`.
 - \`ref\`: string like "r0", "r5" — use with \`__get(ref)\` in next call
 - \`index\`: nearest [N] highlight index — use with browser_click/browser_input`,
-    parameters: Schema.Struct({
-      script: Schema.String.annotate({ description: "JavaScript function body." }),
-    }),
-    execute: (params: { script: string }, ctx: Tool.Context) =>
-      Effect.gen(function* () {
-        const manager = BrowserManager.getInstance()
-        const tab = manager.getActiveTab()
-
-        return yield* Effect.promise(() =>
-          tab.domService.withClient(async () => {
-            const returnValue = await tab.domService.evaluateWithReturn(wrapScript(params.script))
-            const resultText =
-              returnValue !== undefined
-                ? `Result: ${JSON.stringify(returnValue)}`
-                : "Script executed successfully"
-
-            const dom = await getPageDom(manager)
-            return {
-              title: "Execute script",
-              output: `${resultText}${dom.output}`,
-              metadata: {},
-            }
-          }),
-        )
+      parameters: Schema.Struct({
+        script: Schema.String.annotate({ description: "JavaScript function body." }),
       }),
+      execute: (params: { script: string }, ctx: Tool.Context) =>
+        Effect.gen(function* () {
+          const manager = BrowserManager.getInstance()
+          const tab = manager.getActiveTab()
+
+          const { resultText, dom } = yield* Effect.promise(() =>
+            manager.enqueue(async (isLast) => {
+              const result = await tab.domService.withClient(async () => {
+                const returnValue = await tab.domService.evaluateWithReturn(wrapScript(params.script))
+                return returnValue !== undefined
+                  ? `Result: ${JSON.stringify(returnValue)}`
+                  : "Script executed successfully"
+              })
+              const dom = isLast() ? await getPageDom(manager) : skippedDomOutput()
+              return { resultText: result, dom }
+            }),
+          )
+
+          const truncated = yield* truncate.output(resultText, { maxLines: 100, maxBytes: 8 * 1024 })
+          return {
+            title: "Execute script",
+            output: `${truncated.content}${dom.output}`,
+            metadata: {
+              ...(truncated.truncated ? { scriptResultPath: truncated.outputPath } : {}),
+            },
+          }
+        }),
+    }
   }),
 )

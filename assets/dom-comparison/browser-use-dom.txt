@@ -1,0 +1,178 @@
+|scroll element|<html /> (0.0 pages above, 4.3 pages below horizontal 0%)
+	跳至内容
+	[103]<a id=b_a11y_feedback role=button />
+		辅助功能反馈
+	[107]<a />
+	[110]<div role=search />
+		[111]<div id=sb_search />
+			[113]<div id=b_icon_spyglass />
+			|SHADOW(open)|[114]<input type=submit id=sb_form_go name=go value=搜索 />
+		|SHADOW(open)|[22]<input id=sb_form_q name=q aria-label=在此处输入你的搜索 — 输入时会显示搜索建议 type=search value=学生兼职送外卖反而欠款 maxlength=1000 autocomplete=both />
+		[47]<div id=mic_014FCE0 />
+			[119]<div id=vs_mic_icon />
+			[120]<div />
+				[121]<div role=button aria-label=语音搜索 />
+	[42]<a id=id_rh_w aria-label=Microsoft Rewards role=button expanded=false />
+	[244]<a id=id_l />
+		[249]<span id=id_a aria-label=登录 />
+	[252]<span id=id_hbfo role=menu />
+	[258]<div id=est_cn aria-label=国内版 />
+		国内版
+	[261]<div id=est_en aria-label=国际版 />
+		国际版
+	|scroll element|<ul /> (0.0 pages above, 0.2 pages below)
+		[266]<li id=b-scopeListItem-web level=1 />
+			[268]<a />
+				网页
+		[270]<li id=b-scopeListItem-images level=1 />
+			[272]<a />
+				图片
+		[274]<li id=b-scopeListItem-video level=1 />
+			[276]<a />
+				视频
+		[278]<li id=b-scopeListItem-academic level=1 />
+			[280]<a />
+				学术
+		[282]<li id=b-scopeListItem-dictionary level=1 />
+			[284]<a />
+				词典
+		[286]<li id=b-scopeListItem-local level=1 />
+			[288]<a />
+				地图
+		[290]<li id=b-scopeListItem-flights level=1 />
+			[292]<a />
+				航班
+	[304]<div id=b_tween_searchResults />
+		[306]<div />
+			[307]<div />
+				[308]<img role=presentation />
+		[309]<div />
+			[310]<div />
+				[311]<img role=presentation />
+		[312]<div />
+			[313]<div />
+				[314]<img role=presentation />
+		约 4,140 个结果
+	[348]<div id=bza_AutoZoom role=button pressed=true />
+		自适应缩放
+	学生兼职送外卖反而欠款
+	必应上的热点
+	[372]<div id=slideexp0_4CCA10chevrons_prevbtn role=button aria-label=单击以向左滚动 />
+		[374]<span />
+		[377]<div />
+			[378]<svg /> <!-- SVG content collapsed -->
+	|scroll element|<div /> (horizontal 7%)
+		[409]<div role=listitem level=1 />
+			[410]<div id=acftob2 />
+				[412]<a title=73岁奶奶将成首批太空游客 aria-label=73岁奶奶将成首批太空游客 />
+				[413]<div />
+					[414]<img alt=73岁奶奶将成首批太空游客 role=img />
+				[415]<div />
+					[416]<div />
+						[417]<div />
+							73岁奶奶将成首批太空游客
+		[24]<div role=listitem level=1 />
+			[25]<div id=acftob3 />
+				[419]<a title=白海豚走 梭子蟹来了 aria-label=白海豚走 梭子蟹来了 />
+				[420]<div />
+					[421]<img alt=白海豚走 梭子蟹来了 role=img id=emb2220FD6F />
+				[422]<div />
+					[423]<div />
+						[424]<div />
+							白海豚走 梭子蟹来了
+		[27]<div role=listitem level=1 />
+			[28]<div id=acftob4 />
+				[426]<a title=学生兼职送外卖反而欠款 aria-label=学生兼职送外卖反而欠款 />
+				[427]<div />
+					[428]<img alt=学生兼职送外卖反而欠款 role=img id=emb12D694F0B />
+				[429]<div />
+					[430]<div />
+						[431]<div />
+							学生兼职送外卖反而欠款
+		[30]<div role=listitem level=1 />
+			[31]<div id=acftob5 />
+				[48]<a title=央视曝光偷拍手机壳 aria-label=央视曝光偷拍手机壳 />
+				[433]<div />
+					[434]<img alt=央视曝光偷拍手机壳 role=img id=emb27BD34FA4 />
+				[435]<div />
+					[436]<div />
+						[437]<div />
+							央视曝光偷拍手机壳
+		[33]<div role=listitem level=1 />
+			[34]<div id=acftob6 />
+				[439]<a title=邹市明复出重返拳击赛场 aria-label=邹市明复出重返拳击赛场 />
+				[440]<div />
+					[441]<img alt=邹市明复出重返拳击赛场 role=img id=emb315067521 />
+				[442]<div />
+					[443]<div />
+						[444]<div />
+							邹市明复出重返拳击赛场
+		[36]<div role=listitem level=1 />
+			[37]<div id=acftob7 />
+				[446]<a title=禁止在居民楼开油烟餐饮 aria-label=禁止在居民楼开油烟餐饮 />
+				[447]<div />
+					[448]<img alt=禁止在居民楼开油烟餐饮 role=img id=emb449866476 />
+				[449]<div />
+					[450]<div />
+						[451]<div />
+							禁止在居民楼开油烟餐饮
+		[39]<div role=listitem level=1 />
+			[40]<div id=acftob8 />
+				[453]<a title=张雪机车获1.5 亿融资 aria-label=张雪机车获1.5 亿融资 />
+				[454]<div />
+					[455]<img alt=张雪机车获1.5 亿融资 role=img id=emb569F079DF />
+				[456]<div />
+					[457]<div />
+						[458]<div />
+							张雪机车获1.5 亿融资
+	[869]<div />
+	[49]<a id=ns_mag_ht />
+		资讯
+	[896]<a />
+		潇湘晨报 on MSN
+		· 5 小时
+		学生
+		暑假
+		兼职送外卖
+		赚生活费，辛苦工作1个月，竟“倒欠公司200 ...
+		小彭曾在重庆高校读书，近日他向工人日报记者讲述了去年暑假的一段经历：本打算靠送外卖挣生活费，结果辛苦跑单一个月后，竟被通知“倒欠公司200多元”。他介绍，去年8月初与某外卖配送站签下短期用工协议，约定工作到8月底。前半个月，配送费按每单6元正常结算；待到结算后半个月报酬时，等来的却是一张让人费解的“欠费通知单”。“我一个月跑了400多单，按约定有2400余元 ...
+	[916]<a aria-label=潇湘晨报 on MSN />
+	[918]<a />
+		手机光明网 on MSN
+		· 3 小时
+		高校学生兼职送外卖赚取生活费，辛苦工作一个月后，竟被通知“倒欠公司200多元”……
+		曾在重庆某高校读书的小彭近日向工人日报记者反映，去年暑假，其原本计划通过送外卖赚取生活费，但在辛苦工作一个月后，竟被通知“倒欠公司200多元”。小彭回忆道，配送站给出的扣款理由五花八门，“跑单时长不够扣款120元，扣保险费93元，工服、头盔一个月折旧费31元，住宿费490元，还有所谓的‘旷工离职罚款600元’”。在重庆市江津区人民法院审理的一起案件中，某保安服务公司要求保安邱某等3人缴纳冬季保安服 ...
+	[933]<a aria-label=手机光明网 on MSN />
+	[940]<span id=fdbtext_2 />
+		反馈
+	[942]<a id=thumb_t2 role=button aria-label=反馈点赞 title=反馈点赞 />
+	[943]<a id=thumb_f2 role=button aria-label=反馈不喜欢 title=反馈不喜欢 />
+	[952]<a title=查看 MSN 上的更多文章 aria-label=查看 MSN 上的更多文章 />
+		查看 MSN 上的更多文章
+	[959]<div />
+	[966]<a aria-label=搜狐 />
+		搜狐
+		https://www.sohu.com
+	[979]<a />
+		高校
+		学生兼职送外卖
+		赚取生活费，辛苦工作一个月后，竟被 ...
+	6 小时之前 · 曾在重庆某高校读书的小彭近日向工人日报记者反映，去年暑假，其原本计划通过送外卖赚取生活费，但在辛苦工作一个 …
+	[987]<div />
+	[992]<a aria-label=网易 />
+		网易
+		https://www.163.com › dy › article
+	[1005]<a />
+		高校
+		学生兼职送外卖
+		赚取生活费，辛苦工作一个月后，竟被 ...
+	8 小时之前 · 曾在重庆某高校读书的小彭近日向工人日报记者反映，去年暑假，其原本计划通过送外卖赚取生活费，但在辛苦工作一个 …
+	[1016]<a aria-label=腾讯网 />
+		腾讯网
+		https://news.qq.com › rain
+	[1029]<a />
+		学生
+		暑假
+		兼职送外卖
+		赚生活费，辛苦工作1个月，竟“倒欠 ...
+	8 小时之前 · 小彭曾在重庆高校读书，近日他向工人日报记者讲述了去年暑假的一段经历：本打算靠送外卖挣生活费，结果辛苦跑单一 …

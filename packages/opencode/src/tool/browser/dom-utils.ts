@@ -175,7 +175,9 @@ export async function getPageDom(
 
     const header = diffMode === "incremental" || diffMode === "added" ? "## Incremental DOM updates" : "## Current Page DOM Structure"
 
-    const content = `(stateId: ${stateId})\n${header}\n${tabs}\n\n${domHtml}${bars}${overlayNotice}${diffTip}`
+    const retentionTip = "\n**Reminder**: This DOM snapshot will be replaced after your next browser action. Record any important data (answers, values, navigation cues) in your text output now — unrecorded information will be lost."
+
+    const content = `(stateId: ${stateId})\n${header}\n${tabs}\n\n${domHtml}${bars}${overlayNotice}${diffTip}${retentionTip}`
 
     return {
       output: `\n\n${DOM_START} ${domId} tab:${tabId} mode:${diffMode} -->\n${content}\n${DOM_END}`,
@@ -184,6 +186,17 @@ export async function getPageDom(
       mode: diffMode,
     }
   })
+}
+
+const DOM_SKIPPED_MSG = "\n\n(DOM extraction deferred — will be included in the last concurrent browser tool's output.)"
+
+export function skippedDomOutput(): DomResult {
+  return {
+    output: DOM_SKIPPED_MSG,
+    domId: "",
+    tabId: "",
+    mode: "nochange",
+  }
 }
 
 /**

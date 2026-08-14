@@ -1,143 +1,237 @@
-<p align="center">
-  <a href="https://opencode.ai">
-    <picture>
-      <source srcset="packages/console/app/src/asset/logo-ornate-dark.svg" media="(prefers-color-scheme: dark)">
-      <source srcset="packages/console/app/src/asset/logo-ornate-light.svg" media="(prefers-color-scheme: light)">
-      <img src="packages/console/app/src/asset/logo-ornate-light.svg" alt="OpenCode logo">
-    </picture>
-  </a>
-</p>
-<p align="center">The open source AI coding agent.</p>
-<p align="center">
-  <a href="https://opencode.ai/discord"><img alt="Discord" src="https://img.shields.io/discord/1391832426048651334?style=flat-square&label=discord" /></a>
-  <a href="https://www.npmjs.com/package/opencode-ai"><img alt="npm" src="https://img.shields.io/npm/v/opencode-ai?style=flat-square" /></a>
-  <a href="https://github.com/anomalyco/opencode/actions/workflows/publish.yml"><img alt="Build status" src="https://img.shields.io/github/actions/workflow/status/anomalyco/opencode/publish.yml?style=flat-square&branch=dev" /></a>
-</p>
+# OpenCode Browser Agent
 
-<p align="center">
-  <a href="README.md">English</a> |
-  <a href="README.zh.md">简体中文</a> |
-  <a href="README.zht.md">繁體中文</a> |
-  <a href="README.ko.md">한국어</a> |
-  <a href="README.de.md">Deutsch</a> |
-  <a href="README.es.md">Español</a> |
-  <a href="README.fr.md">Français</a> |
-  <a href="README.it.md">Italiano</a> |
-  <a href="README.da.md">Dansk</a> |
-  <a href="README.ja.md">日本語</a> |
-  <a href="README.pl.md">Polski</a> |
-  <a href="README.ru.md">Русский</a> |
-  <a href="README.bs.md">Bosanski</a> |
-  <a href="README.ar.md">العربية</a> |
-  <a href="README.no.md">Norsk</a> |
-  <a href="README.br.md">Português (Brasil)</a> |
-  <a href="README.th.md">ไทย</a> |
-  <a href="README.tr.md">Türkçe</a> |
-  <a href="README.uk.md">Українська</a> |
-  <a href="README.bn.md">বাংলা</a> |
-  <a href="README.gr.md">Ελληνικά</a> |
-  <a href="README.vi.md">Tiếng Việt</a>
-</p>
+An AI-powered browser agent built on top of [OpenCode](https://github.com/anomalyco/opencode). Give natural language instructions and the agent autonomously navigates websites, fills forms, extracts information, and completes complex multi-step tasks.
 
-[![OpenCode Terminal UI](packages/web/src/assets/lander/screenshot.png)](https://opencode.ai)
+> **Based on [OpenCode](https://github.com/anomalyco/opencode)** — the open source AI coding agent. This fork adds browser automation capabilities with intelligent DOM extraction, incremental diffing, and MCP 2.0 tool integration.
+
+## Examples
+
+### Example 1: Information Extraction
+
+> **Prompt**: "使用浏览器找到 Hugging Face 热门大语言模型页面，记录排名前三的模型，包括模型名称、发布机构、参数规模、下载量或热度、是否支持中文。将结果保存到 huggingface_top3_models.md 文件中。"
+
+https://github.com/user-attachments/assets/huggingface_top3_models.mp4
+
+The agent navigates to HuggingFace, extracts model information, and produces a structured report:
+
+| Rank | Model | Organization | Parameters | Monthly Downloads |
+|------|-------|-------------|-----------|-------------------|
+| 1 | Qwen3.8-2.4T-A95B | Alibaba (Qwen) | 2.4T (MoE) | 1,012 |
+| 2 | DeepSeek-V4-Flash-0731 | DeepSeek | 304B | 1,431,587 |
+| 3 | LFM2.5-2.6B | Liquid AI | 3B | 116,640 |
+
+<details>
+<summary>📄 Full report</summary>
+
+See [huggingface_top3_models.md](assets/examples/huggingface_top3_models.md)
+
+</details>
 
 ---
 
-### Installation
+### Example 2: Complex Form Filling
 
-```bash
-# YOLO
-curl -fsSL https://opencode.ai/install | bash
+> **Prompt**: "使用浏览器访问 London Business School 官方 Contact Us 页面，找到在线咨询表单，填写所有字段（Masters programmes, kai.chen@example.com, Mr, Kai Chen...），检查页面校验结果，但不要最终提交表单。将填写内容和校验结果保存到 lbs_form_report.md。"
 
-# Package managers
-npm i -g opencode-ai@latest        # or bun/pnpm/yarn
-scoop install opencode             # Windows
-choco install opencode             # Windows
-brew install anomalyco/tap/opencode # macOS and Linux (recommended, always up to date)
-brew install opencode              # macOS and Linux (official brew formula, updated less)
-sudo pacman -S opencode            # Arch Linux (Stable)
-paru -S opencode-bin               # Arch Linux (Latest from AUR)
-mise use -g opencode               # Any OS
-nix run nixpkgs#opencode           # or github:anomalyco/opencode for latest dev branch
-```
+https://github.com/user-attachments/assets/lbs_form_report.mp4
 
-> [!TIP]
-> Remove versions older than 0.1.x before installing.
+9 fields filled correctly, including conditional fields, dropdown menus, and password confirmation.
 
-### Desktop App (BETA)
+| Field | Value | Status |
+|-------|-------|--------|
+| Question | Masters programmes | ✅ |
+| Topic | Unspecified | ✅ (conditionally displayed) |
+| Email | kai.chen@example.com | ✅ |
+| Title | Mr | ✅ |
+| First Name | Kai | ✅ |
+| Last Name | Chen | ✅ |
+| Comment | Application requirements inquiry (90 chars) | ✅ |
+| Password | KaiMaster2026 | ✅ |
+| Confirm Password | KaiMaster2026 | ✅ |
 
-OpenCode is also available as a desktop application. Download directly from the [releases page](https://github.com/anomalyco/opencode/releases) or [opencode.ai/download](https://opencode.ai/download).
+<details>
+<summary>📄 Full report with DOM constraint analysis</summary>
 
-| Platform              | Download                           |
-| --------------------- | ---------------------------------- |
-| macOS (Apple Silicon) | `opencode-desktop-mac-arm64.dmg`   |
-| macOS (Intel)         | `opencode-desktop-mac-x64.dmg`     |
-| Windows               | `opencode-desktop-windows-x64.exe` |
-| Linux                 | `.deb`, `.rpm`, or `.AppImage`     |
+See [lbs_form_report.md](assets/examples/lbs_form_report.md)
 
-```bash
-# macOS (Homebrew)
-brew install --cask opencode-desktop
-# Windows (Scoop)
-scoop bucket add extras; scoop install extras/opencode-desktop
-```
-
-#### Installation Directory
-
-The install script respects the following priority order for the installation path:
-
-1. `$OPENCODE_INSTALL_DIR` - Custom installation directory
-2. `$XDG_BIN_DIR` - XDG Base Directory Specification compliant path
-3. `$HOME/bin` - Standard user binary directory (if it exists or can be created)
-4. `$HOME/.opencode/bin` - Default fallback
-
-```bash
-# Examples
-OPENCODE_INSTALL_DIR=/usr/local/bin curl -fsSL https://opencode.ai/install | bash
-XDG_BIN_DIR=$HOME/.local/bin curl -fsSL https://opencode.ai/install | bash
-```
-
-### Agents
-
-OpenCode includes two built-in agents you can switch between with the `Tab` key.
-
-- **build** - Default, full-access agent for development work
-- **plan** - Read-only agent for analysis and code exploration
-  - Denies file edits by default
-  - Asks permission before running bash commands
-  - Ideal for exploring unfamiliar codebases or planning changes
-
-Also included is a **general** subagent for complex searches and multistep tasks.
-This is used internally and can be invoked using `@general` in messages.
-
-Learn more about [agents](https://opencode.ai/docs/agents).
-
-### Documentation
-
-For more info on how to configure OpenCode, [**head over to our docs**](https://opencode.ai/docs).
-
-### Contributing
-
-If you're interested in contributing to OpenCode, please read our [contributing docs](./CONTRIBUTING.md) before submitting a pull request.
-
-### Browser Tools
-
-OpenCode includes built-in browser automation powered by CDP (Chrome DevTools Protocol). The agent can open a real Chrome browser to navigate pages, click elements, fill forms, scroll, execute JavaScript, and more — all without leaving the terminal.
-
-Browser tools are **enabled by default**. Set `OPENCODE_DISABLE_BROWSER=true` to disable. Requires Chrome/Chromium (auto-detected, or set `CHROME_PATH` to override).
-
-The agent automatically enters browser mode when websearch or webfetch are not enough. Just ask naturally:
-
-```
-> Go to https://news.ycombinator.com and find the top 3 stories about AI
-> Open https://example.com and click the "More information" link
-> Search for "opencode" on GitHub and tell me the star count
-```
-
-### Building on OpenCode
-
-If you are working on a project that's related to OpenCode and is using "opencode" as part of its name, for example "opencode-dashboard" or "opencode-mobile", please add a note to your README to clarify that it is not built by the OpenCode team and is not affiliated with us in any way.
+</details>
 
 ---
 
-**Join our community** [Discord](https://discord.gg/opencode) | [X.com](https://x.com/opencode)
+### Example 3: Deep Research
+
+> **Prompt**: "使用浏览器调查论文《Generative Agents: Interactive Simulacra of Human Behavior》的代码复现情况。找到GitHub仓库，检查代码完整性、依赖环境、运行说明、Issues中常见复现问题。判断复现难度并说明原因，整理到 reproduction_report.md。"
+
+https://github.com/user-attachments/assets/reproduction_report.mp4
+
+The agent performs multi-step research: navigates to the GitHub repo, checks issues, analyzes dependencies, evaluates code completeness, and generates a comprehensive reproducibility report.
+
+**Result**: 🟡 Medium difficulty — code is complete but core OpenAI models (`text-davinci-002/003`) have been deprecated, dependencies are outdated, and the project is unmaintained (3 years, 115 open issues).
+
+<details>
+<summary>📄 Full reproducibility report</summary>
+
+See [reproduction_report.md](assets/examples/reproduction_report.md)
+
+</details>
+
+### Cost
+
+All examples run on **MiniMax M3** ($0.30/M input, $1.20/M output):
+
+| Task | Steps | Final Context | Cost |
+|------|-------|--------------|------|
+| Information Extraction (HuggingFace) | 6 | 20,363 tokens | $0.022 |
+| Complex Form Filling (9 fields) | 15 | 21,527 tokens | $0.030 |
+| Deep Research (Paper Reproducibility) | 14 | 26,597 tokens | $0.040 |
+
+Multi-step agent tasks at **~$0.03 each** — enabled by incremental DOM diffing that keeps context compact.
+
+---
+
+## Incremental DOM Diff
+
+Most browser agents re-send the **entire page DOM** to the LLM after every action. This is wasteful — the LLM re-reads thousands of unchanged elements just to find what changed.
+
+We take a different approach: **diff the DOM tree and send only what changed.**
+
+### How It Works
+
+The agent is on a Bing search page. It clicks the settings button:
+
+| Before | After |
+|--------|-------|
+| ![before](assets/dom-comparison/bing-search-before.png) | ![after](assets/dom-comparison/bing-search-after.png) |
+
+A settings menu appeared on the right. One trending topic scrolled out of view. **Everything else is identical.**
+
+Other agents would re-send the entire ~186-line DOM. We send this instead:
+
+```diff
+  <header></header>                                        ← unchanged, stays as-is
+      <form></form>
+          [831]<a> 返回到必应搜索 </a>                       ← unchanged
+      ...
++|    <span></span>                                        ← NEW: settings menu appeared
++|        [2147]<a> 使用个人帐户登录 </a>
++|        [2151]<a role='menuitem' aria-label='收藏'></a>
++|            [2155]<div> 收藏 </div>
++|        [2158]<div role='menuitem'> 设置 </div>
++|        [2189]<a role='menuitem'> 安全搜索 </a>
++|        [2195]<a role='menuitem'> 搜索历史记录 </a>
++|        [2201]<a role='menuitem'> 隐私 </a>
++|        [2207]<a role='menuitem'> 反馈 </a>
++|        ...
+      [543]<a> 潇湘晨报 on MSN · 5 小时 ... </a>            ← unchanged news results
+      ...
+-|    [717]<div> 禁止在居民楼开油烟餐饮 </div>                ← GONE: scrolled out of view
+-|        [1154]<a aria-label='禁止在居民楼开油烟餐饮'></a>
+```
+
+`+|` = appeared after the action. `-|` = disappeared. No prefix = unchanged.
+
+<details>
+<summary>Full diff output (76 lines)</summary>
+
+See [dom-diff.txt](assets/dom-comparison/dom-diff.txt)
+
+</details>
+
+### Why This Matters
+
+**1. KV Cache reuse** — Unchanged DOM stays as a stable prefix across rounds. LLM APIs skip re-computing attention for cached prefixes. Re-sending the full DOM each round **invalidates the entire cache**, wasting latency and cost.
+
+**2. Focused attention** — The `+|`/`-|` markers tell the LLM exactly what its last action changed. No more scanning 2000 lines of static content to find what happened.
+
+**3. Longer task horizons** — A 10-step task that re-sends full DOM each round quickly exhausts the context window. With incremental diff, each round only adds the delta:
+
+```
+Round    Full re-send         Incremental Diff
+  1       ~2,000 tokens        ~2,000 tokens
+  2       ~2,000 tokens          ~400 tokens
+  3       ~2,000 tokens          ~300 tokens
+  ...          ...                   ...
+ 10       ~2,000 tokens          ~200 tokens
+───────────────────────────────────────────────
+Total    ~20,000 tokens        ~4,500 tokens  ↓77%
+```
+
+---
+
+## Architecture
+
+```
+User Instruction → Agentic Loop:
+  1. Extract DOM via CDP (snapshot → prune → highlight → render)
+  2. Build prompt with DOM + action history
+  3. LLM decides which tool to call (ReAct)
+  4. Execute tool via MCP 2.0
+  5. Compute DOM Diff (incremental update)
+  6. Analyze page changes
+  7. Repeat until task complete
+→ Stream results in real-time
+```
+
+### DOM Processing Pipeline
+
+```
+CDP Snapshot → Tree Build → Render Info (5 stages) → Prune → Highlight → Render
+                                                                           ↓
+                                                               [N] clickable elements
+                                                               <N> fillable inputs
+                                                               [view:ID] visual elements
+                                                               +| / -| diff markers
+```
+
+### MCP Tools
+
+| Tool | Description |
+|------|-------------|
+| `browser_goto` | Navigate to a URL |
+| `browser_click` | Click elements by index `[N]` |
+| `browser_input` | Fill text into input fields `<N>` |
+| `browser_execute_script` | Run JavaScript |
+| `browser_scroll_explore` | Scroll to discover content |
+| `browser_reveal_offscreen` | Scroll to specific off-screen elements |
+| `browser_screenshot` | Capture page screenshot |
+| `browser_extract` | Extract structured info from the page |
+| `browser_view_elements` | Inspect images, tables, SVGs |
+| `browser_new_tab` / `browser_close_tab` | Tab management |
+| `browser_back` / `browser_forward` / `browser_refresh` | Navigation |
+| `browser_wait` | Wait for page changes |
+
+### What I Built (vs. Original OpenCode)
+
+```
+packages/opencode/src/tool/browser/
+├── cdp/                  # Chrome DevTools Protocol communication
+├── dom/
+│   ├── snapshot/          # CDP Accessibility Snapshot
+│   ├── tree/              # DOM tree construction & traversal
+│   ├── serializer/        # Render info extraction (5 stages)
+│   ├── markdown/          # DOM → structured text rendering
+│   ├── types/             # DOM node type definitions
+│   └── utils/             # Pruning, merging, visibility detection
+├── tools/                 # 14 MCP Browser Tools
+│   ├── navigate.ts        #   goto / back / forward / refresh
+│   ├── interact.ts        #   click / input
+│   ├── scroll.ts          #   scroll_explore / reveal_offscreen
+│   ├── observe.ts         #   screenshot / extract / view_elements
+│   ├── script.ts          #   execute_script
+│   ├── tab.ts             #   new_tab / close_tab
+│   ├── wait.ts            #   wait for page changes
+│   └── start.ts           #   browser launch & connect
+├── diff.ts                # ★ Incremental DOM Diff algorithm
+├── manager.ts             # Browser lifecycle management
+├── service.ts             # Agentic Loop (ReAct) orchestration
+├── highlight.ts           # [N] clickable / <N> fillable annotation
+├── clickable-detector.ts  # Clickable element detection
+├── render-info.ts         # Viewport awareness & OFF-SCREEN markers
+├── pruner.ts              # DOM pruning (noise reduction)
+└── ...
+
+---
+
+## Built On
+
+This project extends [OpenCode](https://github.com/anomalyco/opencode) with browser agent capabilities.

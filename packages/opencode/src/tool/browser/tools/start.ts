@@ -1,7 +1,7 @@
 import { Effect, Schema } from "effect"
 import * as Tool from "../../tool"
 import { BrowserManager } from "../manager"
-import { getPageDom } from "../dom-utils"
+import { getPageDom, skippedDomOutput } from "../dom-utils"
 
 const BROWSER_SYSTEM_PROMPT = `# Browser Mode
 
@@ -109,29 +109,30 @@ Use when websearch or webfetch alone are not enough — e.g. interacting with we
       url: Schema.String.annotate({ description: "The URL to navigate to" }),
     }),
     execute: (params: { url: string }, ctx: Tool.Context) =>
-      Effect.gen(function* () {
+      Effect.promise(() => {
         const manager = BrowserManager.getInstance()
-        const tab = manager.hasActiveTab() ? manager.getActiveTab() : yield* Effect.promise(() => manager.newTab())
+        return manager.enqueue(async (isLast) => {
+          const tab = manager.hasActiveTab() ? manager.getActiveTab() : await manager.newTab()
+          await tab.page.goto(params.url, { waitUntil: "domcontentloaded" }).catch(() => {})
 
-        yield* Effect.promise(() => tab.page.goto(params.url, { waitUntil: "domcontentloaded" }).catch(() => {}))
+          const hasGuide = ctx.messages.some((msg) =>
+            msg.parts.some(
+              (part) =>
+                part.type === "tool" &&
+                part.tool === "browser_start" &&
+                part.state.status === "completed" &&
+                !part.state.metadata?.truncated,
+            ),
+          )
 
-        const hasGuide = ctx.messages.some((msg) =>
-          msg.parts.some(
-            (part) =>
-              part.type === "tool" &&
-              part.tool === "browser_start" &&
-              part.state.status === "completed" &&
-              !part.state.metadata?.truncated,
-          ),
-        )
-
-        const dom = yield* Effect.promise(() => getPageDom(manager))
-        const guide = hasGuide ? "" : `${BROWSER_SYSTEM_PROMPT}\n\n---\n\n`
-        return {
-          title: `Browser started → ${params.url}`,
-          output: `${guide}Navigated to ${params.url}${dom.output}`,
-          metadata: { url: params.url, domId: dom.domId },
-        }
+          const dom = isLast() ? await getPageDom(manager) : skippedDomOutput()
+          const guide = hasGuide ? "" : `${BROWSER_SYSTEM_PROMPT}\n\n---\n\n`
+          return {
+            title: `Browser started → ${params.url}`,
+            output: `${guide}Navigated to ${params.url}${dom.output}`,
+            metadata: { url: params.url, domId: dom.domId },
+          }
+        })
       }),
   }),
 )

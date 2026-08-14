@@ -1,7 +1,7 @@
 import { Effect, Schema } from "effect"
 import * as Tool from "../../tool"
 import { BrowserManager } from "../manager"
-import { getPageDom } from "../dom-utils"
+import { getPageDom, skippedDomOutput } from "../dom-utils"
 import type { EnhancedDOMTreeNode } from "../dom/types/dom-node"
 import { VALUE_SETTABLE_INPUT_TYPES } from "../dom/tree/clickable-detector"
 
@@ -68,25 +68,25 @@ Do NOT interact with off-screen elements — scroll first with browser_reveal_of
       elementIndex: Schema.Number.annotate({ description: "The numeric ID of the element to click (e.g., 5 for [5]<button>)" }),
     }),
     execute: (params: { elementIndex: number }, ctx: Tool.Context) =>
-      Effect.gen(function* () {
+      Effect.promise(() => {
         const manager = BrowserManager.getInstance()
         const tab = manager.getActiveTab()
-        const elementData = yield* Effect.promise(() => getElementDataByIndex(tab, params.elementIndex))
-        if (!elementData) {
-          return {
-            title: `Click [${params.elementIndex}]`,
-            output: `Element [${params.elementIndex}] not found or not clickable in the current DOM.`,
-            metadata: {},
+        return manager.enqueue(async (isLast) => {
+          const elementData = await getElementDataByIndex(tab, params.elementIndex)
+          if (!elementData) {
+            return {
+              title: `Click [${params.elementIndex}]`,
+              output: `Element [${params.elementIndex}] not found or not clickable in the current DOM.`,
+              metadata: {},
+            }
           }
-        }
 
-        return yield* Effect.promise(() =>
-          tab.domService.withClient(async () => {
+          return tab.domService.withClient(async () => {
             if (elementData.isSelectOption) {
               await tab.domService.selectOption(elementData.node)
               tab.domService.recordInteraction(elementData.node.backendNodeId, "select", elementData.renderedLine)
               await new Promise((resolve) => setTimeout(resolve, 200))
-              const dom = await getPageDom(manager)
+              const dom = isLast() ? await getPageDom(manager) : skippedDomOutput()
               return {
                 title: `Select ${elementData.renderedLine?.trim() ?? `[${params.elementIndex}]`}`,
                 output: `Selected ${elementData.renderedLine?.trim() ?? `option [${params.elementIndex}]`}${dom.output}`,
@@ -111,14 +111,14 @@ Do NOT interact with off-screen elements — scroll first with browser_reveal_of
             tab.domService.recordInteraction(elementData.node.backendNodeId, "click", elementData.renderedLine)
             await new Promise((resolve) => setTimeout(resolve, 500))
 
-            const dom = await getPageDom(manager)
+            const dom = isLast() ? await getPageDom(manager) : skippedDomOutput()
             return {
               title: `Click ${elementData.renderedLine?.trim() ?? `[${params.elementIndex}]`}`,
               output: `Clicked ${elementData.renderedLine?.trim() ?? `element [${params.elementIndex}]`}${dom.output}`,
               metadata: {},
             }
-          }),
-        )
+          })
+        })
       }),
   }),
 )
@@ -137,29 +137,29 @@ Supports range, color, date inputs and ARIA sliders.`,
       pressEnter: Schema.optional(Schema.Boolean).annotate({ description: "Whether to press Enter after input (default: false)" }),
     }),
     execute: (params: { elementIndex: number; text: string; clear?: boolean; pressEnter?: boolean }, ctx: Tool.Context) =>
-      Effect.gen(function* () {
+      Effect.promise(() => {
         const clear = params.clear ?? true
         const pressEnter = params.pressEnter ?? false
         const manager = BrowserManager.getInstance()
         const tab = manager.getActiveTab()
-        const elementData = yield* Effect.promise(() => getElementDataByIndex(tab, params.elementIndex))
-        if (!elementData) {
-          return {
-            title: `Input [${params.elementIndex}]`,
-            output: `Element [${params.elementIndex}] not found in the current DOM.`,
-            metadata: {},
+        return manager.enqueue(async (isLast) => {
+          const elementData = await getElementDataByIndex(tab, params.elementIndex)
+          if (!elementData) {
+            return {
+              title: `Input [${params.elementIndex}]`,
+              output: `Element [${params.elementIndex}] not found in the current DOM.`,
+              metadata: {},
+            }
           }
-        }
-        if (!elementData.isFill) {
-          return {
-            title: `Input [${params.elementIndex}]`,
-            output: `Element [${params.elementIndex}] is not an input element. Use browser_click instead.`,
-            metadata: {},
+          if (!elementData.isFill) {
+            return {
+              title: `Input [${params.elementIndex}]`,
+              output: `Element [${params.elementIndex}] is not an input element. Use browser_click instead.`,
+              metadata: {},
+            }
           }
-        }
 
-        return yield* Effect.promise(() =>
-          tab.domService.withClient(async () => {
+          return tab.domService.withClient(async () => {
             if (isValueSettableElement(elementData.node)) {
               await tab.domService.setInputValue(elementData.node, params.text)
             } else {
@@ -196,14 +196,14 @@ Supports range, color, date inputs and ARIA sliders.`,
             }
 
             await new Promise((resolve) => setTimeout(resolve, 300))
-            const dom = await getPageDom(manager)
+            const dom = isLast() ? await getPageDom(manager) : skippedDomOutput()
             return {
               title: `Input "${params.text}" into [${params.elementIndex}]`,
               output: `Input "${params.text}" into ${elementData.renderedLine?.trim() ?? `element <${params.elementIndex}>`}${pressEnter ? " and pressed Enter" : ""}${dom.output}`,
               metadata: {},
             }
-          }),
-        )
+          })
+        })
       }),
   }),
 )

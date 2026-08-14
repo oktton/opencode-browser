@@ -1,7 +1,7 @@
 import { Effect, Schema } from "effect"
 import * as Tool from "../../tool"
 import { BrowserManager } from "../manager"
-import { getPageDom } from "../dom-utils"
+import { getPageDom, skippedDomOutput } from "../dom-utils"
 
 export const BrowserNewTabTool = Tool.define(
   "browser_new_tab",
@@ -11,19 +11,21 @@ export const BrowserNewTabTool = Tool.define(
       url: Schema.optional(Schema.String).annotate({ description: "The URL to open in the new tab" }),
     }),
     execute: (params: { url?: string }, ctx: Tool.Context) =>
-      Effect.gen(function* () {
+      Effect.promise(() => {
         const manager = BrowserManager.getInstance()
         manager.ensureStarted()
-        const tab = yield* Effect.promise(() => manager.newTab(params.url))
-        if (params.url) {
-          yield* Effect.promise(() => new Promise((resolve) => setTimeout(resolve, 2000)))
-        }
-        const dom = yield* Effect.promise(() => getPageDom(manager))
-        return {
-          title: `New tab${params.url ? ` → ${params.url}` : ""}`,
-          output: `Opened new tab${params.url ? ` and navigated to ${params.url}` : ""}${dom.output}`,
-          metadata: { tabId: tab.id, domId: dom.domId },
-        }
+        return manager.enqueue(async (isLast) => {
+          const tab = await manager.newTab(params.url)
+          if (params.url) {
+            await new Promise((resolve) => setTimeout(resolve, 2000))
+          }
+          const dom = isLast() ? await getPageDom(manager) : skippedDomOutput()
+          return {
+            title: `New tab${params.url ? ` → ${params.url}` : ""}`,
+            output: `Opened new tab${params.url ? ` and navigated to ${params.url}` : ""}${dom.output}`,
+            metadata: { tabId: tab.id, domId: dom.domId },
+          }
+        })
       }),
   }),
 )
@@ -36,16 +38,18 @@ export const BrowserSwitchTabTool = Tool.define(
       tabId: Schema.String.annotate({ description: "The tab ID to switch to" }),
     }),
     execute: (params: { tabId: string }, ctx: Tool.Context) =>
-      Effect.gen(function* () {
+      Effect.promise(() => {
         const manager = BrowserManager.getInstance()
         manager.ensureStarted()
-        const tab = yield* Effect.promise(() => manager.switchTab(params.tabId))
-        const dom = yield* Effect.promise(() => getPageDom(manager))
-        return {
-          title: `Switch to ${params.tabId}`,
-          output: `Switched to tab ${params.tabId}: ${tab.page.url()}${dom.output}`,
-          metadata: { tabId: params.tabId, domId: dom.domId },
-        }
+        return manager.enqueue(async (isLast) => {
+          const tab = await manager.switchTab(params.tabId)
+          const dom = isLast() ? await getPageDom(manager) : skippedDomOutput()
+          return {
+            title: `Switch to ${params.tabId}`,
+            output: `Switched to tab ${params.tabId}: ${tab.page.url()}${dom.output}`,
+            metadata: { tabId: params.tabId, domId: dom.domId },
+          }
+        })
       }),
   }),
 )
@@ -58,26 +62,29 @@ export const BrowserCloseTabTool = Tool.define(
       tabIds: Schema.optional(Schema.Array(Schema.String)).annotate({ description: "Tab IDs to close. Defaults to the active tab." }),
     }),
     execute: (params: { tabIds?: readonly string[] }, ctx: Tool.Context) =>
-      Effect.gen(function* () {
+      Effect.promise(() => {
         const manager = BrowserManager.getInstance()
         manager.ensureStarted()
-        const targets = params.tabIds?.length ? [...params.tabIds] : [manager.getActiveTab().id]
-        for (const id of targets) {
-          yield* Effect.promise(() => manager.closeTab(id))
-        }
+        return manager.enqueue(async (isLast) => {
+          const targets = params.tabIds?.length ? [...params.tabIds] : [manager.getActiveTab().id]
+          for (const id of targets) {
+            await manager.closeTab(id)
+          }
 
-        let domOutput = ""
-        if (manager.hasActiveTab()) {
-          const tab = manager.getActiveTab()
-          const dom = yield* Effect.promise(() => getPageDom(manager))
-          domOutput = dom.output
-        }
+          let domOutput = ""
+          if (manager.hasActiveTab() && isLast()) {
+            const dom = await getPageDom(manager)
+            domOutput = dom.output
+          } else if (manager.hasActiveTab()) {
+            domOutput = skippedDomOutput().output
+          }
 
-        return {
-          title: `Close tab${targets.length > 1 ? "s" : ""}: ${targets.join(", ")}`,
-          output: `Closed tab${targets.length > 1 ? "s" : ""}: ${targets.join(", ")}${domOutput}`,
-          metadata: {},
-        }
+          return {
+            title: `Close tab${targets.length > 1 ? "s" : ""}: ${targets.join(", ")}`,
+            output: `Closed tab${targets.length > 1 ? "s" : ""}: ${targets.join(", ")}${domOutput}`,
+            metadata: {},
+          }
+        })
       }),
   }),
 )

@@ -1,0 +1,186 @@
+<header></header>
+	<form></form>
+		[831]<a> 返回到必应搜索 </a>
+			[832]<h1 title='返回到必应搜索'></h1>
+		<div></div>
+			<div></div>
+				[838]<input id='sb_form_go' type='submit' value='搜索'></input>
+			<839><input aria-label='在此处输入你的搜索 — 输入时会显示搜索建议' id='sb_form_q' type='search' name='q' value='学生兼职送外卖反而欠款'></input>
+			[844]<div id='mic_072F882'></div>
+				[847]<div role='button' aria-label='语音搜索'></div>
+	<div></div>
+		[726]<a role='button' aria-label='Microsoft Rewards' id='id_rh_w' aria-expanded='false'></a>
+			<div id='rh_rwm'></div>
+				[855]<span> 200 </span>
+				<div></div>
+					[860][view:iga]<svg></svg>
+		[972]<a id='id_l'> 登录 </a>
+			[977][view:jhh]<span aria-label='登录' id='id_a'></span>
+		<span></span>
+			<div></div>
+				[2143]<div role='link' aria-label='必应徽标，在新选项卡中打开' title='必应上的“实时热点”'></div>
+			<ul></ul>
+				[2147]<a role='link'> personal signin 使用个人帐户登录 </a>
+					[2148][view:cbei]<img role='presentation' aria-label='personal signin'></img>
+					[2149]<span> 使用个人帐户登录 </span>
+			<div></div>
+				[2151]<a role='menuitem' aria-label='收藏'></a>
+					[2155]<div> 收藏 </div>
+				<div></div>
+					[2158]<div role='menuitem' id='hbsettings' aria-expanded='false'> 设置 </div>
+						[view:cbgb]<span></span>
+						[view:cbge]<span></span>
+				[2189]<a role='menuitem' aria-label='安全搜索'></a>
+					<div></div>
+						[2192][view:cbjc]<span></span>
+					[2193]<div> 安全搜索 </div>
+					[2194]<div> 严格 </div>
+				[2195]<a role='menuitem' aria-label='搜索历史记录'></a>
+					<div></div>
+						[2198][view:cbji]<span></span>
+					[2199]<div> 搜索历史记录 </div>
+				[2201]<a role='menuitem' aria-label='隐私'></a>
+					<div></div>
+						[2204][view:ccae]<span></span>
+					[2205]<div> 隐私 </div>
+				[2207]<a role='menuitem' id='hb_feedback'> 反馈 </a>
+					<div></div>
+						[2210][view:ccba]<span></span>
+					[2211]<div> 反馈 </div>
+				<div></div>
+					[2213]<div role='menuitem' id='hbradio' aria-expanded='true'> 外观 </div>
+						[view:ccbg]<span></span>
+						[view:ccca]<span></span>
+					<div></div>
+						[2222]<a role='menuitemradio' aria-label='外观, 浅色' aria-checked='true'></a>
+							[2224]<label for='rdiolight'></label>
+								[2226][view:cccg]<svg></svg>
+								[2229]<span> 浅色 </span>
+								[2230][view:ccda]<img role='presentation'></img>
+						[2231]<a role='menuitemradio' aria-label='外观, 深色' aria-checked='false'></a>
+							[2233]<label for='rdiodark'></label>
+								[2235][view:ccdf]<svg></svg>
+								[2238]<span> 深色 </span>
+								[2239][view:ccdj]<img role='presentation'></img>
+						[2240]<a role='menuitemradio' aria-label='外观, 系统默认值' aria-checked='false'></a>
+							[2242]<label for='rdiodef'></label>
+								[2244][view:ccee]<svg></svg>
+								[2247]<span> 系统默认值 </span>
+								[2248][view:ccei]<img role='presentation'></img>
+				[2250]<div role='menuitem' id='hbthemes' aria-expanded='true'> 主题 </div>
+					[view:ccfd]<span></span>
+					[view:ccfh]<span></span>
+=== OFF-SCREEN below [container:0] (scroll to reveal these elements) ===
+				<div role='menuitem'> Default </div>
+					 ...
+				<div></div>
+					<li role='menuitem'> 隐私 </li>
+						 ...
+					<li role='menuitem'> 条款 </li>
+						 ...
+					<li role='menuitem'> 广告 </li>
+						 ...
+					<li role='menuitem'> 帮助 </li>
+						 ...
+					<li role='menuitem'> © 2026 Microsoft </li>
+						 ...
+=== END OFF-SCREEN ===
+	[981]<div aria-label='国内版' id='est_cn'></div>
+	[984]<div aria-label='国际版' id='est_en'></div>
+	<nav></nav>
+		<li></li>
+			[990]<a> 网页 </a>
+		<li></li>
+			[994]<a> 图片 </a>
+		<li></li>
+			[998]<a> 视频 </a>
+		<li></li>
+			[1002]<a> 学术 </a>
+		<li></li>
+			[1006]<a> 词典 </a>
+		<li></li>
+			[1010]<a> 地图 </a>
+		<li></li>
+			[1014]<a> 航班 </a>
+<div></div>
+	[1018]<div></div>
+		[1020][view:baca]<img role='presentation'></img>
+	[1021]<div></div>
+		[1023][view:bacd]<img role='presentation'></img>
+	[1024]<div></div>
+		[1026][view:bacg]<img role='presentation'></img>
+<div></div>
+	[570]<div role='button' aria-label='单击以向左滚动' id='slideexp0_9B5D5Fchevrons_prevbtn'></div>
+		[1060][view:baga]<svg></svg>
+=== OFF-SCREEN below [container:0] (scroll to reveal these elements) ===
+	<div role='button' aria-label='单击以向右滚动' id='slideexp0_9B5D5Fchevrons_nextbtn'></div>
+=== END OFF-SCREEN ===
+	<div></div>
+=== OFF-SCREEN above [container:1] (scroll to reveal these elements) ===
+		<div></div>
+			<div id='acftob3'></div>
+				 ...
+		<div></div>
+			<div id='acftob4'></div>
+				 ...
+		<div></div>
+			<div id='acftob5'></div>
+				 ...
+		<div></div>
+			<div id='acftob6'></div>
+				 ...
+=== END OFF-SCREEN ===
+		<div></div>
+			[625]<div id='acftob7'></div>
+				[627]<a aria-label='白海豚走 梭子蟹来了' title='白海豚走 梭子蟹来了'></a>
+		<div></div>
+			[711]<div id='acftob8'></div>
+				[1134]<a aria-label='学生兼职送外卖反而欠款' title='学生兼职送外卖反而欠款'></a>
+		<div></div>
+			[713]<div id='acftob9'></div>
+				[784]<a aria-label='央视曝光偷拍手机壳' title='央视曝光偷拍手机壳'></a>
+		<div></div>
+			[715]<div id='acftob10'></div>
+				[1147]<a aria-label='邹市明复出重返拳击赛场' title='邹市明复出重返拳击赛场'></a>
+=== OFF-SCREEN below [container:1] (scroll to reveal these elements) ===
+		<div></div>
+			<div id='acftob13'></div>
+				 ...
+		<div></div>
+			<div id='acftob14'></div>
+				 ...
+		<div></div>
+			<div id='acftob15'></div>
+				 ...
+		<div></div>
+			<div id='acftob16'></div>
+				 ...
+=== END OFF-SCREEN ===
+<div></div>
+	[1500]<a id='ns_mag_ht'> 资讯 </a>
+		[1501]<h2> 资讯 </h2>
+		<acf-icon></acf-icon>
+			[view:bfah]<svg></svg>
+<div></div>
+	[543]<a> 潇湘晨报 on MSN · 5 小时 大学生暑假兼职送外卖赚生活费，辛苦工作1个月，竟“倒欠公司200 ... 小彭曾在重庆高校读书，近日他向工人日报记者讲述了去年暑假的一段经历：本打算靠送外卖挣生活费，结果辛苦跑单一个月后，竟被通知“倒欠公司200多元”。他介绍，去年8月初与某外卖配送站签下短期用工协议，约定工作到8月底。前半个月，配送费按每单6元正常结算；待到结算后半个月报酬时，等来的却是一张让人费解的“欠费通知单”。“我一个月跑了400多单，按约定有2400余元 ... </a>
+		[1509]<cite title='潇湘晨报 on MSN'></cite>
+=== OFF-SCREEN below [container:0] (scroll to reveal these elements) ===
+<div></div>
+	<a> 手机光明网 on MSN 手机光明网 on MSN · 3 小时 高校学生兼职送外卖赚取生活费，辛苦... </a>
+		 ...
+<div></div>
+	<a role='button' aria-label='反馈点赞' title='反馈点赞' id='thumb_t2'></a>
+	<a role='button' aria-label='反馈不喜欢' title='反馈不喜欢' id='thumb_f2'></a>
+<acf-section-footer></acf-section-footer>
+	<a aria-label='查看 MSN 上的更多文章' title='查看 MSN 上的更多文章'></a>
+<li></li>
+	<div></div>
+		<a aria-label='搜狐'></a>
+	<h2></h2>
+		<a> 高校学生兼职送外卖赚取生活费，辛苦工作一个月后，竟被 ... </a>
+<li></li>
+	<div></div>
+		<a aria-label='腾讯网'></a>
+	<h2></h2>
+		<a> 大学生暑假兼职送外卖赚生活费，辛苦工作1个月，竟“倒欠 ... </a>
+=== END OFF-SCREEN ===

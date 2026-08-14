@@ -17,6 +17,8 @@ export class BrowserManager {
   private tabs = new Map<string, TabState>()
   private activeTabId: string | null = null
   private tabCounter = 0
+  private pending = 0
+  private chain: Promise<void> = Promise.resolve()
 
   static getInstance(): BrowserManager {
     if (!BrowserManager.instance) {
@@ -210,6 +212,20 @@ export class BrowserManager {
     this.tabs.clear()
     this.activeTabId = null
     this.browser = null
+  }
+
+  async enqueue<T>(fn: (isLast: () => boolean) => Promise<T>): Promise<T> {
+    this.pending++
+    const prev = this.chain
+    let resolve!: () => void
+    this.chain = new Promise<void>((r) => { resolve = r })
+    await prev
+    try {
+      return await fn(() => this.pending === 1)
+    } finally {
+      this.pending--
+      resolve()
+    }
   }
 
   async cleanup(): Promise<void> {
