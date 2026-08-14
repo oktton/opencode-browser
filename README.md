@@ -10,7 +10,7 @@ An AI-powered browser agent built on top of [OpenCode](https://github.com/anomal
 
 > **Prompt**: "使用浏览器找到 Hugging Face 热门大语言模型页面，记录排名前三的模型，包括模型名称、发布机构、参数规模、下载量或热度、是否支持中文。将结果保存到 huggingface_top3_models.md 文件中。"
 
-https://github.com/user-attachments/assets/huggingface_top3_models.mp4
+https://github.com/user-attachments/assets/3d2ef328-b42a-45f4-820a-3e29b5ac923b
 
 The agent navigates to HuggingFace, extracts model information, and produces a structured report:
 
@@ -33,7 +33,7 @@ See [huggingface_top3_models.md](assets/examples/huggingface_top3_models.md)
 
 > **Prompt**: "使用浏览器访问 London Business School 官方 Contact Us 页面，找到在线咨询表单，填写所有字段（Masters programmes, kai.chen@example.com, Mr, Kai Chen...），检查页面校验结果，但不要最终提交表单。将填写内容和校验结果保存到 lbs_form_report.md。"
 
-https://github.com/user-attachments/assets/lbs_form_report.mp4
+https://github.com/user-attachments/assets/c35831c2-4433-41fd-a71c-d6b271fb6746
 
 9 fields filled correctly, including conditional fields, dropdown menus, and password confirmation.
 
@@ -62,7 +62,7 @@ See [lbs_form_report.md](assets/examples/lbs_form_report.md)
 
 > **Prompt**: "使用浏览器调查论文《Generative Agents: Interactive Simulacra of Human Behavior》的代码复现情况。找到GitHub仓库，检查代码完整性、依赖环境、运行说明、Issues中常见复现问题。判断复现难度并说明原因，整理到 reproduction_report.md。"
 
-https://github.com/user-attachments/assets/reproduction_report.mp4
+https://github.com/user-attachments/assets/ab84a6b5-94c9-4fb0-a2f5-6997d6200762
 
 The agent performs multi-step research: navigates to the GitHub repo, checks issues, analyzes dependencies, evaluates code completeness, and generates a comprehensive reproducibility report.
 
