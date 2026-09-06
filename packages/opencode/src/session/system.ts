@@ -22,6 +22,7 @@ import { Location } from "@opencode-ai/core/location"
 import { LocationServiceMap, locationServiceMapLayer } from "@opencode-ai/core/location-services"
 import { Reference } from "@opencode-ai/core/reference"
 import { MCP } from "@/mcp"
+import { RuntimeFlags } from "@/effect/runtime-flags"
 import { PermissionV1 } from "@opencode-ai/core/v1/permission"
 
 export function provider(model: Provider.Model) {
@@ -57,6 +58,7 @@ const layer = Layer.effect(
   Effect.gen(function* () {
     const skill = yield* Skill.Service
     const mcp = yield* MCP.Service
+    const flags = yield* RuntimeFlags.Service
     const locations = yield* LocationServiceMap.Service
 
     return Service.of({
@@ -77,6 +79,12 @@ const layer = Layer.effect(
             `  Today's date: ${new Date().toDateString()}`,
             `</env>`,
           ].join("\n"),
+          flags.disableBrowser
+            ? undefined
+            : [
+                "You can drive a real browser when websearch and webfetch fail or aren't enough — e.g. JS-rendered pages, sites requiring login, forms, or multi-step interactive flows.",
+                "Prefer websearch/webfetch first; when they fall short, call `browser_start` to open the browser, then use the other `browser_*` tools.",
+              ].join("\n"),
           references.length === 0
             ? undefined
             : [
@@ -142,7 +150,7 @@ const locationServiceMapNode = LayerNode.make({
 export const node = LayerNode.make({
   service: Service,
   layer: layer,
-  deps: [Skill.node, MCP.node, locationServiceMapNode],
+  deps: [Skill.node, MCP.node, RuntimeFlags.node, locationServiceMapNode],
 })
 
 export * as SystemPrompt from "./system"

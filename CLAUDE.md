@@ -48,7 +48,7 @@ Bun workspaces + Turbo orchestration. Default branch is `dev`.
 
 ## Browser Tools (experimental)
 
-Enable with `OPENCODE_EXPERIMENTAL_BROWSER=true`. Requires Chrome/Chromium (auto-detected, or set `CHROME_PATH`).
+Enabled by default; disable with `OPENCODE_DISABLE_BROWSER=true`. Requires Chrome/Chromium (auto-detected, or set `CHROME_PATH`).
 
 Located in `src/tool/browser/`. 15 tools for web automation:
 
