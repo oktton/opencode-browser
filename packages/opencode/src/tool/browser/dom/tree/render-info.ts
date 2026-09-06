@@ -8,6 +8,7 @@
 import { type EnhancedDOMTreeNode, NodeType } from '../types/dom-node';
 import { ClickableElementDetector } from './clickable-detector';
 import { checkElementVisibility, type ParentFrameState } from './visibility';
+import { fetchAxForUsedNodes } from './ax-fetch';
 import type { CDPClient } from '../../cdp/client';
 import type { OOPIFManager } from '../../cdp/oopif-manager';
 
@@ -44,7 +45,11 @@ export async function computeRenderInfo(
 
   // Step 5: Mark descendant candidates as isDuplicateListener if they share listener signatures with an ancestor
   deduplicateByListeners(root);
+
+  // Step 6: Fetch accessible names, now that we know which nodes can use them
+  await fetchAxForUsedNodes(root, cdpClient, oopifManager);
 }
+
 
 const SCROLLABLE_OVERFLOW_VALUES = new Set([
   'auto',
@@ -262,22 +267,17 @@ function initRenderInfo(
   node.renderInfo.isIframeHost = isIframeHost;
   node.renderInfo.isFill = isFill;
 
-  // Track HTML frames for children
-  const updatedFrames = [...htmlFrames];
-  if (
-    node.nodeType === NodeType.ELEMENT_NODE &&
-    (node.nodeName.toUpperCase() === 'IFRAME' ||
-      node.nodeName.toUpperCase() === 'FRAME')
-  ) {
-    updatedFrames.push(node);
-  }
-  if (
+  // Track HTML frames for children. Only frame nodes extend the list, so the
+  // copy is made when one is found rather than at every node.
+  const upper =
+    node.nodeType === NodeType.ELEMENT_NODE ? node.nodeName.toUpperCase() : '';
+  const isFrameElement = upper === 'IFRAME' || upper === 'FRAME';
+  const isFrameHtml =
     node.nodeType === NodeType.ELEMENT_NODE &&
     node.nodeName === 'HTML' &&
-    node.frameId
-  ) {
-    updatedFrames.push(node);
-  }
+    !!node.frameId;
+  const updatedFrames =
+    isFrameElement || isFrameHtml ? [...htmlFrames, node] : htmlFrames;
 
   // Process shadow roots first — discover scrollable containers inside them
   // so slotted light DOM children inherit the correct scrollableContainerId.
@@ -402,30 +402,20 @@ export async function elementFromPoint(
   centerX: number,
   centerY: number,
 ): Promise<number | undefined> {
-  const evalResult = await sendCmd<{
-    result: { objectId?: string; subtype?: string };
-  }>('Runtime.evaluate', {
-    expression: `document.elementFromPoint(${centerX}, ${centerY})`,
-    returnByValue: false,
-  });
+  // One round trip. Resolving the same point through
+  // document.elementFromPoint costs four (evaluate -> requestNode ->
+  // releaseObject -> describeNode) and this runs once per visible node, so it
+  // used to dominate live extraction time.
+  //
+  // It hit-tests the page rather than a document, so it pierces into child
+  // frames and can land on a ::before/::after pseudo-element; checkTopElements
+  // maps those back to the element that owns them.
+  const hit = await sendCmd<{ backendNodeId?: number }>(
+    'DOM.getNodeForLocation',
+    { x: centerX, y: centerY },
+  ).catch(() => undefined);
 
-  if (!evalResult.result.objectId || evalResult.result.subtype === 'null') {
-    return undefined;
-  }
-
-  const domNode = await sendCmd<{ nodeId: number }>('DOM.requestNode', {
-    objectId: evalResult.result.objectId,
-  });
-
-  await sendCmd('Runtime.releaseObject', {
-    objectId: evalResult.result.objectId,
-  }).catch(() => {});
-
-  const describeResult = await sendCmd<{
-    node: { backendNodeId: number };
-  }>('DOM.describeNode', { nodeId: domNode.nodeId, depth: 0 });
-
-  return describeResult.node.backendNodeId;
+  return hit?.backendNodeId;
 }
 
 /**
@@ -439,10 +429,18 @@ async function checkTopElements(
   const nodesToCheck: EnhancedDOMTreeNode[] = [];
   const nodeByBackendId = new Map<number, EnhancedDOMTreeNode>();
 
+  // A hit can land on a ::before/::after pseudo-element, which has no tree node
+  // and whose DOM.describeNode carries no parentId — so it has to be resolved
+  // to its owning element here, from data the DOM tree already carries.
+  const pseudoToHost = new Map<number, number>();
+
   const collectNodes = (node: EnhancedDOMTreeNode) => {
     if (node.renderInfo.isVisible) {
       nodesToCheck.push(node);
       nodeByBackendId.set(node.backendNodeId, node);
+    }
+    for (const pseudoId of node.pseudoElementIds ?? []) {
+      pseudoToHost.set(pseudoId, node.backendNodeId);
     }
     for (const child of node.childrenNodes ?? []) {
       collectNodes(child);
@@ -511,6 +509,8 @@ async function checkTopElements(
         node.renderInfo.isTopElement = false;
         return;
       }
+
+      hitBackendNodeId = pseudoToHost.get(hitBackendNodeId) ?? hitBackendNodeId;
 
       node.renderInfo.hitBackendNodeId = hitBackendNodeId;
 

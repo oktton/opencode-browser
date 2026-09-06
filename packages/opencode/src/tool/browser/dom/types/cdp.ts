@@ -108,6 +108,8 @@ export namespace DOM {
     contentDocument?: Node
     shadowRoots?: Node[]
     shadowRootType?: "user-agent" | "open" | "closed"
+    pseudoElements?: Node[]
+    pseudoType?: string
     frameId?: string
     isSVG?: boolean
     isScrollable?: boolean

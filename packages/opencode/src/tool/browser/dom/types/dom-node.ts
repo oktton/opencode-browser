@@ -53,7 +53,6 @@ export interface EnhancedDOMTreeNode {
   nodeName: string;
   nodeValue: string;
   attributes: Record<string, string>;
-  uuid: string;
 
   // Absolute position (accounting for frame offsets)
   absolutePosition?: DOMRect;
@@ -88,6 +87,14 @@ export interface EnhancedDOMTreeNode {
   xpath?: string;
   /** Temporary: stored during build, consumed by assignXPaths() */
   _xpathPrefix?: string;
+  /** Temporary: per-pass memo of "this subtree holds a candidate", set by pruneTree() */
+  _hasCandidate?: boolean;
+  /**
+   * backendNodeIds of this element's ::before/::after pseudo-elements.
+   * Hit tests can land on a pseudo-element, which is not a tree node of its
+   * own; this maps such a hit back to the element that owns it.
+   */
+  pseudoElementIds?: number[];
 
   // OOPIF session (set for nodes inside cross-origin iframes)
   oopifSessionId?: string;
