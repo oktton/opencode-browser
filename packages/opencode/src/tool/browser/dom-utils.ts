@@ -85,10 +85,10 @@ function formatTabList(
  */
 export async function getPageDom(
   manager: BrowserManager,
-  tab?: TabState,
+  opts?: { tab?: TabState; forceFull?: boolean },
 ): Promise<DomResult> {
   await manager.syncActiveTab()
-  const activeTab = tab ?? manager.getActiveTab()
+  const activeTab = opts?.tab ?? manager.getActiveTab()
   const { domService } = activeTab
   const tabId = activeTab.id
 
@@ -102,6 +102,7 @@ export async function getPageDom(
     const renderResult = await domService.renderDomTree(domTree)
     const url = activeTab.page.url()
     const viewportStats = await domService.computeViewportStats(renderResult.scrollContainerMap)
+    const historyEntryId = await domService.captureHistoryEntryId()
     const explorationBars = domService.getExplorationBars(domId)
     const tabList = manager.listTabs()
 
@@ -117,13 +118,14 @@ export async function getPageDom(
       0.8,
       renderResult.hasOverlay,
       renderResult.topElementCount,
+      historyEntryId,
     )
 
     // Try diff when we have a previous snapshot on the same tab
     let diffMode: "full" | "incremental" | "added" | "nochange" = "full"
     let domHtml = renderResult.html
 
-    if (previousDomId) {
+    if (previousDomId && !opts?.forceFull) {
       const diffStats = domService.getDiffStats(previousDomId, domId)
 
       if (diffStats !== null) {

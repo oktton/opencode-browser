@@ -1,6 +1,30 @@
 import { Effect, Schema } from "effect"
 import * as Tool from "../../tool"
 import { BrowserManager } from "../manager"
+import { getPageDom, skippedDomOutput } from "../dom-utils"
+
+export const BrowserObserveTool = Tool.define(
+  "browser_observe",
+  Effect.succeed({
+    description: `Get the current page DOM snapshot without performing any action.
+Use this when the page may have changed (e.g. user manually interacted with the browser) and you need to see the latest state before deciding what to do.`,
+    parameters: Schema.Struct({}),
+    execute: (_params: {}, ctx: Tool.Context) =>
+      Effect.promise(() => {
+        const manager = BrowserManager.getInstance()
+        return manager.enqueue(async (isLast) => {
+          const tab = manager.getActiveTab()
+          const url = tab.page.url()
+          const dom = isLast() ? await getPageDom(manager, { forceFull: true }) : skippedDomOutput()
+          return {
+            title: `Observe page: ${url}`,
+            output: `Current page: ${url}${dom.output}`,
+            metadata: { url, domId: dom.domId },
+          }
+        })
+      }),
+  }),
+)
 
 export const BrowserViewElementsTool = Tool.define(
   "browser_view_elements",

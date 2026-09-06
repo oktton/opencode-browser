@@ -27,6 +27,10 @@ export class BrowserManager {
     return BrowserManager.instance
   }
 
+  static peekInstance(): BrowserManager | null {
+    return BrowserManager.instance
+  }
+
   private async ensureBrowser(): Promise<Browser> {
     if (!this.browser) {
       const puppeteer = await import("puppeteer-core")
@@ -198,6 +202,23 @@ export class BrowserManager {
 
   isStarted(): boolean {
     return this.browser !== null && this.browser.connected
+  }
+
+  async detectStateChanges(): Promise<{ tabId: string; lastUrl: string; currentUrl: string }[]> {
+    if (!this.browser || !this.browser.connected) return []
+    const changes: { tabId: string; lastUrl: string; currentUrl: string }[] = []
+    for (const [tabId, tab] of this.tabs) {
+      if (tab.page.isClosed() || !tab.lastDomId) continue
+      const lastUrl = tab.domService.getCachedUrl(tab.lastDomId)
+      if (!lastUrl) continue
+      try {
+        const currentUrl = tab.page.url()
+        if (currentUrl !== lastUrl) {
+          changes.push({ tabId, lastUrl, currentUrl })
+        }
+      } catch {}
+    }
+    return changes
   }
 
   ensureStarted(): void {

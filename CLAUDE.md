@@ -50,7 +50,7 @@ Bun workspaces + Turbo orchestration. Default branch is `dev`.
 
 Enable with `OPENCODE_EXPERIMENTAL_BROWSER=true`. Requires Chrome/Chromium (auto-detected, or set `CHROME_PATH`).
 
-Located in `src/tool/browser/`. 14 tools for web automation:
+Located in `src/tool/browser/`. 15 tools for web automation:
 
 | Category   | Tools                                                        |
 |------------|--------------------------------------------------------------|
@@ -59,7 +59,7 @@ Located in `src/tool/browser/`. 14 tools for web automation:
 | Tabs       | `browser_new_tab`, `browser_switch_tab`, `browser_close_tab` |
 | Interact   | `browser_click`, `browser_input`, `browser_execute_script`   |
 | Scroll     | `browser_reveal_offscreen`, `browser_scroll_next_screen`, `browser_scroll_to_page` |
-| Observe    | `browser_view_elements`                                      |
+| Observe    | `browser_observe`, `browser_view_elements`                   |
 | Utility    | `browser_wait`                                               |
 
 **Internal architecture:**

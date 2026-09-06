@@ -8,7 +8,7 @@ import {
   BrowserScrollToPageTool,
 } from "./tools/scroll"
 import { BrowserExecuteScriptTool } from "./tools/script"
-import { BrowserViewElementsTool } from "./tools/observe"
+import { BrowserObserveTool, BrowserViewElementsTool } from "./tools/observe"
 import { BrowserWaitTool } from "./tools/wait"
 
 export { BrowserStartTool }
@@ -27,6 +27,7 @@ export const BrowserToolEffects = [
   BrowserScrollNextScreenTool,
   BrowserScrollToPageTool,
   BrowserExecuteScriptTool,
+  BrowserObserveTool,
   BrowserViewElementsTool,
   BrowserWaitTool,
 ]

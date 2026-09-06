@@ -84,6 +84,7 @@ interface DomSnapshot {
   topElementCount: number;
   navigationIndex?: number;
   url?: string;
+  historyEntryId?: number;
   viewportStats?: ViewportStats;
   expand?: number;
   hasOverlay?: boolean;
@@ -173,6 +174,40 @@ export class DomService {
 
   getCachedUrl(domId: string): string | undefined {
     return this.cache.get(domId)?.url;
+  }
+
+  getHistoryEntryId(domId: string): number | undefined {
+    return this.cache.get(domId)?.historyEntryId;
+  }
+
+  async captureHistoryEntryId(): Promise<number | undefined> {
+    try {
+      const result = await this.client.sendCommand<{
+        currentIndex: number
+        entries: Array<{ id: number; url: string }>
+      }>("Page.getNavigationHistory")
+      return result.entries[result.currentIndex]?.id
+    } catch {
+      return undefined
+    }
+  }
+
+  async restoreHistoryEntry(entryId: number): Promise<boolean> {
+    try {
+      // Verify the entry still exists in the history stack
+      const history = await this.client.sendCommand<{
+        currentIndex: number
+        entries: Array<{ id: number }>
+      }>("Page.getNavigationHistory")
+      if (!history.entries.some(e => e.id === entryId)) return false
+
+      const nav = this.page.waitForNavigation({ waitUntil: "domcontentloaded", timeout: 10000 }).catch(() => {})
+      await this.client.sendCommand("Page.navigateToHistoryEntry", { entryId })
+      await nav
+      return true
+    } catch {
+      return false
+    }
   }
 
   getRootAxName(domId: string): string | null {
@@ -1117,6 +1152,7 @@ export class DomService {
     expand?: number,
     hasOverlay?: boolean,
     topElementCount?: number,
+    historyEntryId?: number,
   ): void {
     this.setSnapshot(domId, {
       domTree,
@@ -1128,6 +1164,7 @@ export class DomService {
       viewportStats,
       expand,
       hasOverlay,
+      historyEntryId,
     });
   }
 

@@ -84,14 +84,33 @@ The stateId is shown in every DOM snapshot header.`,
 
         return manager.enqueue(async (isLast) => {
           await manager.switchTab(tabId)
-          const snapshotUrl = tab.domService.getCachedUrl(domId)
-          if (snapshotUrl) {
-            await tab.page.goto(snapshotUrl, { waitUntil: "domcontentloaded" }).catch(() => {})
+
+          let restored = false
+          const historyEntryId = tab.domService.getHistoryEntryId(domId)
+          if (historyEntryId !== undefined) {
+            restored = await tab.domService.withClient(() =>
+              tab.domService.restoreHistoryEntry(historyEntryId),
+            )
           }
+
+          if (!restored) {
+            const snapshotUrl = tab.domService.getCachedUrl(domId)
+            if (snapshotUrl) {
+              await tab.page.goto(snapshotUrl, { waitUntil: "domcontentloaded" }).catch(() => {})
+            } else {
+              const dom = isLast() ? await getPageDom(manager) : skippedDomOutput()
+              return {
+                title: `Restore ${params.stateId}`,
+                output: `State "${params.stateId}" not found in cache (evicted). Current page returned instead.${dom.output}`,
+                metadata: { domId: dom.domId },
+              }
+            }
+          }
+
           const dom = isLast() ? await getPageDom(manager) : skippedDomOutput()
           return {
             title: `Restore ${params.stateId}`,
-            output: `Restored to ${params.stateId}${dom.output}`,
+            output: `Restored to ${params.stateId}${restored ? " (via browser history)" : " (via URL reload)"}${dom.output}`,
             metadata: { domId: dom.domId },
           }
         })

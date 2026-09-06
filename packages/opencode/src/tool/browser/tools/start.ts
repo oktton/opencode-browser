@@ -94,6 +94,7 @@ Each DOM snapshot has:
 - **browser_scroll_to_page**(page, container) — Jump to a specific page
 
 ### Observation
+- **browser_observe**() — Get the current page DOM snapshot without performing any action. Use when the page may have changed externally.
 - **browser_view_elements**(viewIds) — Inspect visual elements [view:ID]
 
 ### Utility

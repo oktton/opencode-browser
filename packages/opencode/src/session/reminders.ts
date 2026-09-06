@@ -8,6 +8,7 @@ import { RuntimeFlags } from "@/effect/runtime-flags"
 import { PartID } from "./schema"
 import { MessageV2 } from "./message-v2"
 import { Session } from "./session"
+import { BrowserManager } from "@/tool/browser/manager"
 import PROMPT_PLAN from "./prompt/plan.txt"
 import BUILD_SWITCH from "./prompt/build-switch.txt"
 import PLAN_MODE from "./prompt/plan-mode.txt"
@@ -22,6 +23,25 @@ export const apply = Effect.fn("SessionReminders.apply")(function* (input: {
   const sessions = yield* Session.Service
   const userMessage = input.messages.findLast((msg) => msg.info.role === "user")
   if (!userMessage) return input.messages
+
+  // Detect if browser page changed since the agent's last DOM snapshot
+  yield* Effect.promise(async () => {
+    const manager = BrowserManager.peekInstance()
+    if (!manager || !manager.isStarted()) return
+    const changes = await manager.detectStateChanges()
+    if (changes.length === 0) return
+    const lines = changes.map(
+      (c) => `- [${c.tabId}] navigated from ${c.lastUrl} → ${c.currentUrl}`,
+    )
+    userMessage.parts.push({
+      id: PartID.ascending(),
+      messageID: userMessage.info.id,
+      sessionID: userMessage.info.sessionID,
+      type: "text",
+      text: `**Browser state changed since your last observation:**\n${lines.join("\n")}\nThe page may have been modified by the user. Use \`browser_observe\` to get a fresh DOM snapshot before taking actions.`,
+      synthetic: true,
+    })
+  })
 
   if (!flags.experimentalPlanMode) {
     if (input.agent.name === "plan") {
