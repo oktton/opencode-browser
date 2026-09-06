@@ -16,17 +16,15 @@ import { REQUIRED_COMPUTED_STYLES } from '../types/snapshot';
 import type { DOMRect } from '../types/dom-node';
 
 /**
- * Parse rare boolean data from snapshot
- * Returns true if index is in the rare data array, false otherwise
+ * Collect the indices flagged true in a CDP RareBooleanData.
+ *
+ * Built once per document: probing the raw array with includes() is a linear
+ * scan, and it would run once per node.
  */
-function parseRareBooleanData(
+function rareBooleanSet(
   rareData: DOMSnapshot.RareBooleanData | undefined,
-  index: number,
-): boolean {
-  if (!rareData?.index) {
-    return false;
-  }
-  return rareData.index.includes(index);
+): Set<number> {
+  return new Set(rareData?.index ?? []);
 }
 
 /**
@@ -35,17 +33,16 @@ function parseRareBooleanData(
 function parseComputedStyles(
   strings: string[],
   styleIndices: number[],
-): Record<string, string> {
-  const styles: Record<string, string> = {};
+): Record<string, string> | null {
+  // Returns null rather than an empty object so the caller can skip the
+  // Object.keys() emptiness probe — that allocated an array per node.
+  let styles: Record<string, string> | null = null;
+  const count = Math.min(styleIndices.length, REQUIRED_COMPUTED_STYLES.length);
 
-  for (let i = 0; i < styleIndices.length; i++) {
+  for (let i = 0; i < count; i++) {
     const styleIndex = styleIndices[i];
-    if (
-      i < REQUIRED_COMPUTED_STYLES.length &&
-      styleIndex >= 0 &&
-      styleIndex < strings.length
-    ) {
-      styles[REQUIRED_COMPUTED_STYLES[i]] = strings[styleIndex];
+    if (styleIndex >= 0 && styleIndex < strings.length) {
+      (styles ??= {})[REQUIRED_COMPUTED_STYLES[i]] = strings[styleIndex];
     }
   }
 
@@ -108,6 +105,7 @@ export function buildSnapshotLookup(
 
   for (const document of snapshot.documents) {
     const nodes = document.nodes;
+    const clickableIndices = rareBooleanSet(nodes.isClickable);
     const layout = document.layout;
 
     // Build backend node ID to snapshot index lookup
@@ -137,7 +135,7 @@ export function buildSnapshotLookup(
     for (const [backendNodeId, snapshotIndex] of backendNodeToSnapshotIndex) {
       // Create enhanced snapshot node with required fields
       const enhancedNode: EnhancedSnapshotNode = {
-        isClickable: parseRareBooleanData(nodes.isClickable, snapshotIndex),
+        isClickable: clickableIndices.has(snapshotIndex),
       };
 
       // Get layout data if available
@@ -156,7 +154,7 @@ export function buildSnapshotLookup(
         if (layout.styles && layoutIdx < layout.styles.length) {
           const styleIndices = layout.styles[layoutIdx];
           const computedStyles = parseComputedStyles(strings, styleIndices);
-          if (Object.keys(computedStyles).length > 0) {
+          if (computedStyles) {
             enhancedNode.computedStyles = computedStyles;
             if (computedStyles.cursor) {
               enhancedNode.cursorStyle = computedStyles.cursor;
@@ -179,15 +177,6 @@ export function buildSnapshotLookup(
         if (layout.scrollRects && layoutIdx < layout.scrollRects.length) {
           const scrollRects = parseRects(layout.scrollRects[layoutIdx]);
           if (scrollRects) enhancedNode.scrollRects = scrollRects;
-        }
-
-        // Extract stacking contexts
-        if (
-          layout.stackingContexts?.index &&
-          layoutIdx < layout.stackingContexts.index.length
-        ) {
-          enhancedNode.stackingContexts =
-            layout.stackingContexts.index[layoutIdx];
         }
       }
 
@@ -216,6 +205,7 @@ export function buildSnapshotLookupWithFrames(
 
   for (const document of snapshot.documents) {
     const nodes = document.nodes;
+    const clickableIndices = rareBooleanSet(nodes.isClickable);
     const layout = document.layout;
 
     // Get frame ID
@@ -260,7 +250,7 @@ export function buildSnapshotLookupWithFrames(
     // Build snapshot lookup for each backend node ID
     for (const [backendNodeId, snapshotIndex] of backendNodeToSnapshotIndex) {
       const enhancedNode: EnhancedSnapshotNode = {
-        isClickable: parseRareBooleanData(nodes.isClickable, snapshotIndex),
+        isClickable: clickableIndices.has(snapshotIndex),
       };
 
       const layoutIdx = layoutIndexMap.get(snapshotIndex);
@@ -276,7 +266,7 @@ export function buildSnapshotLookupWithFrames(
         if (layout.styles && layoutIdx < layout.styles.length) {
           const styleIndices = layout.styles[layoutIdx];
           const computedStyles = parseComputedStyles(strings, styleIndices);
-          if (Object.keys(computedStyles).length > 0) {
+          if (computedStyles) {
             enhancedNode.computedStyles = computedStyles;
             if (computedStyles.cursor) {
               enhancedNode.cursorStyle = computedStyles.cursor;
@@ -296,14 +286,6 @@ export function buildSnapshotLookupWithFrames(
         if (layout.scrollRects && layoutIdx < layout.scrollRects.length) {
           const scrollRects = parseRects(layout.scrollRects[layoutIdx]);
           if (scrollRects) enhancedNode.scrollRects = scrollRects;
-        }
-
-        if (
-          layout.stackingContexts?.index &&
-          layoutIdx < layout.stackingContexts.index.length
-        ) {
-          enhancedNode.stackingContexts =
-            layout.stackingContexts.index[layoutIdx];
         }
       }
 

@@ -27,7 +27,7 @@ export function createDiffTree(
 ): EnhancedDOMTreeNode | null {
   if (oldTree.backendNodeId !== newTree.backendNodeId) return null;
 
-  const { copy: merged } = copyDomTree(newTree);
+  const merged = copyDomTree(newTree);
 
   const oldTop = collectTopElements(oldTree);
   const newTop = collectTopElements(merged);

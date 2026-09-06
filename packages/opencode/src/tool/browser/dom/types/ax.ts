@@ -5,96 +5,22 @@
  */
 
 /**
- * AX property names that are commonly used
- */
-export type AXPropertyName =
-  | 'busy'
-  | 'disabled'
-  | 'editable'
-  | 'focusable'
-  | 'focused'
-  | 'hidden'
-  | 'hiddenRoot'
-  | 'invalid'
-  | 'keyshortcuts'
-  | 'settable'
-  | 'roledescription'
-  | 'live'
-  | 'atomic'
-  | 'relevant'
-  | 'root'
-  | 'autocomplete'
-  | 'hasPopup'
-  | 'level'
-  | 'multiselectable'
-  | 'orientation'
-  | 'multiline'
-  | 'readonly'
-  | 'required'
-  | 'valuemin'
-  | 'valuemax'
-  | 'valuetext'
-  | 'checked'
-  | 'expanded'
-  | 'modal'
-  | 'pressed'
-  | 'selected'
-  | 'activedescendant'
-  | 'controls'
-  | 'describedby'
-  | 'details'
-  | 'errormessage'
-  | 'flowto'
-  | 'labelledby'
-  | 'owns'
-  | 'url'
-  | 'value';
-
-/**
- * Enhanced AX property
- */
-export interface EnhancedAXProperty {
-  name: AXPropertyName;
-  value: string | boolean | number | null;
-}
-
-/**
- * Enhanced AX node with extracted data
+ * The subset of a CDP AXNode the pipeline actually consumes.
+ *
+ * getFullAXTree returns far more (properties, description, childIds, node ids),
+ * but nothing reads those — and the AX tree is the largest payload we handle,
+ * so materialising them costs allocation and memory for every cached snapshot.
  */
 export interface EnhancedAXNode {
-  axNodeId: string;
   ignored: boolean;
   role?: string;
   name?: string;
-  description?: string;
-  properties?: EnhancedAXProperty[];
-  childIds?: string[];
 }
 
 /**
  * AX tree lookup map: backendDOMNodeId -> EnhancedAXNode
  */
 export type AXTreeLookup = Map<number, EnhancedAXNode>;
-
-/**
- * Common interactive AX roles
- */
-export const INTERACTIVE_AX_ROLES = new Set([
-  'button',
-  'link',
-  'menuitem',
-  'option',
-  'radio',
-  'checkbox',
-  'tab',
-  'textbox',
-  'combobox',
-  'slider',
-  'spinbutton',
-  'listbox',
-  'search',
-  'searchbox',
-]);
 
 /** Roles that compute name from descendant text content (WAI-ARIA "Name from Content") */
 export const NAME_FROM_CONTENT_ROLES = new Set([
@@ -141,7 +67,6 @@ export function buildEnhancedAXNode(
   axNode: import('./cdp').Accessibility.AXNode,
 ): EnhancedAXNode {
   const result: EnhancedAXNode = {
-    axNodeId: axNode.nodeId,
     ignored: axNode.ignored,
   };
 
@@ -150,30 +75,6 @@ export function buildEnhancedAXNode(
   }
   if (axNode.name?.value) {
     result.name = axNode.name.value;
-  }
-  if (axNode.description?.value) {
-    result.description = axNode.description.value;
-  }
-  if (axNode.childIds?.length) {
-    result.childIds = axNode.childIds;
-  }
-
-  if (axNode.properties?.length) {
-    const properties: EnhancedAXProperty[] = [];
-    for (const prop of axNode.properties) {
-      try {
-        const value = prop.value?.value ?? null;
-        properties.push({
-          name: prop.name as AXPropertyName,
-          value,
-        });
-      } catch {
-        // Skip properties that can't be processed
-      }
-    }
-    if (properties.length > 0) {
-      result.properties = properties;
-    }
   }
 
   return result;

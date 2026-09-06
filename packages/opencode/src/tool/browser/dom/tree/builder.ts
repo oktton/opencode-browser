@@ -6,8 +6,7 @@
  */
 
 import type { DOM } from '../types/cdp';
-import { generateUUID } from '../utils/index';
-import { generateXPath } from './xpath';
+import { elementSegment } from './xpath';
 import { getWhitelistedAttributes } from './attributes';
 import type {
   EnhancedDOMTreeNode,
@@ -70,11 +69,8 @@ export class DOMTreeBuilder {
    * @param initialFrameOffset - Starting offset for coordinate calculation.
    *   For OOPIF sub-trees, this is the accumulated offset from the parent iframe.
    */
-  async build(
-    initialFrameOffset?: DOMRect,
-    xpathPrefix?: string,
-  ): Promise<TreeBuildResult> {
-    const root = await this.constructEnhancedNode(
+  build(initialFrameOffset?: DOMRect, xpathPrefix?: string): TreeBuildResult {
+    const root = this.constructEnhancedNode(
       this.trees.domTree.root,
       initialFrameOffset ?? { x: 0, y: 0, width: 0, height: 0 },
       0,
@@ -91,12 +87,12 @@ export class DOMTreeBuilder {
    *
    * This is the TypeScript port of Python's _construct_enhanced_node.
    */
-  private async constructEnhancedNode(
+  private constructEnhancedNode(
     node: DOM.Node,
     totalFrameOffset: DOMRect,
     iframeDepth: number,
     xpathPrefix: string,
-  ): Promise<EnhancedDOMTreeNode> {
+  ): EnhancedDOMTreeNode {
     // Clone offset to avoid reference issues
     const frameOffset = { ...totalFrameOffset };
 
@@ -153,7 +149,6 @@ export class DOMTreeBuilder {
         Object.keys(whitelistedAttributes).length > 0
           ? whitelistedAttributes
           : undefined,
-      uuid: generateUUID(),
       renderInfo: {
         isVisible: false,
         isInteractive: false,
@@ -180,6 +175,11 @@ export class DOMTreeBuilder {
     }
     if (snapshotData) {
       enhancedNode.snapshotNode = snapshotData;
+    }
+    if (node.pseudoElements?.length) {
+      enhancedNode.pseudoElementIds = node.pseudoElements.map(
+        p => p.backendNodeId,
+      );
     }
 
     // Store in lookup for memoization and parent reference
@@ -219,7 +219,7 @@ export class DOMTreeBuilder {
     if (node.contentDocument) {
       // Same-origin iframe: CDP provides contentDocument directly
       const iframePrefix = `${enhancedNode.xpath} [IFRAME] `;
-      enhancedNode.contentDocument = await this.constructEnhancedNode(
+      enhancedNode.contentDocument = this.constructEnhancedNode(
         node.contentDocument,
         frameOffset,
         iframeDepth + 1,
@@ -241,7 +241,7 @@ export class DOMTreeBuilder {
           axTree: oopifData.axTree,
           devicePixelRatio: this.devicePixelRatio,
         });
-        const { root: oopifRoot } = await subBuilder.build(
+        const { root: oopifRoot } = subBuilder.build(
           frameOffset,
           iframePrefix,
         );
@@ -258,7 +258,7 @@ export class DOMTreeBuilder {
       enhancedNode.shadowRoots = [];
       const shadowPrefix = `${enhancedNode.xpath} [SHADOW] `;
       for (const shadowRoot of node.shadowRoots) {
-        const shadowRootNode = await this.constructEnhancedNode(
+        const shadowRootNode = this.constructEnhancedNode(
           shadowRoot,
           frameOffset,
           iframeDepth,
@@ -287,7 +287,7 @@ export class DOMTreeBuilder {
           continue;
         }
 
-        const childNode = await this.constructEnhancedNode(
+        const childNode = this.constructEnhancedNode(
           child,
           frameOffset,
           iframeDepth,
@@ -325,21 +325,34 @@ export class DOMTreeBuilder {
 /**
  * Assign xpaths to all nodes after tree is fully built
  * (siblings are in parent.childrenNodes so position calculation works)
+ *
+ * The path is accumulated top-down: a node's path is its parent's path plus
+ * its own segment, so each node costs one segment instead of a fresh walk to
+ * the root. Document and shadow-root boundaries reset the chain, matching
+ * generateXPath's behaviour of stopping there.
  */
-function assignXPaths(node: EnhancedDOMTreeNode): void {
+function assignXPaths(node: EnhancedDOMTreeNode, parentChain = ''): void {
+  const chain =
+    node.nodeType === NodeType.DOCUMENT_NODE ||
+    node.nodeType === NodeType.DOCUMENT_FRAGMENT_NODE
+      ? ''
+      : node.nodeType === NodeType.ELEMENT_NODE
+        ? `${parentChain}/${elementSegment(node)}`
+        : parentChain;
+
   const prefix = node._xpathPrefix ?? '';
-  const localXpath = generateXPath(node);
+  const localXpath = chain || '/';
   node.xpath = prefix ? `${prefix}${localXpath}` : localXpath;
   delete node._xpathPrefix;
 
   for (const child of node.childrenNodes ?? []) {
-    assignXPaths(child);
+    assignXPaths(child, chain);
   }
   for (const sr of node.shadowRoots ?? []) {
-    assignXPaths(sr);
+    assignXPaths(sr, chain);
   }
   if (node.contentDocument) {
-    assignXPaths(node.contentDocument);
+    assignXPaths(node.contentDocument, chain);
   }
 }
 

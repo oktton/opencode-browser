@@ -185,12 +185,7 @@ export function deepClone<T>(obj: T): T {
  * Skips parentNode to avoid circular refs, rebuilds parent links on the copy.
  * Returns the copied root and a backendNodeId → copied node lookup map.
  */
-export function copyDomTree(root: EnhancedDOMTreeNode): {
-  copy: EnhancedDOMTreeNode;
-  lookup: Map<number, EnhancedDOMTreeNode>;
-} {
-  const lookup = new Map<number, EnhancedDOMTreeNode>();
-
+export function copyDomTree(root: EnhancedDOMTreeNode): EnhancedDOMTreeNode {
   function clone(
     node: EnhancedDOMTreeNode,
     parent?: EnhancedDOMTreeNode,
@@ -209,8 +204,6 @@ export function copyDomTree(root: EnhancedDOMTreeNode): {
       copy.whitelistedAttributes = { ...node.whitelistedAttributes };
     if (node.attributes) copy.attributes = { ...node.attributes };
 
-    lookup.set(copy.backendNodeId, copy);
-
     copy.childrenNodes = (node.childrenNodes ?? []).map(c => clone(c, copy));
 
     if (node.shadowRoots) {
@@ -223,8 +216,7 @@ export function copyDomTree(root: EnhancedDOMTreeNode): {
     return copy;
   }
 
-  const copy = clone(root);
-  return { copy, lookup };
+  return clone(root);
 }
 
 /**

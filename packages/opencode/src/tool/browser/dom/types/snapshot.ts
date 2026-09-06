@@ -20,7 +20,6 @@ export interface EnhancedSnapshotNode {
   scrollRects?: DOMRect;
   computedStyles?: Record<string, string>;
   paintOrder?: number;
-  stackingContexts?: number;
   inputValue?: string;
 }
 
