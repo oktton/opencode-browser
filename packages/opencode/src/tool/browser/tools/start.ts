@@ -60,16 +60,18 @@ Each DOM snapshot has:
 - Use \`container: N\` where N is the index from \`[container:N]\` in the DOM.
 
 ### Information Extraction
+- Check \`__data()\` first via \`browser_execute_script\` — pages often embed the answer as structured data with named fields that the rendered page conflates
 - Scroll progressively to discover lazy-loaded content
-- Use \`browser_execute_script\` with \`__find()\` + \`scrollIntoView()\` to locate specific elements quickly
+- Use \`browser_reveal_offscreen\` with \`target\` to jump straight to a specific off-screen element
 
 ### State Recovery
 - Different stateId → \`browser_restore_state(stateId)\` — reverts to that exact page state
 - Same stateId, different scroll → \`browser_scroll_to_page\` — jump back to content you noted earlier
 
 ### JavaScript Execution
-- Use built-in tools (\`__q\`, \`__find\`, \`__get\`, \`__clickable\`) instead of querySelector
-- Return elements directly — they auto-serialize to \`{ref, index, tagName, textContent, attrs, ...}\`
+- Built-in helpers: \`__data(type?)\` (embedded structured data), \`__q(n)\`, \`__find(pattern, tag?)\`
+- Read with JS; act with browser_click / browser_input so your DOM snapshot stays in sync
+- Return plain objects for extracted data; returned elements serialize to \`{index, tagName, textContent, attrs, ...}\` — pass \`index\` to browser_click
 
 ## Available Tools
 
@@ -86,7 +88,7 @@ Each DOM snapshot has:
 ### Interaction
 - **browser_click**(elementIndex) — Click on element [N] or <N>
 - **browser_input**(elementIndex, text, {clear?, pressEnter?}) — Fill text into input <N>. clear=true by default. pressEnter=false by default.
-- **browser_execute_script**(script) — Execute JavaScript with built-in helpers (__q, __find, __get, __clickable)
+- **browser_execute_script**(script?, guide?) — Read page data with JavaScript (helpers: __data, __q, __find). Pass \`guide: true\` for the extraction guide when pulling structured data or working a repeating list.
 
 ### Scrolling
 - **browser_reveal_offscreen**(direction, container, target?) — Scroll to off-screen elements

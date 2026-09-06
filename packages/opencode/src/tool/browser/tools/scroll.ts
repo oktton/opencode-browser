@@ -75,7 +75,7 @@ Container: Use index N from [container:N] in OFF-SCREEN blocks.`,
           else if (params.direction === "down" && atEnd) hint = " (Already at the BOTTOM of the page)"
 
           const targetHint = params.target
-            ? ` Target "${params.target}" not found in off-screen elements. Tip: use \`browser_execute_script\` with \`__find()\` + \`scrollIntoView()\` to locate elements.`
+            ? ` Target "${params.target}" not found in off-screen elements. It may not be rendered yet — use browser_scroll_next_screen to load more content, then retry.`
             : ""
 
           const dom = isLast() ? await getPageDom(manager) : skippedDomOutput()
@@ -94,7 +94,7 @@ export const BrowserScrollNextScreenTool = Tool.define(
   Effect.succeed({
     description: `Scroll to scan through unseen content. Each call advances past the current expand zone into content not yet in the DOM.
 
-Best for discovering unknown content. If you already know what to find, consider browser_execute_script with __find() + scrollIntoView() — it's faster.
+Best for discovering unknown content. If you already know what to find, browser_reveal_offscreen with a target parameter jumps straight to it.
 
 Container: index N from [container:N] comments.`,
     parameters: Schema.Struct({
