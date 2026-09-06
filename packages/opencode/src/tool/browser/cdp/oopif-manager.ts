@@ -197,7 +197,11 @@ export class OOPIFManager {
     const cdpClient = this.cdpClient!;
     const { sessionId } = session;
 
-    const [snapshot, domTree, axTree] = await Promise.all([
+    // No accessibility tree here, for the same reason the main frame does not
+    // fetch one: it is the most expensive call available and the pipeline needs
+    // AX data for only a handful of nodes, fetched individually per session
+    // once they are known (see dom/tree/ax-fetch.ts).
+    const [snapshot, domTree] = await Promise.all([
       cdpClient.sendCommandWithRetry<DOMSnapshot.CaptureSnapshotResponse>(
         'DOMSnapshot.captureSnapshot',
         {
@@ -215,15 +219,9 @@ export class OOPIFManager {
         10000,
         sessionId,
       ),
-      cdpClient
-        .sendCommand<Accessibility.GetFullAXTreeResponse>(
-          'Accessibility.getFullAXTree',
-          {},
-          10000,
-          sessionId,
-        )
-        .catch(() => ({ nodes: [] }) as Accessibility.GetFullAXTreeResponse),
     ]);
+
+    const axTree: Accessibility.GetFullAXTreeResponse = { nodes: [] };
 
     return {
       sessionId: session.sessionId,

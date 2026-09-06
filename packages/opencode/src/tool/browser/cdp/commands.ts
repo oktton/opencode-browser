@@ -32,13 +32,18 @@ export class CDPCommands {
   }): Promise<TargetAllTrees> {
     const { maxIframes = 100, timeout = 10000, oopifManager } = options ?? {};
 
-    // Run all CDP commands in parallel
-    const [snapshot, domTree, axTree, metrics] = await Promise.all([
+    // Run all CDP commands in parallel.
+    //
+    // The accessibility tree is deliberately not fetched here: it is the single
+    // most expensive call in an extraction and the pipeline needs AX data for
+    // only a few hundred nodes, which are fetched individually once known
+    // (see dom/tree/ax-fetch.ts).
+    const [snapshot, domTree, metrics] = await Promise.all([
       this.captureSnapshot({ timeout }),
       this.getDocument({ timeout }),
-      this.getAccessibilityTreeForAllFrames({ timeout }),
       this.getLayoutMetrics({ timeout }),
     ]);
+    const axTree: Accessibility.GetFullAXTreeResponse = { nodes: [] };
 
     // Limit documents to prevent iframe explosion
     if (snapshot.documents.length > maxIframes) {
@@ -110,51 +115,6 @@ export class CDPCommands {
       params,
       options?.timeout ?? 10000,
     );
-  }
-
-  /**
-   * Get accessibility tree for all frames
-   */
-  async getAccessibilityTreeForAllFrames(options?: {
-    timeout?: number;
-  }): Promise<Accessibility.GetFullAXTreeResponse> {
-    try {
-      // Get frame tree first
-      const frameTree = await this.getFrameTree({ timeout: options?.timeout });
-
-      // Collect all frame IDs
-      const frameIds: string[] = [];
-      const collectFrameIds = (node: Page.FrameTree) => {
-        if (node.frame?.id) {
-          frameIds.push(node.frame.id);
-        }
-        if (node.childFrames) {
-          node.childFrames.forEach(collectFrameIds);
-        }
-      };
-      collectFrameIds(frameTree.frameTree);
-
-      // Get AX tree for each frame in parallel
-      const axTreePromises = frameIds.map(frameId =>
-        this.client
-          .sendCommand<Accessibility.GetFullAXTreeResponse>(
-            'Accessibility.getFullAXTree',
-            { frameId },
-            options?.timeout ?? 10000,
-          )
-          .catch(() => ({ nodes: [] })),
-      );
-
-      const axTrees = await Promise.all(axTreePromises);
-
-      // Merge all AX nodes
-      const mergedNodes = axTrees.flatMap(tree => tree.nodes);
-
-      return { nodes: mergedNodes };
-    } catch (error) {
-      // silently ignore AX tree failures
-      return { nodes: [] };
-    }
   }
 
   /**
