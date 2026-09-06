@@ -13,10 +13,14 @@ bun install                                    # install deps
 bun dev                                        # run TUI (packages/opencode)
 bun dev serve                                  # headless API server
 bun dev serve --port 8080                      # custom port
-bun typecheck                                  # full monorepo typecheck
 bun run --cwd packages/opencode test           # run tests
 ./packages/opencode/script/build.ts --single   # build current platform
 ```
+
+**Never run type checking.** Not `bun typecheck`, not `tsc` over the monorepo,
+not a single-file or scoped variant — it hangs this machine. This holds while
+pushing too: pass `--no-verify` so a pre-push hook cannot start one. It does not
+pass anyway, so there is nothing to learn from running it.
 
 Web UI development: run `bun dev serve` in one terminal, `bun run --cwd packages/app dev` in another.
 
