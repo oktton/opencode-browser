@@ -1,0 +1,279 @@
+=== OFF-SCREEN above [container:0] (scroll to reveal these elements) ===
+<a> Skip to main content </a>
+	 ...
+<a> Skip to search </a>
+	 ...
+=== END OFF-SCREEN ===
+<div></div>
+	Learn frontend, backend, and AI from our course partner
+	[228]<a> Scrimba </a>
+<header></header>
+	<nav></nav>
+		<div></div>
+			[241]<a> MDN </a>
+				[243][view:ced]<svg role='img'></svg>
+		<div></div>
+			<div></div>
+				[290]<button type='button'> HTML </button>
+					[293]<span> HTML </span>
+			<div></div>
+				[406]<button type='button'> CSS </button>
+					[409]<span> CSS </span>
+			<div></div>
+				[538]<button type='button'> JavaScript </button>
+					[541]<span data-type='long'> JavaScript </span>
+			<div></div>
+				[643]<button type='button'> Web APIs </button>
+					[646]<span> Web APIs </span>
+			<div></div>
+				[755]<button type='button'> All </button>
+					[758]<span> All </span>
+			<div></div>
+				[866]<button type='button'> Learn </button>
+					[870]<span> Learn </span>
+			<div></div>
+				[978]<button type='button'> Tools </button>
+					[982]<span> Tools </span>
+			<div></div>
+				[1053]<button type='button'> About </button>
+					[1056]<span> About </span>
+			<div></div>
+				[1100]<a> Blog </a>
+		<div></div>
+			[1112]<button title='Search the site'></button>
+				[1116][view:bbbg]<svg></svg>
+		<mdn-user-menu></mdn-user-menu>
+			[1130]<a aria-labelledby='label-hl791uobd9l'> Log in </a>
+				<span></span>
+					[1136][view:bbdg]<svg></svg>
+				[1141]<span id='label-hl791uobd9l'></span>
+	<div></div>
+		<ol></ol>
+			<li></li>
+				[1250]<a> Web </a>
+					[1251]<span> Web </span>
+			<li></li>
+				[1260]<a> Web APIs </a>
+					[1261]<span> Web APIs </span>
+			<li></li>
+				[1268]<a> Element </a>
+					[1269]<span> Element </span>
+		<mdn-color-theme></mdn-color-theme>
+			[1290]<button aria-label='Switch color theme' type='button'></button>
+				[1293]<span> Theme </span>
+		<mdn-language-switcher></mdn-language-switcher>
+			[1363]<button aria-labelledby='current-locale' type='button'> English (US) </button>
+				[1366]<span id='current-locale'> English (US) </span>
+<div></div>
+	Element
+	[1550][view:bffa]<details></details>
+		[1552]<summary></summary>
+			[1554][view:bffe]<span role='img' aria-label='Baseline Check'></span>
+			[1556]<div> Baseline </div>
+			[1559]<div> Widely available </div>
+			[60]<div> * </div>
+			<div></div>
+				[1565]<span title='Supported in Chrome and Edge'></span>
+					[1567][view:bfgh]<span role='img' aria-label='Chrome check'></span>
+					[1570][view:bfha]<span role='img' aria-label='Edge check'></span>
+				[1574]<span title='Supported in Firefox'></span>
+					[1576][view:bfhg]<span role='img' aria-label='Firefox check'></span>
+				[1580]<span title='Supported in Safari'></span>
+					[1582][view:bfic]<span role='img' aria-label='Safari check'></span>
+	<section></section>
+		<p></p>
+			<code> Element </code>
+			is the most general base class from which all element objects (i.e., objects that represent elements) in a
+			[1624]<a> Document </a>
+				[1625]<code> Document </code>
+			inherit. It only has methods and properties common to all kinds of elements. More specific classes inherit from
+			<code> Element </code>
+			.
+		<p></p>
+			For example, the
+			[1630]<a> HTMLElement </a>
+				[1631]<code> HTMLElement </code>
+			interface is the base interface for HTML elements. Similarly, the
+			[1632]<a> SVGElement </a>
+				[1633]<code> SVGElement </code>
+			interface is the basis for all SVG elements, and the
+			[1634]<a> MathMLElement </a>
+				[1635]<code> MathMLElement </code>
+			interface is the base interface for MathML elements. Most functionality is specified further down the class hierarchy.
+		Languages outside the realm of the Web platform, like XUL through the
+		<code> XULElement </code>
+		interface, also implement
+		<code> Element </code>
+		.
+		[view:bgec]<svg></svg>
+			[1643]<a> EventTarget </a>
+				[1647]<text> EventTarget Node Element </text>
+			[1652]<a> Node </a>
+			[1661]<a> Element </a>
+<aside></aside>
+	In this article
+	<ul></ul>
+		<li></li>
+			[1681]<a> Instance properties </a>
+		<li></li>
+			[1686]<a> Instance methods </a>
+		<li></li>
+			[1691]<a> Events </a>
+		<li></li>
+			[1696]<a> Specifications </a>
+		<li></li>
+			[1701]<a> Browser compatibility </a>
+<h2></h2>
+	[1719]<a> Instance properties </a>
+<p></p>
+	<code> Element inherits properties from its parent interface, Node, and by extension that interface's parent, EventTarget. </code>
+	[1726]<a> Node </a>
+		[1727]<code></code>
+	[1728]<a> EventTarget </a>
+		[1729]<code></code>
+<dt id='element.activeviewtransition'></dt>
+	[1733]<a> Element.activeViewTransition </a>
+		[1734]<code> Element.activeViewTransitionRead only </code>
+	[view:bhdh]<span role='img' aria-label='Experimental' title='Experimental. Expect behavior to change in the future.'></span>
+=== OFF-SCREEN below [container:0] (scroll to reveal these elements) ===
+<dd> Returns a instance representing the currently acti... </dd>
+	Returns a
+	<a> ViewTransition </a>
+		 ...
+	instance representing the
+	<a> view transition </a>
+		 ...
+	currently active on an element.
+<dt id='element.assignedslot'></dt>
+	<a> Element.assignedSlot </a>
+		 ...
+<dd> Returns a representing the the node is inserted in... </dd>
+	Returns a
+	<a> HTMLSlotElement </a>
+		 ...
+	representing the
+	<a> <slot> </a>
+		 ...
+	the node is inserted in.
+<dt id='element.attributes'></dt>
+	<a> Element.attributes </a>
+		 ...
+<dd> Returns a object containing the assigned attribute... </dd>
+	Returns a
+	<a> NamedNodeMap </a>
+		 ...
+	object containing the assigned attributes of the c...
+<dt id='element.childelementcount'></dt>
+	<a> Element.childElementCount </a>
+		 ...
+Returns the number of child elements of this eleme...
+<dt id='element.children'></dt>
+	<a> Element.children </a>
+		 ...
+Returns the child elements of this element.
+<dt id='element.classlist'></dt>
+	<a> Element.classList </a>
+		 ...
+<dd> Returns a containing the list of class attributes. </dd>
+	Returns a
+	<a> DOMTokenList </a>
+		 ...
+	containing the list of class attributes.
+<dt id='element.classname'></dt>
+	<a> Element.className </a>
+		 ...
+A string representing the class of the element.
+<dt id='element.clientheight'></dt>
+	<a> Element.clientHeight </a>
+		 ...
+Returns a number representing the inner height of ...
+<dt id='element.clientleft'></dt>
+	<a> Element.clientLeft </a>
+		 ...
+=== END OFF-SCREEN ===
+<aside></aside>
+	[view:ghjhi]<div></div>
+		[67985]<label for='input'></label>
+		<38><input id='input' placeholder='Filter'></input>
+	<li></li>
+		[68036]<a> Document Object Model (DOM) </a>
+	<li></li>
+		[68040]<a> Element </a>
+			[68041]<code> Element </code>
+	[68044]<summary></summary>
+		[68046]<span> Instance properties </span>
+	<li></li>
+		[68050]<a> activeViewTransition Experimental </a>
+			[68051]<code> activeViewTransition </code>
+			[68052][view:giafc]<span role='img' aria-label='Experimental' title='Experimental. Expect behavior to change in the future.'></span>
+	<li></li>
+		[68053]<a> ariaActiveDescendantElement </a>
+			<code> ariaActiveDescendantElement </code>
+	<li></li>
+		[68055]<a> ariaAtomic </a>
+			[68056]<code> ariaAtomic </code>
+	<li></li>
+		[68057]<a> ariaAutoComplete </a>
+			[68058]<code> ariaAutoComplete </code>
+	<li></li>
+		[68059]<a> ariaBrailleLabel </a>
+			[68060]<code> ariaBrailleLabel </code>
+	<li></li>
+		[68061]<a> ariaBrailleRoleDescription </a>
+			<code> ariaBrailleRoleDescription </code>
+	<li></li>
+		[68063]<a> ariaBusy </a>
+			[68064]<code> ariaBusy </code>
+	<li></li>
+		[68065]<a> ariaChecked </a>
+			[68066]<code> ariaChecked </code>
+	<li></li>
+		[68067]<a> ariaColCount </a>
+			[68068]<code> ariaColCount </code>
+	<li></li>
+		[68069]<a> ariaColIndex </a>
+			[68070]<code> ariaColIndex </code>
+=== OFF-SCREEN below [container:0] (scroll to reveal these elements) ===
+	<li></li>
+		<a> ariaCurrent </a>
+			 ...
+	<li></li>
+		<a> ariaDescribedByElements </a>
+			 ...
+	<li></li>
+		<a> ariaDescription </a>
+			 ...
+	<li></li>
+		<a> ariaDetailsElements </a>
+			 ...
+	<li></li>
+		<a> ariaDisabled </a>
+			 ...
+	<li></li>
+		<a> ariaErrorMessageElements </a>
+			 ...
+	<li></li>
+		<a> ariaExpanded </a>
+			 ...
+	<li></li>
+		<a> ariaFlowToElements </a>
+			 ...
+	<li></li>
+		<a> ariaHasPopup </a>
+			 ...
+	<li></li>
+		<a> ariaHidden </a>
+			 ...
+	<li></li>
+		<a> ariaInvalid </a>
+			 ...
+	<li></li>
+		<a> ariaKeyShortcuts </a>
+			 ...
+	<li></li>
+		<a> ariaLabel </a>
+			 ...
+	<li></li>
+		<a> ariaLabelledByElements </a>
+			 ...
+=== END OFF-SCREEN ===

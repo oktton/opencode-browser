@@ -1,0 +1,42 @@
+[
+  {
+    "name": "wikipedia-js",
+    "url": "https://en.wikipedia.org/wiki/JavaScript",
+    "wait": 1500
+  },
+  {
+    "name": "mdn-element",
+    "url": "https://developer.mozilla.org/en-US/docs/Web/API/Element",
+    "wait": 2000
+  },
+  {
+    "name": "github-repo",
+    "url": "https://github.com/oven-sh/bun",
+    "wait": 2500
+  },
+  {
+    "name": "hn-front",
+    "url": "https://news.ycombinator.com",
+    "wait": 800
+  },
+  {
+    "name": "youtube-home",
+    "url": "https://www.youtube.com",
+    "wait": 4000
+  },
+  {
+    "name": "bing-search",
+    "url": "https://www.bing.com/search?q=puppeteer+cdp",
+    "wait": 2500
+  },
+  {
+    "name": "oopif-frames",
+    "file": "pages/oopif.html",
+    "wait": 4000
+  },
+  {
+    "name": "nested-iframe",
+    "url": "https://v0-website-with-clickable-elements.vercel.app/nested-iframe",
+    "wait": 5000
+  }
+]

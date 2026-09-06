@@ -1,0 +1,98 @@
+<header></header>
+	<form></form>
+		[129]<a> 返回到必应搜索 </a>
+			[130]<h1 title='返回到必应搜索'></h1>
+		<div></div>
+			<div></div>
+				[136]<input id='sb_form_go' type='submit' value='搜索'></input>
+			<20><input aria-label='在此处输入你的搜索 — 输入时会显示搜索建议' id='sb_form_q' type='search' name='q' value='puppeteer cdp'></input>
+			<div></div>
+				[143]<div role='button' aria-label='使用图像搜索' id='sb_sbi' aria-expanded='false'></div>
+					[144][view:bee]<div id='sbi_b'></div>
+	<div></div>
+		[24]<a role='button' aria-label='Microsoft Rewards' id='id_rh_w' aria-expanded='false'></a>
+			<div id='rh_rwm'></div>
+				[220]<span> Rewards </span>
+				<div></div>
+					[225][view:ccf]<svg></svg>
+		[337]<a id='id_l'> 登录 </a>
+			[342][view:dec]<span aria-label='登录' id='id_a'></span>
+	<nav></nav>
+		<li></li>
+			[354]<a> 全部 </a>
+		<li></li>
+			[358]<a> 搜索 </a>
+				[view:dfj]<svg></svg>
+		<li></li>
+			[364]<a> 图片 </a>
+		<li></li>
+			[368]<a> 视频 </a>
+		<li></li>
+			[372]<a> 地图 </a>
+		<li></li>
+			[376]<a role='button'> 更多 </a>
+				[377]<span></span>
+					[view:dhi]<svg></svg>
+约 81,700 个结果在新选项卡中打开链接日期全部24 小时内一周内一个月内去年pptr.devhttps://pptr.devPuppeteerAlternatively, you can configure your package manager to allow the install script to run (for example, with npm, by adding …   github.comhttps://github.com › puppeteer › puppeteerGitHub - puppeteer/puppeteer: JavaScript API for Chrome and FirefoxPuppeteer is a JavaScript library which provides a high-level API to control Chrome or Firefox over the DevTools Protocol or …chrome.comhttps://developer.chrome.com › docs › puppeteerPuppeteer | Chrome for Developersn to use them. Learn more Blog posts Read the most recent blog posts touching on Puppeteer, Chrome For Testing and WebDriver …pptr.devhttps://pptr.dev › guides › what-is-puppeteerWhat is Puppeteer? | Puppeteer - pptr.devMost things that you can do manually in the browser can be done using Puppeteer! Here are a few examples to get you started: …npmjs.comhttps://www.npmjs.com › package › puppeteerpuppeteer - npmPuppeteer is a JavaScript library which provides a high-level API to control Chrome or Firefox over the DevTools Protocol or …github.comhttps://github.com › puppeteerPuppeteer · GitHubForked from mozilla/gecko-dev Juggler - Firefox Automation Protocol for implementing the Puppeteer API. 81 13 pptr.dev …wikipedia.orghttps://en.wikipedia.org › wiki › PuppeteerPuppeteer - WikipediaA puppeteer can operate a puppet indirectly by the use of strings, rods, wires, electronics or directly by their own hands placed inside …tutorialspoint.comhttps://www.tutorialspoint.com › puppeteerPuppeteer Tutorial - Online Tutorials LibraryThis tutorial is designed for professionals working in software testing who want to hone their skills on a robust automation testing tool …thunderbit.comhttps://thunderbit.com › blog › what-is-puppeteer...Puppeteer Guide 2026: Setup, Examples & Scraping Uses2026年6月29日 · If you searched for Puppeteer, you probably want the practical answer first: Puppeteer is a JavaScript library for …puppeteer.github.iohttps://puppeteer.github.io › pptr.devPuppeteer v0.9.0 - GitHub PagesPuppeteer is a JavaScript library which provides a high-level API to control Chrome or Firefox over the DevTools Protocol or …//<![CDATA[
+_w.sched=_w.sched||function(){function r(t){n.push(t)}function u(n){return function(){_w.sched.schedule(n)}}function f(n){t.push(n)}function e(n,t){i[n]=t}var n=[],t=[],i={};return{register:r,wrapSchedule:u,schedule:f,reportCustomMetric:e,_ns:n,_reg:t,_cm:i}}();function ge_cl(n,t){var u,f,r,i;if(n){if(n.getElementsByClassName)return n.getElementsByClassName(t);for(u=n.getElementsByTagName("*"),f=[],r=0;r<u.length;r++)i=u[r],i&&i.className&&i.className.indexOf(t)!==-1&&f.push(i);return f}return[]};function sa_cl(n,t,i){if(n&&t){var r=n.className;i?r.indexOf(t)==-1&&(r=r.concat(" ",t)):r=r.replace(t,"");n.className=r}};
+//]]>//<![CDATA[
+var sj_appHTML=function(n,t){var u,f,e,r,i,s,h;if(t&&n){var c="innerHTML",l="script",a="appendChild",v="length",y="src",p=sj_ce,o=p("div");if(o[c]="<br>"+t,u=o.childNodes,o.removeChild(u[0]),f=o.getElementsByTagName(l),f)for(e=0;e<f[v];e++)r=p(l),i=f[e],i&&(r.type=i.type=="module"||i.type=="importmap"?i.type:"text/javascript",s=i.getAttribute(y),s?(r.setAttribute(y,s),r.setAttribute("crossorigin","anonymous"),i.hasAttribute("async")||(r.async=!1)):(r.text=i[c],r.setAttribute("data-bing-script","1")),i.parentNode.replaceChild(r,i));for(h=_d.createDocumentFragment();u[v];)h[a](u[0]);n[a](h)}};var _gpsConfig = { timeout: 10000, maxAge: 0, sappAF: false, outerTimeoutForGPS: 40000 };;sj_be(_w, "click", function() { _G.UIWP = true; }, 1);;var EntityPreviewConfig = { featureList: "", testHooks: false };
+//]]>分页123下一页
+<li></li>
+	<div></div>
+		[484]<a aria-label='pptr.dev'></a>
+			[485]<div></div>
+				[488][view:eii]<img alt='全球 Web 图标'></img>
+	<h2></h2>
+		[497]<a> Puppeteer </a>
+<li></li>
+	<div></div>
+		[508]<a aria-label='github.com'></a>
+			[509]<div></div>
+				[512][view:fbc]<img alt='全球 Web 图标'></img>
+	<h2></h2>
+		[521]<a> GitHub - puppeteer/puppeteer: JavaScript API for Chrome and Firefox </a>
+<li></li>
+	<div></div>
+		[536]<a aria-label='chrome.com'></a>
+			[537]<div></div>
+				[540][view:fea]<img alt='全球 Web 图标'></img>
+	<h2></h2>
+		[549]<a> Puppeteer | Chrome for Developers </a>
+<li></li>
+	<div></div>
+		[559]<a aria-label='pptr.dev'></a>
+			[560]<div></div>
+				[563][view:fgd]<img alt='全球 Web 图标'></img>
+	<h2></h2>
+		[572]<a> What is Puppeteer? | Puppeteer - pptr.dev </a>
+<li></li>
+	<div></div>
+		[586]<a aria-label='npmjs.com'></a>
+			[587]<div></div>
+				[590][view:fja]<img alt='全球 Web 图标'></img>
+	<h2></h2>
+		[598]<a> puppeteer - npm </a>
+=== OFF-SCREEN below [container:0] (scroll to reveal these elements) ===
+<a> Puppeteer · GitHub </a>
+<li></li>
+	<div></div>
+		<a aria-label='wikipedia.org'></a>
+	<h2></h2>
+		<a> Puppeteer - Wikipedia </a>
+<li></li>
+	<div></div>
+		<a aria-label='tutorialspoint.com'></a>
+	<h2></h2>
+		<a> Puppeteer Tutorial - Online Tutorials Library </a>
+<li></li>
+	<div></div>
+		<a aria-label='thunderbit.com'></a>
+	<h2></h2>
+		<a> Puppeteer Guide 2026: Setup, Examples & Scraping U... </a>
+<li></li>
+	<div></div>
+		<a aria-label='puppeteer.github.io'></a>
+	<h2></h2>
+		<a> Puppeteer v0.9.0 - GitHub Pages </a>
+=== END OFF-SCREEN ===

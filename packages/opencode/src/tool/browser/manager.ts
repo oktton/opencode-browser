@@ -1,6 +1,7 @@
 import type { Browser, Page, CDPSession } from "puppeteer-core"
 import { DomService } from "./dom/service.js"
 import { CDPClient } from "./cdp/client.js"
+import { findChromePath } from "./cdp/chrome-path.js"
 
 export interface TabState {
   id: string
@@ -34,7 +35,7 @@ export class BrowserManager {
   private async ensureBrowser(): Promise<Browser> {
     if (!this.browser) {
       const puppeteer = await import("puppeteer-core")
-      const executablePath = this.findChromePath()
+      const executablePath = findChromePath()
       this.browser = await puppeteer.default.launch({
         executablePath,
         headless: false,
@@ -62,43 +63,6 @@ export class BrowserManager {
       })
     }
     return this.browser
-  }
-
-  private findChromePath(): string {
-    if (process.platform === "win32") {
-      const paths = [
-        process.env.CHROME_PATH,
-        "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
-        "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
-        `${process.env.LOCALAPPDATA}\\Google\\Chrome\\Application\\chrome.exe`,
-      ]
-      for (const p of paths) {
-        if (p) {
-          try {
-            const fs = require("fs")
-            if (fs.existsSync(p)) return p
-          } catch {}
-        }
-      }
-    } else if (process.platform === "darwin") {
-      return "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
-    } else {
-      const paths = [
-        process.env.CHROME_PATH,
-        "/usr/bin/google-chrome",
-        "/usr/bin/chromium-browser",
-        "/usr/bin/chromium",
-      ]
-      for (const p of paths) {
-        if (p) {
-          try {
-            const fs = require("fs")
-            if (fs.existsSync(p)) return p
-          } catch {}
-        }
-      }
-    }
-    return "google-chrome"
   }
 
   async newTab(url?: string): Promise<TabState> {

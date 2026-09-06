@@ -1,0 +1,76 @@
+[view:cf]<div> Explore complex nested iframe structures with Shadow DOM combinations Nested Iframe Clicks: 0 Shadow+Iframe Clicks: 0 Iframe Inside Iframe (Nested) Shadow DOM containing Iframe 🌟 Shadow DOM + Iframe Combo 🎭 Shadow DOM Iframe Clicks: 0 External Controls </div>
+	<div></div>
+		[29]<a> Home </a>
+			[view:db]<svg></svg>
+		<div></div>
+			[36]<a> Basic Buttons </a>
+			[39]<a> Shadow DOM </a>
+			[42]<a> Iframe Buttons </a>
+			[45]<a> Nested Iframe </a>
+			[48]<a> Cross-Origin </a>
+	<div></div>
+		[view:fd]<h1> Nested Iframe & Shadow DOM Combinations </h1>
+		<div></div>
+			<div></div>
+				[view:bgc]<body> 🎭 Outer Iframe Container Outer Clicks: 0 `); nestedDoc.close(); </body>
+					<div></div>
+						<div></div>
+							[176]<button> 🔵 Outer Button 1 </button>
+							[179]<button> 🟢 Outer Button 2 </button>
+							[182]<button> 🟡 Outer Button 3 </button>
+							[185]<button> 🔴 Outer Button 4 </button>
+							[188]<button> 🟣 Outer Button 5 </button>
+=== OFF-SCREEN below [container:0] (scroll to reveal these elements) ===
+=== END OFF-SCREEN ===
+=== OFF-SCREEN below [container:0] (scroll to reveal these elements) ===
+		<iframe></iframe>
+			<div></div>
+				<button> 🔮 S1 </button>
+					 ...
+				<button> ⭐ S2 </button>
+					 ...
+				<button> 🌟 S3 </button>
+					 ...
+				<button> ✨ S4 </button>
+					 ...
+				<button> 💫 S5 </button>
+					 ...
+				<button> 🎪 S6 </button>
+					 ...
+				<button> 🎭 S7 </button>
+					 ...
+				<button> 🎨 S8 </button>
+					 ...
+				<button> 🎯 S9 </button>
+					 ...
+				<button> 🎲 S10 </button>
+					 ...
+				<button> 🎪 S11 </button>
+					 ...
+				<button> 🔮 S12 </button>
+					 ...
+		<div></div>
+			<button> 🔄 Reload </button>
+				 ...
+			<button> 🎨 Change Theme </button>
+				 ...
+			<button> 📤 Send Message </button>
+				 ...
+		<div></div>
+			<div></div>
+				<button> 🔄 Refresh All </button>
+					 ...
+				<button> 🔍 Inspect Structure </button>
+					 ...
+				<button> 📡 Broadcast Message </button>
+					 ...
+				<button> 🔢 Reset Counters </button>
+					 ...
+=== END OFF-SCREEN ===
+[116]<a> Built with </a>
+	[118][view:bbi]<svg></svg>
+[126]<button aria-label='Close'></button>
+	[view:bci]<svg></svg>
+=== OFF-SCREEN below [container:0] (scroll to reveal these elements) ===
+<div role='alert' id='__next-route-announcer__'></div>
+=== END OFF-SCREEN ===

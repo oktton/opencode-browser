@@ -1,0 +1,506 @@
+=== OFF-SCREEN above [container:0] (scroll to reveal these elements) ===
+<a> Jump to content </a>
+=== END OFF-SCREEN ===
+<div></div>
+	<div></div>
+		<nav></nav>
+			[28]<input role='button' aria-label='Main menu' id='vector-main-menu-dropdown-checkbox' type='checkbox'></input>
+		[289]<a> Wikipedia The Free Encyclopedia </a>
+			[view:cjf]<img alt='Wikipedia'></img>
+			[297][view:cjh]<img alt='The Free Encyclopedia'></img>
+	<div></div>
+		<div></div>
+			<div></div>
+				<27><input aria-label='Search Wikipedia' title='Search Wikipedia [alt-f]' id='searchInput' type='search' name='search' placeholder='Search Wikipedia'></input>
+			[329]<button> Search </button>
+		<nav></nav>
+			<li></li>
+				[394]<a> Donate </a>
+			<li></li>
+				[400]<a title='You are encouraged to create an account and log in; however, it is not mandatory'> Create account </a>
+					<span> Create account </span>
+			<li></li>
+				[406]<a title='You're encouraged to log in; however, it's not mandatory. [alt-o]'> Log in </a>
+					<span> Log in </span>
+<div></div>
+	Contents
+	[508]<button aria-label='Hide Contents'> hide </button>
+<ul></ul>
+	<li></li>
+		[516]<a> (Top) </a>
+	<li></li>
+		[525]<a> History </a>
+			[532]<span> History </span>
+		[537]<button> Toggle History subsection </button>
+	<li></li>
+		[640]<a> Trademark </a>
+			[647]<span> Trademark </span>
+	<li></li>
+		[658]<a> Website client-side usage </a>
+		[670]<button> Toggle Website client-side usage subsection </button>
+	<li></li>
+		[719]<a> Other usage </a>
+			[726]<span> Other usage </span>
+	<li></li>
+		[737]<a> Execution </a>
+			[744]<span> Execution </span>
+		[749]<button> Toggle Execution subsection </button>
+	<li></li>
+		[798]<a> Features </a>
+			[805]<span> Features </span>
+		[810]<button> Toggle Features subsection </button>
+	<li></li>
+		[1237]<a> Syntax </a>
+			[1244]<span> Syntax </span>
+	<li></li>
+		[1255]<a> Security </a>
+			[1262]<span> Security </span>
+		[1267]<button> Toggle Security subsection </button>
+	<li></li>
+		[1406]<a> Development tools </a>
+	<li></li>
+		[1424]<a> Related technologies </a>
+		[1436]<button> Toggle Related technologies subsection </button>
+	<li></li>
+		[1521]<a> Notes </a>
+			[1528]<span> Notes </span>
+	<li></li>
+		[1539]<a> References </a>
+			[1546]<span> References </span>
+	<li></li>
+		[1557]<a> Further reading </a>
+	<li></li>
+		[1575]<a> External links </a>
+<header></header>
+	JavaScript
+	<div></div>
+		[32]<input role='button' aria-label='117 languages' id='p-lang-btn-checkbox' type='checkbox'></input>
+<div></div>
+	<div></div>
+		<li></li>
+			[2141]<a title='View the content page [alt-c]'> Article </a>
+				<span> Article </span>
+		<li></li>
+			[2148]<a title='Discuss improvements to the content page [alt-t]'> Talk </a>
+				<span> Talk </span>
+	<div></div>
+		<nav></nav>
+			<li></li>
+				[2191]<a> Read </a>
+			<li></li>
+				[2198]<a title='This page is protected.
+You can view its source [alt-e]'> View source </a>
+					<span> View source </span>
+			<li></li>
+				[2205]<a title='Past revisions of this page [alt-h]'> View history </a>
+					<span> View history </span>
+		<nav></nav>
+			[34]<input role='button' aria-label='Tools' id='vector-page-tools-dropdown-checkbox' type='checkbox'></input>
+			Tools
+<div></div>
+	Appearance
+	[2429]<button aria-label='Hide Appearance'> hide </button>
+<div></div>
+	Text
+	<div></div>
+		<div></div>
+			[81]<input id='skin-client-pref-vector-feature-custom-font-size-value-0' type='radio' name='skin-client-pref-vector-feature-custom-font-size-group' value='0'> Small </input>
+			[2443]<label for='skin-client-pref-vector-feature-custom-font-size-value-0'> Small </label>
+		<div></div>
+			[82]<input id='skin-client-pref-vector-feature-custom-font-size-value-1' type='radio' name='skin-client-pref-vector-feature-custom-font-size-group' value='1' checked='checked'> Standard </input>
+			[54]<label for='skin-client-pref-vector-feature-custom-font-size-value-1'> Standard </label>
+		<div></div>
+			[83]<input id='skin-client-pref-vector-feature-custom-font-size-value-2' type='radio' name='skin-client-pref-vector-feature-custom-font-size-group' value='2'> Large </input>
+			[58]<label for='skin-client-pref-vector-feature-custom-font-size-value-2'> Large </label>
+<div></div>
+	Width
+	<div></div>
+		<div></div>
+			[84]<input id='skin-client-pref-vector-feature-limited-width-value-1' type='radio' name='skin-client-pref-vector-feature-limited-width-group' value='1' checked='checked'> Standard </input>
+			[63]<label for='skin-client-pref-vector-feature-limited-width-value-1'> Standard </label>
+		<div></div>
+			[85]<input id='skin-client-pref-vector-feature-limited-width-value-0' type='radio' name='skin-client-pref-vector-feature-limited-width-group' value='0'> Wide </input>
+			[67]<label for='skin-client-pref-vector-feature-limited-width-value-0'> Wide </label>
+<div></div>
+	Color
+	<div></div>
+		<div></div>
+			[86]<input id='skin-client-pref-skin-theme-value-os' type='radio' name='skin-client-pref-skin-theme-group' value='os'> Automatic </input>
+			[72]<label for='skin-client-pref-skin-theme-value-os'> Automatic </label>
+		<div></div>
+			[87]<input id='skin-client-pref-skin-theme-value-day' type='radio' name='skin-client-pref-skin-theme-group' value='day' checked='checked'> Light </input>
+			[76]<label for='skin-client-pref-skin-theme-value-day'> Light </label>
+		<div></div>
+			[88]<input id='skin-client-pref-skin-theme-value-night' type='radio' name='skin-client-pref-skin-theme-group' value='night'> Dark </input>
+			[80]<label for='skin-client-pref-skin-theme-value-night'> Dark </label>
+<div></div>
+	<div></div>
+		<div></div>
+			[2495]<a title='This article is semi-protected.' id='mwC00'> Page semi-protected </a>
+				[view:cejg]<img alt='Page semi-protected'></img>
+		<div></div>
+			[2501]<a title='Listen to this article' id='mwC1A'></a>
+				[view:cfac]<img alt='Listen to this article'></img>
+	From Wikipedia, the free encyclopedia
+<section></section>
+	<div></div>
+		Not to be confused with
+		[2528]<a title='Java (programming language)'></a>
+		,
+		[2531]<a title='Javanese script'></a>
+		, or
+		[2534]<a title='ECMAScript'></a>
+		.
+	[view:cffb]<table id='mwDA'></table>
+		<tbody> First appeared 4 December 1995 ;30 years ago Stable release ECMAScript 2024 / June 2024 ;2 years ago Preview release ECMAScript 2025 / 27 March 2024 ;2 years ago Typing discipline , , Memory management Garbage collected Scope Lexical Filename extensions .js • .mjs • .cjs[4] Website ecma-international .org /publications-and-standards /standards /ecma-262 / Major , , ; (deprecated) Influenced by , , , , Influenced , , , , , , , , </tbody>
+			<tr></tr>
+				<th colspan='2'> JavaScript </th>
+			<tr></tr>
+				<td colspan='2'> Official logo of , the technical committee responsible for maintaining JavaScript </td>
+					<span></span>
+						[2559]<a></a>
+							[view:cfga]<img></img>
+					<div></div>
+						[2563]<a title='TC39'></a>
+			<tr></tr>
+				<td colspan='2'> Screenshot of JavaScript source code </td>
+					<span></span>
+						[2569]<a></a>
+							[view:cfha]<img></img>
+			<tr></tr>
+				<th scope='row'> Paradigms </th>
+					[2575]<a title='Programming paradigm'> Paradigms </a>
+				<td> : , , , , </td>
+					[2578]<a title='Multi-paradigm'></a>
+					[2584]<a title='Functional programming'> functional </a>
+					[2587]<a title='Imperative programming'> imperative </a>
+					[2590]<a title='Procedural programming'> procedural </a>
+					[2593]<a title='Object-oriented programming'> object-oriented </a>
+			<tr></tr>
+				<th scope='row'> Family </th>
+				<td> ECMAScript </td>
+					[2599]<a title='ECMAScript'></a>
+			<tr></tr>
+				<th scope='row'> Designed by </th>
+					[2603]<a title='Software design'> Designed by </a>
+				<td> of first; then others contributed to standard </td>
+					[2609]<a title='Brendan Eich'></a>
+					[2612]<a title='Netscape'></a>
+					[2615]<a title='ECMAScript'></a>
+=== OFF-SCREEN below [container:0] (scroll to reveal these elements) ===
+			<sup></sup>
+				<a id='mwDQ'> [1] </a>
+					 ...
+			<tr> Stable release ECMAScript 2024 / June 2024 ;2 year... </tr>
+				<th scope='row'> Stable release </th>
+					<a title='Software release life cycle'> Stable release </a>
+						 ...
+				<td> ECMAScript 2024 / June 2024 ;2 years ago </td>
+					<sup></sup>
+						<a id='mwEQ'> [2] </a>
+							 ...
+					<span></span>
+						<a title='Edit this on Wikidata'></a>
+							 ...
+			<tr> Preview release ECMAScript 2025 / 27 March 2024 ;2... </tr>
+				<th scope='row'> Preview release </th>
+					<a title='Software release life cycle'> Preview release </a>
+						 ...
+				<td> ECMAScript 2025 / 27 March 2024 ;2 years ago </td>
+					<sup></sup>
+						<a id='mwFQ'> [3] </a>
+							 ...
+					<span></span>
+						<a title='Edit this on Wikidata'></a>
+							 ...
+			<tr> Typing discipline , , </tr>
+				<th scope='row'> Typing discipline </th>
+					<a title='Type system'> Typing discipline </a>
+						 ...
+				<td> , , </td>
+					<a title='Dynamic typing'></a>
+						 ...
+					<a title='Strong and weak typing'></a>
+						 ...
+					<a title='Duck typing'> duck </a>
+						 ...
+			<tr> Memory management Garbage collected </tr>
+				<th scope='row'> Memory management </th>
+					<a title='Memory management'></a>
+						 ...
+				<td> Garbage collected </td>
+					<a title='Garbage collection (computer science)'> Garbage collected </a>
+						 ...
+			<tr> Scope Lexical </tr>
+				<th scope='row'> Scope </th>
+					<a title='Scope (computer science)'></a>
+						 ...
+				<td> Lexical </td>
+					<a title='Scope (computer science)'> Lexical </a>
+						 ...
+			<tr> Filename extensions .js • .mjs • .cjs[4] </tr>
+				<th scope='row'> Filename extensions </th>
+					<a> Filename extensions </a>
+						 ...
+				<td> .js • .mjs • .cjs[4] </td>
+					<sup></sup>
+						<a id='mwGQ'> [4] </a>
+							 ...
+			<tr> Website ecma-international .org /publications-and-... </tr>
+				<td> ecma-international .org /publications-and-standard... </td>
+					<a> ecma-international.org/publications-and-standards/... </a>
+						 ...
+			<tr> Major </tr>
+				<a title='Programming language implementation'> implementations </a>
+					 ...
+			<tr> , , ; (deprecated) </tr>
+				<a title='V8 (JavaScript engine)'></a>
+					 ...
+				<a title='JavaScriptCore'></a>
+					 ...
+				<a title='SpiderMonkey'></a>
+					 ...
+				<a title='Chakra (JavaScript engine)'></a>
+					 ...
+			<tr> , , , , </tr>
+				<a title='Java (programming language)'></a>
+					 ...
+				<sup></sup>
+					<a id='mwHQ'> [5] </a>
+						 ...
+				<sup></sup>
+					<a id='mwIQ'> [6] </a>
+						 ...
+				<a title='Scheme (programming language)'></a>
+				<sup></sup>
+					<a id='mwJQ'> [6] </a>
+						 ...
+				<a title='Self (programming language)'></a>
+				<sup></sup>
+					<a id='mwKQ'> [7] </a>
+						 ...
+				<a title='AWK'></a>
+				<sup></sup>
+					<a id='mwLQ'> [8] </a>
+						 ...
+				<a title='HyperTalk'></a>
+				<sup></sup>
+					<a id='mwMQ'> [9] </a>
+						 ...
+			<tr> , , , , , , , , </tr>
+				<a title='ActionScript'></a>
+					 ...
+				<a title='ArkTS'></a>
+					 ...
+				<a title='AssemblyScript'></a>
+					 ...
+				<a title='CoffeeScript'></a>
+					 ...
+				<a title='Dart (programming language)'></a>
+					 ...
+				<a title='Haxe'></a>
+					 ...
+				<a title='JS++'></a>
+					 ...
+				<a title='Opa (programming language)'></a>
+					 ...
+				<a title='TypeScript'></a>
+					 ...
+			<tr></tr>
+				<span></span>
+					<a> Wikibooks logo </a>
+						 ...
+				<a title='wikibooks:JavaScript'> JavaScript at Wikibooks </a>
+					 ...
+=== END OFF-SCREEN ===
+	<p></p>
+		JavaScript
+		(
+		JS
+		)
+		<sup></sup>
+			[2935]<a id='mwOA'> [a] </a>
+				<span id='mwOQ'></span>
+					<span id='mwOg'> [a] </span>
+					<span id='mwOw'></span>
+		is a
+		[2943]<a title='Programming language' id='mwPA'> programming language </a>
+		and core technology of
+		[2946]<a title='World Wide Web' id='mwPQ'> the Web </a>
+		, alongside
+		[2949]<a title='HTML' id='mwPg'></a>
+		and
+		[2952]<a title='CSS' id='mwPw'></a>
+		[2955]<a title='Brendan Eich' id='mwQA'></a>
+		in 1995,
+		<sup></sup>
+			[2959]<a id='mwQQ'> [6] </a>
+				<span id='mwQg'></span>
+					<span id='mwQw'> [6] </span>
+					<span id='mwRA'></span>
+		it is maintained by
+		[2967]<a title='Ecma International' id='mwRQ'></a>
+		's
+		[2970]<a title='TC39' id='mwRg'></a>
+		technical committee,
+		<sup></sup>
+			[2974]<a id='mwRw'> [10] </a>
+				<span id='mwSA'></span>
+					<span id='mwSQ'> [10] </span>
+					<span id='mwSg'></span>
+		with related
+		[2982]<a title='Web platform' id='mwSw'> Web APIs </a>
+		maintained by
+		[2985]<a title='W3C' id='mwTA'></a>
+		and
+		[2988]<a title='WHATWG' id='mwTQ'></a>
+		.
+		<sup></sup>
+			[2992]<a id='mwTg'> [11] </a>
+				<span id='mwTw'></span>
+					<span id='mwUA'> [11] </span>
+					<span id='mwUQ'></span>
+		As of 2025, JavaScript is the most widely used programming language on
+		[3000]<a title='GitHub' id='mwUg'></a>
+		.
+		<sup></sup>
+			[3004]<a id='mwUw'> [b] </a>
+				<span id='mwVA'></span>
+					<span id='mwVQ'> [b][12] </span>
+					<span id='mwVg'></span>
+		<sup></sup>
+			[3012]<a id='mwVw'> [12] </a>
+				<span id='mwWA'></span>
+					<span id='mwWQ'></span>
+					<span id='mwWg'></span>
+		, however,
+		[3020]<a title='TypeScript' id='mwWw'></a>
+		, which is a version of JavaScript that is strict about types and is statically typed, overtook JavaScript on GitHub by August 2025.
+		<sup></sup>
+			[3024]<a id='mwXA'> [13] </a>
+				<span id='mwXQ'></span>
+					<span id='mwXg'> [13] </span>
+					<span id='mwXw'></span>
+	<p></p>
+		[3033]<a id='mwYQ'> Web browsers </a>
+		have a dedicated
+		[13]<a title='JavaScript engine' id='mwYg'></a>
+		that executes the client
+		[3038]<a title='Source code' id='mwYw'></a>
+		. These engines are also utilized in some
+		[3041]<a title='Server (computing)' id='mwZA'> servers </a>
+		and a variety of
+		[3044]<a title='Application software' id='mwZQ'> apps </a>
+		. The most popular
+		[3047]<a title='Runtime system' id='mwZg'> runtime system </a>
+		for non-browser usage is
+		[3050]<a title='Node.js' id='mwZw'></a>
+		.
+		<sup></sup>
+			[3054]<a id='mwaA'> [14] </a>
+				<span id='mwaQ'></span>
+					<span id='mwag'> [14] </span>
+					<span id='mwaw'></span>
+	<p></p>
+		JavaScript is a
+		[3063]<a title='High-level programming language' id='mwbQ'> high-level </a>
+		, often
+		[3066]<a title='Just-in-time compilation' id='mwbg'> just-in-time–compiled </a>
+		language that conforms to the
+		[3069]<a title='ECMAScript' id='mwbw'></a>
+		standard.
+		<sup></sup>
+			[3073]<a id='mwcA'> [15] </a>
+				<span id='mwcQ'></span>
+					<span id='mwcg'> [15] </span>
+					<span id='mwcw'></span>
+		It has
+		[3081]<a title='Dynamic typing' id='mwdA'> dynamic typing </a>
+		,
+		[3084]<a title='Prototype-based programming' id='mwdQ'> prototype-basedobject-orientation </a>
+		, and
+		[3090]<a title='First-class function' id='mwdw'> first-class functions </a>
+		. It is
+		, supporting
+		[3096]<a title='Event-driven programming' id='mweQ'> event-driven </a>
+		,
+		[3099]<a title='Functional programming' id='mweg'> functional </a>
+		, and
+		[3102]<a title='Imperative programming' id='mwew'> imperativeprogramming styles </a>
+		[3105]<a title='Programming paradigm' id='mwfA'> programming styles </a>
+		. It has
+		[3108]<a title='Application programming interface' id='mwfQ'> application programming interfaces </a>
+		[3111]<a title='Regular expression' id='mwfg'> regular expressions </a>
+		, standard
+		[3114]<a title='Data structure' id='mwfw'> data structures </a>
+		, and the
+		[3117]<a title='Document Object Model' id='mwgA'></a>
+		(DOM).
+=== OFF-SCREEN below [container:0] (scroll to reveal these elements) ===
+	<a title='Input/output' id='mwgg'> input/output </a>
+		 ...
+	(I/O), such as
+	<a title='Computer network' id='mwgw'> networking </a>
+		 ...
+	,
+	<a title='Data storage' id='mwhA'></a>
+		 ...
+	, or
+	<a title='Computer graphics' id='mwhQ'></a>
+		 ...
+	facilities. In practice, the web browser or other ...
+	<p></p>
+		Although
+		<a title='Java (programming language)' id='mwhw'></a>
+			 ...
+		and JavaScript are similar in name and
+		<a title='Syntax (programming languages)' id='mwiA'> syntax </a>
+			 ...
+		, the two languages are distinct and differ greatl...
+History
+<section></section>
+	Creation at Netscape
+	<p></p>
+		The first popular
+		<a title='Web browser' id='mwjQ'> web browser </a>
+			 ...
+		with a
+		<a title='Graphical user interface' id='mwjg'> graphical user interface </a>
+			 ...
+		,
+		<a title='Mosaic (web browser)' id='mwjw'></a>
+			 ...
+		, was released in 1993. The lead developers of Mos...
+		<a title='Netscape' id='mwkA'></a>
+			 ...
+		corporation, which released a more polished browse...
+		<a title='Netscape Navigator' id='mwkQ'></a>
+			 ...
+		, in 1994. This quickly became the most-used.
+		<sup></sup>
+			<a id='mwkg'> [16] </a>
+				 ...
+	<p></p>
+		During these formative years of the Web,
+		<a title='Web page' id='mwlw'> web pages </a>
+			 ...
+		could only be static, lacking the capability for d...
+		<a title='Programming language' id='mwmA'> programming language </a>
+			 ...
+		to Navigator. They pursued two routes to achieve t...
+		<a title='Sun Microsystems' id='mwmQ'></a>
+			 ...
+		to embed the
+		<a title='Java (programming language)' id='mwmg'></a>
+			 ...
+		language, while also hiring
+		<a title='Brendan Eich' id='mwmw'></a>
+			 ...
+		to embed the
+		<a title='Scheme (programming language)' id='mwnA'></a>
+			 ...
+		language.
+		<sup></sup>
+			<a id='mwnQ'> [6] </a>
+				 ...
+=== END OFF-SCREEN ===

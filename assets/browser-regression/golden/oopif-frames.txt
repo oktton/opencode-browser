@@ -1,0 +1,73 @@
+Cross-origin iframe fixture
+Each frame below is a separate origin, so Chrome runs it out of process and it
+  is reached through its own CDP session. Interactive elements sit next to and
+  on top of the frames: hit testing at those points is where a page-level hit
+  test (which pierces into the child frame) and a document-level one (which
+  stops at the iframe element) disagree.
+<div></div>
+	[33]<button id='before-frames'> Button before frames </button>
+	[36]<a> Link before frames </a>
+Cross-origin: OpenStreetMap
+<div></div>
+	[47]<span> Badge over the map </span>
+	<iframe></iframe>
+		[view:ih]<canvas role='region' aria-label='地图'></canvas>
+		[92]<button aria-label='放大' title='放大' type='button'></button>
+			[93][view:jd]<i class='maplibregl-ctrl-icon fs-5 bi bi-plus-lg'></i>
+		[94]<button aria-label='缩小' title='缩小' type='button'></button>
+			[95][view:jf]<i class='maplibregl-ctrl-icon fs-5 bi bi-dash-lg'></i>
+		<div></div>
+			[5][view:f]<details> | © ♥️ . </details>
+				[99]<a> 报告问题 </a>
+				[102]<a> OpenStreetMap 贡献者 </a>
+				[105]<a> 捐款 </a>
+				[108]<a> 网站和API条款 </a>
+<div></div>
+	[54]<button id='beside-map'> Button beside the map </button>
+	<thead></thead>
+		<tr></tr>
+			<th> Cell with link </th>
+			<th> Plain cell </th>
+	<tbody></tbody>
+		<td> Nested link one </td>
+			[70]<a> Nested link one </a>
+		<td> plain text one </td>
+		<tr></tr>
+			<td> Nested link two </td>
+				[77]<a> Nested link two </a>
+			<td> plain text two </td>
+Cross-origin: Vimeo player
+<div></div>
+	<iframe></iframe>
+		[91]<button aria-label='更多选项' type='button'></button>
+			[92][view:jc]<svg></svg>
+		<div></div>
+			[121]<button aria-labelledby='play-button-tooltip' type='button'> 播放 </button>
+			<div></div>
+				<div></div>
+					[130]<div role='presentation'> 01:02 </div>
+				<div></div>
+					[162][view:bgc]<svg></svg>
+					<div></div>
+						[204]<button aria-labelledby='collapse-control-bar-button-tooltip' id='collapse-control-bar-button' type='button'> 显示控件 </button>
+							[view:caf]<svg></svg>
+					[210]<a aria-label='在 Vimeo 上观看'></a>
+						[view:cbb]<svg></svg>
+	[92]<button id='beside-vimeo'> Button beside the player </button>
+Same-document iframe (srcdoc)
+<iframe></iframe>
+	[124]<button id='inner-btn'> Inner button </button>
+	Inner paragraph text
+=== OFF-SCREEN below [container:0] (scroll to reveal these elements) ===
+After the frames
+<form></form>
+	<label></label>
+		Name Pick
+    OneTwo
+		<input name='name' value='hello'></input>
+	<label></label>
+		<select name='pick' value='Two'></select>
+			 ...
+	<button type='submit'> Submit </button>
+		 ...
+=== END OFF-SCREEN ===

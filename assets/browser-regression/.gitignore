@@ -1,0 +1,2 @@
+# written by `verify` when a fixture fails, for inspecting the full output
+golden/*.actual.txt

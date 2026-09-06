@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Cross-origin iframe fixture</title>
+<style>
+  body { font: 14px system-ui; margin: 0; padding: 16px; }
+  h2 { margin: 20px 0 8px; font-size: 15px; }
+  .frames { display: flex; gap: 12px; flex-wrap: wrap; }
+  iframe { border: 2px solid #888; }
+  .near { display: flex; gap: 8px; align-items: flex-start; }
+  button, a { padding: 6px 10px; }
+  .overlap { position: relative; }
+  .overlap .badge {
+    position: absolute; top: 8px; left: 8px; z-index: 2;
+    background: #fc0; padding: 4px 8px; cursor: pointer;
+  }
+  table { border-collapse: collapse; margin-top: 8px; }
+  td, th { border: 1px solid #ccc; padding: 4px 8px; }
+</style>
+</head>
+<body>
+<h1>Cross-origin iframe fixture</h1>
+<p>
+  Each frame below is a separate origin, so Chrome runs it out of process and it
+  is reached through its own CDP session. Interactive elements sit next to and
+  on top of the frames: hit testing at those points is where a page-level hit
+  test (which pierces into the child frame) and a document-level one (which
+  stops at the iframe element) disagree.
+</p>
+
+<div class="near">
+  <button id="before-frames">Button before frames</button>
+  <a href="#anchor">Link before frames</a>
+</div>
+
+<h2>Cross-origin: OpenStreetMap</h2>
+<div class="frames">
+  <div class="overlap">
+    <span class="badge" onclick="void 0">Badge over the map</span>
+    <iframe
+      title="OpenStreetMap embed"
+      width="360" height="220"
+      src="https://www.openstreetmap.org/export/embed.html?bbox=-0.11%2C51.50%2C-0.09%2C51.51&amp;layer=mapnik"></iframe>
+  </div>
+  <div>
+    <button id="beside-map">Button beside the map</button>
+    <table>
+      <thead><tr><th>Cell with link</th><th>Plain cell</th></tr></thead>
+      <tbody>
+        <tr><td><a href="#one">Nested link one</a></td><td>plain text one</td></tr>
+        <tr><td><a href="#two">Nested link two</a></td><td>plain text two</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<h2>Cross-origin: Vimeo player</h2>
+<div class="frames">
+  <iframe
+    title="Vimeo embed"
+    width="360" height="220"
+    src="https://player.vimeo.com/video/76979871"></iframe>
+  <button id="beside-vimeo">Button beside the player</button>
+</div>
+
+<h2>Same-document iframe (srcdoc)</h2>
+<iframe
+  title="srcdoc embed"
+  width="360" height="120"
+  srcdoc="<button id='inner-btn'>Inner button</button><p>Inner paragraph text</p>"></iframe>
+
+<h2 id="anchor">After the frames</h2>
+<form>
+  <label>Name <input type="text" name="name" value="hello"></label>
+  <label>Pick
+    <select name="pick"><option value="1">One</option><option value="2" selected>Two</option></select>
+  </label>
+  <button type="submit">Submit</button>
+</form>
+</body>
+</html>

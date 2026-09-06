@@ -1,0 +1,52 @@
+<div></div>
+	<div></div>
+		[1179]<yt-icon-button id='guide-button'></yt-icon-button>
+			<button aria-label='导视' id='button'></button>
+				<yt-icon id='guide-icon'></yt-icon>
+					[1190]<div></div>
+						[view:bbjb]<svg></svg>
+		<ytd-topbar-logo-renderer></ytd-topbar-logo-renderer>
+			[1205]<a title='YouTube 首页' id='logo'></a>
+				<yt-icon id='logo-icon'></yt-icon>
+					[1218]<div></div>
+						[view:bcbj]<svg></svg>
+							<g id='youtube-paths_yt15'></g>
+	<div></div>
+		<div></div>
+			<3><input role='combobox' aria-expanded='true' name='search_query' placeholder='搜索'></input>
+		[7]<button aria-label='Search' title='搜索'></button>
+			[1347]<div></div>
+				[view:bdei]<svg></svg>
+	<div></div>
+		[1425]<a></a>
+			<yt-icon-button id='button'></yt-icon-button>
+				<button aria-label='设置' id='button'></button>
+					[1436]<div></div>
+						[view:bedh]<svg></svg>
+<ytd-mini-guide-renderer></ytd-mini-guide-renderer>
+	<ytd-mini-guide-entry-renderer></ytd-mini-guide-entry-renderer>
+		[1638]<a aria-label='首页' title='首页' id='endpoint'></a>
+			<yt-icon id='icon'></yt-icon>
+				[1645]<div></div>
+					[view:bgeg]<svg></svg>
+			[1649]<span> 首页 </span>
+	<ytd-mini-guide-entry-renderer></ytd-mini-guide-entry-renderer>
+		[1679]<a aria-label='Shorts' title='Shorts' id='endpoint'></a>
+			<yt-icon id='icon'></yt-icon>
+				[1686]<div></div>
+					[view:bgih]<svg></svg>
+			[1690]<span> Shorts </span>
+	<ytd-mini-guide-entry-renderer></ytd-mini-guide-entry-renderer>
+		[1720]<a aria-label='订阅' title='订阅' id='endpoint'></a>
+			<yt-icon id='icon'></yt-icon>
+				[1727]<div></div>
+					[view:bhci]<svg></svg>
+			[1731]<span> 订阅 </span>
+	<ytd-mini-guide-entry-renderer></ytd-mini-guide-entry-renderer>
+		[1761]<a aria-label='我' title='我' id='endpoint'></a>
+			<yt-icon id='icon'></yt-icon>
+				[1768]<div></div>
+					[view:bhgj]<svg></svg>
+			[1772]<span> 我 </span>
+搜索视频，开启 YouTube 之旅
+开始观看视频吧，帮助我们为你推荐更多你可能会喜欢的内容！

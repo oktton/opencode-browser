@@ -1,0 +1,467 @@
+[view:cb]<table id='hnmain'></table>
+	<tbody></tbody>
+		<tr></tr>
+			<td></td>
+				[view:cf]<table></table>
+					<tbody></tbody>
+						<tr></tr>
+							<td></td>
+								[30][view:da]<img></img>
+							<td></td>
+								<b></b>
+									[34]<a> Hacker Newsnew | past | comments | ask | show | jobs | submit </a>
+								[36]<a> new </a>
+								[39]<a> past </a>
+								[42]<a> comments </a>
+								[45]<a> ask </a>
+								[48]<a> show </a>
+								[51]<a> jobs </a>
+								[54]<a> submit </a>
+							<td></td>
+								[58]<a> login </a>
+		<tr></tr>
+		<tr id='bigbox'></tr>
+			<td></td>
+				[view:gd]<table></table>
+					<tbody></tbody>
+						<tr id='49585644'></tr>
+							<td> 1. </td>
+							<td></td>
+								[71]<a id='up_49585644'></a>
+									[72][view:hc]<div title='upvote'></div>
+							<td> Intellectual Fly Is Open (dtrace.org) </td>
+								[75]<a> Intellectual Fly Is Open (dtrace.org) </a>
+								<span></span>
+									[79]<a> dtrace.org </a>
+						<tr></tr>
+							<td colspan='2'></td>
+							<td> 63 points by cyb0rg01 hour ago | hide | 35 comments </td>
+								[5]<a> cyb0rg0 </a>
+								<span></span>
+									[93]<a> 1 hour ago </a>
+								[98]<a> hide </a>
+								[101]<a> 35 comments </a>
+						<tr></tr>
+						<tr id='49584083'></tr>
+							<td> 2. </td>
+							<td></td>
+								[110]<a id='up_49584083'></a>
+									[111][view:bbb]<div title='upvote'></div>
+							<td> Isar Aerospace reaches orbit and deploys payloads on second flight (isaraerospace.com) </td>
+								[114]<a> Isar Aerospace reaches orbit and deploys payloads on second flight (isaraerospace.com) </a>
+								<span></span>
+									[118]<a> isaraerospace.com </a>
+						<tr></tr>
+							<td colspan='2'></td>
+							<td> 302 points by mpweiher5 hours ago | hide | 79 comments </td>
+								[4]<a> mpweiher </a>
+								<span></span>
+									[132]<a> 5 hours ago </a>
+								[137]<a> hide </a>
+								[140]<a> 79 comments </a>
+						<tr></tr>
+						<tr id='49585627'></tr>
+							<td> 3. </td>
+							<td></td>
+								[149]<a id='up_49585627'></a>
+									[150][view:bfa]<div title='upvote'></div>
+							<td> Doomscrolling Ourselves to Death (edwest.co.uk) </td>
+								[153]<a> Doomscrolling Ourselves to Death (edwest.co.uk) </a>
+								<span></span>
+									[157]<a> edwest.co.uk </a>
+						<tr></tr>
+							<td colspan='2'></td>
+							<td> 39 points by shubhamjain1 hour ago | hide | 16 comments </td>
+								[168]<a> shubhamjain </a>
+								<span></span>
+									[172]<a> 1 hour ago </a>
+								[177]<a> hide </a>
+								[180]<a> 16 comments </a>
+						<tr></tr>
+						<tr id='49531619'></tr>
+							<td> 4. </td>
+							<td></td>
+								[189]<a id='up_49531619'></a>
+									[190][view:bja]<div title='upvote'></div>
+							<td> M-DISC – DVD/Blu-ray compatible discs that may last up to 1000 years (wikipedia.org) </td>
+								[193]<a> M-DISC – DVD/Blu-ray compatible discs that may last up to 1000 years (wikipedia.org) </a>
+								<span></span>
+									[197]<a> wikipedia.org </a>
+						<tr></tr>
+							<td colspan='2'></td>
+							<td> 58 points by gurjeet4 hours ago | hide | 16 comments </td>
+								[208]<a> gurjeet </a>
+								<span></span>
+									[212]<a> 4 hours ago </a>
+								[217]<a> hide </a>
+								[220]<a> 16 comments </a>
+						<tr></tr>
+						<tr id='49585300'></tr>
+							<td> 5. </td>
+							<td></td>
+								[229]<a id='up_49585300'></a>
+									[230][view:cda]<div title='upvote'></div>
+							<td> I asked astra to make playable 4D chess (4d-chess.pages.dev) </td>
+								[233]<a> I asked astra to make playable 4D chess (4d-chess.pages.dev) </a>
+								<span></span>
+									[237]<a> 4d-chess.pages.dev </a>
+						<tr></tr>
+							<td colspan='2'></td>
+							<td> 20 points by mikiyas1 hour ago | hide | 9 comments </td>
+								[248]<a> mikiyas </a>
+								<span></span>
+									[252]<a> 1 hour ago </a>
+								[257]<a> hide </a>
+								[260]<a> 9 comments </a>
+						<tr></tr>
+						<tr id='49582000'></tr>
+							<td> 6. </td>
+							<td></td>
+								[269]<a id='up_49582000'></a>
+									[270][view:cha]<div title='upvote'></div>
+							<td> Cloud in a Bottle: making self-hosting accessible to everyone (cloudinabottle.org) </td>
+								[273]<a> Cloud in a Bottle: making self-hosting accessible to everyone (cloudinabottle.org) </a>
+								<span></span>
+									[277]<a> cloudinabottle.org </a>
+						<tr></tr>
+							<td colspan='2'></td>
+							<td> 478 points by zplizzi12 hours ago | hide | 235 comments </td>
+								[288]<a> zplizzi </a>
+								<span></span>
+									[292]<a> 12 hours ago </a>
+								[297]<a> hide </a>
+								[300]<a> 235 comments </a>
+						<tr></tr>
+						<tr id='49580939'></tr>
+							<td> 7. </td>
+							<td></td>
+								[309]<a id='up_49580939'></a>
+									[310][view:dba]<div title='upvote'></div>
+							<td> The revolt of the reader (dtrace.org) </td>
+								[313]<a> The revolt of the reader (dtrace.org) </a>
+								<span></span>
+									[317]<a> dtrace.org </a>
+						<tr></tr>
+							<td colspan='2'></td>
+							<td> 425 points by chmaynard15 hours ago | hide | 191 comments </td>
+								[328]<a> chmaynard </a>
+								<span></span>
+									[332]<a> 15 hours ago </a>
+								[337]<a> hide </a>
+								[340]<a> 191 comments </a>
+						<tr></tr>
+						<tr id='49585161'></tr>
+							<td> 8. </td>
+							<td></td>
+								[349]<a id='up_49585161'></a>
+									[350][view:dfa]<div title='upvote'></div>
+							<td> I Changed My License (bergie.iki.fi) </td>
+								[353]<a> I Changed My License (bergie.iki.fi) </a>
+								<span></span>
+									[357]<a> bergie.iki.fi </a>
+						<tr></tr>
+							<td colspan='2'></td>
+							<td> 76 points by jllyhill2 hours ago | hide | 80 comments </td>
+								[368]<a> jllyhill </a>
+								<span></span>
+									[372]<a> 2 hours ago </a>
+								[377]<a> hide </a>
+								[380]<a> 80 comments </a>
+						<tr></tr>
+						<tr id='49546198'></tr>
+							<td> 9. </td>
+							<td></td>
+								[389]<a id='up_49546198'></a>
+									[390][view:dja]<div title='upvote'></div>
+							<td> IBM Quantum Nighthawk R2 (ibm.com) </td>
+								[393]<a> IBM Quantum Nighthawk R2 (ibm.com) </a>
+								<span></span>
+									[397]<a> ibm.com </a>
+						<tr></tr>
+							<td colspan='2'></td>
+							<td> 35 points by fuglede_5 hours ago | hide | 14 comments </td>
+								[408]<a> fuglede_ </a>
+								<span></span>
+									[412]<a> 5 hours ago </a>
+								[417]<a> hide </a>
+								[420]<a> 14 comments </a>
+						<tr></tr>
+						<tr id='49541888'></tr>
+							<td> 10. </td>
+							<td></td>
+								[429]<a id='up_49541888'></a>
+									[430][view:eda]<div title='upvote'></div>
+							<td> Music Theory for Programmers (runjs.app) </td>
+								[433]<a> Music Theory for Programmers (runjs.app) </a>
+								<span></span>
+									[437]<a> runjs.app </a>
+						<tr></tr>
+							<td colspan='2'></td>
+							<td> 191 points by birdculture10 hours ago | hide | 103 comments </td>
+								[448]<a> birdculture </a>
+								<span></span>
+									[452]<a> 10 hours ago </a>
+								[457]<a> hide </a>
+								[460]<a> 103 comments </a>
+						<tr></tr>
+						<tr id='49585703'></tr>
+							<td> 11. </td>
+							<td></td>
+								[469]<a id='up_49585703'></a>
+									[470][view:eha]<div title='upvote'></div>
+							<td> The pencil case model of creativity (uu.nl) </td>
+								[473]<a> The pencil case model of creativity (uu.nl) </a>
+								<span></span>
+									[477]<a> uu.nl </a>
+						<tr></tr>
+							<td colspan='2'></td>
+							<td> 8 points by jruohonen54 minutes ago | hide | discuss </td>
+								[488]<a> jruohonen </a>
+								<span></span>
+									[492]<a> 54 minutes ago </a>
+								[497]<a> hide </a>
+								[500]<a> discuss </a>
+						<tr></tr>
+						<tr id='49529398'></tr>
+							<td> 12. </td>
+							<td></td>
+								[509]<a id='up_49529398'></a>
+									[510][view:fba]<div title='upvote'></div>
+							<td> The ColorChecker, photography's most important 24 squares, turns 50 (dpreview.com) </td>
+								[513]<a> The ColorChecker, photography's most important 24 squares, turns 50 (dpreview.com) </a>
+								<span></span>
+									[517]<a> dpreview.com </a>
+						<tr></tr>
+							<td colspan='2'></td>
+							<td> 87 points by sohkamyung10 hours ago | hide | 14 comments </td>
+								[528]<a> sohkamyung </a>
+								<span></span>
+									[532]<a> 10 hours ago </a>
+								[537]<a> hide </a>
+								[540]<a> 14 comments </a>
+						<tr></tr>
+						<tr id='49569983'></tr>
+							<td> 13. </td>
+							<td></td>
+								[549]<a id='up_49569983'></a>
+									[550][view:ffa]<div title='upvote'></div>
+							<td> Household Laser Cuts (cceckman.com) </td>
+								[553]<a> Household Laser Cuts (cceckman.com) </a>
+								<span></span>
+									[557]<a> cceckman.com </a>
+						<tr></tr>
+							<td colspan='2'></td>
+							<td> 8 points by evakhoury1 hour ago | hide | discuss </td>
+								[568]<a> evakhoury </a>
+								<span></span>
+									[572]<a> 1 hour ago </a>
+								[577]<a> hide </a>
+								[580]<a> discuss </a>
+						<tr></tr>
+						<tr id='49582656'></tr>
+							<td> 14. </td>
+							<td></td>
+								[589]<a id='up_49582656'></a>
+									[590][view:fja]<div title='upvote'></div>
+							<td> AI, Tools and Transformation (ben-evans.com) </td>
+								[593]<a> AI, Tools and Transformation (ben-evans.com) </a>
+								<span></span>
+									[597]<a> ben-evans.com </a>
+						<tr></tr>
+							<td colspan='2'></td>
+							<td> 86 points by firexcy10 hours ago | hide | 36 comments </td>
+								[608]<a> firexcy </a>
+								<span></span>
+									[612]<a> 10 hours ago </a>
+								[617]<a> hide </a>
+								[620]<a> 36 comments </a>
+						<tr></tr>
+						<tr id='49582719'></tr>
+							<td> 15. </td>
+							<td></td>
+								[629]<a id='up_49582719'></a>
+									[630][view:gda]<div title='upvote'></div>
+							<td> AMD Based FreeBSD Desktop Reloaded (vermaden.wordpress.com) </td>
+								[633]<a> AMD Based FreeBSD Desktop Reloaded (vermaden.wordpress.com) </a>
+								<span></span>
+									[637]<a> vermaden.wordpress.com </a>
+						<tr></tr>
+							<td colspan='2'></td>
+							<td> 74 points by vermaden10 hours ago | hide | 9 comments </td>
+								[648]<a> vermaden </a>
+								<span></span>
+									[652]<a> 10 hours ago </a>
+								[657]<a> hide </a>
+								[660]<a> 9 comments </a>
+						<tr></tr>
+						<tr id='49563355'></tr>
+							<td> 16. </td>
+							<td></td>
+								[669]<a id='up_49563355'></a>
+									[670][view:gha]<div title='upvote'></div>
+							<td> Discovery of a new OpenAI agent message board (collusion.wiki) </td>
+								[673]<a> Discovery of a new OpenAI agent message board (collusion.wiki) </a>
+								<span></span>
+									[677]<a> collusion.wiki </a>
+						<tr></tr>
+							<td colspan='2'></td>
+							<td> 2212 points by moultano2 days ago | hide | 1559 comments </td>
+								[688]<a> moultano </a>
+								<span></span>
+									[692]<a> 2 days ago </a>
+								[697]<a> hide </a>
+								[700]<a> 1559 comments </a>
+						<tr></tr>
+						<tr id='49535122'></tr>
+							<td> 17. </td>
+							<td></td>
+								[709]<a id='up_49535122'></a>
+									[710][view:hba]<div title='upvote'></div>
+							<td> The Empire of Information (lareviewofbooks.org) </td>
+								[713]<a> The Empire of Information (lareviewofbooks.org) </a>
+								<span></span>
+									[717]<a> lareviewofbooks.org </a>
+						<tr></tr>
+							<td colspan='2'></td>
+							<td> 10 points by Petiver3 hours ago | hide | 4 comments </td>
+								[728]<a> Petiver </a>
+								<span></span>
+									[732]<a> 3 hours ago </a>
+								[737]<a> hide </a>
+								[740]<a> 4 comments </a>
+						<tr></tr>
+						<tr id='49578280'></tr>
+							<td> 18. </td>
+							<td></td>
+								[749]<a id='up_49578280'></a>
+									[750][view:hfa]<div title='upvote'></div>
+							<td> Learn Programming with OCaml (cnrs.fr) </td>
+								[753]<a> Learn Programming with OCaml (cnrs.fr) </a>
+								<span></span>
+									[757]<a> cnrs.fr </a>
+						<tr></tr>
+							<td colspan='2'></td>
+							<td> 274 points by elvis7020 hours ago | hide | 107 comments </td>
+								[768]<a> elvis70 </a>
+								<span></span>
+									[772]<a> 20 hours ago </a>
+								[777]<a> hide </a>
+								[780]<a> 107 comments </a>
+						<tr></tr>
+						<tr id='49585594'></tr>
+							<td> 19. </td>
+							<td></td>
+								[789]<a id='up_49585594'></a>
+									[790][view:hja]<div title='upvote'></div>
+							<td> Don't Use a gmail.com Address (crookedtimber.org) </td>
+								[793]<a> Don't Use a gmail.com Address (crookedtimber.org) </a>
+								<span></span>
+									[797]<a> crookedtimber.org </a>
+						<tr></tr>
+							<td colspan='2'></td>
+							<td> 24 points by jruohonen1 hour ago | hide | 6 comments </td>
+								[808]<a> jruohonen </a>
+								<span></span>
+									[812]<a> 1 hour ago </a>
+								[817]<a> hide </a>
+								[820]<a> 6 comments </a>
+						<tr></tr>
+						<tr id='49539759'></tr>
+							<td> 20. </td>
+							<td></td>
+								[829]<a id='up_49539759'></a>
+									[830][view:ida]<div title='upvote'></div>
+							<td> OpenBSD Stories: Strange Medieval Devices (online.fr) </td>
+								[833]<a> OpenBSD Stories: Strange Medieval Devices (online.fr) </a>
+								<span></span>
+									[837]<a> online.fr </a>
+						<tr></tr>
+							<td colspan='2'></td>
+							<td> 72 points by zdw10 hours ago | hide | 16 comments </td>
+								[848]<a> zdw </a>
+								<span></span>
+									[852]<a> 10 hours ago </a>
+								[857]<a> hide </a>
+								[860]<a> 16 comments </a>
+						<tr></tr>
+						<tr id='49576386'></tr>
+							<td> 21. </td>
+							<td></td>
+								[869]<a id='up_49576386'></a>
+									[870][view:iha]<div title='upvote'></div>
+							<td> The "$60 Gaming PC" – AMD BC-250 (2025) (devquasar.com) </td>
+								[873]<a> The "$60 Gaming PC" – AMD BC-250 (2025) (devquasar.com) </a>
+								<span></span>
+									[877]<a> devquasar.com </a>
+						<tr></tr>
+							<td colspan='2'></td>
+							<td> 353 points by networked23 hours ago | hide | 103 comments </td>
+								[888]<a> networked </a>
+								<span></span>
+									[892]<a> 23 hours ago </a>
+								[897]<a> hide </a>
+								[900]<a> 103 comments </a>
+						<tr></tr>
+						<tr id='49581870'></tr>
+							<td> 22. </td>
+							<td></td>
+								[909]<a id='up_49581870'></a>
+									[910][view:jba]<div title='upvote'></div>
+							<td> Chrome again exempts Google from user site data settings (lapcatsoftware.com) </td>
+								[913]<a> Chrome again exempts Google from user site data settings (lapcatsoftware.com) </a>
+								<span></span>
+									[917]<a> lapcatsoftware.com </a>
+						<tr></tr>
+							<td colspan='2'></td>
+							<td> 460 points by ExMachina7313 hours ago | hide | 75 comments </td>
+								[928]<a> ExMachina73 </a>
+								<span></span>
+									[932]<a> 13 hours ago </a>
+								[937]<a> hide </a>
+								[940]<a> 75 comments </a>
+						<tr></tr>
+						<tr id='49585605'></tr>
+							<td> 23. </td>
+							<td></td>
+								[949]<a id='up_49585605'></a>
+									[950][view:jfa]<div title='upvote'></div>
+							<td> New all in one 6502 computer (Neo6502kbd) (olimex.wordpress.com) </td>
+								[953]<a> New all in one 6502 computer (Neo6502kbd) (olimex.wordpress.com) </a>
+								<span></span>
+									[957]<a> olimex.wordpress.com </a>
+						<tr></tr>
+							<td colspan='2'></td>
+							<td> 9 points by AlexeyBrin1 hour ago | hide | 2 comments </td>
+								[968]<a> AlexeyBrin </a>
+								<span></span>
+									[972]<a> 1 hour ago </a>
+								[977]<a> hide </a>
+								[980]<a> 2 comments </a>
+						<tr></tr>
+						<tr id='49580369'></tr>
+							<td> 24. </td>
+							<td></td>
+								[989]<a id='up_49580369'></a>
+									[990][view:jja]<div title='upvote'></div>
+							<td> Private German rocket makes history, reaches orbit from European soil (space.com) </td>
+								[993]<a> Private German rocket makes history, reaches orbit from European soil (space.com) </a>
+								<span></span>
+									[997]<a> space.com </a>
+						<tr></tr>
+							<td colspan='2'></td>
+							<td> 652 points by bookmtn16 hours ago | hide | 348 comments </td>
+								[1008]<a> bookmtn </a>
+								<span></span>
+									[1012]<a> 16 hours ago </a>
+								[1017]<a> hide </a>
+								[1020]<a> 348 comments </a>
+						<tr></tr>
+						<tr id='49585520'></tr>
+							<td> 25. </td>
+							<td></td>
+								[1029]<a id='up_49585520'></a>
+									[1030][view:bada]<div title='upvote'></div>
+							<td> 'Old Person Smell' (theguardian.com) </td>
+								[1033]<a> 'Old Person Smell' (theguardian.com) </a>
+								<span></span>
+									[1037]<a> theguardian.com </a>
