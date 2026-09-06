@@ -126,7 +126,9 @@ export async function getPageDom(
     let domHtml = renderResult.html
 
     if (previousDomId && !opts?.forceFull) {
-      const diffStats = domService.getDiffStats(previousDomId, domId)
+      // Build the diff tree once and reuse it for both stats and rendering
+      const bothTree = domService.getDiffTree(previousDomId, domId, "both")
+      const diffStats = domService.getDiffStats(previousDomId, domId, bothTree)
 
       if (diffStats !== null) {
         if (diffStats.added === 0 && diffStats.removed === 0) {
@@ -142,17 +144,22 @@ export async function getPageDom(
         const isIncremental =
           Math.max(diffStats.addedRatio, diffStats.removedRatio) < INCREMENTAL_DIFF_RATIO_THRESHOLD
 
+        // highlight: false — overlays were already drawn for the full tree above.
+        // Re-running the highlight pass here would wipe them and redraw only the
+        // diff subset (visible flash + wrong element set), at double the CDP cost.
         if (isIncremental) {
-          const diffTree = domService.getDiffTree(previousDomId, domId, "both")
-          if (diffTree) {
-            const diffResult = await domService.renderDomTree(diffTree, { incrementalDiff: true })
+          if (bothTree) {
+            const diffResult = await domService.renderDomTree(bothTree, {
+              incrementalDiff: true,
+              highlight: false,
+            })
             domHtml = diffResult.html
             diffMode = "incremental"
           }
         } else {
-          const diffTree = domService.getDiffTree(previousDomId, domId, "added")
-          if (diffTree) {
-            const diffResult = await domService.renderDomTree(diffTree)
+          const addedTree = domService.getDiffTree(previousDomId, domId, "added")
+          if (addedTree) {
+            const diffResult = await domService.renderDomTree(addedTree, { highlight: false })
             domHtml = diffResult.html
             diffMode = "added"
           }

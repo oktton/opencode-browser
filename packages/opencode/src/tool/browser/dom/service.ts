@@ -1135,7 +1135,7 @@ export class DomService {
     if (!cached?.domTree) {
       return undefined;
     }
-    return copyDomTree(cached.domTree).copy;
+    return copyDomTree(cached.domTree);
   }
 
   /**
@@ -1379,7 +1379,7 @@ export class DomService {
     hasOverlay: boolean;
     topElementCount: number;
   }> {
-    const { copy: rootForRender } = copyDomTree(domTree);
+    const rootForRender = copyDomTree(domTree);
     const lookup = buildNodeKeyLookup(domTree);
 
     // Prune structurally redundant nodes (writes pruneReason back to domTree via lookup)
@@ -1418,8 +1418,11 @@ export class DomService {
     })(domTree);
 
     // Save single debug file with all info (pruneReason + highlightIndex + isDuplicateListener)
-    saveDebugJson('domTree.json', flattenDomTree(domTree));
-    saveDebugHtml('domTree.txt', domTree);
+    // Skipped for secondary diff renders, which would otherwise overwrite the full-tree dump
+    if (options?.highlight !== false) {
+      saveDebugJson('domTree.json', flattenDomTree(domTree));
+      saveDebugHtml('domTree.txt', domTree);
+    }
 
     let topElementCount = 0;
     const countTop = (node: EnhancedDOMTreeNode): void => {
@@ -1491,7 +1494,7 @@ export class DomService {
   }
 
   renderMarkdown(domTree: EnhancedDOMTreeNode): string {
-    const { copy: rootForRender } = copyDomTree(domTree);
+    const rootForRender = copyDomTree(domTree);
     const lookup = buildNodeKeyLookup(domTree);
 
     // Prune for markdown (writes pruneReason back to domTree via lookup)
@@ -1533,6 +1536,7 @@ export class DomService {
   getDiffStats(
     oldDomId: string,
     newDomId: string,
+    prebuiltTree?: EnhancedDOMTreeNode | null,
   ): {
     added: number;
     removed: number;
@@ -1541,11 +1545,14 @@ export class DomService {
   } | null {
     const oldSnapshot = this.cache.get(oldDomId);
     const newSnapshot = this.cache.get(newDomId);
-    const diffTree = this.getDiffTree(oldDomId, newDomId);
+    const diffTree =
+      prebuiltTree === undefined
+        ? this.getDiffTree(oldDomId, newDomId)
+        : prebuiltTree;
     if (!diffTree || !oldSnapshot || !newSnapshot) return null;
 
     // Prune before counting so stats reflect what the AI actually sees
-    const { copy: prunedTree } = copyDomTree(diffTree);
+    const prunedTree = copyDomTree(diffTree);
     pruneTree(prunedTree);
 
     let added = 0;
@@ -1589,7 +1596,7 @@ export class DomService {
     });
 
     const builder = new DOMTreeBuilder(trees);
-    const { root } = await builder.build();
+    const { root } = builder.build();
 
     return root;
   }
