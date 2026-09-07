@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Scrolled cross-origin frame fixture</title>
+<style>
+  body { font: 14px system-ui; margin: 0; padding: 20px; }
+  .filler { height: 1200px; background: linear-gradient(#efe, #fff); padding: 8px; }
+  iframe { width: 760px; height: 360px; border: 3px solid #333; }
+  button, a { display: inline-block; padding: 6px 10px; }
+</style>
+</head>
+<body>
+<h1>Cross-origin frame, scrolled inside</h1>
+<p>
+  The frame below runs out of process, so commands for it go through its own
+  CDP session and hit testing there uses that document's coordinates. Scrolling
+  it internally is the only way to tell those apart from viewport coordinates —
+  an unscrolled frame makes both look correct. The harness scrolls it through
+  the child session, since a parent cannot script a cross-origin child.
+</p>
+
+<div class="filler">filler — the main frame is scrolled past this</div>
+
+<button id="before-frame">Button before the frame</button>
+
+<iframe
+  id="remote"
+  title="cross-origin scrollable document"
+  src="https://www.gutenberg.org/cache/epub/11/pg11-images.html"></iframe>
+
+<button id="after-frame">Button after the frame</button>
+<div class="filler">trailing filler</div>
+</body>
+</html>

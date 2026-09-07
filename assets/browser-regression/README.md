@@ -60,14 +60,22 @@ noisy unless both ran back to back on the same loaded page.
 | `strategy-careers` | 971 | 22 | Scrolled to the bottom of a real page |
 | `wikipedia-scrolled` | 10856 | 252 | Same page as above, four viewports down |
 | `oopif-frames` | 644 | 37 | Cross-origin iframes (OpenStreetMap, Vimeo), local page |
+| `oopif-scrolled` | 2885 | 13 | A cross-origin frame scrolled inside itself |
 | `nested-iframe` | 202 | 47 | Iframe inside an iframe |
 | `scrolled-frames` | 49 | 6 | Main scroll + iframe offset + the iframe's own scroll, at once |
 
 Pages under `pages/` are local and deterministic; the rest are live sites and
 their content drifts, which is exactly why the tapes are frozen.
 
-Add a fixture by editing `fixtures.json` (`url`, or `file` for a page in
-`pages/`; optional `wait` in ms and `scroll` in viewports) and capturing it.
+Add a fixture by editing `fixtures.json`: `url`, or `file` for a page in
+`pages/`; `wait` in ms; `scroll` in viewports; `frameScroll` in pixels, applied
+to every cross-origin frame through its own session, since a parent page cannot
+script a cross-origin child. Then capture it.
+
+An unscrolled frame cannot distinguish document coordinates from viewport ones,
+so `oopif-scrolled` is the only fixture that exercises hit testing inside a
+child session for real — it lands on a table of contents so the links there have
+to resolve.
 
 ## What this cannot catch
 
@@ -85,6 +93,8 @@ Worth knowing before trusting a green run:
 - **States no fixture is in.** Every fixture sat at scroll position zero until
   a hit-test bug that emptied every scrolled page of interactive elements got
   through. When a change depends on page state, add a fixture in that state.
+  Still missing: any page with a modal or overlay, so the overlay detection in
+  `render-info.ts` has never run here; and any page behind a login.
 
 ## Tapes
 

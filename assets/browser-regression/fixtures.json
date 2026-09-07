@@ -56,5 +56,12 @@
     "file": "pages/scrolled-iframe.html",
     "wait": 2000,
     "scroll": 1.5
+  },
+  {
+    "name": "oopif-scrolled",
+    "file": "pages/oopif-scrolled.html",
+    "wait": 5000,
+    "scroll": 1.2,
+    "frameScroll": 1500
   }
 ]

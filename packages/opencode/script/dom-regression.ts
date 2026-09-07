@@ -63,6 +63,15 @@ interface Fixture {
   wait?: number
   /** Scroll down this many viewports before extracting */
   scroll?: number
+  /**
+   * Scroll every cross-origin iframe to this offset before extracting.
+   *
+   * The parent page cannot script a cross-origin child, and wheel events race
+   * with its load, so this runs in the child's own CDP session. Hit testing
+   * there uses that document's coordinates, which only an internally scrolled
+   * frame distinguishes from viewport ones.
+   */
+  frameScroll?: number
 }
 
 function fixtureUrl(fixture: Fixture, dir: string): string {
@@ -268,6 +277,32 @@ async function capture(
 
         const session = await page.createCDPSession()
         const client = new CDPClient(session)
+
+        if (fixture.frameScroll) {
+          const frames = new OOPIFManager()
+          const sessions = await frames.discoverOOPIFs(client)
+          for (const child of sessions) {
+            await frames
+              .sendCommand(child.sessionId, "Runtime.evaluate", {
+                expression: `window.scrollTo(0, ${fixture.frameScroll})`,
+              })
+              .catch(() => undefined)
+          }
+          await new Promise((r) => setTimeout(r, 1000))
+          // Report what actually took, so a fixture cannot quietly degrade to
+          // an unscrolled one when a page stops being scrollable.
+          const offsets: string[] = []
+          for (const child of sessions) {
+            const m = await frames
+              .sendCommand<{ cssLayoutViewport?: { pageY: number }; layoutViewport: { pageY: number } }>(
+                child.sessionId,
+                "Page.getLayoutMetrics",
+              )
+              .catch(() => undefined)
+            offsets.push(String((m?.cssLayoutViewport ?? m?.layoutViewport)?.pageY ?? "?"))
+          }
+          process.stdout.write(`[frames scrolled to ${offsets.join(", ") || "none"}] `)
+        }
 
         // Repeats run against the same loaded page, which is what the agent
         // actually does (many actions, one navigation). Both hit-test paths are
