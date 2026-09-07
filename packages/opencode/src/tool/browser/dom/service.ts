@@ -110,6 +110,17 @@ interface DomSnapshot {
  * High-level service for DOM extraction, combining CDP communication,
  * tree building, and serialization into a single API.
  */
+/** Centre of a rect, in whatever space the rect is already expressed in. */
+function centerOf(
+  rect?: DOMRect | null,
+): { x: number; y: number } | undefined {
+  if (!rect) return undefined;
+  return {
+    x: Math.round(rect.x + rect.width / 2),
+    y: Math.round(rect.y + rect.height / 2),
+  };
+}
+
 export class DomService {
   private client: CDPClient;
   readonly commands: CDPCommands;
@@ -1027,25 +1038,34 @@ export class DomService {
   }
 
   /**
-   * Re-check whether the node is still on top using its absolutePosition
-   * (same coordinate system as checkTopElements used at snapshot time).
+   * Re-check whether the node is still the topmost one at its own centre, so a
+   * click is not sent into something that now covers it.
+   *
+   * Hit testing takes coordinates in the target frame's document space and only
+   * resolves points inside its visible band, so the probe is built in the frame
+   * the command is routed to. `rect` should be the element's live viewport
+   * rect when the caller already has one — the snapshot's position is stale as
+   * soon as the page scrolls.
+   *
    * Must be called within withClient().
    */
-  async hitTestAtPoint(node: EnhancedDOMTreeNode): Promise<boolean> {
-    const pos = node.absolutePosition;
-    if (!pos) return true;
-
-    const centerX = Math.round(pos.x + pos.width / 2);
-    const centerY = Math.round(pos.y + pos.height / 2);
-
+  async hitTestAtPoint(
+    node: EnhancedDOMTreeNode,
+    rect?: DOMRect,
+  ): Promise<boolean> {
     const sessionId = node.oopifSessionId
       ? this.oopifManager.resolveSessionId(node.oopifSessionId)
       : undefined;
 
+    const point = sessionId
+      ? centerOf(node.snapshotNode?.bounds)
+      : await this.toDocumentPoint(rect ?? node.absolutePosition);
+    if (!point) return true;
+
     const sendCmd = <T>(method: string, params?: Record<string, unknown>) =>
       this.client.sendCommand<T>(method, params, undefined, sessionId);
 
-    const hitBackendNodeId = await elementFromPoint(sendCmd, centerX, centerY);
+    const hitBackendNodeId = await elementFromPoint(sendCmd, point.x, point.y);
     if (hitBackendNodeId === undefined) return false;
 
     const snapshotHit = node.renderInfo.hitBackendNodeId;
@@ -1053,6 +1073,19 @@ export class DomService {
       hitBackendNodeId === (snapshotHit ?? node.backendNodeId) ||
       hitBackendNodeId === node.backendNodeId
     );
+  }
+
+  /** Centre of a viewport rect, moved into the main document's coordinates. */
+  private async toDocumentPoint(
+    rect?: DOMRect | null,
+  ): Promise<{ x: number; y: number } | undefined> {
+    if (!rect) return undefined;
+    const metrics = await this.commands.getLayoutMetrics();
+    const css = metrics.cssLayoutViewport ?? metrics.layoutViewport;
+    return {
+      x: Math.round(rect.x + rect.width / 2 + css.pageX),
+      y: Math.round(rect.y + rect.height / 2 + css.pageY),
+    };
   }
 
   /**

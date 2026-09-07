@@ -98,7 +98,7 @@ Do NOT interact with off-screen elements — scroll first with browser_reveal_of
             const cssX = rect.x + rect.width / 2
             const cssY = rect.y + rect.height / 2
 
-            const isHit = await tab.domService.hitTestAtPoint(elementData.node)
+            const isHit = await tab.domService.hitTestAtPoint(elementData.node, rect)
             if (!isHit) {
               return {
                 title: `Click [${params.elementIndex}]`,
@@ -167,7 +167,7 @@ Supports range, color, date inputs and ARIA sliders.`,
               const cssX = rect.x + rect.width / 2
               const cssY = rect.y + rect.height / 2
 
-              const isHit = await tab.domService.hitTestAtPoint(elementData.node)
+              const isHit = await tab.domService.hitTestAtPoint(elementData.node, rect)
               if (!isHit) {
                 return {
                   title: `Input [${params.elementIndex}]`,
