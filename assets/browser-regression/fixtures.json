@@ -50,5 +50,11 @@
     "url": "https://en.wikipedia.org/wiki/JavaScript",
     "wait": 1500,
     "scroll": 4
+  },
+  {
+    "name": "scrolled-frames",
+    "file": "pages/scrolled-iframe.html",
+    "wait": 2000,
+    "scroll": 1.5
   }
 ]

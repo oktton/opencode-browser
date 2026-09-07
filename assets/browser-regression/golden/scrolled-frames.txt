@@ -1,0 +1,12 @@
+[31]<button id='before-frame'> Button before the frame </button>
+[34]<a> Link before the frame </a>
+<iframe></iframe>
+	[58]<button id='inner-button'> Inner button </button>
+	[61]<a id='inner-link'> Inner link </a>
+	<label></label>
+		Inner field
+		<3><input name='inner-field' value='typed'></input>
+	iframe trailing filler
+[38]<button id='after-frame'> Button after the frame </button>
+After the frame
+filler B

@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Scrolled frames fixture</title>
+<style>
+  body { font: 14px system-ui; margin: 0; padding: 20px; }
+  .filler { height: 1400px; background: linear-gradient(#eef, #fff); padding: 8px; }
+  iframe { width: 600px; height: 300px; border: 3px solid #333; }
+  button, a { display: inline-block; padding: 6px 10px; }
+</style>
+</head>
+<body>
+<h1>Scrolled frames</h1>
+<p>
+  Hit testing runs in document coordinates and only resolves points inside the
+  currently visible band, so an element's position has to survive three
+  offsets at once: the main frame's scroll, the iframe's position in it, and
+  the iframe's own internal scroll. This page holds all three at the same time.
+</p>
+
+<div class="filler">filler A — the main frame is scrolled past this</div>
+
+<button id="before-frame">Button before the frame</button>
+<a href="#after">Link before the frame</a>
+
+<iframe
+  id="inner"
+  title="internally scrolled iframe"
+  srcdoc="
+    <style>
+      body { font: 14px system-ui; margin: 0 }
+      .pad { height: 800px; background: #ffe; padding: 8px }
+      button, a { display: block; margin: 10px; padding: 8px }
+    </style>
+    <div class='pad'>iframe filler — the controls below sit at y=800 in this document</div>
+    <button id='inner-button'>Inner button</button>
+    <a href='#inner' id='inner-link'>Inner link</a>
+    <label>Inner field <input name='inner-field' value='typed'></label>
+    <div class='pad'>iframe trailing filler</div>
+  "></iframe>
+
+<button id="after-frame">Button after the frame</button>
+<h2 id="after">After the frame</h2>
+<div class="filler">filler B</div>
+
+<script>
+  // Scroll the child to its controls once it is ready, so the capture always
+  // sees the same three-way offset without the harness having to drive it.
+  var frame = document.getElementById("inner")
+  frame.addEventListener("load", function () {
+    frame.contentWindow.scrollTo(0, 780)
+  })
+  if (frame.contentDocument && frame.contentDocument.readyState === "complete") {
+    frame.contentWindow.scrollTo(0, 780)
+  }
+</script>
+</body>
+</html>
