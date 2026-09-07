@@ -80,6 +80,14 @@ Located in `src/tool/browser/`. 15 tools for web automation:
 5. **Diff** (`diff.ts`) — Incremental diffs vs snapshots (`dom/snapshot/lookup.ts`)
 6. **Scroll mapping** (`scroll-container.ts`) — Track exploration state per container (above/current/below pages)
 
+**Regression harness** — `bun packages/opencode/script/dom-regression.ts verify` replays
+recorded CDP traffic offline and diffs the extracted DOM against committed goldens. Run it
+before and after any change to the DOM pipeline; it needs no browser and takes seconds. It
+also reports per-stage CPU time, since replay serves CDP from memory. See
+`assets/browser-regression/README.md` for what it covers, what it cannot catch (settle
+timing, the diff path, scroll maps, page states no fixture is in), and the CDP behaviour it
+pinned down.
+
 **Settle monitoring** (`dom/settle-monitor.ts`) — Waits for network quiet + DOM mutation settling before returning results. Ignores ads/analytics requests.
 
 **Page-injected helpers** (`page-tools.ts`) — JavaScript injected into page context: `__q(n)` (get element by index), `__find(pattern)` (regex search), `__get(refId)`, `__clickable(el)`.
