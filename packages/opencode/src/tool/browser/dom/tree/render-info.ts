@@ -419,6 +419,31 @@ export async function elementFromPoint(
 }
 
 /**
+ * Scroll offset of the main frame's document, as the builder subtracted it when
+ * turning snapshot bounds into viewport-relative absolutePosition.
+ */
+function findMainFrameScroll(root: EnhancedDOMTreeNode): { x: number; y: number } {
+  let found: { x: number; y: number } | null = null;
+
+  const visit = (node: EnhancedDOMTreeNode): void => {
+    if (found) return;
+    // Stop at frame boundaries: only the top document's scroll applies here
+    if (node.contentDocument) return;
+    if (node.nodeName === 'HTML' && node.frameId && node.snapshotNode?.scrollRects) {
+      found = {
+        x: node.snapshotNode.scrollRects.x,
+        y: node.snapshotNode.scrollRects.y,
+      };
+      return;
+    }
+    for (const child of node.childrenNodes ?? []) visit(child);
+  };
+
+  visit(root);
+  return found ?? { x: 0, y: 0 };
+}
+
+/**
  * Check if elements are top-level (not occluded) using elementFromPoint.
  */
 async function checkTopElements(
@@ -456,6 +481,14 @@ async function checkTopElements(
 
   if (nodesToCheck.length === 0) return;
 
+  // DOM.getNodeForLocation hit-tests in document coordinates, while
+  // absolutePosition is relative to the viewport (the builder subtracts the
+  // main frame's scroll offset). Without adding it back, every probe on a
+  // scrolled page lands outside the document and comes back "No node found at
+  // given location" — which reads as "nothing is a top element" and empties
+  // the extraction of every interactive element.
+  const mainScroll = findMainFrameScroll(root);
+
   // Build ancestor lookup within the same frame (stop at iframe/OOPIF boundary)
   const getAncestorBackendIds = (node: EnhancedDOMTreeNode): Set<number> => {
     const ancestors = new Set<number>();
@@ -476,8 +509,8 @@ async function checkTopElements(
       node.renderInfo.isTopElement = false;
       return;
     }
-    const centerX = Math.round(pos.x + pos.width / 2);
-    const centerY = Math.round(pos.y + pos.height / 2);
+    const centerX = Math.round(pos.x + pos.width / 2 + mainScroll.x);
+    const centerY = Math.round(pos.y + pos.height / 2 + mainScroll.y);
 
     const ancestors = getAncestorBackendIds(node);
 

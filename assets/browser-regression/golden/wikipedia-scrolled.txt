@@ -1,0 +1,460 @@
+<div></div>
+	Contents
+	[513]<button aria-label='Hide Contents'> hide </button>
+<ul></ul>
+	<li></li>
+		[521]<a> (Top) </a>
+	<li></li>
+		[530]<a> History </a>
+			[537]<span> History </span>
+		[542]<button> Toggle History subsection </button>
+	<li></li>
+		[645]<a> Trademark </a>
+			[652]<span> Trademark </span>
+	<li></li>
+		[663]<a> Website client-side usage </a>
+		[675]<button> Toggle Website client-side usage subsection </button>
+	<li></li>
+		[724]<a> Other usage </a>
+			[731]<span> Other usage </span>
+	<li></li>
+		[742]<a> Execution </a>
+			[749]<span> Execution </span>
+		[754]<button> Toggle Execution subsection </button>
+	<li></li>
+		[803]<a> Features </a>
+			[810]<span> Features </span>
+		[815]<button> Toggle Features subsection </button>
+	<li></li>
+		[1242]<a> Syntax </a>
+			[1249]<span> Syntax </span>
+	<li></li>
+		[1260]<a> Security </a>
+			[1267]<span> Security </span>
+		[1272]<button> Toggle Security subsection </button>
+	<li></li>
+		[1411]<a> Development tools </a>
+	<li></li>
+		[1429]<a> Related technologies </a>
+		[1441]<button> Toggle Related technologies subsection </button>
+	<li></li>
+		[1526]<a> Notes </a>
+			[1533]<span> Notes </span>
+	<li></li>
+		[1544]<a> References </a>
+			[1551]<span> References </span>
+	<li></li>
+		[1562]<a> Further reading </a>
+	<li></li>
+		[1580]<a> External links </a>
+<div></div>
+	Appearance
+	[2433]<button aria-label='Hide Appearance'> hide </button>
+<div></div>
+	Text
+	<div></div>
+		<div></div>
+			[52]<input id='skin-client-pref-vector-feature-custom-font-size-value-0' type='radio' name='skin-client-pref-vector-feature-custom-font-size-group' value='0'> Small </input>
+			[2447]<label for='skin-client-pref-vector-feature-custom-font-size-value-0'> Small </label>
+		<div></div>
+			[53]<input id='skin-client-pref-vector-feature-custom-font-size-value-1' type='radio' name='skin-client-pref-vector-feature-custom-font-size-group' value='1' checked='checked'> Standard </input>
+			[68]<label for='skin-client-pref-vector-feature-custom-font-size-value-1'> Standard </label>
+		<div></div>
+			[54]<input id='skin-client-pref-vector-feature-custom-font-size-value-2' type='radio' name='skin-client-pref-vector-feature-custom-font-size-group' value='2'> Large </input>
+			[72]<label for='skin-client-pref-vector-feature-custom-font-size-value-2'> Large </label>
+<div></div>
+	Width
+	<div></div>
+		<div></div>
+			[55]<input id='skin-client-pref-vector-feature-limited-width-value-1' type='radio' name='skin-client-pref-vector-feature-limited-width-group' value='1' checked='checked'> Standard </input>
+			[77]<label for='skin-client-pref-vector-feature-limited-width-value-1'> Standard </label>
+		<div></div>
+			[56]<input id='skin-client-pref-vector-feature-limited-width-value-0' type='radio' name='skin-client-pref-vector-feature-limited-width-group' value='0'> Wide </input>
+			[81]<label for='skin-client-pref-vector-feature-limited-width-value-0'> Wide </label>
+<div></div>
+	Color
+	<div></div>
+		<div></div>
+			[57]<input id='skin-client-pref-skin-theme-value-os' type='radio' name='skin-client-pref-skin-theme-group' value='os'> Automatic </input>
+			[86]<label for='skin-client-pref-skin-theme-value-os'> Automatic </label>
+		<div></div>
+			[58]<input id='skin-client-pref-skin-theme-value-day' type='radio' name='skin-client-pref-skin-theme-group' value='day' checked='checked'> Light </input>
+			[90]<label for='skin-client-pref-skin-theme-value-day'> Light </label>
+		<div></div>
+			[59]<input id='skin-client-pref-skin-theme-value-night' type='radio' name='skin-client-pref-skin-theme-group' value='night'> Dark </input>
+			[94]<label for='skin-client-pref-skin-theme-value-night'> Dark </label>
+=== OFF-SCREEN above [container:0] (scroll to reveal these elements) ===
+<section></section>
+	<p></p>
+		), who were implementing E4X in their ActionScript...
+		<a title='Tamarin (software)' id='mwARM'></a>
+			 ...
+		implementation as an
+		<a title='Open-source model' id='mwARQ'> open source </a>
+			 ...
+		project. However, Tamarin and ActionScript 3 were ...
+	<p></p>
+		Meanwhile, very important developments were occurr...
+		<a title='Jesse James Garrett' id='mwARY'></a>
+			 ...
+		released a white paper in which he coined the term
+		<a title='Ajax (programming)' id='mwARc'></a>
+			 ...
+		and described a set of technologies, of which Java...
+		<a title='Web application' id='mwARg'> web applications </a>
+			 ...
+		where data can be loaded in the background, avoidi...
+		<a title='JQuery' id='mwARk'> jQuery </a>
+			 ...
+		,
+		<a title='Prototype JavaScript Framework' id='mwARo'></a>
+			 ...
+		,
+		<a title='Dojo Toolkit' id='mwARs'></a>
+			 ...
+		, and
+		<a title='MooTools' id='mwARw'></a>
+			 ...
+		.
+	<p></p>
+		<a title='Google' id='mwAR4'></a>
+			 ...
+		debuted its
+		<a title='Google Chrome' id='mwAR8'></a>
+			 ...
+		browser in 2008, with the
+		<a title='V8 (JavaScript engine)' id='mwASA'></a>
+			 ...
+		JavaScript engine that was faster than its competi...
+		<sup></sup>
+			<a id='mwASE'> [27] </a>
+				 ...
+		<sup></sup>
+			<a id='mwASU'> [28] </a>
+				 ...
+		The key innovation was
+		<a title='Just-in-time compilation' id='mwASk'> just-in-time compilation </a>
+			 ...
+		(JIT),
+		<sup></sup>
+			<a id='mwASo'> [29] </a>
+				 ...
+		so other browser vendors needed to overhaul their ...
+		<sup></sup>
+			<a id='mwAS4'> [30] </a>
+				 ...
+	<p></p>
+		In July 2008, these disparate parties came togethe...
+		<a title='Oslo' id='mwATM'></a>
+			 ...
+		. This led to the eventual agreement in early 2009...
+=== END OFF-SCREEN ===
+<section></section>
+=== OFF-SCREEN above [container:0] (scroll to reveal these elements) ===
+	Reaching maturity
+	<p></p>
+		Ambitious work on the language continued for sever...
+		<a title='ECMAScript 6' id='mwATY'></a>
+			 ...
+		in 2015.
+		<sup></sup>
+			<a id='mwATc'> [31] </a>
+				 ...
+	The creation of
+	<a title='Node.js' id='mwATw'></a>
+		 ...
+	in 2009 by
+	<a title='Ryan Dahl' id='mwAT0'></a>
+		 ...
+	sparked a significant increase in the usage of Jav...
+	<a title='V8 (JavaScript engine)' id='mwAT4'></a>
+		 ...
+	engine, an
+	<a title='Event loop' id='mwAT8'> event loop </a>
+		 ...
+	, and
+	<a title='Input/output' id='mwAUA'> I/OAPIs </a>
+		 ...
+	<a title='Application programming interface' id='mwAUE'> APIs </a>
+	, thereby providing a stand-alone JavaScript runti...
+	<sup></sup>
+		<a id='mwAUI'> [32] </a>
+			 ...
+	<sup></sup>
+		<a id='mwAUY'> [33] </a>
+			 ...
+	<sup></sup>
+		<a id='mwAUo'> [34] </a>
+			 ...
+=== END OFF-SCREEN ===
+	in the world.
+	<sup></sup>
+		[3671]<a id='mwAVA'> [35] </a>
+			<span id='mwAVE'></span>
+				<span id='mwAVI'> [35] </span>
+				<span id='mwAVM'></span>
+	<p></p>
+		The ECMAScript draft specification is currently maintained openly on
+		[3681]<a title='GitHub' id='mwAVU'></a>
+		,
+		<sup></sup>
+			[3685]<a id='mwAVY'> [36] </a>
+				<span id='mwAVc'></span>
+					<span id='mwAVg'> [36] </span>
+					<span id='mwAVk'></span>
+		and editions are produced via regular annual snapshots.
+		<sup></sup>
+			[3694]<a id='mwAVo'> [36] </a>
+				<span id='mwAVs'></span>
+					<span id='mwAVw'> [36] </span>
+					<span id='mwAV0'></span>
+		Potential revisions to the language are vetted through a comprehensive proposal process.
+		<sup></sup>
+			[3703]<a id='mwAV4'> [37] </a>
+				<span id='mwAV8'></span>
+					<span id='mwAWA'> [37][38] </span>
+					<span id='mwAWE'></span>
+		<sup></sup>
+			[3711]<a id='mwAWI'> [38] </a>
+				<span id='mwAWM'></span>
+					<span id='mwAWQ'></span>
+					<span id='mwAWU'></span>
+		Now, instead of edition numbers, developers check the status of upcoming features individually.
+		<sup></sup>
+			[3720]<a id='mwAWY'> [36] </a>
+				<span id='mwAWc'></span>
+					<span id='mwAWg'> [36] </span>
+					<span id='mwAWk'></span>
+	<p></p>
+		The current JavaScript ecosystem has many
+		[3730]<a title='List of JavaScript libraries' id='mwAWs'></a>
+		and
+		[3733]<a title='Web framework' id='mwAWw'> frameworks </a>
+		, established programming practices, and substantial usage of JavaScript outside of web browsers.
+		<sup></sup>
+			[3737]<a id='mwAW0'> [20] </a>
+				<span id='mwAW4'></span>
+					<span id='mwAW8'> [20] </span>
+					<span id='mwAXA'></span>
+		Plus, with the rise of
+		[3745]<a title='Single-page application' id='mwAXE'> single-page applications </a>
+		and other JavaScript-heavy websites, several
+		[3748]<a title='Source-to-source compiler' id='mwAXI'> transpilers </a>
+		have been created to aid the development process.
+		<sup></sup>
+			[3752]<a id='mwAXM'> [39] </a>
+				<span id='mwAXQ'></span>
+					<span id='mwAXU'> [39] </span>
+					<span id='mwAXY'></span>
+	<p></p>
+		As of 2025, the overwhelming majority of
+		[3762]<a title='Website' id='mwAXg'> websites </a>
+		(98.9%) use JavaScript for
+		[3765]<a title='Client (computing)' id='mwAXk'> client </a>
+		side
+		[3768]<a title='Web page' id='mwAXo'> webpage </a>
+		behavior.
+		<sup></sup>
+			[3772]<a id='mwAXs'> [40] </a>
+				<span id='mwAXw'></span>
+					<span id='mwAX0'> [40] </span>
+					<span id='mwAX4'></span>
+<section></section>
+	Trademark
+	<p></p>
+		"JavaScript" is a
+		[3786]<a title='Trademark' id='mwAYE'> trademark </a>
+		of
+		[3789]<a title='Oracle Corporation' id='mwAYI'></a>
+		in the United States.
+		<sup></sup>
+			[3793]<a id='mwAYM'> [41] </a>
+				<span id='mwAYQ'></span>
+					<span id='mwAYU'> [41][42] </span>
+					<span id='mwAYY'></span>
+		<sup></sup>
+			[3801]<a id='mwAYc'> [42] </a>
+				<span id='mwAYg'></span>
+					<span id='mwAYk'></span>
+					<span id='mwAYo'></span>
+		The trademark was originally issued to
+		[3809]<a title='Sun Microsystems' id='mwAYs'></a>
+		on 6 May 1997, and was transferred to Oracle when
+		[3812]<a title='Acquisition of Sun Microsystems by Oracle Corporation' id='mwAYw'> they acquired Sun </a>
+		in 2009.
+		<sup></sup>
+			[3816]<a id='mwAY0'> [43] </a>
+				<span id='mwAY4'></span>
+					<span id='mwAY8'> [43][44] </span>
+					<span id='mwAZA'></span>
+		<sup></sup>
+			[3824]<a id='mwAZE'> [44] </a>
+				<span id='mwAZI'></span>
+					<span id='mwAZM'></span>
+					<span id='mwAZQ'></span>
+	<p></p>
+		A letter was circulated in September 2024, spearheaded by
+		[3834]<a title='Ryan Dahl' id='mwAZY'></a>
+		, calling on Oracle to free the JavaScript trademark.
+		<sup></sup>
+			[3838]<a id='mwAZc'> [45] </a>
+				<span id='mwAZg'></span>
+					<span id='mwAZk'> [45]Brendan Eich </span>
+					<span id='mwAZo'></span>
+		[3846]<a title='Brendan Eich' id='mwAZs'></a>
+		, the original creator of JavaScript, was among the over 14,000 signatories who supported the initiative.
+Website client-side usage
+<p></p>
+	JavaScript is the dominant
+	[3856]<a title='Client-side' id='mwAZ4'> client-sidescripting language </a>
+	[3859]<a title='Scripting language' id='mwAZ8'> scripting language </a>
+	of the Web, with 99% of all
+	[3862]<a title='Website' id='mwAaA'> websites </a>
+	using it for this purpose.
+	<sup></sup>
+		[3866]<a id='mwAaE'> [40] </a>
+			<span id='mwAaI'></span>
+				<span id='mwAaM'> [40] </span>
+				<span id='mwAaQ'></span>
+	Scripts are embedded in or included from
+	[3874]<a title='HTML' id='mwAaU'></a>
+	documents and interact with the
+	[3877]<a title='Document Object Model' id='mwAaY'> DOM </a>
+	.
+<p></p>
+	All major
+	[3883]<a title='Web browser' id='mwAag'> web browsers </a>
+	have a built-in
+	[3886]<a title='JavaScript engine' id='mwAak'></a>
+	that executes the
+	[3889]<a title='Source code' id='mwAao'></a>
+	on the user's device.
+Examples of scripted behavior
+Loading new
+[3902]<a title='Web page' id='mwAa4'> web page </a>
+content without reloading the page, via
+[3905]<a title='Ajax (programming)' id='mwAa8'></a>
+or a
+[3908]<a title='WebSocket' id='mwAbA'></a>
+. For example,
+=== OFF-SCREEN below [container:0] (scroll to reveal these elements) ===
+Web page animations, such as fading objects in and...
+<li></li>
+	Playing
+	<a title='Browser game' id='mwAbU'> browser games </a>
+		 ...
+	.
+<li></li>
+	Controlling the
+	<a title='Media player software' id='mwAbc'> playback </a>
+		 ...
+	of
+	<a title='Streaming media' id='mwAbg'> streaming media </a>
+		 ...
+	.
+<li></li>
+	Generating
+	<a title='Pop-up ad' id='mwAbo'> pop-up ads </a>
+		 ...
+	or alert boxes.
+<li></li>
+	<a title='Data validation' id='mwAbw'> Validating </a>
+		 ...
+	input values of a
+	<a title='Form (HTML)' id='mwAb0'> web form </a>
+		 ...
+	before the data is sent to a
+	<a title='Web server' id='mwAb4'> web server </a>
+		 ...
+	.
+<li></li>
+	Logging data about the user's behavior then sendin...
+	<a title='Web analytics' id='mwAcA'></a>
+		 ...
+	,
+	<a title='Ad tracking' id='mwAcE'> ad tracking </a>
+		 ...
+	, and
+	<a title='Personalization' id='mwAcI'> personalization </a>
+		 ...
+	.
+Redirecting a user to another page.
+<li></li>
+	Storing and retrieving data on the user's device, ...
+	<a title='Web storage' id='mwAcU'></a>
+		 ...
+	or
+	<a title='Indexed Database API' id='mwAcY'> IndexedDB </a>
+		 ...
+	standards.
+<section></section>
+	Libraries and frameworks
+	<p></p>
+		Over 80% of websites use a third-party JavaScript
+		<a title='Library (computing)' id='mwAck'> library </a>
+			 ...
+		or
+		<a title='Web framework' id='mwAco'> web framework </a>
+			 ...
+		as part of their client-side scripting.
+		<sup></sup>
+			<a id='mwAcs'> [46] </a>
+				 ...
+	<p></p>
+		<a title='JQuery' id='mwAdA'> jQuery </a>
+			 ...
+		is by far the most-used.
+		<sup></sup>
+			<a id='mwAdE'> [46] </a>
+				 ...
+		Other notable ones include
+		<a title='Angular (web framework)' id='mwAdU'></a>
+			 ...
+		,
+		<a title='Bootstrap (front-end framework)' id='mwAdY'></a>
+			 ...
+		,
+		<a title='Lodash' id='mwAdc'></a>
+			 ...
+		,
+		<a title='Modernizr' id='mwAdg'></a>
+			 ...
+		,
+		<a title='React (software)' id='mwAdk'></a>
+			 ...
+		,
+		<a title='Underscore.js' id='mwAdo'></a>
+			 ...
+		, and
+		<a title='Vue.js' id='mwAds'></a>
+			 ...
+		.
+		<sup></sup>
+			<a id='mwAdw'> [46] </a>
+				 ...
+		Multiple options can be used in conjunction, such ...
+		<sup></sup>
+			<a id='mwAeA'> [47] </a>
+				 ...
+	<p></p>
+		However, the term "Vanilla JS" was coined for webs...
+		<sup></sup>
+			<a id='mwAeU'> [48] </a>
+				 ...
+Other usage
+<p></p>
+	The use of JavaScript has expanded beyond its
+	<a title='Web browser' id='mwAes'> web browser </a>
+		 ...
+	roots.
+	<a id='mwAew'> JavaScript engines </a>
+		 ...
+	are now embedded
+	in a variety of other software systems, both for
+	<a title='Server-side' id='mwAe0'> server-side </a>
+		 ...
+	website deployments and non-browser
+	<a title='Application software' id='mwAe4'> applications </a>
+		 ...
+	.
+=== END OFF-SCREEN ===

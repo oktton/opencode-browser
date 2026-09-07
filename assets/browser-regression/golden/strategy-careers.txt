@@ -1,0 +1,73 @@
+<header></header>
+	<div></div>
+		[173]<a> Strategy </a>
+			[view:bb]<img alt='Strategy'></img>
+	<div></div>
+		<div></div>
+			[177]<a> Analytics </a>
+			[179]<a> Company </a>
+			[181]<a> Software </a>
+		<div></div>
+			[184]<button aria-label='User Initials Account Menu' type='button'></button>
+				<div></div>
+					[view:big]<svg data-testid='PersonOutlineRoundedIcon'></svg>
+=== OFF-SCREEN above [container:0] (scroll to reveal these elements) ===
+August
+Roles posted on Handshake
+August - September
+Campus career fairs
+October
+Interviews begin
+November - December
+Onsite interviews at Strategy HQ
+December - January
+Offers made
+June
+Interns first day!
+August
+Full-time hires first day!
+Explore early career
+job opportunities
+To see open campus roles, please check your univer...
+=== END OFF-SCREEN ===
+<div></div>
+	<div></div>
+		<div></div>
+			<22><input id='jobs-search-bar' placeholder='Start typing...'></input>
+			[view:fbj]<svg data-testid='SearchIcon'></svg>
+		<div></div>
+			[24]<label id='department-label'> Departments </label>
+			<div></div>
+				[529]<div role='combobox' aria-label='Department' aria-labelledby='department-label department' id='department' aria-expanded='false'> All </div>
+		<div></div>
+			[538]<button type='button'> Clear Filters </button>
+	Title
+	Department
+	Location
+	<div></div>
+		Incentives Analyst
+		Executive
+		Tysons Corner
+		,
+		United States
+		<div></div>
+			[564]<button type='button'> Apply now </button>
+				[566]<span></span>
+					[view:fgh]<svg data-testid='ArrowForwardIosRoundedIcon'></svg>
+	<div></div>
+		[view:fhd]<svg data-testid='ChevronLeftRoundedIcon'></svg>
+		<li></li>
+			[576]<button aria-label='page 1' type='button'></button>
+		[view:fia]<svg data-testid='ChevronRightRoundedIcon'></svg>
+<div></div>
+	[589]<a> Explore all open roles </a>
+<div></div>
+	Have a question?
+	<p></p>
+		Please reach out to
+		[601]<a> earlycareers@strategy.com, </a>
+		and a member of the Early Careers team will follow up with you.
+By clicking “Accept All Cookies”, you agree to the storing of cookies on your device to enhance site navigation, analyze site usage, and assist in our marketing efforts.
+<div></div>
+	[737]<button id='onetrust-pc-btn-handler'> Cookies Settings </button>
+	[741]<button id='onetrust-accept-btn-handler'> Accept All Cookies </button>
