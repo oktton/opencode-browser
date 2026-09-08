@@ -38,7 +38,7 @@ export const apply = Effect.fn("SessionReminders.apply")(function* (input: {
       messageID: userMessage.info.id,
       sessionID: userMessage.info.sessionID,
       type: "text",
-      text: `**Browser state changed since your last observation:**\n${lines.join("\n")}\nThe page may have been modified by the user. Use \`browser_observe\` to get a fresh DOM snapshot before taking actions.`,
+      text: `**Browser state changed since your last observation:**\n${lines.join("\n")}\nYour last DOM snapshot describes the page as it was; every \`[N]\` and \`<N>\` index in it is stale. Call \`browser_observe\` before anything that depends on the page as it is now — describing what is on it, reading a value from it, or passing an index to a browser tool. Answering from the old snapshot will describe a page that is no longer there.`,
       synthetic: true,
     })
   })
