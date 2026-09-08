@@ -107,8 +107,14 @@ export const LONE_REQUEST_MAX_MS = 5000;
 export const IMAGE_URL_RE = /\.(jpg|jpeg|png|gif|webp|svg|ico)(\?|$)/i;
 
 export function isIgnoredUrl(url: string): boolean {
-  if (!url || url.startsWith('data:') || url.length > 500) return true;
+  if (!url || url.length > 500) return true;
   const lower = url.toLowerCase();
+  // Only real network traffic says anything about whether the page is still
+  // loading. Everything else here is machinery: an extension that blocks a
+  // request makes Chrome report it as chrome-extension://invalid/, so a page
+  // whose telemetry is being blocked looks perpetually busy — enough of them
+  // and the quiet window never elapses.
+  if (!lower.startsWith('http://') && !lower.startsWith('https://')) return true;
   return IGNORED_URL_KEYWORDS.some(kw => lower.includes(kw));
 }
 
@@ -284,17 +290,23 @@ export class PageSettleMonitor {
       }
       remaining.push([reqId, req]);
     }
-    // Few lingering requests that have all been pending long enough are likely background polls
-    if (remaining.length <= 3) {
-      const allLone = remaining.every(
-        ([, req]) => now - req.startTime > LONE_REQUEST_MAX_MS,
-      );
-      if (allLone) {
-        for (const [reqId] of remaining) {
-          this.inflightRequests.delete(reqId);
-        }
-        return false;
+    // Once every request still open has been open a while, none of them is the
+    // page loading: real content arrives in bursts, so a burst would still have
+    // a young member. What is left is polling, telemetry and third-party frames
+    // that never resolve — a tracker iframe and two metrics beacons are enough
+    // to hold a page "busy" indefinitely.
+    //
+    // There used to be a cap of three such requests, which only decided how
+    // many of them it took to stall settling entirely; the age test already
+    // carries the argument.
+    const allStale = remaining.every(
+      ([, req]) => now - req.startTime > LONE_REQUEST_MAX_MS,
+    );
+    if (allStale) {
+      for (const [reqId] of remaining) {
+        this.inflightRequests.delete(reqId);
       }
+      return false;
     }
     return remaining.length > 0;
   }
