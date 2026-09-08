@@ -122,24 +122,25 @@ async function highlightElements(
   // Track which OOPIF sessions have candidate elements
   const oopifSessionIds = new Set<string>();
 
-  // Mark each element with data-hl-idx via CDP
-  for (const [index, node] of selectorMap) {
-    try {
+  // Mark each element with data-hl-idx.
+  //
+  // DOM.setAttributeValue writes straight to a nodeId, which the tree already
+  // carries; going through an object handle instead cost a DOM.resolveNode and
+  // a Runtime.callFunctionOn per element. The marking also used to run one
+  // element at a time — every round trip waiting on the last — where nothing
+  // about it is ordered.
+  await Promise.all(
+    [...selectorMap].map(async ([index, node]) => {
       const sendCmd = createSendCommand(node, cdpClient, oopifManager);
 
-      const result = await sendCmd<{
-        object: { objectId?: string };
-      }>('DOM.resolveNode', { backendNodeId: node.backendNodeId });
-
-      const objectId = result?.object?.objectId;
-      if (!objectId) continue;
-
-      // setAttribute runs in the element's own frame context via callFunctionOn
-      await sendCmd('Runtime.callFunctionOn', {
-        objectId,
-        functionDeclaration: `function() { this.setAttribute('${HIGHLIGHT_ATTR}', '${index}'); }`,
-        awaitPromise: false,
-      });
+      const marked = await sendCmd('DOM.setAttributeValue', {
+        nodeId: node.nodeId,
+        name: HIGHLIGHT_ATTR,
+        value: String(index),
+      })
+        .then(() => true)
+        .catch(() => false);
+      if (!marked) return;
 
       if (node.oopifSessionId) {
         oopifSessionIds.add(node.oopifSessionId);
@@ -153,10 +154,8 @@ async function highlightElements(
           frameIds.add(node.frameId);
         }
       }
-    } catch {
-      // Element may not be resolvable
-    }
-  }
+    }),
+  );
 
   // Inject highlight script into each frame
   const script = generateDynamicHighlightScript();
