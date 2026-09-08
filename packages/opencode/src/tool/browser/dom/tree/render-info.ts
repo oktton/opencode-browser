@@ -760,13 +760,6 @@ function createSendCommand(
     cdpClient.sendCommand<T>(method, params);
 }
 
-interface CDPEventListener {
-  type: string;
-  scriptId: string;
-  lineNumber: number;
-  columnNumber: number;
-}
-
 /**
  * Extract click handlers from an element and its ancestor chain.
  * Covers React, Vue 2/3, jQuery, and inline onclick.
@@ -862,18 +855,13 @@ async function getClickListenerSignatures(
     const objectId = resolved?.object?.objectId;
     if (!objectId) return sigs;
 
-    // 1. CDP native event listeners
-    const result = await sendCmd<{
-      listeners: CDPEventListener[];
-    }>('DOMDebugger.getEventListeners', { objectId });
-
-    for (const l of result?.listeners ?? []) {
-      if (l.type === 'click') {
-        sigs.push(`native:${l.scriptId}:${l.lineNumber}:${l.columnNumber}`);
-      }
-    }
-
-    // 2. Framework handlers (React, Vue, jQuery)
+    // Only framework handlers are collected. DOMDebugger.getEventListeners was
+    // also probed here, a third serial round trip per candidate, but its
+    // signatures never changed the output on any fixture: rule 2 of
+    // deduplicateByListeners requires a matching hit target as well, and that
+    // already subsumes what a native listener location tells us. Framework
+    // handlers do carry their own weight — a parent and child bind different
+    // functions, which is exactly what distinguishes them.
     const fwResult = await sendCmd<{
       result: { value?: string[] };
     }>('Runtime.callFunctionOn', {

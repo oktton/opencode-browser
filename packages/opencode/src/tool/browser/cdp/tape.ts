@@ -118,12 +118,15 @@ export class CDPTape {
    * Used by ablation experiments: strip a field out of a recorded payload to
    * see what the pipeline would produce had the browser never sent it.
    */
-  mapResults(method: string, fn: (value: unknown) => unknown): void {
+  mapResults(
+    method: string,
+    fn: (value: unknown, key: string) => unknown,
+  ): void {
     const marker = `|${method}|`;
     for (const [key, results] of this.data) {
       if (!key.includes(marker)) continue;
       for (const entry of results) {
-        if (entry.ok) entry.value = fn(entry.value);
+        if (entry.ok) entry.value = fn(entry.value, key);
       }
     }
   }

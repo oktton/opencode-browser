@@ -466,6 +466,9 @@ async function verify(fixtures: Fixture[], dir: string, bless: boolean, repeat: 
  */
 const SNAPSHOT = "DOMSnapshot.captureSnapshot"
 const AX_TREE = "Accessibility.getFullAXTree"
+const AX_NODE = "Accessibility.getPartialAXTree"
+const LISTENERS = "DOMDebugger.getEventListeners"
+const CALL_ON = "Runtime.callFunctionOn"
 
 type Doc = { layout?: Record<string, unknown> }
 
@@ -508,6 +511,26 @@ const ABLATIONS: { name: string; apply: (t: CDPTape) => void }[] = [
   { name: "no-stackingContexts", apply: (t) => dropLayoutField(t, "stackingContexts") },
   { name: "no-bounds", apply: (t) => dropLayoutField(t, "bounds") },
   { name: "no-ax-tree", apply: (t) => t.mapResults(AX_TREE, () => ({ nodes: [] })) },
+  { name: "no-ax-nodes", apply: (t) => t.mapResults(AX_NODE, () => ({ nodes: [] })) },
+  // What the per-candidate listener probing buys: it feeds only rule 2 of
+  // deduplicateByListeners, at three serial round trips per candidate.
+  { name: "no-native-listeners", apply: (t) => t.mapResults(LISTENERS, () => ({ listeners: [] })) },
+  {
+    name: "no-framework-handlers",
+    apply: (t) =>
+      t.mapResults(CALL_ON, (v, key) =>
+        key.includes("extractFromElement") ? { result: { value: [] } } : v,
+      ),
+  },
+  {
+    name: "no-listener-signatures",
+    apply: (t) => {
+      t.mapResults(LISTENERS, () => ({ listeners: [] }))
+      t.mapResults(CALL_ON, (v, key) =>
+        key.includes("extractFromElement") ? { result: { value: [] } } : v,
+      )
+    },
+  },
 ]
 
 /** Share of the trees payload each field accounts for, as recorded. */
