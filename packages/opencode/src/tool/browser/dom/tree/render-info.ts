@@ -9,6 +9,7 @@ import { type EnhancedDOMTreeNode, NodeType } from '../types/dom-node';
 import { ClickableElementDetector } from './clickable-detector';
 import { checkElementVisibility, type ParentFrameState } from './visibility';
 import { fetchAxForUsedNodes } from './ax-fetch';
+import { HIGHLIGHT_CONTAINER_ID } from '../tool-markers';
 import type { CDPClient } from '../../cdp/client';
 import type { OOPIFManager } from '../../cdp/oopif-manager';
 
@@ -58,7 +59,6 @@ const SCROLLABLE_OVERFLOW_VALUES = new Set([
   'hidden',
 ]);
 const OVERLAY_COVERAGE_THRESHOLD = 0.75;
-const HIGHLIGHT_CONTAINER_ID = '__elements_highlight_container__';
 const COMMON_CONTAINER_TAGS = new Set([
   'div',
   'main',

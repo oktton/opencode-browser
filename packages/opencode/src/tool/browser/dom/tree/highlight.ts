@@ -31,8 +31,10 @@ function createSendCommand(
     cdpClient.sendCommand<T>(method, params);
 }
 
-const HIGHLIGHT_ATTR = 'data-hl-idx';
-const HIGHLIGHT_CONTAINER_ID = '__elements_highlight_container__';
+import {
+  HIGHLIGHT_ATTR,
+  HIGHLIGHT_CONTAINER_ID,
+} from '../tool-markers';
 
 /**
  * Assign sequential highlightIndex and highlight elements in the page.

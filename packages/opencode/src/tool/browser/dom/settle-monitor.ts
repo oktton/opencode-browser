@@ -161,6 +161,8 @@ export class PageSettleMonitor {
   private readonly onMessageBound: (...args: any[]) => void;
   private readonly quietWindow: number;
   private readonly enableOOPIFSession?: (sessionId: string) => Promise<void>;
+  /** Depth of suspend() calls; DOM mutations are ignored while above zero */
+  private suspended = 0;
 
   constructor(
     private readonly debugger_: CdpDebugger,
@@ -181,6 +183,26 @@ export class PageSettleMonitor {
 
   isDirty(): boolean {
     return this.dirty;
+  }
+
+  /**
+   * Ignore DOM mutations until the matching resume().
+   *
+   * Highlighting marks every indexed element and injects an overlay of its
+   * own, then clears both on the next run — hundreds of mutations that are the
+   * extraction, not the page. Counted as activity they made the tool guarantee
+   * the page was dirty whenever it next looked, so every extraction after the
+   * first paid a full quiet window for its own overlay.
+   *
+   * Network activity still counts: suspending is about our writes, and we make
+   * no requests.
+   */
+  suspend(): void {
+    this.suspended++;
+  }
+
+  resume(): void {
+    if (this.suspended > 0) this.suspended--;
   }
 
   /** Explicitly mark dirty — use for tools that don't emit CDP events (e.g. scroll). */
@@ -231,6 +253,7 @@ export class PageSettleMonitor {
     }
 
     if (DOM_MUTATION_EVENTS.has(method)) {
+      if (this.suspended > 0) return;
       this.dirty = true;
       this.resetTimer();
       return;

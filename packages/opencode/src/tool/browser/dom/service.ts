@@ -1418,14 +1418,17 @@ export class DomService {
     // Prune structurally redundant nodes (writes pruneReason back to domTree via lookup)
     pruneTree(rootForRender, lookup);
 
-    // Assign highlightIndex (writes highlightIndex back to domTree via lookup)
+    // Assign highlightIndex (writes highlightIndex back to domTree via lookup).
+    // Suspended because drawing the overlay mutates the page, and the monitor
+    // would otherwise report our own marks as the page still working.
+    this.settleMonitor.suspend();
     const selectorMap = await assignAndHighlight(
       rootForRender,
       this.client,
       this.oopifManager,
       lookup,
       { highlight: options?.highlight },
-    );
+    ).finally(() => this.settleMonitor.resume());
 
     // Build scroll container map for expanded viewport elements (after prune)
     const scrollContainerMap = buildScrollContainerMap(rootForRender, lookup);
