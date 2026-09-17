@@ -32,3 +32,6 @@ UPCOMING_CHANGELOG.md
 logs/
 *.bun-build
 tsconfig.tsbuildinfo
+
+# Benchmark run output — raw per-run results; merged/ stays tracked
+assets/benchmark/results/run-*/
