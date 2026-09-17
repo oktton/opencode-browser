@@ -67,6 +67,8 @@ interface ToolTraceEntry {
   tool: string
   input: unknown
   output_preview: string
+  /** "tab0-dom3 | incremental | Title | [container:0] 13 pages ..." — null for non-browser tools */
+  dom: string | null
   time_ms: number
 }
 
@@ -183,6 +185,28 @@ function extractFinalAnswer(parts: any[]): string {
   return textParts[textParts.length - 1].text ?? ""
 }
 
+/**
+ * What the browser tool saw, in one line.
+ *
+ * Browser tools keep the DOM tree out of their result — it lives in the
+ * server's snapshot cache — so the output preview alone no longer says which
+ * page the model was looking at. The metadata does, compactly. Set
+ * OPENCODE_BROWSER_DOM_DUMP on the server to get the trees themselves on disk,
+ * one file per snapshot, keyed by the same stateId recorded here.
+ */
+function extractDomMeta(part: any): string | null {
+  const dom = part?.state?.metadata?.dom
+  if (!dom?.domId) return null
+  // Full domId, not the stateId: one stateId covers every sub-snapshot taken
+  // without navigating (dom4, dom4.1, dom4.2), and this has to name exactly the
+  // one file the dump wrote. The stateId is the prefix before any dot.
+  const bits = [`${dom.tabId}-${dom.domId}`, dom.mode]
+  if (dom.title) bits.push(dom.title)
+  if (dom.scrollMap) bits.push(String(dom.scrollMap).replace(/\n/g, " ; "))
+  if (dom.fullPath) bits.push(`full=${dom.fullPath}`)
+  return bits.join(" | ")
+}
+
 function extractToolTrace(parts: any[]): ToolTraceEntry[] {
   return parts
     .filter((p: any) => p.type === "tool")
@@ -193,6 +217,7 @@ function extractToolTrace(parts: any[]): ToolTraceEntry[] {
         typeof p.state?.output === "string" ? p.state.output : JSON.stringify(p.state?.output ?? ""),
         300,
       ),
+      dom: extractDomMeta(p),
       time_ms: p.state?.time ? (p.state.time.completed ?? 0) - (p.state.time.created ?? 0) : 0,
     }))
 }
