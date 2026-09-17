@@ -2,6 +2,15 @@ import type { Browser, Page, CDPSession } from "puppeteer-core"
 import { DomService } from "./dom/service.js"
 import { CDPClient } from "./cdp/client.js"
 import { findChromePath } from "./cdp/chrome-path.js"
+import path from "path"
+import { Global } from "@opencode-ai/core/global"
+
+/**
+ * Where Chrome keeps cookies, logins and site data between runs, so a site
+ * signed into once stays signed in on later sessions. Chrome creates the
+ * directory on first launch; delete it to sign out of everything.
+ */
+const PROFILE = path.join(Global.Path.data, "chrome-profile")
 
 export interface TabState {
   id: string
@@ -32,20 +41,26 @@ export class BrowserManager {
     return BrowserManager.instance
   }
 
+  private async launch(profile?: string): Promise<Browser> {
+    const puppeteer = await import("puppeteer-core")
+    return puppeteer.default.launch({
+      executablePath: findChromePath(),
+      headless: false,
+      args: [
+        "--no-sandbox",
+        "--disable-setuid-sandbox",
+        "--disable-blink-features=AutomationControlled",
+      ],
+      defaultViewport: { width: 1280, height: 900 },
+      ...(profile ? { userDataDir: profile } : {}),
+    })
+  }
+
   private async ensureBrowser(): Promise<Browser> {
     if (!this.browser) {
-      const puppeteer = await import("puppeteer-core")
-      const executablePath = findChromePath()
-      this.browser = await puppeteer.default.launch({
-        executablePath,
-        headless: false,
-        args: [
-          "--no-sandbox",
-          "--disable-setuid-sandbox",
-          "--disable-blink-features=AutomationControlled",
-        ],
-        defaultViewport: { width: 1280, height: 900 },
-      })
+      // Chrome refuses to open a profile a second Chrome already holds, so a
+      // busy profile falls back to a throwaway one rather than failing outright
+      this.browser = await this.launch(PROFILE).catch(() => this.launch())
 
       // Register tabs opened by the page itself (target="_blank", window.open, etc.)
       this.browser.on("targetcreated", async (target) => {
