@@ -1,20 +1,42 @@
 import type { TabState, BrowserManager } from "./manager"
+import type { Truncate } from "../truncate"
+import { Effect } from "effect"
+import * as fs from "fs"
+import * as path from "path"
+import { Global } from "@opencode-ai/core/global"
 
 const INCREMENTAL_DIFF_RATIO_THRESHOLD = 0.3
 
-// DOM delimiter markers for downstream omit processing
-const DOM_START = "<!-- DOM_START"
-const DOM_END = "<!-- DOM_END -->"
+/** Appended to a tool's own output when a concurrent call deferred extraction. */
+export const DOM_DEFERRED = "\n\n(DOM extraction deferred — included in the last concurrent browser tool's output.)"
 
-export interface DomResult {
-  /** Formatted string to append to tool output */
-  output: string
-  /** The domId of this snapshot */
+/**
+ * Everything about a DOM snapshot except the snapshot itself.
+ *
+ * This is what a browser tool puts in its result metadata, so it is small,
+ * JSON-serializable and durable. The serialized tree stays in the tab's
+ * DomService cache and is pulled back by domId when model messages are built —
+ * keeping it out of the tool result means it never reaches tool-output
+ * truncation, which would otherwise cut a multi-thousand-line page mid-tree.
+ */
+export interface DomMeta {
   domId: string
-  /** The tabId */
   tabId: string
   /** full = complete DOM (new base), incremental = small diff (preserves base), added = large diff (new base), nochange = nothing changed */
   mode: "full" | "incremental" | "added" | "nochange"
+  /** Accessibility name of the document root — effectively the page title. */
+  title: string
+  /** Address this snapshot was taken at; only browser_goto-style tools echo it otherwise. */
+  url?: string
+  /** Rendered `[container:N] ...` exploration lines, one per scroll container. */
+  scrollMap?: string
+  /** Rendered tab list, present only while more than one tab is open. */
+  tabs?: string
+  /** Schema types the page embeds, readable in full via `__data(type)`. */
+  data?: string[]
+  hasOverlay: boolean
+  /** Set when the tree was too large to show whole; the full text is at this path. */
+  fullPath?: string
 }
 
 interface ExplorationData {
@@ -59,34 +81,69 @@ function buildScrollBar(data: ExplorationData): string {
 
 function formatExplorationBars(
   explorationBars?: Map<number, ExplorationData> | null,
-): string {
-  if (!explorationBars) return ""
+): string | undefined {
+  if (!explorationBars) return undefined
   const parts: string[] = []
   for (const [index, data] of explorationBars) {
     parts.push(`[container:${index}] ${buildScrollBar(data)}`)
   }
-  if (parts.length === 0) return ""
-  return `\nscrollMap:\n${parts.join("\n")}`
+  if (parts.length === 0) return undefined
+  return parts.join("\n")
 }
 
 function formatTabList(
   tabs: { id: string; title: string; url: string; isActive: boolean }[],
-): string {
-  if (tabs.length <= 1) return ""
+): string | undefined {
+  if (tabs.length <= 1) return undefined
   const lines = tabs.map(
     (t) => `- ${t.isActive ? "[active] " : ""}[tab:${t.id}] ${t.title} (${t.url.slice(0, 80)})`,
   )
-  return `\n**Tabs**:\n${lines.join("\n")}`
+  return lines.join("\n")
 }
 
 /**
- * Extract DOM from the active tab, compute diff if possible,
- * and return formatted output with DOM delimiters for omit processing.
+ * Names the schema types the page embeds, without reading any of the values.
+ *
+ * Whether structured data is worth asking for is otherwise invisible: it lives
+ * in script tags the snapshot prunes away, so the only way to find out is to
+ * spend a browser_execute_script call and see. Listing the types up front turns
+ * that guess into a fact — and a thin answer on one page stops reading as
+ * evidence about the site, which is how a page carrying a full record gets
+ * scraped by hand instead.
+ */
+const DATA_TYPES_PROBE = `(function () {
+  var types = {};
+  var note = function (t) {
+    if (!t) return;
+    if (Array.isArray(t)) return t.forEach(note);
+    t = String(t).split('/').pop();
+    if (t) types[t] = 1;
+  };
+  var walk = function (o, depth) {
+    if (!o || typeof o !== 'object' || depth > 3) return;
+    if (Array.isArray(o)) return o.forEach(function (x) { walk(x, depth + 1); });
+    if (o['@graph']) return walk(o['@graph'], depth + 1);
+    note(o['@type']);
+  };
+  var ld = document.querySelectorAll('script[type="application/ld+json"]');
+  for (var i = 0; i < ld.length && i < 20; i++) {
+    try { walk(JSON.parse(ld[i].textContent), 0); } catch (e) {}
+  }
+  var scopes = document.querySelectorAll('[itemscope][itemtype]');
+  for (var s = 0; s < scopes.length && s < 50; s++) note(scopes[s].getAttribute('itemtype'));
+  return Object.keys(types).slice(0, 12);
+})()`
+
+/**
+ * Extract DOM from the active tab, compute a diff against the previous
+ * snapshot when possible, park the serialized tree in the tab's snapshot cache,
+ * and return only the metadata describing it.
  */
 export async function getPageDom(
   manager: BrowserManager,
-  opts?: { tab?: TabState; forceFull?: boolean },
-): Promise<DomResult> {
+  truncate: Truncate.Interface,
+  opts?: { tab?: TabState; forceFull?: boolean; sessionID?: string },
+): Promise<DomMeta> {
   await manager.syncActiveTab()
   const activeTab = opts?.tab ?? manager.getActiveTab()
   const { domService } = activeTab
@@ -94,7 +151,6 @@ export async function getPageDom(
 
   return domService.withClient(async () => {
     const domId = domService.generateDomId()
-    const stateId = `${tabId}-${domId.split(".")[0]}`
     const previousDomId = activeTab.lastDomId
 
     // Extract and render DOM tree (settle wait happens inside buildTree)
@@ -121,6 +177,19 @@ export async function getPageDom(
       historyEntryId,
     )
 
+    const dataTypes: string[] = await domService.evaluateWithReturn(DATA_TYPES_PROBE).catch(() => [])
+
+    const baseMeta = {
+      domId,
+      tabId,
+      title: domTree.axNode?.name?.trim() || "",
+      url,
+      scrollMap: formatExplorationBars(explorationBars),
+      tabs: formatTabList(tabList),
+      ...(dataTypes.length > 0 ? { data: dataTypes } : {}),
+      hasOverlay: renderResult.hasOverlay,
+    }
+
     // Try diff when we have a previous snapshot on the same tab
     let diffMode: "full" | "incremental" | "added" | "nochange" = "full"
     let domHtml = renderResult.html
@@ -133,12 +202,7 @@ export async function getPageDom(
       if (diffStats !== null) {
         if (diffStats.added === 0 && diffStats.removed === 0) {
           activeTab.lastDomId = domId
-          return {
-            output: `\n\n${DOM_START} ${domId} tab:${tabId} mode:nochange -->\nNo DOM changes detected after the previous action.\n${DOM_END}`,
-            domId,
-            tabId,
-            mode: "nochange" as const,
-          }
+          return { ...baseMeta, mode: "nochange" as const }
         }
 
         const isIncremental =
@@ -169,152 +233,179 @@ export async function getPageDom(
 
     activeTab.lastDomId = domId
 
-    // Build output with delimiter markers
-    const overlayNotice = renderResult.hasOverlay
-      ? "\n**Notice**: An overlay (modal/dialog) is covering the page. Handle or dismiss it first."
-      : ""
-    const bars = formatExplorationBars(explorationBars)
-    const tabs = formatTabList(tabList)
-    const diffTip =
-      diffMode === "incremental"
-        ? "\n**Tip**: Elements prefixed with `+|` are newly added and `-|` are removed since the previous action. Removed elements are no longer interactive."
-        : diffMode === "added"
-          ? "\n**Tip**: Elements prefixed with `+|` are newly appeared since the previous action."
-          : ""
+    // Same budget every other tool output answers to, applied to the tree alone:
+    // an oversized page is written out in full and only its head is kept, while
+    // the sections that frame it — scroll map, notices, reminder — always survive.
+    const trimmed = await Effect.runPromise(truncate.output(domHtml))
 
-    const header = diffMode === "incremental" || diffMode === "added" ? "## Incremental DOM updates" : "## Current Page DOM Structure"
+    // Park the serialized tree next to the snapshot it belongs to; the session
+    // layer renders it back into the conversation when it builds model messages.
+    domService.setRenderedHtml(domId, trimmed.content)
 
-    const retentionTip = "\n**Reminder**: This DOM snapshot will be replaced after your next browser action. Record any important data (answers, values, navigation cues) in your text output now — unrecorded information will be lost."
-
-    const content = `(stateId: ${stateId})\n${header}\n${tabs}\n\n${domHtml}${bars}${overlayNotice}${diffTip}${retentionTip}`
-
-    return {
-      output: `\n\n${DOM_START} ${domId} tab:${tabId} mode:${diffMode} -->\n${content}\n${DOM_END}`,
-      domId,
-      tabId,
+    const meta: DomMeta = {
+      ...baseMeta,
       mode: diffMode,
+      ...(trimmed.truncated ? { fullPath: trimmed.outputPath } : {}),
     }
+    dumpSnapshot(meta, trimmed.content, opts?.sessionID)
+    return meta
   })
 }
 
-const DOM_SKIPPED_MSG = "\n\n(DOM extraction deferred — will be included in the last concurrent browser tool's output.)"
+/** How long a session's snapshots stay on disk before the next sweep removes them. */
+const DUMP_RETENTION_MS = 7 * 24 * 60 * 60 * 1000
+const DUMP_ROOT = path.join(Global.Path.data, "dom-snapshots")
+let sweptDumps = false
 
-export function skippedDomOutput(): DomResult {
-  return {
-    output: DOM_SKIPPED_MSG,
-    domId: "",
-    tabId: "",
-    mode: "nochange",
+/**
+ * Where snapshots are written, or undefined when dumping is switched off.
+ *
+ * On by default, the way tool-output truncation already keeps full outputs on
+ * disk: the rendered tree exists only in memory and never reaches the tool
+ * result, so once a run is over there is otherwise no way to see what the model
+ * was looking at when it made a call. Set OPENCODE_BROWSER_DOM_DUMP to a path
+ * to redirect it, or to 0/false to turn it off.
+ */
+function dumpRoot(): string | undefined {
+  const override = process.env.OPENCODE_BROWSER_DOM_DUMP
+  if (override === "0" || override === "false") return undefined
+  return override || DUMP_ROOT
+}
+
+/** Drop session folders past the retention window. Once per process is enough. */
+async function sweepDumps(root: string): Promise<void> {
+  if (sweptDumps) return
+  sweptDumps = true
+  const cutoff = Date.now() - DUMP_RETENTION_MS
+  const entries = await fs.promises.readdir(root).catch(() => [] as string[])
+  for (const entry of entries) {
+    const target = path.join(root, entry)
+    const info = await fs.promises.stat(target).catch(() => undefined)
+    if (!info || info.mtimeMs >= cutoff) continue
+    await fs.promises.rm(target, { recursive: true, force: true }).catch(() => {})
   }
 }
 
 /**
- * Build the omitted placeholder for a previously seen DOM snapshot.
+ * Write one snapshot as the model will see it, named by the tab and domId that
+ * identify it everywhere else.
  */
-export function buildOmittedDomPlaceholder(
-  domId: string,
-  tabId: string,
-  title?: string,
-): string {
-  const stateId = `${tabId}-${domId.split(".")[0]}`
-  const titleLine = title ? `\n**${title}**` : ""
-  return `${DOM_START} ${domId} tab:${tabId} mode:omitted -->\n(stateId: ${stateId})\n## Previous Page DOM Snapshot${titleLine}\n[DOM content omitted. Use \`browser_restore_state\` with (stateId: "${stateId}") to restore this page.]\n${DOM_END}`
-}
-
-/** Regex to match DOM delimiter blocks in tool output */
-export const DOM_BLOCK_RE = /<!-- DOM_START (.+?) -->\n([\s\S]*?)\n<!-- DOM_END -->/g
-
-/** Parse DOM block metadata from the delimiter comment */
-export function parseDomBlockMeta(header: string): {
-  domId: string
-  tabId: string
-  mode: string
-} {
-  const parts = header.trim().split(/\s+/)
-  const domId = parts[0] ?? ""
-  let tabId = ""
-  let mode = ""
-  for (const p of parts.slice(1)) {
-    if (p.startsWith("tab:")) tabId = p.slice(4)
-    else if (p.startsWith("mode:")) mode = p.slice(5)
-  }
-  return { domId, tabId, mode }
+function dumpSnapshot(meta: DomMeta, html: string, sessionID?: string): void {
+  const root = dumpRoot()
+  if (!root) return
+  // Sessions share one browser and its tabs keep counting across them, so the
+  // session has to be in the path or a run's snapshots arrive as a flat pile
+  // with nothing to say which task each belongs to.
+  const target = sessionID ? path.join(root, sessionID) : root
+  const file = path.join(target, `${meta.tabId}-${meta.domId}.txt`)
+  const body = renderDom(meta, html)
+  // Fire and forget: a debug artifact must not hold up the extraction, nor take
+  // it down when the disk refuses.
+  void (async () => {
+    await sweepDumps(root)
+    await fs.promises.mkdir(target, { recursive: true }).catch(() => {})
+    await fs.promises.writeFile(file, body, "utf-8").catch(() => {})
+  })()
 }
 
 /**
- * Omit stale DOM blocks from browser tool outputs before sending to LLM.
+ * Decide which snapshots the model still needs in full, newest last.
  *
- * Strategy (matches abrowser):
- * - Scan all tool outputs from newest to oldest
- * - The newest DOM block is always kept (it's the current state)
- * - For older blocks, keep the "base chain": a full/added DOM and all
- *   incremental diffs that follow it, until the next full/added DOM appears
- * - Everything outside the base chain gets replaced with an omitted placeholder
- * - view_elements image attachments older than the newest are stripped
- *
- * Base chain example:
- *   [full dom3] → [incremental dom4] → [incremental dom5] → [full dom6]
- *   dom6 = current (kept), dom3-5 = all omitted (dom6 is a new base)
- *
- *   [full dom3] → [incremental dom4] → [incremental dom5]
- *   dom5 = current (kept), dom4 = kept (incremental), dom3 = kept (base for dom4-5)
+ * The newest one always survives. A diff only means something on top of the
+ * snapshot it was computed against, so an incremental newest drags its base
+ * chain along: every incremental below it, down to and including the nearest
+ * full or added snapshot. "nochange" asserts the previous snapshot still
+ * stands, so it pulls the chain in the same way while never being a base
+ * itself. Everything outside that collapses to a placeholder.
  */
-export function omitStaleDomBlocks(
-  toolOutputs: { toolName: string; output: string; index: number }[],
-): Map<number, string> {
-  const replacements = new Map<number, string>()
+export function computeDomKeep(metas: DomMeta[]): Set<string> {
+  const keep = new Set<string>()
+  if (metas.length === 0) return keep
 
-  // Collect all DOM blocks with their position info
-  const allBlocks: {
-    index: number
-    mode: string
-    domId: string
-    tabId: string
-  }[] = []
+  const last = metas[metas.length - 1]
+  keep.add(domKey(last))
+  if (last.mode !== "incremental" && last.mode !== "nochange") return keep
 
-  for (const entry of toolOutputs) {
-    const re = new RegExp(DOM_BLOCK_RE.source, "g")
-    let match
-    while ((match = re.exec(entry.output)) !== null) {
-      const meta = parseDomBlockMeta(match[1])
-      allBlocks.push({ index: entry.index, ...meta })
-    }
+  for (let i = metas.length - 2; i >= 0; i--) {
+    const prev = metas[i]
+    // A diff is always computed against the previous snapshot of its own tab,
+    // so another tab's snapshot can never be the base of this chain.
+    if (prev.tabId !== last.tabId) continue
+    if (prev.mode === "nochange") continue
+    keep.add(domKey(prev))
+    if (prev.mode === "full" || prev.mode === "added") break
+  }
+  return keep
+}
+
+/**
+ * Identity of a snapshot across the whole conversation. domIds restart per tab,
+ * so the tab has to be part of the key or two tabs' `dom0` collide.
+ */
+export function domKey(meta: DomMeta): string {
+  return `${meta.tabId}/${meta.domId}`
+}
+
+function stateIdOf(meta: DomMeta): string {
+  return `${meta.tabId}-${meta.domId.split(".")[0]}`
+}
+
+/**
+ * The `<state>` block: everything needed to place this snapshot before reading
+ * the tree — which page, which mode, where the viewport sits, what is unseen.
+ *
+ * Kept and collapsed snapshots share it, so the two read the same way and the
+ * presence of a `<dom>` block after it is what says whether the tree survived.
+ */
+function stateSection(meta: DomMeta): string {
+  const lines = [`stateId: ${stateIdOf(meta)}`, `mode: ${meta.mode}`]
+  if (meta.title) lines.push(`title: ${meta.title}`)
+  // Kept whole rather than shortened: a clipped query string is no longer an
+  // address that browser_goto can be handed back.
+  if (meta.url) lines.push(`url: ${meta.url}`)
+  // A one-line value rides on the label; only a genuinely multi-line one — several
+  // tabs, several scroll containers — is worth the break.
+  const field = (label: string, value: string) =>
+    value.includes("\n") ? lines.push(`${label}:`, value) : lines.push(`${label}: ${value}`)
+  if (meta.tabs) field("tabs", meta.tabs)
+  if (meta.scrollMap) field("scroll", meta.scrollMap)
+  if (meta.data?.length) lines.push(`data: ${meta.data.join(", ")} — readable via __data("Type")`)
+  return `<state>\n${lines.join("\n")}\n</state>`
+}
+
+/**
+ * Render a DOM snapshot for the model. `html` is the serialized tree pulled
+ * back from the tab's snapshot cache; when it is gone (cache evicted, browser
+ * restarted) the caller falls back to `renderOmittedDom`.
+ *
+ * Notices and tips sit between `<state>` and `<dom>` on purpose: each one tells
+ * the model how to read the tree it is about to meet — that an overlay may be
+ * occluding it, or what the `+|` prefixes on its rows mean. The retention
+ * reminder is the exception and trails the tree, being the last word before the
+ * model acts.
+ */
+export function renderDom(meta: DomMeta, html: string): string {
+  if (meta.mode === "nochange") {
+    return `\n\n${stateSection(meta)}\nNo DOM changes detected after the previous action.`
   }
 
-  if (allBlocks.length <= 1) return replacements
+  const overlay = meta.hasOverlay
+    ? "\n**Notice**: An overlay (modal/dialog) is covering the page. Handle or dismiss it first."
+    : ""
+  const diffTip =
+    meta.mode === "incremental"
+      ? "\n**Tip**: Elements prefixed with `+|` are newly added and `-|` are removed since the previous action. Removed elements are no longer interactive."
+      : meta.mode === "added"
+        ? "\n**Tip**: Elements prefixed with `+|` are newly appeared since the previous action."
+        : ""
+  const retention =
+    "\n**Reminder**: This DOM snapshot will be replaced after your next browser action. Record any important data (answers, values, navigation cues) in your text output now — unrecorded information will be lost."
 
-  // The last block is always the current state — never omit
-  // Walk backwards from second-to-last to find what to keep
-  const keepSet = new Set<string>() // domIds to keep
-  keepSet.add(allBlocks[allBlocks.length - 1].domId)
+  return `\n\n${stateSection(meta)}${overlay}${diffTip}\n<dom>\n${html}\n</dom>${retention}`
+}
 
-  const lastBlock = allBlocks[allBlocks.length - 1]
-
-  // If the current (newest) block is incremental, walk backwards to find its base chain
-  if (lastBlock.mode === "incremental") {
-    for (let i = allBlocks.length - 2; i >= 0; i--) {
-      const block = allBlocks[i]
-      if (block.mode === "omitted" || block.mode === "nochange") continue
-      keepSet.add(block.domId)
-      // Stop at full or added — that's the base
-      if (block.mode === "full" || block.mode === "added") break
-    }
-  }
-
-  // Replace non-kept DOM blocks with omitted placeholders
-  for (const entry of toolOutputs) {
-    const re = new RegExp(DOM_BLOCK_RE.source, "g")
-    let modified = false
-    const newOutput = entry.output.replace(re, (fullMatch, header) => {
-      const meta = parseDomBlockMeta(header)
-      if (keepSet.has(meta.domId)) return fullMatch
-      modified = true
-      return buildOmittedDomPlaceholder(meta.domId, meta.tabId)
-    })
-    if (modified) {
-      replacements.set(entry.index, newOutput)
-    }
-  }
-
-  return replacements
+/** Render a snapshot the model no longer needs in full. */
+export function renderOmittedDom(meta: DomMeta): string {
+  const stateId = stateIdOf(meta)
+  return `\n\n${stateSection(meta)}\n[DOM omitted. Use \`browser_restore_state\` with stateId "${stateId}" to restore this page.]`
 }

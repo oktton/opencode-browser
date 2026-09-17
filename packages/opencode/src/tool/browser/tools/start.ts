@@ -1,7 +1,8 @@
 import { Effect, Schema } from "effect"
 import * as Tool from "../../tool"
+import * as Truncate from "../../truncate"
 import { BrowserManager } from "../manager"
-import { getPageDom, skippedDomOutput } from "../dom-utils"
+import { getPageDom, DOM_DEFERRED } from "../dom-utils"
 
 const BROWSER_SYSTEM_PROMPT = `# Browser Mode
 
@@ -9,17 +10,35 @@ You now have access to browser automation tools. You can navigate, click, fill f
 
 ## DOM Snapshot
 
-Each DOM snapshot has:
-- **Header**: \`(stateId: tab0-dom5 | scrollPosition: [container:0] at P1.8)\`
-- **Element markers**:
-  - \`[N]\` = Clickable element (use N in browser_click)
-  - \`<N>\` = Input element (use N in browser_input)
-  - \`[view:ID]\` = Visual element (image/table/svg/icon) — use \`browser_view_elements\` to inspect
+Each snapshot is a \`<state>\` block describing the page, then a \`<dom>\` block holding the page itself:
+
+\`\`\`
+<state>
+stateId: tab0-dom5
+mode: full
+title: Example
+scroll:
+[container:0] 13 pages | viewing P2-3 | unexplored P4-6,P11-12
+</state>
+<dom>
+[3]<button> Submit </button>
+</dom>
+\`\`\`
+
+Inside \`<state>\`:
+- \`stateId\` — pass it to \`browser_restore_state\` to come back to this page
+- \`mode\` — \`full\` (whole page) or \`incremental\`/\`added\` (only what changed since your last action, \`+|\` added, \`-|\` removed; everything from earlier snapshots is still there unless shown removed)
+- \`scroll\` — per scroll container: total pages, where you are, and which pages you have not seen yet
+- \`fullText\` — only when the page was too large to show whole; the complete text is at that path, readable with Grep/Read
+
+Inside \`<dom>\`:
+- \`[N]\` = Clickable element (use N in browser_click)
+- \`<N>\` = Input element (use N in browser_input)
+- \`[view:ID]\` = Visual element (image/table/svg/icon) — use \`browser_view_elements\` to inspect
 - \`=== OFF-SCREEN {direction} [container:N] ===\` ... \`=== END OFF-SCREEN ===\` = Off-screen elements. Use \`browser_reveal_offscreen\` to scroll to elements inside these blocks.
 - \`\\t\` indentation = Nesting depth. Same level = siblings, deeper level = children
-- **scrollMap**: \`[container:0] 13 pages | viewing P2-3 | unexplored P4-6,P11-12\` — shows total pages, current viewport, and exploration status.
 
-**Incremental DOM updates** show only changes since the last snapshot (\`+|\` added, \`-|\` removed). All elements from previous snapshots remain available unless explicitly removed.
+**A snapshot with no \`<dom>\` block** is one you have moved past — its \`<state>\` still names the page and where you had explored to, and \`browser_restore_state\` reopens it.
 
 ## Decision Process
 
@@ -61,6 +80,7 @@ Each DOM snapshot has:
 
 ### Information Extraction
 - Check \`__data()\` first via \`browser_execute_script\` — pages often embed the answer as structured data with named fields that the rendered page conflates
+- **Re-check \`__data()\` on every new page.** What a page embeds depends entirely on what that page is: a search result listing usually carries only \`og:\` meta, while the item page behind it carries the full record. Thin results on one page say nothing about the next one
 - Scroll progressively to discover lazy-loaded content
 - Use \`browser_reveal_offscreen\` with \`target\` to jump straight to a specific off-screen element
 
@@ -88,7 +108,7 @@ Each DOM snapshot has:
 ### Interaction
 - **browser_click**(elementIndex) — Click on element [N] or <N>
 - **browser_input**(elementIndex, text, {clear?, pressEnter?}) — Fill text into input <N>. clear=true by default. pressEnter=false by default.
-- **browser_execute_script**(script?, guide?) — Read page data with JavaScript (helpers: __data, __q, __find). Pass \`guide: true\` for the extraction guide when pulling structured data or working a repeating list.
+- **browser_execute_script**(script) — Read page data with JavaScript. Helpers: \`__data\` (the page's own structured data), \`__records\`/\`__find\` (repeating lists), \`__skeleton\` (one record's real structure), \`__q\`. See the tool's own description for how to combine them.
 
 ### Scrolling
 - **browser_reveal_offscreen**(direction, container, target?) — Scroll to off-screen elements
@@ -104,7 +124,9 @@ Each DOM snapshot has:
 
 export const BrowserStartTool = Tool.define(
   "browser_start",
-  Effect.succeed({
+  Effect.gen(function* () {
+    const truncate = yield* Truncate.Service
+    return {
     description: `Enter browser mode. Call this BEFORE using any other browser_* tools.
 Opens a real browser, navigates to the URL, and returns the browser usage guide with DOM snapshot.
 Use when websearch or webfetch alone are not enough — e.g. interacting with web apps, filling forms, navigating multi-step flows, or extracting content from dynamic/JS-rendered pages that require real-time browser interaction.`,
@@ -128,14 +150,15 @@ Use when websearch or webfetch alone are not enough — e.g. interacting with we
             ),
           )
 
-          const dom = isLast() ? await getPageDom(manager) : skippedDomOutput()
+          const dom = isLast() ? await getPageDom(manager, truncate, { sessionID: ctx.sessionID }) : undefined
           const guide = hasGuide ? "" : `${BROWSER_SYSTEM_PROMPT}\n\n---\n\n`
           return {
             title: `Browser started → ${params.url}`,
-            output: `${guide}Navigated to ${params.url}${dom.output}`,
-            metadata: { url: params.url, domId: dom.domId },
+            output: `${guide}Navigated to ${params.url}${dom ? "" : DOM_DEFERRED}`,
+            metadata: { url: params.url, ...(dom ? { dom } : {}) },
           }
         })
       }),
+    }
   }),
 )

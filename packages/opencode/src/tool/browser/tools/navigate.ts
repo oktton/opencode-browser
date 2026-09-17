@@ -1,11 +1,14 @@
 import { Effect, Schema } from "effect"
 import * as Tool from "../../tool"
+import * as Truncate from "../../truncate"
 import { BrowserManager } from "../manager"
-import { getPageDom, skippedDomOutput } from "../dom-utils"
+import { getPageDom, DOM_DEFERRED } from "../dom-utils"
 
 export const BrowserGotoTool = Tool.define(
   "browser_goto",
-  Effect.succeed({
+  Effect.gen(function* () {
+    const truncate = yield* Truncate.Service
+    return {
     description: `Navigate to a website URL. Opens a browser window if not already open.
 Use this when you need to go to a specific URL or website.
 TIP: You can revisit a URL from previous DOM snapshots to restore a prior page state.`,
@@ -19,20 +22,23 @@ TIP: You can revisit a URL from previous DOM snapshots to restore a prior page s
         return manager.enqueue(async (isLast) => {
           const tab = manager.getActiveTab()
           await tab.page.goto(params.url, { waitUntil: "domcontentloaded" }).catch(() => {})
-          const dom = isLast() ? await getPageDom(manager) : skippedDomOutput()
+          const dom = isLast() ? await getPageDom(manager, truncate, { sessionID: ctx.sessionID }) : undefined
           return {
             title: `Navigate to ${params.url}`,
-            output: `Navigated to ${params.url}${dom.output}`,
-            metadata: { url: params.url, domId: dom.domId },
+            output: `Navigated to ${params.url}${dom ? "" : DOM_DEFERRED}`,
+            metadata: { url: params.url, ...(dom ? { dom } : {}) },
           }
         })
       }),
+    }
   }),
 )
 
 export const BrowserRefreshTool = Tool.define(
   "browser_refresh",
-  Effect.succeed({
+  Effect.gen(function* () {
+    const truncate = yield* Truncate.Service
+    return {
     description: "Refresh the current page",
     parameters: Schema.Struct({}),
     execute: (_params: {}, ctx: Tool.Context) =>
@@ -41,20 +47,23 @@ export const BrowserRefreshTool = Tool.define(
         return manager.enqueue(async (isLast) => {
           const tab = manager.getActiveTab()
           await tab.page.reload({ waitUntil: "domcontentloaded" }).catch(() => {})
-          const dom = isLast() ? await getPageDom(manager) : skippedDomOutput()
+          const dom = isLast() ? await getPageDom(manager, truncate, { sessionID: ctx.sessionID }) : undefined
           return {
             title: "Refresh page",
-            output: `Page refreshed${dom.output}`,
-            metadata: { domId: dom.domId },
+            output: `Page refreshed${dom ? "" : DOM_DEFERRED}`,
+            metadata: { ...(dom ? { dom } : {}) },
           }
         })
       }),
+    }
   }),
 )
 
 export const BrowserRestoreStateTool = Tool.define(
   "browser_restore_state",
-  Effect.succeed({
+  Effect.gen(function* () {
+    const truncate = yield* Truncate.Service
+    return {
     description: `Navigate back to a previous state by stateId (e.g. "tab0-dom3").
 Use this when you made a wrong decision, navigated to an unintended page, or want to revisit a previous state.
 The stateId is shown in every DOM snapshot header.`,
@@ -98,22 +107,23 @@ The stateId is shown in every DOM snapshot header.`,
             if (snapshotUrl) {
               await tab.page.goto(snapshotUrl, { waitUntil: "domcontentloaded" }).catch(() => {})
             } else {
-              const dom = isLast() ? await getPageDom(manager) : skippedDomOutput()
+              const dom = isLast() ? await getPageDom(manager, truncate, { sessionID: ctx.sessionID }) : undefined
               return {
                 title: `Restore ${params.stateId}`,
-                output: `State "${params.stateId}" not found in cache (evicted). Current page returned instead.${dom.output}`,
-                metadata: { domId: dom.domId },
+                output: `State "${params.stateId}" not found in cache (evicted). Current page returned instead.${dom ? "" : DOM_DEFERRED}`,
+                metadata: { ...(dom ? { dom } : {}) },
               }
             }
           }
 
-          const dom = isLast() ? await getPageDom(manager) : skippedDomOutput()
+          const dom = isLast() ? await getPageDom(manager, truncate, { sessionID: ctx.sessionID }) : undefined
           return {
             title: `Restore ${params.stateId}`,
-            output: `Restored to ${params.stateId}${restored ? " (via browser history)" : " (via URL reload)"}${dom.output}`,
-            metadata: { domId: dom.domId },
+            output: `Restored to ${params.stateId}${restored ? " (via browser history)" : " (via URL reload)"}${dom ? "" : DOM_DEFERRED}`,
+            metadata: { ...(dom ? { dom } : {}) },
           }
         })
       }),
+    }
   }),
 )

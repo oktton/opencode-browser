@@ -1,7 +1,8 @@
 import { Effect, Schema } from "effect"
 import * as Tool from "../../tool"
+import * as Truncate from "../../truncate"
 import { BrowserManager } from "../manager"
-import { getPageDom, skippedDomOutput } from "../dom-utils"
+import { getPageDom, DOM_DEFERRED } from "../dom-utils"
 import type { EnhancedDOMTreeNode } from "../dom/types/dom-node"
 import { VALUE_SETTABLE_INPUT_TYPES } from "../dom/tree/clickable-detector"
 
@@ -60,7 +61,9 @@ async function getElementDataByIndex(tab: import("../manager").TabState, element
 
 export const BrowserClickTool = Tool.define(
   "browser_click",
-  Effect.succeed({
+  Effect.gen(function* () {
+    const truncate = yield* Truncate.Service
+    return {
     description: `Click on a specific element on the page.
 Only use on elements marked with [N] or <N> in the DOM.
 Do NOT interact with off-screen elements — scroll first with browser_reveal_offscreen.`,
@@ -86,11 +89,11 @@ Do NOT interact with off-screen elements — scroll first with browser_reveal_of
               await tab.domService.selectOption(elementData.node)
               tab.domService.recordInteraction(elementData.node.backendNodeId, "select", elementData.renderedLine)
               await new Promise((resolve) => setTimeout(resolve, 200))
-              const dom = isLast() ? await getPageDom(manager) : skippedDomOutput()
+              const dom = isLast() ? await getPageDom(manager, truncate, { sessionID: ctx.sessionID }) : undefined
               return {
                 title: `Select ${elementData.renderedLine?.trim() ?? `[${params.elementIndex}]`}`,
-                output: `Selected ${elementData.renderedLine?.trim() ?? `option [${params.elementIndex}]`}${dom.output}`,
-                metadata: {},
+                output: `Selected ${elementData.renderedLine?.trim() ?? `option [${params.elementIndex}]`}${dom ? "" : DOM_DEFERRED}`,
+                metadata: { ...(dom ? { dom } : {}) },
               }
             }
 
@@ -111,21 +114,24 @@ Do NOT interact with off-screen elements — scroll first with browser_reveal_of
             tab.domService.recordInteraction(elementData.node.backendNodeId, "click", elementData.renderedLine)
             await new Promise((resolve) => setTimeout(resolve, 500))
 
-            const dom = isLast() ? await getPageDom(manager) : skippedDomOutput()
+            const dom = isLast() ? await getPageDom(manager, truncate, { sessionID: ctx.sessionID }) : undefined
             return {
               title: `Click ${elementData.renderedLine?.trim() ?? `[${params.elementIndex}]`}`,
-              output: `Clicked ${elementData.renderedLine?.trim() ?? `element [${params.elementIndex}]`}${dom.output}`,
-              metadata: {},
+              output: `Clicked ${elementData.renderedLine?.trim() ?? `element [${params.elementIndex}]`}${dom ? "" : DOM_DEFERRED}`,
+              metadata: { ...(dom ? { dom } : {}) },
             }
           })
         })
       }),
+    }
   }),
 )
 
 export const BrowserInputTool = Tool.define(
   "browser_input",
-  Effect.succeed({
+  Effect.gen(function* () {
+    const truncate = yield* Truncate.Service
+    return {
     description: `Fill text into an input field.
 Only use on elements marked with <N> in the DOM (not [N]).
 TIP: For search boxes, use pressEnter: true to submit directly.
@@ -196,14 +202,15 @@ Supports range, color, date inputs and ARIA sliders.`,
             }
 
             await new Promise((resolve) => setTimeout(resolve, 300))
-            const dom = isLast() ? await getPageDom(manager) : skippedDomOutput()
+            const dom = isLast() ? await getPageDom(manager, truncate, { sessionID: ctx.sessionID }) : undefined
             return {
               title: `Input "${params.text}" into [${params.elementIndex}]`,
-              output: `Input "${params.text}" into ${elementData.renderedLine?.trim() ?? `element <${params.elementIndex}>`}${pressEnter ? " and pressed Enter" : ""}${dom.output}`,
-              metadata: {},
+              output: `Input "${params.text}" into ${elementData.renderedLine?.trim() ?? `element <${params.elementIndex}>`}${pressEnter ? " and pressed Enter" : ""}${dom ? "" : DOM_DEFERRED}`,
+              metadata: { ...(dom ? { dom } : {}) },
             }
           })
         })
       }),
+    }
   }),
 )

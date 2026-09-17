@@ -37,74 +37,57 @@ import type { Provider } from "@/provider/provider"
 import { Effect, Schema } from "effect"
 import * as nodeFs from "fs"
 import * as nodePath from "path"
-import { DOM_BLOCK_RE, parseDomBlockMeta, buildOmittedDomPlaceholder } from "@/tool/browser/dom-utils"
+import { renderDom, renderOmittedDom, computeDomKeep, domKey, type DomMeta } from "@/tool/browser/dom-utils"
+import { BrowserManager } from "@/tool/browser/manager"
 
 /**
- * Pre-scan all browser tool outputs to determine which DOM blocks should be omitted.
- * Returns a Map<callID, replacedOutput> for tool parts whose DOM content should be replaced.
+ * Decide how each browser tool result should present its DOM snapshot.
  *
- * Omit strategy (matches abrowser):
- * - The newest DOM block is always kept
- * - If the newest is incremental, keep its base chain (base + all incremental diffs above it)
- * - Everything else gets replaced with a lightweight placeholder
- * - view_elements image attachments older than the newest are stripped (handled separately)
+ * Browser tools keep the serialized tree out of their result — it lives in the
+ * tab's snapshot cache, and only `DomMeta` is persisted — so the text is
+ * assembled here, on the way to the model:
+ * - The newest snapshot is rendered in full
+ * - If the newest is an incremental diff, its base chain is rendered too
+ *   (the base plus every incremental diff stacked on it)
+ * - Everything older collapses to a placeholder naming the page and its
+ *   exploration state, which the model can reopen via browser_restore_state
+ *
+ * A snapshot whose cache entry is gone (evicted, or the browser was restarted)
+ * also collapses to the placeholder — the metadata behind it is durable, so the
+ * conversation degrades to exactly what an omitted snapshot would have shown.
  */
-function computeDomOmitMap(input: WithParts[]): Map<string, string> {
+function computeDomRenders(input: WithParts[]): Map<string, string> {
   const result = new Map<string, string>()
 
-  // Collect all DOM blocks across all tool results, in conversation order
-  const allBlocks: {
-    callID: string
-    output: string
-    domId: string
-    tabId: string
-    mode: string
-  }[] = []
-
+  const blocks: { callID: string; meta: DomMeta }[] = []
   for (const msg of input) {
     if (msg.info.role !== "assistant") continue
     for (const part of msg.parts) {
       if (part.type !== "tool" || !part.tool.startsWith("browser_") || part.state.status !== "completed") continue
-      const output = part.state.output
-      if (typeof output !== "string") continue
-      const re = new RegExp(DOM_BLOCK_RE.source, "g")
-      let match
-      while ((match = re.exec(output)) !== null) {
-        const meta = parseDomBlockMeta(match[1])
-        allBlocks.push({ callID: part.callID, output, ...meta })
-      }
+      const meta = part.state.metadata?.dom as DomMeta | undefined
+      if (!meta?.domId) continue
+      blocks.push({ callID: part.callID, meta })
     }
   }
 
-  if (allBlocks.length <= 1) return result
+  if (blocks.length === 0) return result
 
-  // Determine which domIds to keep
-  const keepDomIds = new Set<string>()
-  const lastBlock = allBlocks[allBlocks.length - 1]
-  keepDomIds.add(lastBlock.domId)
-
-  // If newest is incremental, walk back to find the base
-  if (lastBlock.mode === "incremental") {
-    for (let i = allBlocks.length - 2; i >= 0; i--) {
-      const block = allBlocks[i]
-      if (block.mode === "omitted" || block.mode === "nochange") continue
-      keepDomIds.add(block.domId)
-      if (block.mode === "full" || block.mode === "added") break
+  const keep = computeDomKeep(blocks.map((block) => block.meta))
+  const manager = BrowserManager.peekInstance()
+  for (const block of blocks) {
+    const meta = block.meta
+    // "nochange" never had a tree of its own — it reports against the one
+    // before it, and its one line is not worth collapsing either way
+    if (meta.mode === "nochange") {
+      result.set(block.callID, renderDom(meta, ""))
+      continue
     }
-  }
-
-  // Build replacement outputs for tool results with stale DOM blocks
-  const seenCallIDs = new Set<string>()
-  for (const block of allBlocks) {
-    if (keepDomIds.has(block.domId) || seenCallIDs.has(block.callID)) continue
-    seenCallIDs.add(block.callID)
-    const re = new RegExp(DOM_BLOCK_RE.source, "g")
-    const replaced = block.output.replace(re, (fullMatch, header) => {
-      const meta = parseDomBlockMeta(header)
-      if (keepDomIds.has(meta.domId)) return fullMatch
-      return buildOmittedDomPlaceholder(meta.domId, meta.tabId)
-    })
-    result.set(block.callID, replaced)
+    if (!keep.has(domKey(meta))) {
+      result.set(block.callID, renderOmittedDom(meta))
+      continue
+    }
+    const html = manager?.getTab(meta.tabId)?.domService.getRenderedHtml(meta.domId)
+    result.set(block.callID, html ? renderDom(meta, html) : renderOmittedDom(meta))
   }
 
   return result
@@ -266,9 +249,9 @@ export const toModelMessagesEffect = Effect.fnUntraced(function* (
     return { type: "json", value: output as never }
   }
 
-  // Pre-scan browser tool outputs to determine which DOM blocks should be omitted.
-  // Collects all DOM blocks, then computes which ones to keep (current state + base chain).
-  const domOmitMap = computeDomOmitMap(input)
+  // Browser tools persist only DOM metadata; the snapshot text is rendered here,
+  // in full for the current state and its base chain, collapsed for the rest.
+  const domRenders = computeDomRenders(input)
 
   // Find the latest browser_view_elements callID — strip image attachments from older ones
   let latestViewElementsCallID: string | undefined
@@ -385,10 +368,9 @@ export const toModelMessagesEffect = Effect.fnUntraced(function* (
             let outputText = part.state.time.compacted
               ? "[Old tool result content cleared]"
               : truncateToolOutput(part.state.output, options?.toolOutputMaxChars)
-            // Apply DOM omit: replace stale DOM blocks with lightweight placeholders
-            if (part.tool.startsWith("browser_") && domOmitMap.has(part.callID)) {
-              outputText = domOmitMap.get(part.callID)!
-            }
+            // Append the DOM snapshot this call produced, rendered or collapsed
+            const domRender = domRenders.get(part.callID)
+            if (domRender) outputText += domRender
             let attachments = part.state.time.compacted || options?.stripMedia ? [] : (part.state.attachments ?? [])
             // Strip image attachments from older browser_view_elements results
             if (

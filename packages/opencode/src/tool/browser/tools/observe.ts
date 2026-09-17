@@ -1,11 +1,14 @@
 import { Effect, Schema } from "effect"
 import * as Tool from "../../tool"
+import * as Truncate from "../../truncate"
 import { BrowserManager } from "../manager"
-import { getPageDom, skippedDomOutput } from "../dom-utils"
+import { getPageDom, DOM_DEFERRED } from "../dom-utils"
 
 export const BrowserObserveTool = Tool.define(
   "browser_observe",
-  Effect.succeed({
+  Effect.gen(function* () {
+    const truncate = yield* Truncate.Service
+    return {
     description: `Get the current page DOM snapshot without performing any action.
 Use this when the page may have changed (e.g. user manually interacted with the browser) and you need to see the latest state before deciding what to do.`,
     parameters: Schema.Struct({}),
@@ -15,14 +18,15 @@ Use this when the page may have changed (e.g. user manually interacted with the 
         return manager.enqueue(async (isLast) => {
           const tab = manager.getActiveTab()
           const url = tab.page.url()
-          const dom = isLast() ? await getPageDom(manager, { forceFull: true }) : skippedDomOutput()
+          const dom = isLast() ? await getPageDom(manager, truncate, { forceFull: true, sessionID: ctx.sessionID }) : undefined
           return {
             title: `Observe page: ${url}`,
-            output: `Current page: ${url}${dom.output}`,
-            metadata: { url, domId: dom.domId },
+            output: `Current page: ${url}${dom ? "" : DOM_DEFERRED}`,
+            metadata: { url, ...(dom ? { dom } : {}) },
           }
         })
       }),
+    }
   }),
 )
 

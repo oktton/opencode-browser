@@ -1,7 +1,8 @@
 import { Effect, Schema } from "effect"
 import * as Tool from "../../tool"
+import * as Truncate from "../../truncate"
 import { BrowserManager } from "../manager"
-import { getPageDom, skippedDomOutput } from "../dom-utils"
+import { getPageDom, DOM_DEFERRED } from "../dom-utils"
 
 function currentPage(scrollInfo: { scrollY: number; viewportHeight: number }): number {
   if (scrollInfo.viewportHeight <= 0) return 0
@@ -10,7 +11,9 @@ function currentPage(scrollInfo: { scrollY: number; viewportHeight: number }): n
 
 export const BrowserRevealOffscreenTool = Tool.define(
   "browser_reveal_offscreen",
-  Effect.succeed({
+  Effect.gen(function* () {
+    const truncate = yield* Truncate.Service
+    return {
     description: `Scroll to reveal off-screen elements.
 
 Use when:
@@ -33,11 +36,11 @@ Container: Use index N from [container:N] in OFF-SCREEN blocks.`,
             const node = await domService.scrollToOffscreenElementByIndex(params.target!, params.container, params.direction)
             if (node) {
               await new Promise((resolve) => setTimeout(resolve, 300))
-              const dom = isLast() ? await getPageDom(manager) : skippedDomOutput()
+              const dom = isLast() ? await getPageDom(manager, truncate, { sessionID: ctx.sessionID }) : undefined
               return {
                 title: `Scroll to "${params.target}" in [container:${params.container}]`,
-                output: `Scrolled to element in container [${params.container}]: ${params.target}${dom.output}`,
-                metadata: {},
+                output: `Scrolled to element in container [${params.container}]: ${params.target}${dom ? "" : DOM_DEFERRED}`,
+                metadata: { ...(dom ? { dom } : {}) },
               }
             }
           }
@@ -78,20 +81,23 @@ Container: Use index N from [container:N] in OFF-SCREEN blocks.`,
             ? ` Target "${params.target}" not found in off-screen elements. It may not be rendered yet — use browser_scroll_next_screen to load more content, then retry.`
             : ""
 
-          const dom = isLast() ? await getPageDom(manager) : skippedDomOutput()
+          const dom = isLast() ? await getPageDom(manager, truncate, { sessionID: ctx.sessionID }) : undefined
           return {
             title: `Scroll ${params.direction} [container:${params.container}]`,
-            output: `Scrolled ${params.direction} on container [${params.container}]: P${beforePos} → P${afterPos}${hint}${targetHint}${dom.output}`,
-            metadata: {},
+            output: `Scrolled ${params.direction} on container [${params.container}]: P${beforePos} → P${afterPos}${hint}${targetHint}${dom ? "" : DOM_DEFERRED}`,
+            metadata: { ...(dom ? { dom } : {}) },
           }
         })
       }),
+    }
   }),
 )
 
 export const BrowserScrollNextScreenTool = Tool.define(
   "browser_scroll_next_screen",
-  Effect.succeed({
+  Effect.gen(function* () {
+    const truncate = yield* Truncate.Service
+    return {
     description: `Scroll to scan through unseen content. Each call advances past the current expand zone into content not yet in the DOM.
 
 Best for discovering unknown content. If you already know what to find, browser_reveal_offscreen with a target parameter jumps straight to it.
@@ -142,20 +148,23 @@ Container: index N from [container:N] comments.`,
           if (params.direction === "down" && atEnd) hint = " (Reached the BOTTOM of the page)"
           else if (params.direction === "up" && atStart) hint = " (Reached the TOP of the page)"
 
-          const dom = isLast() ? await getPageDom(manager) : skippedDomOutput()
+          const dom = isLast() ? await getPageDom(manager, truncate, { sessionID: ctx.sessionID }) : undefined
           return {
             title: `Scroll ${params.direction} next screen [container:${params.container}]`,
-            output: `Scrolled ${params.direction} to next screen on container [${params.container}]: P${beforePos} → P${afterPos}${hint}${dom.output}`,
-            metadata: {},
+            output: `Scrolled ${params.direction} to next screen on container [${params.container}]: P${beforePos} → P${afterPos}${hint}${dom ? "" : DOM_DEFERRED}`,
+            metadata: { ...(dom ? { dom } : {}) },
           }
         })
       }),
+    }
   }),
 )
 
 export const BrowserScrollToPageTool = Tool.define(
   "browser_scroll_to_page",
-  Effect.succeed({
+  Effect.gen(function* () {
+    const truncate = yield* Truncate.Service
+    return {
     description: `Jump to a specific page in a scroll container.
 Use unexplored pages in scroll_map to explore new content, or restore a previous scroll position.`,
     parameters: Schema.Struct({
@@ -198,13 +207,14 @@ Use unexplored pages in scroll_map to explore new content, or restore a previous
           else if (atStart) hint = " (At the TOP of the page)"
           else if (atEnd) hint = " (At the BOTTOM of the page)"
 
-          const dom = isLast() ? await getPageDom(manager) : skippedDomOutput()
+          const dom = isLast() ? await getPageDom(manager, truncate, { sessionID: ctx.sessionID }) : undefined
           return {
             title: `Scroll to P${params.page} [container:${params.container}]`,
-            output: `Scrolled to target page on container [${params.container}]: P${beforePos} → P${afterPos}${hint}${dom.output}`,
-            metadata: {},
+            output: `Scrolled to target page on container [${params.container}]: P${beforePos} → P${afterPos}${hint}${dom ? "" : DOM_DEFERRED}`,
+            metadata: { ...(dom ? { dom } : {}) },
           }
         })
       }),
+    }
   }),
 )

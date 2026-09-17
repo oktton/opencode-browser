@@ -2,60 +2,26 @@ import { Effect, Schema } from "effect"
 import * as Tool from "../../tool"
 import * as Truncate from "../../truncate"
 import { BrowserManager } from "../manager"
-import { getPageDom, skippedDomOutput } from "../dom-utils"
+import { getPageDom, DOM_DEFERRED } from "../dom-utils"
 import { wrapScript } from "../page-tools"
 
-const EXTRACTION_GUIDE = `# Extraction guide
+export const BrowserExecuteScriptTool = Tool.define(
+  "browser_execute_script",
+  Effect.gen(function* () {
+    const truncate = yield* Truncate.Service
+    return {
+      description: `Run JavaScript in the page context. Full DOM/Web API access, plus the helpers below — for pulling out data the snapshot flattens, working a whole list at once, or reaching anything the other browser tools do not cover.
 
-## Strategy — try in this order
+## Helpers
 
-### 1. \`__data(type?)\` first
-Many pages embed the answer as machine-readable data (JSON-LD, microdata, og/meta) that never appears in the DOM snapshot. Its fields are NAMED, so it separates values the rendered page conflates.
+### __data(type?) → Object[]
+The page's own embedded data — JSON-LD, microdata, og/meta — much of which never appears in the DOM snapshot. Its fields are named, so it separates values the rendered page runs together. Optional regex filter on type.
 \`\`\`js
 return __data("Recipe")[0].aggregateRating;  // { ratingValue, ratingCount, reviewCount }
 return __data("Product");                    // priced items on the page
 return __data();                             // everything the page embeds
 \`\`\`
-**Never substitute a near-miss field.** \`ratingCount\` (people who rated) and \`reviewCount\` (people who wrote a review) are different numbers, and pages often embed only one of them. If the field the task asks for is missing from \`__data\`, do NOT report the similar-sounding one — go find the real value in the page:
-\`\`\`js
-return __find("[0-9,]+\\\\s*(Reviews?|Ratings?)").map(function(e) {
-  return e.textContent.replace(/\\\\s+/g, " ").trim();
-});   // e.g. ["21002 Ratings", "15,328 Reviews"] — two different numbers
-\`\`\`
-The same applies to any constraint the task states (price, size, condition, "in stock"): confirm it against a field that actually means that, or say you could not confirm it.
-
-### 2. Anchor → records → skeleton — for a list of repeating items
-Seed from one item you already know exists, and let \`__records\` find the rest:
-\`\`\`js
-var r = __records(__find("Artichoke Spinach Lasagna")[0]);
-return { count: r.length, sample: __skeleton(r[0]) };
-\`\`\`
-**Always do this confirm-first step.** \`count\` should look like the number of items on the page — a wrong group produces confident garbage. \`__skeleton\` shows you the real structure inside one record, including class names and \`[N]\` indices that the DOM snapshot hides.
-
-Then write an exact extractor against the structure you just saw:
-\`\`\`js
-return __records(__find("Artichoke Spinach Lasagna")[0]).map(function(el) {
-  return {
-    name: el.querySelector("a.title").textContent.trim(),
-    reviews: el.querySelector(".review-count").textContent,
-    index: el.getAttribute("data-hl-idx"),   // pass to browser_click
-  };
-});
-\`\`\`
-Extract only the fields the task needs — returning whole elements is expensive.
-
-### 3. Hand-written selectors last
-\`querySelector\` is fine for reading.
-
-**Principles**: structured data > scraping · anchor > blind selectors · named fields > the most visible number.
-
-## Helpers
-
-### __data(type?) → Object[]
-Embedded structured data. Optional regex filter on type.
-
-### __q(n) → Element
-Element by its [N] or <N> index from the DOM output.
+What a page embeds depends on what that page is: a listing usually carries only \`og:\` meta, while the item page behind it carries the full record. A thin result on one page says nothing about the next.
 
 ### __find(pattern, tag?, n?) → Element[] (max 20 results)
 Regex search across text content and all attributes. Optional tag filter, optional [N] scope.
@@ -66,77 +32,82 @@ return __find("submit", "button");    // filter by tag
 \`\`\`
 
 ### __records(anchor?) → Element[]
-All elements that repeat with the same structure as the anchor (one row/card/item each). Anchor is an element or an [N] index; without one it guesses the largest repeating group on the page.
+\`querySelectorAll\` for when you do not know the selector. Hand it one item you can already see — a title from the snapshot — and it works out which elements repeat with that same structure, returning one row/card/item each. The anchor is an element or an [N] index; without one it guesses the largest repeating group on the page.
+
+It replaces the usual hunt for a stable class or \`[id^="..."]\` prefix, which on a modern site is often hashed, shared across unrelated blocks, or different for the first and last card. \`count\` says whether the group is right: one that missed produces a confident-looking wrong list.
+\`\`\`js
+var r = __records(__find("Artichoke Spinach Lasagna")[0]);
+return { count: r.length, sample: __skeleton(r[0]) };
+\`\`\`
 
 ### __skeleton(el, depth?) → string
-Compressed structure of one element — tags, ids, classes, aria/itemprop, \`[N]\` indices and direct text. Use it to see inside a record before writing selectors. Default depth 4.
+What you would read \`el.outerHTML\` for, without the noise that makes it unreadable — tags, ids, classes, aria/itemprop, \`[N]\` indices and direct text, to depth 4 by default. Typically a third the size and it surfaces what raw markup buries: the value you are after often sits in a class name (\`p.star-rating.Three\`, where the five identical star icons beneath it say nothing) rather than in text.
+
+Once the shape is known, an extractor over the whole group is exact:
+\`\`\`js
+return __records(__find("Artichoke Spinach Lasagna")[0]).map(function(el) {
+  return {
+    name: el.querySelector("a.title").textContent.trim(),
+    reviews: el.querySelector(".review-count").textContent,
+    index: el.getAttribute("data-hl-idx"),   // pass to browser_click
+  };
+});
+\`\`\`
+
+### __q(n) → Element
+Element by its [N] or <N> index from the DOM output.
+
+## Things that bite
+- \`ratingCount\` (people who rated) and \`reviewCount\` (people who wrote a review) are different numbers, and pages often embed only one. The same goes for any constraint a task states — price, size, condition, "in stock". A similar-sounding field is a different measurement, and when the real one is absent from \`__data\` it may still be in the page text:
+\`\`\`js
+return __find("[0-9,]+\\\\s*(Reviews?|Ratings?)").map(function(e) {
+  return e.textContent.replace(/\\\\s+/g, " ").trim();
+});   // e.g. ["21002 Ratings", "15,328 Reviews"] — two different numbers
+\`\`\`
+- Returning whole elements, or many of them, is expensive; plain objects holding the fields you need serialize far smaller.
 
 ## Serialization
 Returned HTMLElements become \`{index, tagName, textContent, attrs, childElementCount, ...}\`.
-- \`index\` — nearest [N] highlight index; pass it to browser_click / browser_input
+- \`index\` — the closest highlighted ancestor's [N], so an element you found here can be clicked even when the snapshot never showed it. Pass it to browser_click / browser_input
 - \`attrs\` — identifying attributes only (id, class, aria-label, role, short data-*)
-- Need another attribute? Read it explicitly: \`el.getAttribute("data-x")\`
-- Returning many elements is expensive — return plain objects holding just the fields you need.`
-
-export const BrowserExecuteScriptTool = Tool.define(
-  "browser_execute_script",
-  Effect.gen(function* () {
-    const truncate = yield* Truncate.Service
-    return {
-      description: `Execute JavaScript in the page context to READ data. You have full DOM/Web API access.
-
-Helpers in scope: \`__data\`, \`__q\`, \`__find\`, \`__records\`, \`__skeleton\`.
-
-**Extracting structured data, or working with a set of repeating/similar elements?** Pass \`guide: true\` to load the extraction guide first — pages often embed the answer as named machine-readable data the DOM snapshot never shows, and there is a reliable way to work a repeating list. You can pass \`script\` in the same call.
-
-## Rules
-- **Read, don't act.** Use browser_click / browser_input / browser_scroll_* for actions — they keep your DOM snapshot in sync. A JS \`.click()\` or \`.value =\` changes the page behind your snapshot's back, so what you see next no longer matches the page.
-- **Return plain objects/arrays** for extracted data — they serialize compactly. Returning many elements is expensive.
-- Returned elements serialize with an \`index\` field — pass it to browser_click / browser_input.
-- Record what you found in your text output before acting — the snapshot is replaced by your next action.`,
+- any other attribute is readable explicitly: \`el.getAttribute("data-x")\`
+`,
       parameters: Schema.Struct({
-        script: Schema.optional(Schema.String).annotate({
-          description: "JavaScript function body. Omit when only loading the guide.",
-        }),
-        guide: Schema.optional(Schema.Boolean).annotate({
-          description: "Load the extraction guide (structured data + repeating elements). Combinable with `script`.",
+        script: Schema.String.annotate({
+          description: "JavaScript function body.",
         }),
       }),
-      execute: (params: { script?: string; guide?: boolean }, ctx: Tool.Context) =>
+      execute: (params: { script: string }, ctx: Tool.Context) =>
         Effect.gen(function* () {
-          const guide = params.guide ? `${EXTRACTION_GUIDE}\n\n---\n\n` : ""
-
-          if (!params.script)
-            return {
-              title: params.guide ? "Extraction guide" : "Execute script",
-              output: params.guide
-                ? EXTRACTION_GUIDE
-                : "Provide `script` to execute, or `guide: true` to load the extraction guide.",
-              metadata: {},
-            }
-
           const manager = BrowserManager.getInstance()
           const tab = manager.getActiveTab()
 
           const { resultText, dom } = yield* Effect.promise(() =>
             manager.enqueue(async (isLast) => {
               const result = await tab.domService.withClient(async () => {
-                const returnValue = await tab.domService.evaluateWithReturn(wrapScript(params.script!))
+                const returnValue = await tab.domService.evaluateWithReturn(wrapScript(params.script))
                 return returnValue !== undefined
                   ? `Result: ${JSON.stringify(returnValue)}`
                   : "Script executed successfully"
               })
-              const dom = isLast() ? await getPageDom(manager) : skippedDomOutput()
+              const dom = isLast() ? await getPageDom(manager, truncate, { sessionID: ctx.sessionID }) : undefined
               return { resultText: result, dom }
             }),
           )
 
           const truncated = yield* truncate.output(resultText, { maxLines: 100, maxBytes: 8 * 1024 })
+          // The generic truncation hint only offers the saved file. An oversized
+          // return usually means the selector was too wide, and that fix lives in
+          // the next script, so name it here too.
+          const overflow = truncated.truncated
+            ? `\n\n**Your script returned too much.** Narrowing it is usually faster: return only the fields you need, use \`__data("Type")\` to pull the page's own structured data, or \`__skeleton(el)\` to inspect one element's shape before mapping over all of them.`
+            : ""
           return {
             title: "Execute script",
-            output: `${guide}${truncated.content}${dom.output}`,
+            output: `${truncated.content}${overflow}${dom ? "" : DOM_DEFERRED}`,
             metadata: {
               ...(truncated.truncated ? { scriptResultPath: truncated.outputPath } : {}),
+              ...(dom ? { dom } : {}),
             },
           }
         }),

@@ -77,6 +77,13 @@ export type ViewportStats = ScrollContainerPages[];
 
 interface DomSnapshot {
   domTree: EnhancedDOMTreeNode;
+  /**
+   * Serialized tree as the model sees it. Held here rather than in the tool
+   * result so the bulky text never passes through tool-output truncation; the
+   * session layer pulls it back by domId when it builds model messages.
+   * For diff modes this is the rendered diff, not the full tree.
+   */
+  html?: string;
   selectorMap: DOMSelectorMap;
   scrollContainerMap: ScrollContainerMap;
   visualElementMap: VisualElementMap;
@@ -177,6 +184,15 @@ export class DomService {
 
   getSelectorMap(domId: string): DOMSelectorMap | undefined {
     return this.cache.get(domId)?.selectorMap;
+  }
+
+  setRenderedHtml(domId: string, html: string): void {
+    const snapshot = this.cache.get(domId);
+    if (snapshot) snapshot.html = html;
+  }
+
+  getRenderedHtml(domId: string): string | undefined {
+    return this.cache.get(domId)?.html;
   }
 
   getScrollContainerMap(domId: string): ScrollContainerMap {
