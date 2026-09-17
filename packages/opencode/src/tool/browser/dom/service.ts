@@ -431,14 +431,25 @@ export class DomService {
   async evaluateWithReturn(expression: string): Promise<any> {
     const result = await this.client.sendCommand<{
       result: { value?: any; subtype?: string; description?: string };
-      exceptionDetails?: { text?: string };
+      exceptionDetails?: {
+        text?: string;
+        lineNumber?: number;
+        columnNumber?: number;
+        exception?: { className?: string; description?: string };
+      };
     }>('Runtime.evaluate', {
       expression,
       returnByValue: true,
       awaitPromise: true,
     });
     if (result.exceptionDetails) {
-      throw new Error(result.exceptionDetails.text ?? 'Script error');
+      // `text` is almost always the bare word "Uncaught"; what the caller needs
+      // — "SyntaxError: Unexpected token '<'" — lives on the exception object.
+      // Reporting only `text` leaves a caller retrying a script whose real fault
+      // it was never shown.
+      const details = result.exceptionDetails;
+      const first = details.exception?.description?.split('\n')[0];
+      throw new Error(first || details.text || 'Script error');
     }
     return result.result.value;
   }
