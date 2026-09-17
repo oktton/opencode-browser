@@ -25,8 +25,12 @@ export class BrowserManager {
   private static instance: BrowserManager | null = null
   private browser: Browser | null = null
   private tabs = new Map<string, TabState>()
+  private adopting = new Map<Page, Promise<TabState>>()
   private activeTabId: string | null = null
-  private tabCounter = 0
+  // Static so ids stay unique across manager instances: cleanup() drops the
+  // singleton, and a reused id would let a stale DOM snapshot be rendered back
+  // into the conversation under a tab that is now a different page.
+  private static tabCounter = 0
   private pending = 0
   private chain: Promise<void> = Promise.resolve()
 
@@ -67,31 +71,46 @@ export class BrowserManager {
         if (target.type() !== "page") return
         const page = await target.page()
         if (!page) return
-        for (const tab of this.tabs.values()) {
-          if (tab.page === page) return
-        }
-        const id = `tab${this.tabCounter++}`
-        const cdpSession = await page.createCDPSession()
-        const cdpClient = new CDPClient(cdpSession)
-        const domService = new DomService(page, cdpClient)
-        this.tabs.set(id, { id, page, cdpSession, cdpClient, domService })
+        await this.adopt(page).catch(() => {})
       })
     }
     return this.browser
   }
 
+  /**
+   * Give a page exactly one TabState, however it arrived.
+   *
+   * `newPage()` fires `targetcreated`, so newTab and the listener both try to
+   * adopt the same page, and each has an await between looking at `tabs` and
+   * writing to it — long enough for the other to slip through. The page would
+   * end up under two ids, with two CDP sessions and two DomServices counting
+   * domIds independently, which breaks diffing the moment the active tab flips
+   * between the twins. Recording the in-flight promise is the synchronous claim
+   * that a `tabs` lookup could not be.
+   */
+  private adopt(page: Page): Promise<TabState> {
+    const inflight = this.adopting.get(page)
+    if (inflight) return inflight
+
+    const pending = (async () => {
+      const id = `tab${BrowserManager.tabCounter++}`
+      const cdpSession = await page.createCDPSession()
+      const cdpClient = new CDPClient(cdpSession)
+      const domService = new DomService(page, cdpClient)
+      const tab: TabState = { id, page, cdpSession, cdpClient, domService }
+      this.tabs.set(id, tab)
+      return tab
+    })()
+
+    this.adopting.set(page, pending)
+    return pending
+  }
+
   async newTab(url?: string): Promise<TabState> {
     const browser = await this.ensureBrowser()
-    const id = `tab${this.tabCounter++}`
-
     const page = await browser.newPage()
-    const cdpSession = await page.createCDPSession()
-    const cdpClient = new CDPClient(cdpSession)
-    const domService = new DomService(page, cdpClient)
-
-    const tab: TabState = { id, page, cdpSession, cdpClient, domService }
-    this.tabs.set(id, tab)
-    this.activeTabId = id
+    const tab = await this.adopt(page)
+    this.activeTabId = tab.id
 
     if (url) {
       await page.goto(url, { waitUntil: "domcontentloaded" }).catch(() => {})
@@ -116,6 +135,7 @@ export class BrowserManager {
     await tab.cdpClient.cleanup()
     await tab.page.close()
     this.tabs.delete(tabId)
+    this.adopting.delete(tab.page)
 
     if (this.activeTabId === tabId) {
       const remaining = [...this.tabs.keys()]
@@ -134,6 +154,7 @@ export class BrowserManager {
         await tab.domService.destroySettle().catch(() => {})
         await tab.cdpClient.cleanup().catch(() => {})
         this.tabs.delete(tabId)
+        this.adopting.delete(tab.page)
         if (this.activeTabId === tabId) this.activeTabId = null
       }
     }
@@ -210,6 +231,7 @@ export class BrowserManager {
 
   private reset(): void {
     this.tabs.clear()
+    this.adopting.clear()
     this.activeTabId = null
     this.browser = null
   }
@@ -234,6 +256,7 @@ export class BrowserManager {
       await tab.cdpClient.cleanup()
     }
     this.tabs.clear()
+    this.adopting.clear()
     this.activeTabId = null
     if (this.browser) {
       await this.browser.close()
