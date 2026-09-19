@@ -156,9 +156,10 @@ Evaluated on the full **WebVoyager** 3-site split (126 tasks) with MiniMax M3.
 <details>
 <summary>📄 Full benchmark data</summary>
 
-- [analysis.json](assets/benchmark/results/merged/analysis.json) — Summary statistics
-- [webvoyager_judgments.json](assets/benchmark/results/merged/webvoyager_judgments.json) — Per-task LLM-as-a-Judge results
-- [results.ndjson](assets/benchmark/results/merged/results.ndjson) — Raw execution traces
+- [analysis.json](assets/benchmark/results/run-2026-9-19/analysis.json) — Summary statistics
+- [webvoyage_judgments.ndjson](assets/benchmark/results/run-2026-9-19/webvoyage_judgments.ndjson) — Per-task LLM-as-a-Judge results
+- [results.ndjson](assets/benchmark/results/run-2026-9-19/results.ndjson) — Raw execution traces
+- [8-14/](assets/benchmark/results/8-14/) — Previous run (109 tasks, 73.4%)
 
 </details>
 
