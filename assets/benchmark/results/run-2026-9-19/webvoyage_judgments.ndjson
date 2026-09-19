@@ -1,0 +1,126 @@
+{"task_id": "Allrecipes--0", "pass": false, "reason": "Agent provides 117 ratings rather than establishing more than 100 written reviews, so the review-count requirement is not demonstrated."}
+{"task_id": "Allrecipes--1", "pass": true, "reason": "Agent found a vegetarian lasagna rated 4.7 stars that explicitly uses zucchini, satisfying both core requirements."}
+{"task_id": "Allrecipes--2", "pass": true, "reason": "Agent found a vegetarian lasagna with 305 calories per serving and a 20-minute prep time, both within the requested limits."}
+{"task_id": "Allrecipes--3", "pass": false, "reason": "Agent's chosen recipe has only 59 written reviews, which does not meet the requirement of over 60 reviews despite having 72 ratings."}
+{"task_id": "Allrecipes--4", "pass": true, "reason": "Agent found a baked salmon recipe rated 4.6 stars with a 10-minute prep time, satisfying the rating and under-30-minute preparation requirements."}
+{"task_id": "Allrecipes--5", "pass": false, "reason": "Agent provides 1,108 ratings but does not establish that the pasta sauce has more than 1,000 reviews, so a key popularity requirement is missing."}
+{"task_id": "Allrecipes--6", "pass": true, "reason": "Agent found a vegetarian lasagna rated 4.6 stars with 1,286 reviews, exceeding both required thresholds."}
+{"task_id": "Allrecipes--7", "pass": true, "reason": "Agent provided a popular chocolate chip cookie recipe with both the ingredient list and preparation steps."}
+{"task_id": "Allrecipes--8", "pass": true, "reason": "Agent found a Beef Wellington rated 4.7 stars with 250 reviews and listed the main ingredients, satisfying all requested criteria."}
+{"task_id": "Allrecipes--9", "pass": true, "reason": "Agent supplied a highly rated vegetarian lasagna, listed key ingredients, and included prep, cook, and total times."}
+{"task_id": "Allrecipes--10", "pass": true, "reason": "Agent gave the second recipe in the 1960s collection and included its recipe name, preparation time, and total time."}
+{"task_id": "Allrecipes--11", "pass": true, "reason": "Agent found a chocolate cupcake recipe with a 15-minute prep time and 957 reviews, satisfying both requirements."}
+{"task_id": "Allrecipes--12", "pass": true, "reason": "Agent provided a 4.6-star cookie recipe with well over 1,000 ratings/reviews and listed the full ingredient set."}
+{"task_id": "Allrecipes--13", "pass": true, "reason": "Agent found a fried fish recipe with over 100 reviews, listed the nutrition label, and reported iron as 3 mg per serving."}
+{"task_id": "Allrecipes--14", "pass": true, "reason": "Agent found a recipe containing both chicken breast and quinoa with a 10-minute prep time, meeting the task requirements."}
+{"task_id": "Allrecipes--15", "pass": true, "reason": "Agent chose a dessert rated 4.8 stars with a 15-minute prep time, includes chocolate frosting, and provided the recipe name, ingredients, and step-by-step instructions."}
+{"task_id": "Allrecipes--16", "pass": false, "reason": "Agent returned a 4.6-star recipe, which does not satisfy the explicit requirement for a five-star rated chocolate chip cookie."}
+{"task_id": "Allrecipes--17", "pass": false, "reason": "Agent only identifies the most recent review among 20 reviews shown under a 'Most helpful' sort, so it does not establish the actual latest review among all 85 reviews."}
+{"task_id": "Allrecipes--18", "pass": true, "reason": "Agent found a vegetarian lasagna rated 4.6 with 1,823 reviews, exceeding the requested rating and review thresholds."}
+{"task_id": "Allrecipes--19", "pass": false, "reason": "Agent explicitly states that no recipe meets the vegan, 10-or-fewer-ingredients, and over-200-reviews requirements, and the proposed recipe has 12 ingredients and fewer than 200 reviews."}
+{"task_id": "Allrecipes--20", "pass": true, "reason": "Agent found a cauliflower pizza crust with a 15-minute prep time, a 4.2-star rating, and included 138 calories per serving."}
+{"task_id": "Allrecipes--21", "pass": true, "reason": "Agent provided a gluten-free brownie recipe with 59 written reviews, listed the main ingredients, and gave the total time of 1 hour."}
+{"task_id": "Allrecipes--22", "pass": true, "reason": "Agent found an avocado salad with 15-minute prep time and 251 reviews and included per-serving nutrition information."}
+{"task_id": "Allrecipes--23", "pass": true, "reason": "Agent found a baked lemon chicken recipe rated 4.6 with 894 reviews and a 10-minute prep time, and listed the primary ingredients."}
+{"task_id": "Allrecipes--24", "pass": true, "reason": "Agent found an eggplant Parmesan rated 4.7 with over 50 reviews and included the 25-minute prep time and 10 servings."}
+{"task_id": "Allrecipes--25", "pass": true, "reason": "Agent found a quinoa salad rated 4.8 with over 500 reviews, provided a shopping list, and included prep, cook, and total times."}
+{"task_id": "Allrecipes--26", "pass": true, "reason": "Agent provided a high-protein vegetarian chili rated 4.6 with well over 50 ratings/reviews, along with ingredients, cooking time, and a cooking-step summary."}
+{"task_id": "Allrecipes--27", "pass": true, "reason": "Agent found a chicken curry rated 4.7 with over 30 reviews and provided ingredients, prep time, and cooking instructions."}
+{"task_id": "Allrecipes--28", "pass": true, "reason": "Agent found a vegan brownie rated 4.6 with 835 reviews and included ingredients, timing, and an overview of preparation steps."}
+{"task_id": "Allrecipes--29", "pass": false, "reason": "Agent's selected grilled fish recipe does not contain olives, which is a stated ingredient requirement; it only uses olive oil."}
+{"task_id": "Allrecipes--30", "pass": false, "reason": "Agent explicitly notes that the selected smoothie bowl does not include leaves or leafy greens, so it fails a core ingredient requirement."}
+{"task_id": "Allrecipes--31", "pass": true, "reason": "Agent found a seafood paella rated 4.7 with over 50 reviews that includes both shrimp and mussels and provided ingredients, total time, and preparation steps."}
+{"task_id": "Allrecipes--32", "pass": true, "reason": "Agent found a slow-cooker beef stew with well over 30 reviews and supplied the cooking time and first five ingredients."}
+{"task_id": "Allrecipes--33", "pass": true, "reason": "Agent found a low-carb breakfast with over 25 reviews and provided nutrition facts including 2 g total carbohydrates per serving."}
+{"task_id": "Allrecipes--34", "pass": true, "reason": "Agent found a baked salmon recipe rated 4.6 with a large review/ratings count and reported Dijon mustard as the primary seasoning and a 15-minute cook time."}
+{"task_id": "Allrecipes--35", "pass": true, "reason": "Agent found an Italian-style meatball recipe with over 100 reviews and correctly specified the beef-and-pork meat mixture and total cooking time."}
+{"task_id": "Allrecipes--36", "pass": true, "reason": "Agent provided a qualifying American apple pie and stated the maximum temperature in the directions as 350°F."}
+{"task_id": "Allrecipes--37", "pass": true, "reason": "Agent found a Greek salad with a 15-minute prep time and over 15 reviews and identified feta cheese and an olive-oil-and-lemon dressing."}
+{"task_id": "Allrecipes--38", "pass": true, "reason": "Agent found a 4.6-star ratatouille with far more than 15 reviews and listed its vegetables and 1-hour total cooking time."}
+{"task_id": "Allrecipes--39", "pass": true, "reason": "Agent found sushi rolls with over 20 reviews, provided nutrition facts and main ingredients, and gave storage guidance to refrigerate and consume within 24 hours."}
+{"task_id": "Allrecipes--40", "pass": true, "reason": "Agent gave a brief introduction to the Allrecipes Allstars, including who they are and their role as brand ambassadors and contributors."}
+{"task_id": "Allrecipes--41", "pass": false, "reason": "Agent listed recipe-collection/article titles rather than three specific dinner recipes, so it does not fulfill the request for three recommended recipes."}
+{"task_id": "Allrecipes--42", "pass": true, "reason": "Agent found a banana bread recipe rated 4.8 stars with 8,324 reviews, easily satisfying both thresholds."}
+{"task_id": "Allrecipes--43", "pass": true, "reason": "Agent found a vegan pumpkin pie rated 5.0 stars with a cook time of 1 hour 55 minutes, satisfying both requirements."}
+{"task_id": "Allrecipes--44", "pass": true, "reason": "Agent listed more than six holiday recipe sections from the Allrecipes Occasions area."}
+{"task_id": "Amazon--0", "pass": true, "reason": "Agent found a green Xbox Wireless Controller rated 4.6 stars, satisfying the color and rating requirements."}
+{"task_id": "Amazon--1", "pass": true, "reason": "Agent identified the lowest-priced qualifying women's golf polo at $50 in size Medium and states that it was saved/added to cart."}
+{"task_id": "Amazon--2", "pass": true, "reason": "Agent found a gaming desktop with Windows 11 Home and a 1 TB SSD, satisfying both required specifications."}
+{"task_id": "Amazon--3", "pass": true, "reason": "Agent supplied the first three climbing-gear results after sorting by price from high to low."}
+{"task_id": "Amazon--4", "pass": true, "reason": "Agent identified a Used - Good Nintendo Switch Lite and gave the cheapest verified price as $141.01."}
+{"task_id": "Amazon--5", "pass": true, "reason": "Agent found a Pacific Blue iPhone 12 Pro with 128 GB storage and states that it was successfully added to the cart."}
+{"task_id": "Amazon--6", "pass": false, "reason": "Agent explicitly reports that no black stroller in the $100-$200 range meets the over-20,000-reviews requirement, so the requested item was not found."}
+{"task_id": "Amazon--7", "pass": true, "reason": "Agent reports applying waterproof, 4-stars-and-up, and size-6 filters to women's hiking boots and provides matching results."}
+{"task_id": "Amazon--8", "pass": true, "reason": "Agent answered with a Samsung 10.1-inch Android tablet at $99.99 as the cheapest matching result, as requested."}
+{"task_id": "Amazon--9", "pass": true, "reason": "Agent found washable dog beds with lengths of at least 30 inches and gave specific matching products."}
+{"task_id": "Amazon--10", "pass": true, "reason": "Agent reported the cost of a 2-year PS4 protection plan as $18.99, directly answering the task."}
+{"task_id": "Amazon--11", "pass": true, "reason": "Agent ultimately identifies a $149.99 double-bowl stainless steel sink with free delivery as the cheapest qualifying sink after correcting an earlier candidate."}
+{"task_id": "Amazon--12", "pass": true, "reason": "Agent chose a ride-on car rated 4.5 stars with 905 reviews and provided the top review details and content."}
+{"task_id": "Amazon--13", "pass": true, "reason": "Agent returned best-selling black men's Big & Tall hoodies within the $25-$50 range, matching the requested filters."}
+{"task_id": "Amazon--14", "pass": true, "reason": "Agent found new surge protectors with 6-8 outlets, prices under $25, and ratings above 4 stars."}
+{"task_id": "Amazon--15", "pass": true, "reason": "Agent found black men's running shoes in size 7, rated 4.4 stars and priced under $50, and states that they were added to the cart."}
+{"task_id": "Amazon--16", "pass": true, "reason": "Agent confirmed free returns for the specified shirt and explained the return process through Your Orders and a free drop-off option."}
+{"task_id": "Amazon--17", "pass": true, "reason": "Agent provided two baby products explicitly described as on sale and priced under $10 after conversion."}
+{"task_id": "Amazon--18", "pass": true, "reason": "Agent identified Amazon's current deals area and listed multiple discounted items with their percentage-off amounts, exceeding the requirement of two."}
+{"task_id": "Amazon--19", "pass": true, "reason": "Agent searched Roman Empire history titles in the Kindle store and identified titles with release dates within one month, including Kindle-format matches."}
+{"task_id": "Amazon--20", "pass": false, "reason": "The result timed out and the final answer only says it will sort by reviews, without naming or saving any qualifying keyboard."}
+{"task_id": "Amazon--21", "pass": true, "reason": "Agent reported a stainless-steel 12-cup programmable coffee maker priced within $100-$200 and rated above 4 stars."}
+{"task_id": "Amazon--22", "pass": true, "reason": "Agent found a 12-piece non-stick cookware set that is oven-safe and priced below $150."}
+{"task_id": "Amazon--23", "pass": true, "reason": "Agent found a men's waterproof digital sports watch with a heart-rate monitor priced at $50.99, within the requested range."}
+{"task_id": "Amazon--24", "pass": true, "reason": "Agent found a compact 3-quart air fryer with a digital display, auto shutoff, and a price well under $100."}
+{"task_id": "Amazon--25", "pass": true, "reason": "Agent provided queen-size memory-foam mattress toppers described as hypoallergenic and priced between $50 and $100."}
+{"task_id": "Amazon--26", "pass": true, "reason": "Agent found a portable Bluetooth speaker under $50 with IPX5 water resistance and up to 24 hours of battery life."}
+{"task_id": "Amazon--27", "pass": true, "reason": "Agent selected a best-selling USB-C hub under $50 with at least four ports including HDMI and an SD card reader and stated MacBook Pro compatibility."}
+{"task_id": "Amazon--28", "pass": true, "reason": "Agent found a yoga mat at least 6 mm thick, non-slip, described as eco-friendly, and priced under $50."}
+{"task_id": "Amazon--29", "pass": true, "reason": "Agent found a 12-pack of solar-powered LED garden lights for $23.99, satisfying the pack-size and price requirements."}
+{"task_id": "Amazon--31", "pass": true, "reason": "Agent provided compact digital cameras priced $100-$300 with at least 10x zoom and ratings of 4 stars or higher."}
+{"task_id": "Amazon--32", "pass": true, "reason": "Agent found stainless-steel electric kettles of at least 1.5 liters with customer ratings above 4 stars."}
+{"task_id": "Amazon--33", "pass": false, "reason": "Agent compares three prices but does not provide an actual energy-efficiency rating such as EER/CEER or ENERGY STAR; it incorrectly treats DOE cooling capacity as an efficiency rating."}
+{"task_id": "Amazon--34", "pass": true, "reason": "Agent found a beginner-suitable 24-color acrylic paint set for canvas painting priced well under $40."}
+{"task_id": "Amazon--35", "pass": true, "reason": "Agent found a men's leather RFID-blocking wallet with at least six card slots under $50 and clearly explained the available free-delivery conditions."}
+{"task_id": "Amazon--36", "pass": true, "reason": "Agent found children's science experiment kits suitable for the requested age range, rated at least 4 stars, and priced below $30."}
+{"task_id": "Amazon--37", "pass": true, "reason": "Agent identified a queen-size floral bedspread listing and confirmed that a blue color option is available."}
+{"task_id": "Amazon--38", "pass": true, "reason": "Agent found a small-bird feeder with a squirrel-proof mechanism and confirmed free delivery availability."}
+{"task_id": "Amazon--40", "pass": true, "reason": "Agent found a purple 5 mm yoga mat rated 4.7 stars under $30 and provided the total color count plus return and delivery policies."}
+{"task_id": "Apple--0", "pass": true, "reason": "Agent compared the latest 13-inch and 15-inch MacBook Air models and provided their starting prices and price difference."}
+{"task_id": "Apple--1", "pass": true, "reason": "Agent confirmed iPhone 12 compatibility with iOS 17 and listed multiple iOS 17 features from Apple support."}
+{"task_id": "Apple--2", "pass": false, "reason": "Agent gives the chips but reports both prices as unavailable, so it does not provide the requested price comparison from Apple's website."}
+{"task_id": "Apple--3", "pass": true, "reason": "Agent identified the latest iPhone Pro and Pro Max models and compared both starting price and screen size."}
+{"task_id": "Apple--4", "pass": false, "reason": "Agent does not provide the requested price for the specified 16-inch M3 Max configuration and instead says the model is discontinued."}
+{"task_id": "Apple--5", "pass": true, "reason": "Agent names the latest iPhone model and provides a specific release date and starting price."}
+{"task_id": "Apple--6", "pass": true, "reason": "Agent states that Apple currently offers three AirPods types and lists all three."}
+{"task_id": "Apple--7", "pass": true, "reason": "Agent provides both the release timing and release locations for Apple Vision Pro, including the original rollout and later M5 release."}
+{"task_id": "Apple--8", "pass": true, "reason": "Agent identifies the latest iPad Pro and provides storage options, processor details, and display specifications."}
+{"task_id": "Apple--10", "pass": true, "reason": "Agent identifies the latest MacBook model and supplies processor, memory, and storage details."}
+{"task_id": "Apple--11", "pass": true, "reason": "Agent identifies the latest iPad model and gives its release date, base storage, and starting price."}
+{"task_id": "Apple--12", "pass": true, "reason": "Agent names two Apple repair methods: Apple Retail Stores and Apple Authorized Service Providers."}
+{"task_id": "Apple--13", "pass": true, "reason": "Agent directly states that the latest MacBook Air is available in four colors and lists them."}
+{"task_id": "Apple--14", "pass": false, "reason": "The result timed out with an empty final answer, so none of the requested upgrade options or price-difference calculation were provided."}
+{"task_id": "Apple--15", "pass": true, "reason": "Agent states that 20 keyboard language options are available when customizing the 14-inch MacBook Pro."}
+{"task_id": "Apple--16", "pass": false, "reason": "Agent states current prices are unavailable and substitutes historical pricing, so it does not provide the requested price difference from Apple's current website."}
+{"task_id": "Apple--17", "pass": false, "reason": "Agent selected Los Angeles city rather than the requested ZIP 90038, making the claimed closest store and 0.98-mile distance unreliable for the specified location."}
+{"task_id": "Apple--18", "pass": true, "reason": "Agent confirms that trade-in offers are available for current iPhone models and provides example trade-in values."}
+{"task_id": "Apple--19", "pass": true, "reason": "Agent provides a slogan for both the Mac and MacBook Pro, directly answering both parts of the task."}
+{"task_id": "Apple--20", "pass": false, "reason": "The result timed out with an empty final answer, so the price for the specified iPhone 14 Plus configuration was not provided."}
+{"task_id": "Apple--21", "pass": true, "reason": "Agent lists all available storage options for the latest iPad Pro: 256GB, 512GB, 1TB, and 2TB."}
+{"task_id": "Apple--22", "pass": true, "reason": "Agent reports a specific trade-in value of up to $320 for an iPhone 13 Pro Max in good condition."}
+{"task_id": "Apple--23", "pass": true, "reason": "Agent gives the starting prices for the latest Apple Watch Series and Apple Watch SE and correctly calculates the $170 difference."}
+{"task_id": "Apple--24", "pass": true, "reason": "Agent directly reports the starting price of the most recent iMac as $1,499."}
+{"task_id": "Apple--25", "pass": true, "reason": "Agent directly identifies the latest Apple TV processor as the A15 Bionic chip."}
+{"task_id": "Apple--26", "pass": true, "reason": "Agent states that the latest iPad mini supports up to 4K video recording and gives the supported frame rates."}
+{"task_id": "Apple--27", "pass": true, "reason": "Agent confirms that HomePod mini comes in multiple colors and lists five color options."}
+{"task_id": "Apple--28", "pass": true, "reason": "Agent confirms that Mac mini can be configured above a 16-core GPU and identifies a 20-core GPU option."}
+{"task_id": "Apple--29", "pass": true, "reason": "Agent reports up to 15 hours of wireless web browsing for the latest MacBook Air."}
+{"task_id": "Apple--30", "pass": true, "reason": "Agent provides storage options and prices for both current iPad Pro sizes."}
+{"task_id": "Apple--31", "pass": true, "reason": "Agent directly provides the slogan for the latest Apple Watch Series as 'A work of heart.'"}
+{"task_id": "Apple--32", "pass": true, "reason": "Agent reports an iPhone 11 Pro Max trade-in value of up to $140."}
+{"task_id": "Apple--33", "pass": true, "reason": "Agent lists seven color options for the newest iMac."}
+{"task_id": "Apple--34", "pass": true, "reason": "Agent provides Apple TV 4K dimensions and weight and lists multiple Siri Remote features."}
+{"task_id": "Apple--35", "pass": true, "reason": "Agent states that two Apple Pencil types are currently available and correctly identifies Apple Pencil Pro as supporting wireless pairing and charging."}
+{"task_id": "Apple--36", "pass": true, "reason": "Agent lists the singers' names shown in Apple Music page imagery, including multiple named artists."}
+{"task_id": "Apple--37", "pass": true, "reason": "Agent compares the complete color options for iPhone 13 Pro, iPhone 14 Pro, and iPhone 15 Pro."}
+{"task_id": "Apple--38", "pass": true, "reason": "Agent lists more than three Apple Vision Pro accessories, satisfying the task."}
+{"task_id": "Apple--39", "pass": true, "reason": "Agent provides actionable Apple-supported solutions for a forgotten Apple ID password, including iforgot.apple.com and trusted-device reset."}
+{"task_id": "Apple--40", "pass": true, "reason": "Agent gives the Apple Vision Pro device weight and lists five built-in apps."}
+{"task_id": "Apple--41", "pass": false, "reason": "Agent says the requested 64GB iPad mini configuration is no longer available and therefore does not provide the requested purchase price."}
+{"task_id": "Apple--42", "pass": true, "reason": "Agent provides current software-update information for Apple Watch Series 7, 8, and 9, including compatibility status and Series 9 update features."}
