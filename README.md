@@ -131,25 +131,27 @@ See [reproduction_report.md](assets/examples/reproduction_report.md)
 
 ## Benchmark
 
-Evaluated on **WebVoyager** (109 tasks across 3 sites) with MiniMax M3:
+Evaluated on the full **WebVoyager** 3-site split (126 tasks) with MiniMax M3.
+
+> **pass@1 84.9%** — up from 73.4% on the previous 109-task partial run (Sep 2026).
+> Same-task comparison on the shared 109: **73.4% → 87.2%**.
 
 | Metric | Value |
 |--------|-------|
-| Success Rate | **73.4%** |
-| Completion Rate | 83.5% |
-| Success Rate (completed only) | 87.9% |
-| Avg Steps | 9.2 |
-| Avg Cost per Task | $0.025 |
-| KV Cache Hit Rate | 78.9% |
-| Avg Duration | 150s |
+| Success Rate (pass@1) | **84.9%** |
+| Completion Rate | 97.6% |
+| Avg Cost / Task | $0.031 |
+| Avg Steps | 11.7 |
+| Avg Duration | 120s |
+| KV Cache Hit | 84.9% |
 
 ### Per-Site Breakdown
 
 | Site | Tasks | Success Rate | Avg Steps | Avg Cost |
 |------|-------|-------------|-----------|----------|
-| allrecipes.com | 35 | **80.0%** | 8.3 | $0.021 |
-| apple.com | 35 | **74.3%** | 11.7 | $0.025 |
-| amazon.com | 39 | **66.7%** | 7.8 | $0.028 |
+| amazon.com | 39 | **92.3%** | 11.4 | $0.035 |
+| apple.com | 42 | **83.3%** | 11.9 | $0.030 |
+| allrecipes.com | 45 | **80.0%** | 11.7 | $0.028 |
 
 <details>
 <summary>📄 Full benchmark data</summary>
@@ -159,6 +161,13 @@ Evaluated on **WebVoyager** (109 tasks across 3 sites) with MiniMax M3:
 - [results.ndjson](assets/benchmark/results/merged/results.ndjson) — Raw execution traces
 
 </details>
+
+### History
+
+| Date | Tasks | pass@1 | Completion | Avg Cost | Avg Duration | Notes |
+|------|-------|--------|------------|----------|-------------|-------|
+| 2026-09-19 | 126 | **84.9%** | 97.6% | $0.031 | 120s | Full 3-site split; same 109 tasks: 87.2% |
+| 2026-08-14 | 109 | 73.4% | 83.5% | $0.025 | 150s | Initial run (partial split) |
 
 ### Reproduce
 

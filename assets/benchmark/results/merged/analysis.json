@@ -1,178 +1,181 @@
 {
   "benchmark": "WebVoyager (partial)",
-  "date": "2026-08-14",
-  "total_tasks": 109,
-  "tasks_completed": 91,
-  "tasks_error": 18,
-  "tasks_timeout": 0,
-  "success_rate": 73.4,
-  "completion_rate": 83.5,
-  "success_rate_of_completed": 87.9,
+  "date": "2026-09-19",
+  "total_tasks": 126,
+  "tasks_completed": 123,
+  "tasks_error": 0,
+  "tasks_timeout": 3,
+  "success_rate": 84.9,
+  "completion_rate": 97.6,
+  "success_rate_of_completed": 87.0,
   "cost": {
-    "total_usd": 2.6658,
-    "avg_per_task_usd": 0.0245,
-    "median_per_task_usd": 0.0213,
-    "avg_completed_usd": 0.0206
+    "total_usd": 3.8545,
+    "avg_per_task_usd": 0.0306,
+    "median_per_task_usd": 0.0195,
+    "avg_completed_usd": 0.0302
   },
   "tokens": {
     "avg": {
-      "input": 42219,
-      "cache_read": 157551,
+      "input": 46731,
+      "cache_read": 263317,
       "cache_write": 0,
-      "output": 1949,
+      "output": 3071,
       "reasoning": 0
     },
     "total": {
-      "input": 4601898,
-      "cache_read": 17173009,
+      "input": 5888108,
+      "cache_read": 33177953,
       "cache_write": 0,
-      "output": 212410,
+      "output": 386925,
       "reasoning": 0
     },
-    "cache_hit_rate": 78.9
+    "cache_hit_rate": 84.9
   },
   "duration": {
-    "avg_seconds": 150,
-    "median_seconds": 125.4,
-    "total_minutes": 272.4,
-    "avg_completed_seconds": 124.8
+    "avg_seconds": 120.3,
+    "median_seconds": 68.3,
+    "total_minutes": 252.7,
+    "avg_completed_seconds": 108.6
   },
   "steps": {
-    "avg": 9.2,
-    "median": 7,
-    "avg_completed": 7.4,
-    "max": 33
+    "avg": 11.7,
+    "median": 8,
+    "avg_completed": 11.3,
+    "max": 83
   },
   "per_site": {
     "www.allrecipes.com": {
-      "total": 35,
-      "completed": 35,
-      "passed": 28,
+      "total": 45,
+      "completed": 45,
+      "passed": 36,
       "error": 0,
+      "timeout": 0,
       "avg_cost": 0,
-      "avg_steps": 8.3,
-      "avg_duration_s": 147.8,
-      "success_rate": 80,
-      "avg_cost_usd": 0.0207
+      "avg_steps": 11.7,
+      "avg_duration_s": 121.3,
+      "success_rate": 80.0,
+      "avg_cost_usd": 0.0282
     },
     "www.amazon.com": {
       "total": 39,
-      "completed": 28,
-      "passed": 26,
-      "error": 11,
+      "completed": 38,
+      "passed": 36,
+      "error": 0,
+      "timeout": 1,
       "avg_cost": 0,
-      "avg_steps": 7.8,
-      "avg_duration_s": 163.9,
-      "success_rate": 66.7,
-      "avg_cost_usd": 0.0278
+      "avg_steps": 11.4,
+      "avg_duration_s": 160.1,
+      "success_rate": 92.3,
+      "avg_cost_usd": 0.0345
     },
     "www.apple.com": {
-      "total": 35,
-      "completed": 28,
-      "passed": 26,
-      "error": 7,
+      "total": 42,
+      "completed": 40,
+      "passed": 35,
+      "error": 0,
+      "timeout": 2,
       "avg_cost": 0,
-      "avg_steps": 11.7,
-      "avg_duration_s": 136.6,
-      "success_rate": 74.3,
-      "avg_cost_usd": 0.0245
+      "avg_steps": 11.9,
+      "avg_duration_s": 82.3,
+      "success_rate": 83.3,
+      "avg_cost_usd": 0.0295
     }
   },
   "failure_analysis": {
-    "error_no_answer": 17,
+    "error_no_answer": 3,
     "wrong_answer": 11,
-    "incomplete_answer": 1
+    "incomplete_answer": 5
   },
   "tool_usage": [
     {
       "tool": "browser_execute_script",
-      "count": 277,
-      "avg_per_task": 2.5
-    },
-    {
-      "tool": "browser_click",
-      "count": 221,
-      "avg_per_task": 2
+      "count": 419,
+      "avg_per_task": 3.3
     },
     {
       "tool": "browser_goto",
-      "count": 166,
-      "avg_per_task": 1.5
+      "count": 253,
+      "avg_per_task": 2.0
     },
     {
-      "tool": "browser_input",
-      "count": 69,
-      "avg_per_task": 0.6
-    },
-    {
-      "tool": "browser_start",
-      "count": 65,
-      "avg_per_task": 0.6
-    },
-    {
-      "tool": "browser_scroll_next_screen",
-      "count": 61,
-      "avg_per_task": 0.6
+      "tool": "browser_click",
+      "count": 252,
+      "avg_per_task": 2.0
     },
     {
       "tool": "browser_reveal_offscreen",
-      "count": 59,
-      "avg_per_task": 0.5
+      "count": 139,
+      "avg_per_task": 1.1
+    },
+    {
+      "tool": "browser_start",
+      "count": 106,
+      "avg_per_task": 0.8
+    },
+    {
+      "tool": "browser_input",
+      "count": 87,
+      "avg_per_task": 0.7
+    },
+    {
+      "tool": "browser_scroll_next_screen",
+      "count": 82,
+      "avg_per_task": 0.7
+    },
+    {
+      "tool": "browser_observe",
+      "count": 46,
+      "avg_per_task": 0.4
     },
     {
       "tool": "webfetch",
-      "count": 31,
-      "avg_per_task": 0.3
+      "count": 27,
+      "avg_per_task": 0.2
     },
     {
       "tool": "bash",
-      "count": 16,
-      "avg_per_task": 0.1
+      "count": 21,
+      "avg_per_task": 0.2
     },
     {
-      "tool": "browser_wait",
-      "count": 10,
+      "tool": "browser_scroll_to_page",
+      "count": 18,
       "avg_per_task": 0.1
     },
     {
       "tool": "browser_restore_state",
-      "count": 10,
-      "avg_per_task": 0.1
+      "count": 5,
+      "avg_per_task": 0.0
     },
     {
-      "tool": "browser_scroll_to_page",
-      "count": 6,
-      "avg_per_task": 0.1
+      "tool": "grep",
+      "count": 5,
+      "avg_per_task": 0.0
     },
     {
       "tool": "read",
       "count": 3,
-      "avg_per_task": 0
+      "avg_per_task": 0.0
+    },
+    {
+      "tool": "browser_wait",
+      "count": 3,
+      "avg_per_task": 0.0
     },
     {
       "tool": "browser_view_elements",
-      "count": 2,
-      "avg_per_task": 0
+      "count": 3,
+      "avg_per_task": 0.0
     },
     {
       "tool": "browser_switch_tab",
-      "count": 2,
-      "avg_per_task": 0
-    },
-    {
-      "tool": "grep",
-      "count": 2,
-      "avg_per_task": 0
-    },
-    {
-      "tool": "invalid",
       "count": 1,
-      "avg_per_task": 0
+      "avg_per_task": 0.0
     },
     {
-      "tool": "browser_refresh",
+      "tool": "browser_close_tab",
       "count": 1,
-      "avg_per_task": 0
+      "avg_per_task": 0.0
     }
   ]
 }
